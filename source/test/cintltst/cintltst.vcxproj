@@ -245,6 +245,7 @@
     <ClCompile Include="colutil.c" />
     <ClCompile Include="cturtst.c" />
     <ClCompile Include="encoll.c" />
+    <ClCompile Include="sil_override_tst.c" />
     <ClCompile Include="usrchdat.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

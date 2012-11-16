@@ -536,6 +536,7 @@
     <ClCompile Include="ucharstriebuilder.cpp" />
     <ClCompile Include="ucharstrieiterator.cpp" />
     <ClCompile Include="listformatter.cpp" />
+    <ClCompile Include="silmods.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ubidi_props.h">
@@ -808,6 +809,7 @@
     <ClInclude Include="uchar_props_data.h">
       <Filter>properties &amp; sets</Filter>
     </ClInclude>
+    <ClInclude Include="silmods.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="common.rc">

@@ -50,7 +50,7 @@ stdnmtst.o usrchtst.o custrtrn.o sorttest.o trietest.o trie2test.o usettest.o \
 uenumtst.o utmstest.o currtest.o \
 idnatest.o nfsprep.o spreptst.o sprpdata.o \
 hpmufn.o tracetst.o reapits.o utexttst.o ucsdetst.o spooftest.o \
-cgendtst.o
+cgendtst.o sil_override_tst.o
 
 DEPS = $(OBJECTS:.o=.d)
 

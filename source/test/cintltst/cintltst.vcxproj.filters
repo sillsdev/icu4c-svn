@@ -297,6 +297,7 @@
     <ClCompile Include="spooftest.c">
       <Filter>spoof</Filter>
     </ClCompile>
+    <ClCompile Include="sil_override_tst.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cbiditst.h">

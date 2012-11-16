@@ -42,9 +42,17 @@ void addUSpoofTest(TestNode** root);
 #if !UCONFIG_NO_FORMATTING
 void addGendInfoForTest(TestNode** root);
 #endif
+#define SIL_MODIFICATIONS
+#ifdef SIL_MODIFICATIONS
+void addSilSetTest(TestNode** root);
+#endif
 
 void addAllTests(TestNode** root)
 {
+#ifdef SIL_MODIFICATIONS
+    // If the SIL test is run, it can change the results for other tests.
+    addSilSetTest(root);
+#else
     addCnvSelTest(root);
     addUDataTest(root);
     addHeapMutexTest(root);
@@ -84,5 +92,6 @@ void addAllTests(TestNode** root)
     addPUtilTest(root);
 #if !UCONFIG_NO_FORMATTING
     addGendInfoForTest(root);
+#endif
 #endif
 }

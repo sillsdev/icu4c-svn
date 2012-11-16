@@ -30,6 +30,7 @@
 #include "udataswp.h"
 #include "uprops.h"
 #include "ustr_imp.h"
+#include "silmods.h" // defines SIL_MODIFICATIONS; including this is an SIL modification.
 
 #define LENGTHOF(array) (int32_t)(sizeof(array)/sizeof((array)[0]))
 
@@ -40,7 +41,11 @@
 /* constants and macros for access to the data ------------------------------ */
 
 /* getting a uint32_t properties word from the data */
+#ifdef SIL_MODIFICATIONS
+#define GET_PROPS(c, result) ((result)=Sil_GET_PROPS(&propsTrie, c));
+#else
 #define GET_PROPS(c, result) ((result)=UTRIE2_GET16(&propsTrie, c));
+#endif
 
 U_CFUNC UBool
 uprv_haveProperties(UErrorCode *pErrorCode) {
@@ -523,7 +528,11 @@ u_getUnicodeProperties(UChar32 c, int32_t column) {
         return 0;
     } else {
         uint16_t vecIndex=UTRIE2_GET16(&propsVectorsTrie, c);
+#ifdef SIL_MODIFICATIONS
+        return SIL_getUnicodeProperties(propsVectors[vecIndex+column], c, column);
+#else
         return propsVectors[vecIndex+column];
+#endif
     }
 }
 
@@ -660,7 +669,11 @@ uchar_addPropertyStarts(const USetAdder *sa, UErrorCode *pErrorCode) {
     }
 
     /* add the start code point of each same-value range of the main trie */
+#ifdef SIL_MODIFICATIONS
+    SIL_utrie2_enum(&propsTrie, NULL, _enumPropertyStartsRange, sa);
+#else
     utrie2_enum(&propsTrie, NULL, _enumPropertyStartsRange, sa);
+#endif
 
     /* add code points with hardcoded properties, plus the ones following them */
 
@@ -722,6 +735,10 @@ upropsvec_addPropertyStarts(const USetAdder *sa, UErrorCode *pErrorCode) {
     /* add the start code point of each same-value range of the properties vectors trie */
     if(propsVectorsColumns>0) {
         /* if propsVectorsColumns==0 then the properties vectors trie may not be there at all */
+#ifdef SIL_MODIFICATIONS
+        SIL_enumPropsVecRanges(&propsVectorsTrie, _enumPropertyStartsRange, sa, propsVectors);
+#else
         utrie2_enum(&propsVectorsTrie, NULL, _enumPropertyStartsRange, sa);
+#endif
     }
 }

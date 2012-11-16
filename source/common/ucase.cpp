@@ -30,6 +30,7 @@
 #include "utrie2.h"
 #include "ucase.h"
 #include "ucln_cmn.h"
+#include "silmods.h" // defines SIL_MODIFICATIONS; including this is an SIL modification.
 
 struct UCaseProps {
     UDataMemory *mem;
@@ -133,6 +134,10 @@ static const uint8_t flagsOffset[256]={
 
 U_CAPI UChar32 U_EXPORT2
 ucase_tolower(const UCaseProps *csp, UChar32 c) {
+#ifdef SIL_MODIFICATIONS
+    if (SIL_tolower(&c))
+        return c;
+#endif
     uint16_t props=UTRIE2_GET16(&csp->trie, c);
     if(!PROPS_HAS_EXCEPTION(props)) {
         if(UCASE_GET_TYPE(props)>=UCASE_UPPER) {
@@ -150,6 +155,10 @@ ucase_tolower(const UCaseProps *csp, UChar32 c) {
 
 U_CAPI UChar32 U_EXPORT2
 ucase_toupper(const UCaseProps *csp, UChar32 c) {
+#ifdef SIL_MODIFICATIONS
+    if (SIL_toupper(&c))
+        return c;
+#endif
     uint16_t props=UTRIE2_GET16(&csp->trie, c);
     if(!PROPS_HAS_EXCEPTION(props)) {
         if(UCASE_GET_TYPE(props)==UCASE_LOWER) {
@@ -167,6 +176,10 @@ ucase_toupper(const UCaseProps *csp, UChar32 c) {
 
 U_CAPI UChar32 U_EXPORT2
 ucase_totitle(const UCaseProps *csp, UChar32 c) {
+#ifdef SIL_MODIFICATIONS
+    if (SIL_totitle(&c))
+        return c;
+#endif
     uint16_t props=UTRIE2_GET16(&csp->trie, c);
     if(!PROPS_HAS_EXCEPTION(props)) {
         if(UCASE_GET_TYPE(props)==UCASE_LOWER) {
@@ -430,6 +443,11 @@ U_NAMESPACE_END
 /** @return UCASE_NONE, UCASE_LOWER, UCASE_UPPER, UCASE_TITLE */
 U_CAPI int32_t U_EXPORT2
 ucase_getType(const UCaseProps *csp, UChar32 c) {
+#ifdef SIL_MODIFICATIONS
+    int32_t result = SIL_ucase_getType(c);
+    if (result >= 0)
+        return result;
+#endif
     uint16_t props=UTRIE2_GET16(&csp->trie, c);
     return UCASE_GET_TYPE(props);
 }

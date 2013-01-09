@@ -1,0 +1,16 @@
+/*.dat
+/*.vcxproj.user
+/Debug
+/reader
+/reader.exe
+/reader.out
+/reader.vcproj.*.*.user
+/reader_Win32_Debug
+/reader_win32_release
+/release
+/writer
+/writer.exe
+/writer.out
+/writer.vcproj.*.*.user
+/x64
+/x86

@@ -1,0 +1,12 @@
+/*.d
+/*.pdb
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/date.vcproj.*.*.user
+/icudate
+/icudate.exe
+/release
+/x64
+/x86

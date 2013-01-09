@@ -1,0 +1,12 @@
+/resources_Win32_Debug
+/*.res
+/*.vcxproj.user
+/Debug
+/release
+/resources.vcproj.*.*.user
+/uresb
+/uresb.exe
+/uresb.out
+/uresb.vcproj.*.*.user
+/x64
+/x86

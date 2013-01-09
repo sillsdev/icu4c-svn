@@ -1,0 +1,17 @@
+/test-*.xml
+/perf-*.xml
+/dist
+/doc
+/autom4te.cache
+/config.log
+/config.cache
+/config.status
+/Makefile
+/icudefs.mk
+/README
+/bin
+/lib
+/Doxyfile
+/icudefs.local
+/configure-local.mk
+/uconfig.h.prepend

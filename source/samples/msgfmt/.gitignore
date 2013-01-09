@@ -1,0 +1,8 @@
+/*.vcxproj.user
+/Debug
+/msgfmt
+/msgfmt.out
+/msgfmt.vcproj.*.*.user
+/release
+/x64
+/x86

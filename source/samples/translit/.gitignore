@@ -1,0 +1,9 @@
+/*.vcxproj.user
+/Debug
+/release
+/translit
+/translit.exe
+/translit.out
+/translit.vcproj.*.*.user
+/x64
+/x86

@@ -1,0 +1,15 @@
+/*.d
+/*.dSYM
+/*.dylib
+/*.o
+/*.so
+/*.user
+/*.vcxproj.user
+/Debug
+/Makefile
+/Makefile.local
+/icuinfo
+/icuinfo.exe
+/icuplugins*.txt
+/x64
+/x86

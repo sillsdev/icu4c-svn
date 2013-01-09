@@ -1,0 +1,15 @@
+/*.d
+/*.o
+/*.pdb
+/*.plg
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/debug
+/gennorm2
+/gennorm2.[0-9]
+/gennorm2.vcproj.*.*.user
+/release
+/x64
+/x86

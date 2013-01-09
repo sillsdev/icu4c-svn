@@ -1,0 +1,6 @@
+/*.vcxproj.user
+/Debug
+/legacy.vcproj.*.*.user
+/release
+/x64
+/x86

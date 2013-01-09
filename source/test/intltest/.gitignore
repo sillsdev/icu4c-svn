@@ -1,0 +1,15 @@
+/*.d
+/*.o
+/*.plg
+/*.vcxproj.user
+/Debug
+/Makefile
+/Makefile.local
+/Release
+/debug
+/intltest
+/intltest.exe
+/intltest.vcproj.*.*.user
+/release
+/x64
+/x86

@@ -1,0 +1,11 @@
+/*.d
+/*.pdb
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/layout.vcproj.*.*.user
+/release
+/tmp
+/x64
+/x86

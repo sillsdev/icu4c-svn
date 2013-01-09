@@ -1,0 +1,14 @@
+/*.d
+/*.dSYM
+/*.o
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/debug
+/iotest
+/iotest.exe
+/iotest.vcproj.*.*.user
+/release
+/x64
+/x86

@@ -1,0 +1,17 @@
+/*.ao
+/*.d
+/*.ncb
+/*.o
+/*.opt
+/*.pdb
+/*.plg
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/debug
+/libicu*
+/release
+/toolutil.vcproj.*.*.user
+/x64
+/x86

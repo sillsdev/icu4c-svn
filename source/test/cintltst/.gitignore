@@ -1,0 +1,16 @@
+/*.d
+/*.dSYM
+/*.o
+/*.plg
+/*.vcxproj.user
+/Debug
+/Makefile
+/Makefile.local
+/Release
+/cintltst
+/cintltst.exe
+/cintltst.vcproj.*.*.user
+/debug
+/release
+/x64
+/x86

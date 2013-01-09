@@ -1,0 +1,13 @@
+/*.ao
+/*.d
+/*.o
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/debug
+/io.res
+/io.vcproj.*.*.user
+/release
+/x64
+/x86

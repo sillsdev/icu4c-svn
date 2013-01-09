@@ -1,0 +1,12 @@
+/*.d
+/*.o
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/debug
+/release
+/unisetperf
+/unisetperf.vcproj.*.*.user
+/x64
+/x86

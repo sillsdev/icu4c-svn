@@ -1,0 +1,14 @@
+/*.ao
+/*.d
+/*.o
+/*.pdb
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/debug
+/layoutex.res
+/layoutex.vcproj.*.*.user
+/release
+/x64
+/x86

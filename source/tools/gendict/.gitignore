@@ -1,0 +1,11 @@
+/*.1
+/*.d
+/*.o
+/*.pdb
+/*.plg
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/x64
+/x86

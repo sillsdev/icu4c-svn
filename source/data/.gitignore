@@ -1,0 +1,13 @@
+/*.plg
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/icupkg.inc
+/in
+/makedata.vcproj.*.*.user
+/obj
+/out
+/pkgdataMakefile
+/x64
+/x86

@@ -1,0 +1,10 @@
+/Makefile.inc
+/icu-config
+/icu-config.1
+/pkgdata.inc
+/pkgdataMakefile
+/icucross.mk
+/icu.pc
+/icu.pc.out
+/icu-*.pc
+/icuinfo.xml

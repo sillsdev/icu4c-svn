@@ -1,0 +1,14 @@
+/*.d
+/*.o
+/*.pdb
+/*.plg
+/*.ncb
+/*.opt
+/icuswap.vcproj.*.*.user
+/icuswap
+/icuswap.[0-9]
+/Makefile
+/Debug
+/Release
+/debug
+/release

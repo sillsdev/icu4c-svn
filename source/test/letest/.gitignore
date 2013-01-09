@@ -1,0 +1,15 @@
+/*.d
+/*.o
+/*.opensdf
+/*.sdf
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/debug
+/letest
+/letest.exe
+/letest.vcproj.*.*.user
+/release
+/x64
+/x86

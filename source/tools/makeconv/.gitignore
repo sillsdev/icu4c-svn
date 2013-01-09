@@ -1,0 +1,16 @@
+/*.1
+/*.d
+/*.o
+/*.pdb
+/*.plg
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/debug
+/makeconv
+/makeconv.[0-9]
+/makeconv.vcproj.*.*.user
+/release
+/x64
+/x86

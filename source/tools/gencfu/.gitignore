@@ -1,0 +1,15 @@
+/*.d
+/*.o
+/*.pdb
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/debug
+/gencfu
+/gencfu.1
+/gencfu.exe
+/gencfu.vcproj.*.*.user
+/release
+/x64
+/x86

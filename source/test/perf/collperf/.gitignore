@@ -1,0 +1,12 @@
+/*.d
+/*.o
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/collperf
+/collperf.vcproj.*.*.user
+/debug
+/release
+/x64
+/x86

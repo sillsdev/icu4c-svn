@@ -1,0 +1,7 @@
+/*.vcxproj.user
+/Makefile
+/convperf.vcproj.*.*.user
+/debug
+/release
+/x64
+/x86

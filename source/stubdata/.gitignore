@@ -1,0 +1,17 @@
+/*.ao
+/*.d
+/*.o
+/*.plg
+/*.vcxproj.user
+/Debug
+/Makefile
+/Release
+/cygicudata*.*
+/debug
+/libicu*.*
+/libsicu*.*
+/release
+/stubdata.vcproj.*.*.user
+/stubdatabuilt.txt
+/x64
+/x86

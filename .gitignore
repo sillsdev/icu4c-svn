@@ -5,3 +5,5 @@
 /lib64
 /installx86_64
 /installi686
+*.o
+*.d

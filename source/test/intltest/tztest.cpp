@@ -1,6 +1,6 @@
 /***********************************************************************
  * COPYRIGHT: 
- * Copyright (c) 1997-2012, International Business Machines Corporation
+ * Copyright (c) 1997-2013, International Business Machines Corporation
  * and others. All Rights Reserved.
  ***********************************************************************/
 
@@ -1962,6 +1962,7 @@ void TimeZoneTest::TestCanonicalID() {
         {"Antarctica/South_Pole", "Antarctica/McMurdo"},
         {"Atlantic/Jan_Mayen", "Europe/Oslo"},
         {"Arctic/Longyearbyen", "Europe/Oslo"},
+        {"Europe/Busingen", "Europe/Zurich"},
         {"Europe/Guernsey", "Europe/London"},
         {"Europe/Isle_of_Man", "Europe/London"},
         {"Europe/Jersey", "Europe/London"},

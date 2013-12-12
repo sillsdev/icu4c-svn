@@ -56,6 +56,9 @@ initData(UErrorCode &status)
 }
 
 U_NAMESPACE_END
+
+U_NAMESPACE_USE
+
 /*
  * ICU Initialization Function. Need not be called.
  */

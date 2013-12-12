@@ -1444,6 +1444,8 @@ U_NAMESPACE_END
 
 /* public API --------------------------------------------------------------- */
 
+U_NAMESPACE_USE
+
 U_CAPI int32_t U_EXPORT2
 u_charName(UChar32 code, UCharNameChoice nameChoice,
            char *buffer, int32_t bufferLength,

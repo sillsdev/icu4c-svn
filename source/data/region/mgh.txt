@@ -7,7 +7,7 @@
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/mgh.xml
+ * ICU <specials> source: <path>/common/main/mgh.xml
  */
 mgh{
     Countries{
@@ -149,5 +149,5 @@ mgh{
         ZM{"Uzambia"}
         ZW{"Uzimbabwe"}
     }
-    Version{"2.0.82.45"}
+    Version{"2.0.90.61"}
 }

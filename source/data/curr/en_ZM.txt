@@ -7,19 +7,12 @@
 // *
 // ***************************************************************************
 en_ZM{
+    %%Parent{"en_001"}
     Currencies{
-        USD{
-            "US$",
-            "US Dollar",
-        }
-        ZMK{
-            "K",
-            "Zambian Kwacha (1968-2012)",
-        }
         ZMW{
-            "KR",
+            "K",
             "Zambian Kwacha",
         }
     }
-    Version{"2.0.82.45"}
+    Version{"2.0.91.70"}
 }

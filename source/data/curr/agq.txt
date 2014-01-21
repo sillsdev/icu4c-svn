@@ -7,7 +7,7 @@
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/agq.xml
+ * ICU <specials> source: <path>/common/main/agq.xml
  */
 agq{
     Currencies{
@@ -221,7 +221,7 @@ agq{
         }
         ZMK{
             "ZMK",
-            "Kwachà è Zambìa (1968-2012)",
+            "Kwachà è Zambìa (1968–2012)",
         }
         ZMW{
             "ZMW",
@@ -232,5 +232,5 @@ agq{
             "Dɔlà è Zìmbagbɛ̀",
         }
     }
-    Version{"2.0.82.45"}
+    Version{"2.0.92.87"}
 }

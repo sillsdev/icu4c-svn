@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="collation">
@@ -291,6 +291,9 @@
     <ClCompile Include="unum.cpp">
       <Filter>formatting</Filter>
     </ClCompile>
+    <ClCompile Include="unumsys.cpp">
+      <Filter>formatting</Filter>
+    </ClCompile>
     <ClCompile Include="upluralrules.cpp">
       <Filter>formatting</Filter>
     </ClCompile>
@@ -499,6 +502,9 @@
       <Filter>formatting</Filter>
     </ClCompile>
     <ClCompile Include="region.cpp">
+      <Filter>formatting</Filter>
+    </ClCompile>
+    <ClCompile Include="uregion.cpp">
       <Filter>formatting</Filter>
     </ClCompile>
     <ClCompile Include="bocsu.cpp">
@@ -806,9 +812,6 @@
     <ClInclude Include="region_impl.h">
       <Filter>formatting</Filter>
     </ClInclude>
-    <ClInclude Include="unicode\region.h">
-      <Filter>formatting</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="i18n.rc">
@@ -993,6 +996,9 @@
     <CustomBuild Include="unicode\unum.h">
       <Filter>formatting</Filter>
     </CustomBuild>
+    <CustomBuild Include="unicode\unumsys.h">
+      <Filter>formatting</Filter>
+    </CustomBuild>
     <CustomBuild Include="unicode\upluralrules.h">
       <Filter>formatting</Filter>
     </CustomBuild>
@@ -1037,6 +1043,12 @@
     </CustomBuild>
     <CustomBuild Include="unicode\currpinf.h">
       <Filter>formatting</Filter>
+    </CustomBuild>
+    <CustomBuild Include="unicode\region.h">
+      <Filter>misc</Filter>
+    </CustomBuild>
+    <CustomBuild Include="unicode\uregion.h">
+      <Filter>misc</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

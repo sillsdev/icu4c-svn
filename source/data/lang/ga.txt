@@ -7,7 +7,7 @@
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/ga.xml
+ * ICU <specials> source: <path>/common/main/ga.xml
  */
 ga{
     Languages{
@@ -156,5 +156,5 @@ ga{
         zh_Hant{"Sínis Thraidisiúnta"}
         zu{"Súlúis"}
     }
-    Version{"2.0.82.45"}
+    Version{"2.0.92.87"}
 }

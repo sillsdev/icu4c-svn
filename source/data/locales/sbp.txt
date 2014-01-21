@@ -7,7 +7,7 @@
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/sbp.xml
+ * ICU <specials> source: <path>/common/main/sbp.xml
  */
 sbp{
     AuxExemplarCharacters{"[q r x z]"}
@@ -29,7 +29,7 @@ sbp{
             }
         }
     }
-    Version{"2.0.82.45"}
+    Version{"2.0.92.87"}
     calendar{
         generic{
             DateTimePatterns{

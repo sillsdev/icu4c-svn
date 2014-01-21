@@ -7,7 +7,7 @@
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/om.xml
+ * ICU <specials> source: <path>/common/main/om.xml
  */
 om{
     Languages{
@@ -102,5 +102,5 @@ om{
     Scripts{
         Latn{"Latin"}
     }
-    Version{"2.0.82.45"}
+    Version{"2.0.92.87"}
 }

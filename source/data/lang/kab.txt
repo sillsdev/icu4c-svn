@@ -7,7 +7,7 @@
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/kab.xml
+ * ICU <specials> source: <path>/common/main/kab.xml
  */
 kab{
     Languages{
@@ -57,5 +57,5 @@ kab{
         zh{"Tacinwat, Tamundarint"}
         zu{"Tazulut"}
     }
-    Version{"2.0.82.45"}
+    Version{"2.0.92.87"}
 }

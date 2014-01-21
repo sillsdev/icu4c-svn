@@ -7,7 +7,7 @@
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/rw.xml
+ * ICU <specials> source: <path>/common/main/rw.xml
  */
 rw{
     Languages{
@@ -118,5 +118,5 @@ rw{
         yi{"Inyeyidishi"}
         zu{"Inyezulu"}
     }
-    Version{"2.0.82.45"}
+    Version{"2.0.90.61"}
 }

@@ -7,7 +7,7 @@
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/yo.xml
+ * ICU <specials> source: <path>/common/main/yo.xml
  */
 yo{
     AuxExemplarCharacters{"[c q v x z]"}
@@ -22,11 +22,12 @@ yo{
     NumberElements{
         latn{
             patterns{
-                currencyFormat{"¤#,##0.00;(¤#,##0.00)"}
+                accountingFormat{"¤#,##0.00;(¤#,##0.00)"}
+                currencyFormat{"¤#,##0.00"}
             }
         }
     }
-    Version{"2.0.82.45"}
+    Version{"2.0.92.87"}
     calendar{
         generic{
             DateTimePatterns{

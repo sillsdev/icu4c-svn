@@ -154,9 +154,6 @@
     <ClCompile Include="locmap.c">
       <Filter>configuration</Filter>
     </ClCompile>
-    <ClCompile Include="mutex.cpp">
-      <Filter>configuration</Filter>
-    </ClCompile>
     <ClCompile Include="putil.cpp">
       <Filter>configuration</Filter>
     </ClCompile>
@@ -259,7 +256,7 @@
     <ClCompile Include="udataswp.c">
       <Filter>data &amp; memory</Filter>
     </ClCompile>
-    <ClCompile Include="uinit.c">
+    <ClCompile Include="uinit.cpp">
       <Filter>data &amp; memory</Filter>
     </ClCompile>
     <ClCompile Include="umapfile.c">

@@ -7,7 +7,7 @@
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/be.xml
+ * ICU <specials> source: <path>/common/main/be.xml
  */
 be{
     Keys{
@@ -60,7 +60,6 @@ be{
         en{"англійская"}
         en_AU{"англійская (аўстрал.)"}
         en_CA{"англійская (канад.)"}
-        en_GB{"англійская (Вялікабрытанія)"}
         en_US{"англійская (ЗША)"}
         eo{"эсперанта"}
         es{"іспанская"}
@@ -187,7 +186,7 @@ be{
             japanese{"японскі каляндар"}
         }
     }
-    Version{"2.0.82.49"}
+    Version{"2.0.92.87"}
     codePatterns{
         language{"Мова: {0}"}
         script{"Пісьмо: {0}"}
@@ -195,6 +194,6 @@ be{
     }
     localeDisplayPattern{
         pattern{"{0} ({1})"}
-        separator{", "}
+        separator{"{0}, {1}"}
     }
 }

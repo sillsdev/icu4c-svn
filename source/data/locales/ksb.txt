@@ -7,7 +7,7 @@
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/ksb.xml
+ * ICU <specials> source: <path>/common/main/ksb.xml
  */
 ksb{
     AuxExemplarCharacters{"[q r x]"}
@@ -23,7 +23,7 @@ ksb{
             }
         }
     }
-    Version{"2.0.82.45"}
+    Version{"2.0.92.87"}
     calendar{
         generic{
             DateTimePatterns{

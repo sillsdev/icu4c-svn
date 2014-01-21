@@ -8,11 +8,7 @@
 // ***************************************************************************
 es_PR{
     %%Parent{"es_419"}
-    PaperSize:intvector{
-        279,
-        216,
-    }
-    Version{"2.0.82.45"}
+    Version{"2.0.90.61"}
     calendar{
         generic{
             DateTimePatterns{
@@ -25,17 +21,17 @@ es_PR{
                 "MM/dd/y G",
                 "MM/dd/yy GGGGG",
                 "{1} {0}",
-                "{1} {0}",
-                "{1} {0}",
+                "{1}, {0}",
+                "{1}, {0}",
                 "{1} {0}",
                 "{1} {0}",
             }
             availableFormats{
                 MEd{"E, MM/dd"}
                 Md{"MM/dd"}
-                yM{"MM/y"}
-                yMEd{"E MM/dd/y"}
-                yMd{"MM/dd/y"}
+                yyyyM{"MM/y G"}
+                yyyyMEd{"E MM/dd/y G"}
+                yyyyMd{"MM/dd/y G"}
             }
         }
         gregorian{
@@ -49,8 +45,8 @@ es_PR{
                 "MM/dd/y",
                 "MM/dd/yy",
                 "{1} {0}",
-                "{1} {0}",
-                "{1} {0}",
+                "{1}, {0}",
+                "{1}, {0}",
                 "{1} {0}",
                 "{1} {0}",
             }

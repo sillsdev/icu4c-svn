@@ -1,6 +1,6 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2013 International Business Machines
+// * Copyright (C) 2014 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/ky.xml
@@ -26,7 +26,6 @@ ky{
         az{"азербайжанча"}
         be{"беларусча"}
         bg{"болгарияча"}
-        bh{"бихариче"}
         bn{"бангладешче"}
         bo{"тибетче"}
         br{"бретон"}
@@ -149,7 +148,7 @@ ky{
         vi{"вьетнамча"}
         wo{"уолофчо"}
         xh{"косача"}
-        yi{"еврей"}
+        yi{"идишче"}
         yo{"йорубача"}
         zgh{"марокко тамазигт адабий тилинде"}
         zh{"кытайча"}
@@ -254,7 +253,7 @@ ky{
             tibt{"Тибет сандары"}
         }
     }
-    Version{"2.0.92.87"}
+    Version{"2.0.98.52"}
     codePatterns{
         language{"Тили: {0}"}
         script{"Жазуусу: {0}"}

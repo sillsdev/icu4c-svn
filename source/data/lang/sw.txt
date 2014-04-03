@@ -1,6 +1,6 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2013 International Business Machines
+// * Copyright (C) 2014 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/sw.xml
@@ -41,7 +41,6 @@ sw{
         be{"Kibelarusi"}
         bem{"Kibemba"}
         bg{"Kibulgaria"}
-        bh{"Kibihari"}
         bn{"Kibangla"}
         bo{"Kitibeti"}
         br{"Kibretoni"}
@@ -366,7 +365,7 @@ sw{
             vaii{"Dijiti za Vai"}
         }
     }
-    Version{"2.0.92.87"}
+    Version{"2.0.98.13"}
     codePatterns{
         language{"{0}"}
         script{"{0}"}

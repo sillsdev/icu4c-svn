@@ -1,6 +1,6 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2013 International Business Machines
+// * Copyright (C) 2014 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/id.xml
@@ -10,7 +10,7 @@
  * ICU <specials> source: <path>/common/main/id.xml
  */
 id{
-    Version{"2.0.93.8"}
+    Version{"2.0.98.52"}
     zoneStrings{
         "Africa:Accra"{
             ec{"Akra"}
@@ -143,9 +143,6 @@ id{
         }
         "Antarctica:DumontDUrville"{
             ec{"Dumont d’Urville"}
-        }
-        "Antarctica:South_Pole"{
-            ec{"Kutub Selatan"}
         }
         "Asia:Aqtau"{
             ec{"Aktau"}

@@ -1,6 +1,6 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2013 International Business Machines
+// * Copyright (C) 2014 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/sv_FI.xml
@@ -8,7 +8,7 @@
 // ***************************************************************************
 sv_FI{
     AuxExemplarCharacters{"[ã ç ë í ñ ó š ÿ ü ž]"}
-    Version{"2.0.92.80"}
+    Version{"2.0.98.14"}
     calendar{
         gregorian{
             DateTimePatterns{
@@ -87,7 +87,7 @@ sv_FI{
     units{
         temperature{
             celsius{
-                one{"{0} grader Celsius"}
+                one{"{0} grad Celsius"}
                 other{"{0} grader Celsius"}
             }
         }

@@ -1,5 +1,5 @@
 # -*-autoconf-*-
-AC_COPYRIGHT([ Copyright (c) 1999-2013, International Business Machines Corporation and others. All Rights Reserved. ])
+AC_COPYRIGHT([ Copyright (c) 1999-2014, International Business Machines Corporation and others. All Rights Reserved. ])
 # configure.in for ICU
 # Stephen F. Booth, heavily modified by Yves and others
 
@@ -1325,6 +1325,7 @@ AC_CONFIG_FILES([icudefs.mk \
 		test/perf/Makefile \
 		test/perf/collationperf/Makefile \
 		test/perf/collperf/Makefile \
+		test/perf/collperf2/Makefile \
 		test/perf/dicttrieperf/Makefile \
 		test/perf/ubrkperf/Makefile \
 		test/perf/charperf/Makefile \

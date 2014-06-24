@@ -1,6 +1,6 @@
 /********************************************************************
  * COPYRIGHT:
- * Copyright (c) 1997-2013, International Business Machines
+ * Copyright (c) 1997-2014, International Business Machines
  * Corporation and others. All Rights Reserved.
  ********************************************************************/
 
@@ -1128,8 +1128,8 @@ DateFormatTest::TestTwoDigitYear()
         dataerrln("FAIL: SimpleDateFormat constructor - %s", u_errorName(ec));
         return;
     }
-    parse2DigitYear(fmt, "5/6/17", date(117, UCAL_JUNE, 5));
-    parse2DigitYear(fmt, "4/6/34", date(34, UCAL_JUNE, 4));
+    parse2DigitYear(fmt, "5/6/30", date(130, UCAL_JUNE, 5));
+    parse2DigitYear(fmt, "4/6/50", date(50, UCAL_JUNE, 4));
 }
 
 // -------------------------------------

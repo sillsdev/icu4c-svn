@@ -10,11 +10,11 @@
  * ICU <specials> source: <path>/common/main/my.xml
  */
 my{
-    AuxExemplarCharacters{"[ၐ ၑ ဢ ၒ ၓ ၔ ၕ ဨ ၖ ၗ \u1058 \u1059]"}
+    AuxExemplarCharacters{"[ၐ ၑ ဨ ဢ ၒ ၓ ၔ ၕ ၖ ၗ \u1058 \u1059]"}
     ExemplarCharacters{
-        "[\u1036 း \u1037 က ခ ဂ ဃ င စ ဆ ဇ ဈ ဉ ည ဋ ဌ ဍ ဎ ဏ တ ထ ဒ ဓ န ပ ဖ ဗ ဘ မ ယ ျ ရ ြ"
-        " လ ဝ \u103D သ ဿ ဟ \u103E ဠ အ ဣ ဤ ဥ ဦ ဧ ဩ ဪ ာ ါ \u102D \u102E \u102F \u1030 ေ"
-        " \u1032 \u1039 \u103A]"
+        "[က ခ ဂ ဃ င စ ဆ ဇ ဈ ဉ ည ဋ ဌ ဍ ဎ ဏ တ ထ ဒ ဓ န ပ ဖ ဗ ဘ မ ယ ရ လ ဝ သ ဟ ဠ အ ဣ ဤ ဥ ဦ"
+        " ဧ ဩ ဪ ာ ါ \u102D \u102E \u102F \u1030 ေ \u1032 \u1036 ဿ ျ ြ \u103D \u103E "
+        "\u1039 \u103A \u1037 း]"
     }
     ExemplarCharactersIndex{"[က ခ ဂ ဃ င စ ဆ ဇ ဈ ဉ ည ဋ ဌ ဍ ဎ ဏ တ ထ ဒ ဓ န ပ ဖ ဗ ဘ မ ယ ရ လ ဝ သ ဟ ဠ အ]"}
     ExemplarCharactersPunctuation{"[၊ ။ ‘ ’ “ ”]"}
@@ -127,8 +127,10 @@ my{
                 percentSign{"%"}
                 plusSign{"+"}
                 superscriptingExponent{"×"}
+                timeSeparator{":"}
             }
         }
+        minimumGroupingDigits{"3"}
         mymr{
             symbols{
                 list{"၊"}
@@ -136,7 +138,7 @@ my{
         }
         native{"mymr"}
     }
-    Version{"2.0.98.62"}
+    Version{"2.1.8.9"}
     calendar{
         generic{
             DateTimePatterns{
@@ -286,6 +288,10 @@ my{
                 "နံနက်",
                 "ညနေ",
             }
+            AmPmMarkersNarrow{
+                "နံနက်",
+                "ညနေ",
+            }
             DateTimePatterns{
                 "HH:mm:ss zzzz",
                 "HH:mm:ss z",
@@ -301,10 +307,13 @@ my{
                 "{1} {0}",
                 "{1} {0}",
             }
+            NoonMarker{"မွန်းတည့်"}
+            NoonMarkerNarrow{"မွန်းတည့်"}
             appendItems{
                 Timezone{"{0} {1}"}
             }
             availableFormats{
+                E{"ccc"}
                 EHm{"E HH:mm"}
                 EHms{"E HH:mm:ss"}
                 Ed{"E, d"}
@@ -405,6 +414,10 @@ my{
                 abbreviated{
                     "ဘီစီ",
                     "အေဒီ",
+                }
+                abbreviated%variant{
+                    "ဘီစီအီး",
+                    "စီအီး",
                 }
                 wide{
                     "ခရစ်တော် မပေါ်မီကာလ",
@@ -714,6 +727,39 @@ my{
                 }
             }
         }
+        quarter{
+            dn{"သုံးလပတ်"}
+            relativeTime{
+                future{
+                    other{"သုံးလပတ်{0}ခု အတွင်း"}
+                }
+                past{
+                    other{"လွန်ခဲ့သော သုံးလပတ်{0}ခု"}
+                }
+            }
+        }
+        quarter-narrow{
+            dn{"သုံးလပတ်"}
+            relativeTime{
+                future{
+                    other{"သုံးလပတ်{0}ခု အတွင်း"}
+                }
+                past{
+                    other{"လွန်ခဲ့သော သုံးလပတ်{0}ခု"}
+                }
+            }
+        }
+        quarter-short{
+            dn{"သုံးလပတ်"}
+            relativeTime{
+                future{
+                    other{"သုံးလပတ်{0}ခု အတွင်း"}
+                }
+                past{
+                    other{"လွန်ခဲ့သော သုံးလပတ်{0}ခု"}
+                }
+            }
+        }
         sat{
             relative{
                 "-1"{"ပြီးခဲ့သောစနေ"}
@@ -832,500 +878,5 @@ my{
         UK{"ဗြိတိန်စနစ်"}
         US{"အမေရိကန်စနစ်"}
         metric{"မက်ထရစ်စနစ်"}
-    }
-    units{
-        acceleration{
-            g-force{
-                other{"{0} ဆွဲငင်အား"}
-            }
-        }
-        angle{
-            arc-minute{
-                other{"{0}မိနစ်"}
-            }
-            arc-second{
-                other{"{0}စက္ကန့်"}
-            }
-            degree{
-                other{"{0}ဒီဂရီ"}
-            }
-        }
-        area{
-            acre{
-                other{"{0}ဧက"}
-            }
-            hectare{
-                other{"{0} ဟက်တာ"}
-            }
-            square-foot{
-                other{"{0}စတုရန်းပေ"}
-            }
-            square-kilometer{
-                other{"{0}စတုရန်းကီလိုမီတာ"}
-            }
-            square-meter{
-                other{"{0}စတုရန်းမီတာ"}
-            }
-            square-mile{
-                other{"{0}စတုရန်းမိုင်"}
-            }
-        }
-        compound{
-            per{"{0}လျှင်{1}နှုန်း"}
-        }
-        duration{
-            day{
-                other{"{0}ရက်"}
-            }
-            hour{
-                other{"{0}နာရီ"}
-            }
-            millisecond{
-                other{"{0}မီလီစက္ကန့်"}
-            }
-            minute{
-                other{"{0} မိနစ်"}
-            }
-            month{
-                other{"{0}လ"}
-            }
-            second{
-                other{"{0} စက္ကန့်"}
-            }
-            week{
-                other{"{0}ပတ်"}
-            }
-            year{
-                other{"{0}နှစ်"}
-            }
-        }
-        length{
-            centimeter{
-                other{"{0} စင်တီမီတာ"}
-            }
-            foot{
-                other{"{0} ပေ"}
-            }
-            inch{
-                other{"{0} လက်မ"}
-            }
-            kilometer{
-                other{"{0} ကီလိုမီတာ"}
-            }
-            light-year{
-                other{"{0} အလင်းနှစ်"}
-            }
-            meter{
-                other{"{0}မီတာ"}
-            }
-            mile{
-                other{"{0} မိုင်"}
-            }
-            millimeter{
-                other{"{0} မီလီမီတာ"}
-            }
-            picometer{
-                other{"{0} ပီကိုမီတာ"}
-            }
-            yard{
-                other{"{0} ကိုက်"}
-            }
-        }
-        mass{
-            gram{
-                other{"{0} ဂရမ်"}
-            }
-            kilogram{
-                other{"{0}ကီလိုဂရမ်"}
-            }
-            ounce{
-                other{"{0}အောင်စ"}
-            }
-            pound{
-                other{"{0}ပေါင်"}
-            }
-        }
-        power{
-            horsepower{
-                other{"{0}မြင်ကောင်ရေအား"}
-            }
-            kilowatt{
-                other{"{0}ကီလိုဝပ်"}
-            }
-            watt{
-                other{"{0}ဝပ်"}
-            }
-        }
-        pressure{
-            hectopascal{
-                other{"{0}ဟက်တိုပါစကယ်"}
-            }
-            inch-hg{
-                other{"ပွဒါး{0}လက်မ"}
-            }
-            millibar{
-                other{"{0}မီလီဘား"}
-            }
-        }
-        speed{
-            kilometer-per-hour{
-                other{"တစ်နာရီလျှင်{0}ကီလိုမီတာနှုန်း"}
-            }
-            meter-per-second{
-                other{"တစ်စက္ကန့်လျှင်{0}မီတာနှုန်း"}
-            }
-            mile-per-hour{
-                other{"တစ်နာရီလျှင်{0}မိုင်နှုန်း"}
-            }
-        }
-        temperature{
-            celsius{
-                other{"{0}စင်တီဂရိတ်"}
-            }
-            fahrenheit{
-                other{"{0}ဖာရင်ဟိုက်"}
-            }
-        }
-        volume{
-            cubic-kilometer{
-                other{"{0} ကုဗကီလိုမီတာ"}
-            }
-            cubic-mile{
-                other{"{0}ကုဗမိုင်"}
-            }
-            liter{
-                other{"{0}လီတာ"}
-            }
-        }
-    }
-    unitsNarrow{
-        acceleration{
-            g-force{
-                other{"{0} G"}
-            }
-        }
-        angle{
-            arc-minute{
-                other{"{0}′"}
-            }
-            arc-second{
-                other{"{0}″"}
-            }
-            degree{
-                other{"{0}°"}
-            }
-        }
-        area{
-            acre{
-                other{"{0} ac"}
-            }
-            hectare{
-                other{"{0} ha"}
-            }
-            square-foot{
-                other{"{0} ft²"}
-            }
-            square-kilometer{
-                other{"{0} km²"}
-            }
-            square-meter{
-                other{"{0} m²"}
-            }
-            square-mile{
-                other{"{0} mi²"}
-            }
-        }
-        compound{
-            per{"{0}/{1}"}
-        }
-        duration{
-            day{
-                other{"{0}ရက်"}
-            }
-            hour{
-                other{"{0}နာရီ"}
-            }
-            millisecond{
-                other{"{0} ms"}
-            }
-            minute{
-                other{"{0}မိနစ်"}
-            }
-            month{
-                other{"{0}လ"}
-            }
-            second{
-                other{"{0} s"}
-            }
-            week{
-                other{"{0}ပတ်"}
-            }
-            year{
-                other{"{0} y"}
-            }
-        }
-        length{
-            centimeter{
-                other{"{0} cm"}
-            }
-            foot{
-                other{"{0} '"}
-            }
-            inch{
-                other{"{0} ″"}
-            }
-            kilometer{
-                other{"{0} km"}
-            }
-            light-year{
-                other{"{0} အလင်းနှစ်"}
-            }
-            meter{
-                other{"{0} m"}
-            }
-            mile{
-                other{"{0}မိုင်"}
-            }
-            millimeter{
-                other{"{0} mm"}
-            }
-            picometer{
-                other{"{0} pm"}
-            }
-            yard{
-                other{"{0} ကိုက်"}
-            }
-        }
-        mass{
-            gram{
-                other{"{0} g"}
-            }
-            kilogram{
-                other{"{0} kg"}
-            }
-            ounce{
-                other{"{0} oz"}
-            }
-            pound{
-                other{"{0} lb"}
-            }
-        }
-        power{
-            horsepower{
-                other{"{0} hp"}
-            }
-            kilowatt{
-                other{"{0} kW"}
-            }
-            watt{
-                other{"{0} W"}
-            }
-        }
-        pressure{
-            hectopascal{
-                other{"{0} hPa"}
-            }
-            inch-hg{
-                other{"{0} inHg"}
-            }
-            millibar{
-                other{"{0} mbar"}
-            }
-        }
-        speed{
-            kilometer-per-hour{
-                other{"{0} km/h"}
-            }
-            meter-per-second{
-                other{"{0} m/s"}
-            }
-            mile-per-hour{
-                other{"{0} mi/h"}
-            }
-        }
-        temperature{
-            celsius{
-                other{"{0}°"}
-            }
-            fahrenheit{
-                other{"{0}°F"}
-            }
-        }
-        volume{
-            cubic-kilometer{
-                other{"{0} km³"}
-            }
-            cubic-mile{
-                other{"{0} mi³"}
-            }
-            liter{
-                other{"{0} l"}
-            }
-        }
-    }
-    unitsShort{
-        acceleration{
-            g-force{
-                other{"{0} G"}
-            }
-        }
-        angle{
-            arc-minute{
-                other{"{0}′"}
-            }
-            arc-second{
-                other{"{0}″"}
-            }
-            degree{
-                other{"{0}°"}
-            }
-        }
-        area{
-            acre{
-                other{"{0} ac"}
-            }
-            hectare{
-                other{"{0} ha"}
-            }
-            square-foot{
-                other{"{0} ft²"}
-            }
-            square-kilometer{
-                other{"{0} km²"}
-            }
-            square-meter{
-                other{"{0} m²"}
-            }
-            square-mile{
-                other{"{0} mi²"}
-            }
-        }
-        compound{
-            per{"{0}/{1}"}
-        }
-        duration{
-            day{
-                other{"{0}ရက်"}
-            }
-            hour{
-                other{"{0}နာရီ"}
-            }
-            millisecond{
-                other{"{0} ms"}
-            }
-            minute{
-                other{"{0}မိနစ်"}
-            }
-            month{
-                other{"{0}လ"}
-            }
-            second{
-                other{"{0} s"}
-            }
-            week{
-                other{"{0}ပတ်"}
-            }
-            year{
-                other{"{0} y"}
-            }
-        }
-        length{
-            centimeter{
-                other{"{0} cm"}
-            }
-            foot{
-                other{"{0} ပေ"}
-            }
-            inch{
-                other{"{0} လက်မ"}
-            }
-            kilometer{
-                other{"{0} km"}
-            }
-            light-year{
-                other{"{0} အလင်းနှစ်"}
-            }
-            meter{
-                other{"{0} m"}
-            }
-            mile{
-                other{"{0}မိုင်"}
-            }
-            millimeter{
-                other{"{0} mm"}
-            }
-            picometer{
-                other{"{0} pm"}
-            }
-            yard{
-                other{"{0} ကိုက်"}
-            }
-        }
-        mass{
-            gram{
-                other{"{0} g"}
-            }
-            kilogram{
-                other{"{0} kg"}
-            }
-            ounce{
-                other{"{0} oz"}
-            }
-            pound{
-                other{"{0} lb"}
-            }
-        }
-        power{
-            horsepower{
-                other{"{0} hp"}
-            }
-            kilowatt{
-                other{"{0} kW"}
-            }
-            watt{
-                other{"{0} W"}
-            }
-        }
-        pressure{
-            hectopascal{
-                other{"{0} hPa"}
-            }
-            inch-hg{
-                other{"{0} inHg"}
-            }
-            millibar{
-                other{"{0} mbar"}
-            }
-        }
-        speed{
-            kilometer-per-hour{
-                other{"{0} km/h"}
-            }
-            meter-per-second{
-                other{"{0} m/s"}
-            }
-            mile-per-hour{
-                other{"{0} mi/h"}
-            }
-        }
-        temperature{
-            celsius{
-                other{"{0}°C"}
-            }
-            fahrenheit{
-                other{"{0}°F"}
-            }
-        }
-        volume{
-            cubic-kilometer{
-                other{"{0} km³"}
-            }
-            cubic-mile{
-                other{"{0} mi³"}
-            }
-            liter{
-                other{"{0} l"}
-            }
-        }
     }
 }

@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/cs.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/cs.xml
- */
 cs{
     AuxExemplarCharacters{"[à ă â å ä ã ā æ ç è ĕ ê ë ē ì ĭ î ï ī ľ ł ñ ò ŏ ô ö ø ō œ ŕ ù ŭ û ü ū ÿ]"}
     Ellipsis{
@@ -25,9 +22,6 @@ cs{
     }
     ExemplarCharactersIndex{"[A B C Č D E F G H {CH} I J K L M N O P Q R Ř S Š T U V W X Y Z Ž]"}
     ExemplarCharactersPunctuation{"[\\- ‐ – , ; \\: ! ? . … ‘ ‚ “ „ ( ) \\[ \\] § @ * / \\&]"}
-    LocaleScript{
-        "Latn",
-    }
     MoreInformation{"?"}
     NumberElements{
         default{"latn"}
@@ -213,7 +207,7 @@ cs{
         minimumGroupingDigits{"1"}
         native{"latn"}
     }
-    Version{"2.1.8.9"}
+    Version{"2.1.12.94"}
     calendar{
         buddhist{
             availableFormats{
@@ -506,12 +500,16 @@ cs{
         }
         gregorian{
             AmPmMarkers{
-                "AM",
-                "PM",
+                "dopoledne",
+                "odpoledne",
+            }
+            AmPmMarkersAbbr{
+                "dop.",
+                "odp.",
             }
             AmPmMarkersNarrow{
-                "AM",
-                "PM",
+                "dop.",
+                "odp.",
             }
             DateTimePatterns{
                 "H:mm:ss zzzz",
@@ -529,6 +527,7 @@ cs{
                 "{1} {0}",
             }
             NoonMarker{"poledne"}
+            NoonMarkerAbbr{"pol."}
             NoonMarkerNarrow{"pol."}
             appendItems{
                 Timezone{"{0} {1}"}
@@ -1120,11 +1119,6 @@ cs{
         quotationEnd{"“"}
         quotationStart{"„"}
     }
-    durationUnits{
-        hm{"h:mm"}
-        hms{"h:mm:ss"}
-        ms{"m:ss"}
-    }
     fields{
         day{
             dn{"Den"}
@@ -1185,7 +1179,7 @@ cs{
             }
         }
         dayperiod{
-            dn{"AM/PM"}
+            dn{"dop./odp."}
         }
         era{
             dn{"Letopočet"}

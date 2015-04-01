@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/hi.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/hi.xml
- */
 hi{
     AuxExemplarCharacters{"[\u200C\u200D]"}
     Ellipsis{
@@ -29,9 +26,6 @@ hi{
         " ल व श ष स ह]"
     }
     ExemplarCharactersPunctuation{"[\\- , ; \\: ! ? . ‘ ’ “ ” ( ) \\[ \\] \\{ \\} ॰]"}
-    LocaleScript{
-        "Deva",
-    }
     MoreInformation{"?"}
     NumberElements{
         default{"latn"}
@@ -169,7 +163,7 @@ hi{
         minimumGroupingDigits{"1"}
         native{"deva"}
     }
-    Version{"2.1.8.9"}
+    Version{"2.1.12.94"}
     calendar{
         ethiopic{
             monthNames{
@@ -301,7 +295,7 @@ hi{
                     h{"h–h a v"}
                 }
                 y{
-                    y{"y-y G"}
+                    y{"y–y G"}
                 }
                 yM{
                     M{"M/y – M/y G"}
@@ -327,7 +321,7 @@ hi{
                 }
                 yMMMd{
                     M{"d MMM – d MMM y G"}
-                    d{"d - d MMM y G"}
+                    d{"d – d MMM y G"}
                     y{"d MMM y – d MMM y G"}
                 }
                 yMd{
@@ -593,7 +587,7 @@ hi{
                 }
                 yMMMd{
                     M{"d MMM – d MMM y"}
-                    d{"d-d MMM y"}
+                    d{"d–d MMM y"}
                     y{"d MMM y – d MMM y"}
                 }
                 yMd{
@@ -1120,11 +1114,6 @@ hi{
         alternateQuotationStart{"‘"}
         quotationEnd{"”"}
         quotationStart{"“"}
-    }
-    durationUnits{
-        hm{"h:mm"}
-        hms{"h:mm:ss"}
-        ms{"m:ss"}
     }
     fields{
         day{

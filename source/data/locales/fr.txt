@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/fr.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/fr.xml
- */
 fr{
     AuxExemplarCharacters{"[á å ä ã ā ē í ì ī ñ ó ò ö ø ú ǔ]"}
     Ellipsis{
@@ -25,9 +22,6 @@ fr{
     }
     ExemplarCharactersIndex{"[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z]"}
     ExemplarCharactersPunctuation{"[\\- ‐ – — , ; \\: ! ? . … ’ \u0022 “ ” « » ( ) \\[ \\] § @ * / \\& # † ‡]"}
-    LocaleScript{
-        "Latn",
-    }
     MoreInformation{"?"}
     NumberElements{
         default{"latn"}
@@ -165,7 +159,7 @@ fr{
         minimumGroupingDigits{"1"}
         native{"latn"}
     }
-    Version{"2.1.8.9"}
+    Version{"2.1.13.46"}
     calendar{
         buddhist{
             DateTimePatterns{
@@ -455,7 +449,7 @@ fr{
                 }
                 MEd{
                     M{"E dd/MM – E dd/MM"}
-                    d{"E dd/MM - E dd/MM"}
+                    d{"E dd/MM – E dd/MM"}
                 }
                 MMM{
                     M{"MMM–MMM"}
@@ -541,7 +535,7 @@ fr{
                 "PM",
             }
             AmPmMarkersNarrow{
-                "AM",
+                "a",
                 "p",
             }
             DateTimePatterns{
@@ -578,6 +572,8 @@ fr{
                 H{"HH 'h'"}
                 Hm{"HH:mm"}
                 Hms{"HH:mm:ss"}
+                Hmsv{"HH:mm:ss v"}
+                Hmv{"HH:mm v"}
                 M{"L"}
                 MEd{"E d/M"}
                 MMM{"LLL"}
@@ -588,6 +584,8 @@ fr{
                 h{"h a"}
                 hm{"h:mm a"}
                 hms{"h:mm:ss a"}
+                hmsv{"h:mm:ss a v"}
+                hmv{"h:mm a v"}
                 ms{"mm:ss"}
                 y{"y"}
                 yM{"M/y"}
@@ -723,8 +721,8 @@ fr{
                     M{"M–M"}
                 }
                 MEd{
-                    M{"E dd/MM - E dd/MM"}
-                    d{"E dd/MM - E dd/MM"}
+                    M{"E dd/MM – E dd/MM"}
+                    d{"E dd/MM – E dd/MM"}
                 }
                 MMM{
                     M{"MMM–MMM"}
@@ -738,11 +736,11 @@ fr{
                     d{"d–d MMM"}
                 }
                 Md{
-                    M{"dd/MM - dd/MM"}
+                    M{"dd/MM – dd/MM"}
                     d{"dd/MM – dd/MM"}
                 }
                 d{
-                    d{"d-d"}
+                    d{"d–d"}
                 }
                 fallback{"{0} – {1}"}
                 h{
@@ -1202,11 +1200,6 @@ fr{
         alternateQuotationStart{"«"}
         quotationEnd{"»"}
         quotationStart{"«"}
-    }
-    durationUnits{
-        hm{"hh:mm"}
-        hms{"hh:mm:ss"}
-        ms{"mm:ss"}
     }
     fields{
         day{

@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/collation/he.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/xml/collation/he.xml
- */
 he{
     Version{"2.1.6.32"}
     collations{
@@ -20,7 +17,7 @@ he{
                 "‎&״"
                 "<<'\u0022'"
             }
-            Version{"26"}
+            Version{"27.0.1"}
         }
         standard{
             Sequence{
@@ -28,7 +25,7 @@ he{
                 "&[before 2]''<<׳"
                 "&[before 2]'\u0022'<<״"
             }
-            Version{"26"}
+            Version{"27.0.1"}
         }
     }
 }

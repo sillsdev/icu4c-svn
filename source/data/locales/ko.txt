@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/ko.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/ko.xml
- */
 ko{
     AuxExemplarCharacters{
         "[ᄀ-ᄒ ᅡ-ᅵ ᆨ-ᇂ 丘 串 乃 久 乖 九 乞 乫 乾 亂 亘 交 京 仇 今 介 件 价 企 伋 伎 伽 佳 佶 侃 來 侊 供 係 俓 俱 個"
@@ -47,10 +44,6 @@ ko{
         "[‾ _ ＿ \\- － ‐ — ― 〜 ・ , ， 、 ; ； \\: ： ! ！ ¡ ? ？ ¿ . ． ‥ … 。 · ＇ ‘ ’ \u0022 "
         "＂ “ ” ( （ ) ） \\[ ［ \\] ］ \\{ ｛ \\} ｝ 〈 〉 《 》 「 」 『 』 【 】 〔 〕 § ¶ @ ＠ * ＊ / "
         "／ \\\\ ＼ \\& ＆ # ＃ % ％ ‰ † ‡ ′ ″ 〃 ※]"
-    }
-    LocaleScript{
-        "Hang",
-        "Hani",
     }
     MoreInformation{"?"}
     NumberElements{
@@ -165,7 +158,7 @@ ko{
         minimumGroupingDigits{"1"}
         native{"latn"}
     }
-    Version{"2.1.9.31"}
+    Version{"2.1.12.94"}
     calendar{
         buddhist{
             eras{
@@ -842,7 +835,7 @@ ko{
                     d{"M월 d일 (E) ~ d일 (E)"}
                 }
                 MMMM{
-                    M{"LLLL-LLLL"}
+                    M{"LLLL–LLLL"}
                 }
                 MMMd{
                     M{"M월 d일 ~ M월 d일"}
@@ -962,6 +955,8 @@ ko{
                 HHmmss{"HH:mm:ss"}
                 Hm{"HH:mm"}
                 Hms{"H시 m분 s초"}
+                Hmsv{"H시 m분 s초 v"}
+                Hmv{"HH:mm v"}
                 M{"M월"}
                 MEEEEd{"M. d. EEEE"}
                 MEd{"M. d. (E)"}
@@ -974,6 +969,8 @@ ko{
                 h{"a h시"}
                 hm{"a h:mm"}
                 hms{"a h:mm:ss"}
+                hmsv{"a h:mm:ss v"}
+                hmv{"a h:mm v"}
                 mmss{"mm:ss"}
                 ms{"mm:ss"}
                 y{"y년"}
@@ -1111,7 +1108,7 @@ ko{
                     d{"M월 d일 (E) ~ d일 (E)"}
                 }
                 MMMM{
-                    M{"LLLL-LLLL"}
+                    M{"LLLL–LLLL"}
                 }
                 MMMd{
                     M{"M월 d일 ~ M월 d일"}
@@ -1641,11 +1638,6 @@ ko{
         alternateQuotationStart{"‘"}
         quotationEnd{"”"}
         quotationStart{"“"}
-    }
-    durationUnits{
-        hm{"h:mm"}
-        hms{"h:mm:ss"}
-        ms{"m:ss"}
     }
     fields{
         day{

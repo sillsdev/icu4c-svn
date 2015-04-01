@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/da.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/da.xml
- */
 da{
     AuxExemplarCharacters{"[á à â ç é è ê ë í î ï ñ ó ô ú ù û ÿ ü ä ǿ ö œ]"}
     Ellipsis{
@@ -22,9 +19,6 @@ da{
     ExemplarCharacters{"[a b c d e f g h i j k l m n o p q r s t u v w x y z æ ø å]"}
     ExemplarCharactersIndex{"[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Æ Ø Å]"}
     ExemplarCharactersPunctuation{"[\\- ‐ – , ; \\: ! ? . … ' ‘ ’ \u0022 “ ” ( ) \\[ \\] § @ * / \\& # † ′ ″]"}
-    LocaleScript{
-        "Latn",
-    }
     MoreInformation{"?"}
     NumberElements{
         default{"latn"}
@@ -162,7 +156,7 @@ da{
         minimumGroupingDigits{"1"}
         native{"latn"}
     }
-    Version{"2.1.9.62"}
+    Version{"2.1.12.94"}
     calendar{
         buddhist{
             eras{
@@ -331,8 +325,8 @@ da{
                 "HH.mm",
                 "EEEE 'den' d. MMMM y",
                 "d. MMMM y",
+                "d. MMM y",
                 "dd/MM/y",
-                "dd/MM/yy",
                 "{1} {0}",
                 "{1} 'kl.' {0}",
                 "{1} 'kl.' {0}",
@@ -359,6 +353,8 @@ da{
                 H{"HH"}
                 Hm{"HH.mm"}
                 Hms{"HH.mm.ss"}
+                Hmsv{"HH.mm.ss v"}
+                Hmv{"HH.mm v"}
                 M{"M"}
                 MEd{"E d/M"}
                 MMM{"MMM"}
@@ -371,6 +367,8 @@ da{
                 h{"h a"}
                 hm{"h.mm a"}
                 hms{"h.mm.ss a"}
+                hmsv{"h.mm.ss a v"}
+                hmv{"h.mm a v"}
                 ms{"mm.ss"}
                 y{"y"}
                 yM{"M/y"}
@@ -766,11 +764,6 @@ da{
         alternateQuotationStart{"‘"}
         quotationEnd{"”"}
         quotationStart{"“"}
-    }
-    durationUnits{
-        hm{"h.mm"}
-        hms{"h.mm.ss"}
-        ms{"m.ss"}
     }
     fields{
         day{

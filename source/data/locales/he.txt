@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/he.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/he.xml
- */
 he{
     AuxExemplarCharacters{
         "[\u05BD\u05C4\u200E\u200F \u05B0 \u05B1 \u05B2 \u05B3 \u05B4 \u05B5 \u05B6 "
@@ -25,9 +22,6 @@ he{
     ExemplarCharacters{"[א ב ג ד ה ו ז ח ט י כ ך ל מ ם נ ן ס ע פ ף צ ץ ק ר ש ת]"}
     ExemplarCharactersIndex{"[א ב ג ד ה ו ז ח ט י כ ל מ נ ס ע פ צ ק ר ש ת]"}
     ExemplarCharactersPunctuation{"[\\- ‐ – — , ; \\: ! ? . ׳ ' \u0022 ( ) \\[ \\] / ״ ־]"}
-    LocaleScript{
-        "Hebr",
-    }
     MoreInformation{"?"}
     NumberElements{
         default{"latn"}
@@ -214,14 +208,14 @@ he{
         native{"latn"}
         traditional{"hebr"}
     }
-    Version{"2.1.8.9"}
+    Version{"2.1.12.94"}
     calendar{
         generic{
             DateTimePatterns{
-                "HH:mm:ss zzzz",
-                "HH:mm:ss z",
-                "HH:mm:ss",
-                "HH:mm",
+                "H:mm:ss zzzz",
+                "H:mm:ss z",
+                "H:mm:ss",
+                "H:mm",
                 "EEEE, d בMMMM y G",
                 "d בMMMM y G",
                 "d בMMM y G",
@@ -238,9 +232,9 @@ he{
                 GyMMM{"MMM y G"}
                 GyMMMEd{"E, d בMMM y G"}
                 GyMMMd{"d בMMM y G"}
-                H{"HH"}
-                Hm{"HH:mm"}
-                Hms{"HH:mm:ss"}
+                H{"H"}
+                Hm{"H:mm"}
+                Hms{"H:mm:ss"}
                 M{"L"}
                 MEd{"E, d/M"}
                 MMM{"LLL"}
@@ -266,18 +260,18 @@ he{
             }
             intervalFormats{
                 H{
-                    H{"HH–HH"}
+                    H{"H–H"}
                 }
                 Hm{
-                    H{"HH:mm–HH:mm"}
-                    m{"HH:mm–HH:mm"}
+                    H{"H:mm–H:mm"}
+                    m{"H:mm–H:mm"}
                 }
                 Hmv{
-                    H{"HH:mm–HH:mm v"}
-                    m{"HH:mm–HH:mm v"}
+                    H{"H:mm–H:mm v"}
+                    m{"H:mm–H:mm v"}
                 }
                 Hv{
-                    H{"HH–HH v"}
+                    H{"H–H v"}
                 }
                 M{
                     M{"M–M"}
@@ -348,7 +342,7 @@ he{
                     y{"EEEE d MMM y – EEEE d MMM y"}
                 }
                 yMMMM{
-                    M{"MMMM - MMMM y G"}
+                    M{"MMMM – MMMM y G"}
                     y{"MMMM y–MMMM y"}
                 }
                 yMMMd{
@@ -373,10 +367,10 @@ he{
                 "אחה״צ",
             }
             DateTimePatterns{
-                "HH:mm:ss zzzz",
-                "HH:mm:ss z",
-                "HH:mm:ss",
-                "HH:mm",
+                "H:mm:ss zzzz",
+                "H:mm:ss z",
+                "H:mm:ss",
+                "H:mm",
                 "EEEE, d בMMMM y",
                 "d בMMMM y",
                 "d בMMM y",
@@ -403,9 +397,9 @@ he{
                 GyMMM{"MMM y G"}
                 GyMMMEd{"E, d בMMM y G"}
                 GyMMMd{"d בMMM y G"}
-                H{"HH"}
-                Hm{"HH:mm"}
-                Hms{"HH:mm:ss"}
+                H{"H"}
+                Hm{"H:mm"}
+                Hms{"H:mm:ss"}
                 M{"L"}
                 MEd{"E, d.M"}
                 MMM{"LLL"}
@@ -588,7 +582,7 @@ he{
                 }
                 yM{
                     M{"M.y–M.y"}
-                    y{"M.y‏-M.y"}
+                    y{"M.y‏–M.y"}
                 }
                 yMEd{
                     M{"EEEE d.M.y – EEEE d.M.y"}
@@ -754,10 +748,10 @@ he{
         }
         hebrew{
             DateTimePatterns{
-                "HH:mm:ss zzzz",
-                "HH:mm:ss z",
-                "HH:mm:ss",
-                "HH:mm",
+                "H:mm:ss zzzz",
+                "H:mm:ss z",
+                "H:mm:ss",
+                "H:mm",
                 {
                     "EEEE, d בMMMM y",
                     "hebr",
@@ -911,10 +905,10 @@ he{
         }
         islamic{
             DateTimePatterns{
-                "HH:mm:ss zzzz",
-                "HH:mm:ss z",
-                "HH:mm:ss",
-                "HH:mm",
+                "H:mm:ss zzzz",
+                "H:mm:ss z",
+                "H:mm:ss",
+                "H:mm",
                 "EEEE, d בMMMM y G",
                 "d בMMMM y G",
                 "d בMMM y G",
@@ -931,8 +925,8 @@ he{
                 GyMMM{"MMM y G"}
                 GyMMMEd{"E, d בMMM y G"}
                 GyMMMd{"d בMMM y G"}
-                Hm{"HH:mm"}
-                Hms{"HH:mm:ss"}
+                Hm{"H:mm"}
+                Hms{"H:mm:ss"}
                 M{"L"}
                 MEd{"E, d/M"}
                 MMM{"LLL"}
@@ -1298,11 +1292,6 @@ he{
         alternateQuotationStart{"׳"}
         quotationEnd{"״"}
         quotationStart{"״"}
-    }
-    durationUnits{
-        hm{"h:mm"}
-        hms{"h:mm:ss"}
-        ms{"m:ss"}
     }
     fields{
         day{

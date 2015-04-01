@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/is.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/is.xml
- */
 is{
     AuxExemplarCharacters{"[c q w z]"}
     Ellipsis{
@@ -24,9 +21,6 @@ is{
     ExemplarCharactersPunctuation{
         "[\\- ‐ – — , ; \\: ! ? . … ' ‘ ‚ \u0022 “ „ ( ) \\[ \\] § @ * / \\& # † ‡ ′ "
         "″]"
-    }
-    LocaleScript{
-        "Latn",
     }
     MoreInformation{"?"}
     NumberElements{
@@ -165,7 +159,7 @@ is{
         minimumGroupingDigits{"1"}
         native{"latn"}
     }
-    Version{"2.1.8.9"}
+    Version{"2.1.12.94"}
     calendar{
         generic{
             DateTimePatterns{
@@ -720,11 +714,6 @@ is{
         alternateQuotationStart{"‚"}
         quotationEnd{"“"}
         quotationStart{"„"}
-    }
-    durationUnits{
-        hm{"h:mm"}
-        hms{"h:mm:ss"}
-        ms{"m:ss"}
     }
     fields{
         day{

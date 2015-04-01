@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/ee.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/ee.xml
- */
 ee{
     AuxExemplarCharacters{"[ă â å ä ā æ c ç ĕ ê ë ĭ î ï j ñ ŏ ô ö ø œ q ŭ û ü ÿ]"}
     ExemplarCharacters{
@@ -19,9 +16,6 @@ ee{
     ExemplarCharactersPunctuation{
         "[\\- ‐ – — , ; \\: ! ? . … ' ‘ ’ \u0022 “ ” ( ) \\[ \\] \\{ \\} § @ * / \\& "
         "# † ‡ ′ ″]"
-    }
-    LocaleScript{
-        "Latn",
     }
     MoreInformation{"..."}
     NumberElements{
@@ -87,7 +81,7 @@ ee{
             }
         }
     }
-    Version{"2.1.8.9"}
+    Version{"2.1.12.94"}
     calendar{
         generic{
             DateTimePatterns{
@@ -185,7 +179,7 @@ ee{
                     h{"a h–h"}
                 }
                 hm{
-                    a{"a 'ga' h:mm - a 'ga' h:mm"}
+                    a{"a 'ga' h:mm – a 'ga' h:mm"}
                     h{"a 'ga' h:mm - 'ga' h:mm"}
                     m{"a 'ga' h:mm – 'ga' h:mm"}
                 }
@@ -419,7 +413,7 @@ ee{
                     h{"a h–h"}
                 }
                 hm{
-                    a{"a 'ga' h:mm - a 'ga' h:mm"}
+                    a{"a 'ga' h:mm – a 'ga' h:mm"}
                     h{"a 'ga' h:mm - 'ga' h:mm"}
                     m{"a 'ga' h:mm – 'ga' h:mm"}
                 }
@@ -709,9 +703,9 @@ ee{
         }
         sun{
             relative{
-                "-1"{"kɔsiɖa si va yi"}
-                "0"{"kɔsiɖa sia"}
-                "1"{"kɔsiɖa si gbɔ na"}
+                "-1"{"kɔsiɖagbe si va yi"}
+                "0"{"kɔsiɖa sia gbe"}
+                "1"{"kɔsiɖagbe si gbɔ na"}
             }
         }
         thu{

@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/ja.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/ja.xml
- */
 ja{
     AuxExemplarCharacters{"[兌 拼 楔 錄 鳯]"}
     Ellipsis{
@@ -80,11 +77,6 @@ ja{
         "[‾ _＿ \\-－ ‐ — ― 〜 ・ ･ ,， 、､ ;； \\:： !！ ?？ .． ‥ … 。｡ ＇ ‘ ’ \u0022＂ “ ” (（ )）"
         " \\[［ \\]］ \\{｛ \\}｝ 〈 〉 《 》 「｢ 」｣ 『 』 【 】 〔 〕 ‖ § ¶ @＠ *＊ /／ \\\\ ＼ \\&＆ #＃"
         " %％ ‰ † ‡ ′ ″ 〃 ※]"
-    }
-    LocaleScript{
-        "Kana",
-        "Hira",
-        "Hani",
     }
     MoreInformation{"?"}
     NumberElements{
@@ -201,7 +193,7 @@ ja{
         native{"latn"}
         traditional{"jpan"}
     }
-    Version{"2.1.8.9"}
+    Version{"2.1.12.94"}
     calendar{
         buddhist{
             DateTimePatterns{
@@ -1270,6 +1262,8 @@ ja{
                 H{"H時"}
                 Hm{"H:mm"}
                 Hms{"H:mm:ss"}
+                Hmsv{"H:mm:ss v"}
+                Hmv{"H:mm v"}
                 M{"M月"}
                 MEEEEd{"M/dEEEE"}
                 MEd{"M/d(E)"}
@@ -1282,6 +1276,8 @@ ja{
                 h{"aK時"}
                 hm{"aK:mm"}
                 hms{"aK:mm:ss"}
+                hmsv{"aK:mm:ss v"}
+                hmv{"aK:mm v"}
                 ms{"mm:ss"}
                 y{"y年"}
                 yM{"y/M"}
@@ -2643,11 +2639,6 @@ ja{
         alternateQuotationStart{"『"}
         quotationEnd{"」"}
         quotationStart{"「"}
-    }
-    durationUnits{
-        hm{"h:mm"}
-        hms{"h:mm:ss"}
-        ms{"m:ss"}
     }
     fields{
         day{

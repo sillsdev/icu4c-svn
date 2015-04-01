@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/ar.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/ar.xml
- */
 ar{
     AuxExemplarCharacters{"[\u200C\u200D\u200E\u200F پ چ ژ ڜ ڢ ڤ ڥ ٯ ڧ ڨ ک گ ی]"}
     Ellipsis{
@@ -25,9 +22,6 @@ ar{
     }
     ExemplarCharactersIndex{"[ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي]"}
     ExemplarCharactersPunctuation{"[\\- ‐ – — ، ؛ \\: ! ؟ . ' \u0022 ( ) \\[ \\]]"}
-    LocaleScript{
-        "Arab",
-    }
     MoreInformation{"؟"}
     NumberElements{
         arab{
@@ -283,7 +277,7 @@ ar{
         minimumGroupingDigits{"1"}
         native{"arab"}
     }
-    Version{"2.1.8.9"}
+    Version{"2.1.12.94"}
     calendar{
         buddhist{
             eras{
@@ -582,7 +576,7 @@ ar{
                 "{1} {0}",
                 "{1} {0}",
             }
-            NoonMarker{"ظ"}
+            NoonMarker{"ظهرا"}
             NoonMarkerNarrow{"ظ"}
             appendItems{
                 Timezone{"{0} {1}"}
@@ -601,6 +595,8 @@ ar{
                 H{"HH"}
                 Hm{"HH:mm"}
                 Hms{"HH:mm:ss"}
+                Hmsv{"HH:mm:ss v"}
+                Hmv{"HH:mm v"}
                 M{"L"}
                 MEd{"E، d/M"}
                 MMM{"LLL"}
@@ -614,6 +610,8 @@ ar{
                 h{"h a"}
                 hm{"h:mm a"}
                 hms{"h:mm:ss a"}
+                hmsv{"h:mm:ss a v"}
+                hmv{"h:mm a v"}
                 ms{"mm:ss"}
                 y{"y"}
                 yM{"M‏/y"}
@@ -1464,11 +1462,6 @@ ar{
         alternateQuotationStart{"’"}
         quotationEnd{"“"}
         quotationStart{"”"}
-    }
-    durationUnits{
-        hm{"h:mm"}
-        hms{"h:mm:ss"}
-        ms{"m:ss"}
     }
     fields{
         day{

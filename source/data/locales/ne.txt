@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/ne.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/ne.xml
- */
 ne{
     AuxExemplarCharacters{"[\u200C\u200D]"}
     Ellipsis{
@@ -22,9 +19,6 @@ ne{
         "[\u093C \u0901 \u0902 ः ॐ अ आ इ ई उ ऊ ऋ ऌ ऍ ए ऐ ऑ ओ औ क ख ग घ ङ च छ ज झ ञ ट "
         "ठ ड ढ ण त थ द ध न प फ ब भ म य र ल ळ व श ष स ह ऽ ा ि ी \u0941 \u0942 \u0943 "
         "\u0944 \u0945 \u0947 \u0948 ॉ ो ौ \u094D]"
-    }
-    LocaleScript{
-        "Deva",
     }
     MoreInformation{"?"}
     NumberElements{
@@ -184,7 +178,7 @@ ne{
         minimumGroupingDigits{"1"}
         native{"deva"}
     }
-    Version{"2.1.8.95"}
+    Version{"2.1.12.94"}
     calendar{
         generic{
             DateTimePatterns{
@@ -292,8 +286,8 @@ ne{
         }
         gregorian{
             AmPmMarkers{
-                "पूर्व मध्यान्ह",
-                "उत्तर मध्यान्ह",
+                "पूर्वाह्न",
+                "अपराह्न",
             }
             AmPmMarkersNarrow{
                 "a",
@@ -388,7 +382,7 @@ ne{
                         "सोमबार",
                         "मङ्गलबार",
                         "बुधबार",
-                        "बिहीबार",
+                        "बिहिबार",
                         "शुक्रबार",
                         "शनिबार",
                     }
@@ -426,7 +420,7 @@ ne{
                         "सोमबार",
                         "मङ्गलबार",
                         "बुधबार",
-                        "बिहीबार",
+                        "बिहिबार",
                         "शुक्रबार",
                         "शनिबार",
                     }
@@ -576,7 +570,7 @@ ne{
                         "फेब्रुअरी",
                         "मार्च",
                         "अप्रिल",
-                        "मे",
+                        "मई",
                         "जुन",
                         "जुलाई",
                         "अगस्ट",
@@ -674,17 +668,32 @@ ne{
                 }
             }
         }
+        indian{
+            monthNames{
+                format{
+                    wide{
+                        "वैशाख",
+                        "जेठ",
+                        "असार",
+                        "साउन",
+                        "भदौ",
+                        "असोज",
+                        "कात्तिक",
+                        "मङसिर",
+                        "पुस",
+                        "माघ",
+                        "फागुन",
+                        "चैत",
+                    }
+                }
+            }
+        }
     }
     delimiters{
         alternateQuotationEnd{"’"}
         alternateQuotationStart{"‘"}
         quotationEnd{"”"}
         quotationStart{"“"}
-    }
-    durationUnits{
-        hm{"h:mm"}
-        hms{"h:mm:ss"}
-        ms{"m:ss"}
     }
     fields{
         day{
@@ -694,6 +703,7 @@ ne{
                 "-2"{"अस्ति"}
                 "0"{"आज"}
                 "1"{"भोली"}
+                "2"{"पर्सि"}
             }
             relativeTime{
                 future{
@@ -733,7 +743,7 @@ ne{
             }
         }
         dayperiod{
-            dn{"पूर्व मध्यान्ह/उत्तर मध्यान्ह"}
+            dn{"पूर्वाह्न / अपराह्न"}
         }
         era{
             dn{"काल"}
@@ -949,7 +959,7 @@ ne{
             }
         }
         second{
-            dn{"दोस्रो"}
+            dn{"सेकेन्ड"}
             relative{
                 "0"{"अब"}
             }
@@ -1106,7 +1116,7 @@ ne{
             dn{"हप्ताको बार"}
         }
         year{
-            dn{"बर्ष"}
+            dn{"वर्ष"}
             relative{
                 "-1"{"पहिलो वर्ष"}
                 "0"{"यो वर्ष"}
@@ -1150,7 +1160,7 @@ ne{
             }
         }
         zone{
-            dn{"क्षेत्र"}
+            dn{"समय क्षेत्र"}
         }
     }
     listPattern{

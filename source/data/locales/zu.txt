@@ -1,14 +1,11 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2014 International Business Machines
+// * Copyright (C) 2015 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/zu.xml
 // *
 // ***************************************************************************
-/**
- * ICU <specials> source: <path>/common/main/zu.xml
- */
 zu{
     AuxExemplarCharacters{
         "[á à ă â å ä ã ā æ ç é è ĕ ê ë ē í ì ĭ î ï ī ñ ó ò ŏ ô ö ø ō œ ú ù ŭ û ü ū ÿ"
@@ -27,9 +24,6 @@ zu{
         "} {kp} l m n {nc} {ngc} {ngq} {ngx} {nhl} {nk} {nkc} {nkq} {nkx} {nq} {ntsh}"
         " {nx} {ny} o p {ph} q {qh} r {rh} s {sh} t {th} {tl} {ts} {tsh} u v w x {xh}"
         " y z]"
-    }
-    LocaleScript{
-        "Latn",
     }
     MoreInformation{"?"}
     NumberElements{
@@ -168,7 +162,7 @@ zu{
         minimumGroupingDigits{"1"}
         native{"latn"}
     }
-    Version{"2.1.8.18"}
+    Version{"2.1.10.93"}
     calendar{
         generic{
             DateTimePatterns{
@@ -263,7 +257,7 @@ zu{
                     d{"M/d – M/d"}
                 }
                 d{
-                    d{"d-d"}
+                    d{"d–d"}
                 }
                 fallback{"{0} – {1}"}
                 h{
@@ -285,7 +279,7 @@ zu{
                     h{"h–h a v"}
                 }
                 y{
-                    y{"y-y"}
+                    y{"y–y"}
                 }
                 yM{
                     M{"M/y – M/y"}
@@ -523,7 +517,7 @@ zu{
                     d{"M/d – M/d"}
                 }
                 d{
-                    d{"d-d"}
+                    d{"d–d"}
                 }
                 fallback{"{0} – {1}"}
                 h{
@@ -545,7 +539,7 @@ zu{
                     h{"h–h a v"}
                 }
                 y{
-                    y{"y-y"}
+                    y{"y–y"}
                 }
                 yM{
                     M{"M/y – M/y"}
@@ -719,11 +713,6 @@ zu{
         alternateQuotationStart{"‘"}
         quotationEnd{"”"}
         quotationStart{"“"}
-    }
-    durationUnits{
-        hm{"h:mm"}
-        hms{"h:mm:ss"}
-        ms{"m:ss"}
     }
     fields{
         day{

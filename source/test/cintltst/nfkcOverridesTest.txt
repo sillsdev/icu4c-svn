@@ -1,0 +1,3 @@
+# Test overrides for sil_override_tst.c
+# Use this as the third input to gennorm2 after nfc.txt and nfkc.txt (from source/data/unicode/norm2).
+F1BE>F22A

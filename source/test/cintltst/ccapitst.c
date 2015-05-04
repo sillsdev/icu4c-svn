@@ -1,6 +1,6 @@
 /********************************************************************
  * COPYRIGHT: 
- * Copyright (c) 1997-2012, International Business Machines Corporation and
+ * Copyright (c) 1997-2014, International Business Machines Corporation and
  * others. All Rights Reserved.
  ********************************************************************/
 /*****************************************************************************
@@ -27,8 +27,6 @@
 #include "cintltst.h"
 #include "ccapitst.h"
 #include "cstring.h"
-
-#define LENGTHOF(array) (int32_t)(sizeof(array)/sizeof((array)[0]))
 
 #define NUM_CODEPAGE 1
 #define MAX_FILE_LEN 1024*20
@@ -253,7 +251,6 @@ static void TestConvert()
     UChar*                my_ucs_file_buffer; /*    [MAX_FILE_LEN] */
     UChar*                my_ucs_file_buffer_1;
     int8_t                ii                  =   0;
-    int32_t             j                   =   0;
     uint16_t            codepage_index      =   0;
     int32_t             cp                  =   0;
     UErrorCode          err                 =   U_ZERO_ERROR;
@@ -838,7 +835,11 @@ static void TestConvert()
 
 
         /*Reads the BOM*/
-        fread(&BOM, sizeof(UChar), 1, ucs_file_in);
+        {
+            // Note: gcc produces a compile warning if the return value from fread() is ignored.
+            size_t numRead = fread(&BOM, sizeof(UChar), 1, ucs_file_in);
+            (void)numRead;
+        }
         if (BOM!=0xFEFF && BOM!=0xFFFE) 
         {
             log_err("File Missing BOM...Bailing!\n");
@@ -969,7 +970,6 @@ static void TestConvert()
 
         /*testing for ucnv_fromUnicode() and ucnv_toUnicode() */
         /*Clean up re-usable vars*/
-        j=0;
         log_verbose("Testing ucnv_fromUnicode().....\n");
         tmp_ucs_buf=ucs_file_buffer_use; 
         ucnv_fromUnicode(myConverter, &mytarget_1,
@@ -980,6 +980,7 @@ static void TestConvert()
                  TRUE,
                  &err);
         consumedUni = (UChar*)tmp_consumedUni;
+        (void)consumedUni;   /* Suppress set but not used warning. */
 
         if (U_FAILURE(err)) 
         {
@@ -1677,7 +1678,7 @@ static void TestConvertSafeClone()
     };
 
     /* store the actual sizes of each converter */
-    int32_t actualSizes[LENGTHOF(names)];
+    int32_t actualSizes[UPRV_LENGTHOF(names)];
 
     static const int32_t bufferSizes[] = {
         U_CNV_SAFECLONE_BUFFERSIZE,
@@ -1713,28 +1714,29 @@ static void TestConvertSafeClone()
 
         /* Null status - just returns NULL */
         bufferSize = U_CNV_SAFECLONE_BUFFERSIZE;
-        if (0 != ucnv_safeClone(cnv, buffer[0], &bufferSize, 0))
+        if (NULL != ucnv_safeClone(cnv, buffer[0], &bufferSize, NULL))
         {
             log_err("FAIL: Cloned converter failed to deal correctly with null status\n");
         }
         /* error status - should return 0 & keep error the same */
         err = U_MEMORY_ALLOCATION_ERROR;
-        if (0 != ucnv_safeClone(cnv, buffer[0], &bufferSize, &err) || err != U_MEMORY_ALLOCATION_ERROR)
+        if (NULL != ucnv_safeClone(cnv, buffer[0], &bufferSize, &err) || err != U_MEMORY_ALLOCATION_ERROR)
         {
             log_err("FAIL: Cloned converter failed to deal correctly with incoming error status\n");
         }
         err = U_ZERO_ERROR;
 
-        /* Null buffer size pointer - just returns NULL & set error to U_ILLEGAL_ARGUMENT_ERROR*/
-        if (0 != ucnv_safeClone(cnv, buffer[0], 0, &err) || err != U_ILLEGAL_ARGUMENT_ERROR)
+        /* Null buffer size pointer is ok */
+        if (NULL == (cnv2 = ucnv_safeClone(cnv, buffer[0], NULL, &err)) || U_FAILURE(err))
         {
             log_err("FAIL: Cloned converter failed to deal correctly with null bufferSize pointer\n");
         }
+        ucnv_close(cnv2);
         err = U_ZERO_ERROR;
 
         /* buffer size pointer is 0 - fill in pbufferSize with a size */
         bufferSize = 0;
-        if (0 != ucnv_safeClone(cnv, buffer[0], &bufferSize, &err) || U_FAILURE(err) || bufferSize <= 0)
+        if (NULL != ucnv_safeClone(cnv, buffer[0], &bufferSize, &err) || U_FAILURE(err) || bufferSize <= 0)
         {
             log_err("FAIL: Cloned converter failed a sizing request ('preflighting')\n");
         }
@@ -1744,7 +1746,7 @@ static void TestConvertSafeClone()
             log_err("FAIL: Pre-calculated buffer size is too small\n");
         }
         /* Verify we can use this run-time calculated size */
-        if (0 == (cnv2 = ucnv_safeClone(cnv, buffer[0], &bufferSize, &err)) || U_FAILURE(err))
+        if (NULL == (cnv2 = ucnv_safeClone(cnv, buffer[0], &bufferSize, &err)) || U_FAILURE(err))
         {
             log_err("FAIL: Converter can't be cloned with run-time size\n");
         }
@@ -1754,7 +1756,7 @@ static void TestConvertSafeClone()
 
         /* size one byte too small - should allocate & let us know */
         --bufferSize;
-        if (0 == (cnv2 = ucnv_safeClone(cnv, 0, &bufferSize, &err)) || err != U_SAFECLONE_ALLOCATED_WARNING)
+        if (NULL == (cnv2 = ucnv_safeClone(cnv, NULL, &bufferSize, &err)) || err != U_SAFECLONE_ALLOCATED_WARNING)
         {
             log_err("FAIL: Cloned converter failed to deal correctly with too-small buffer size\n");
         }
@@ -1766,7 +1768,7 @@ static void TestConvertSafeClone()
         bufferSize = U_CNV_SAFECLONE_BUFFERSIZE;
 
         /* Null buffer pointer - return converter & set error to U_SAFECLONE_ALLOCATED_ERROR */
-        if (0 == (cnv2 = ucnv_safeClone(cnv, 0, &bufferSize, &err)) || err != U_SAFECLONE_ALLOCATED_WARNING)
+        if (NULL == (cnv2 = ucnv_safeClone(cnv, NULL, &bufferSize, &err)) || err != U_SAFECLONE_ALLOCATED_WARNING)
         {
             log_err("FAIL: Cloned converter failed to deal correctly with null buffer pointer\n");
         }
@@ -1777,7 +1779,7 @@ static void TestConvertSafeClone()
         err = U_ZERO_ERROR;
     
         /* Null converter - return NULL & set U_ILLEGAL_ARGUMENT_ERROR */
-        if (0 != ucnv_safeClone(0, buffer[0], &bufferSize, &err) || err != U_ILLEGAL_ARGUMENT_ERROR)
+        if (NULL != ucnv_safeClone(NULL, buffer[0], &bufferSize, &err) || err != U_ILLEGAL_ARGUMENT_ERROR)
         {
             log_err("FAIL: Cloned converter failed to deal correctly with null converter pointer\n");
         }
@@ -1790,8 +1792,8 @@ static void TestConvertSafeClone()
 
     /* Do these cloned converters work at all - shuffle UChars to chars & back again..*/
 
-    for(j = 0; j < LENGTHOF(bufferSizes); ++j) {
-        for (idx = 0; idx < LENGTHOF(names); idx++)
+    for(j = 0; j < UPRV_LENGTHOF(bufferSizes); ++j) {
+        for (idx = 0; idx < UPRV_LENGTHOF(names); idx++)
         {
             err = U_ZERO_ERROR;
             cnv = ucnv_open(names[idx], &err);
@@ -2515,7 +2517,7 @@ static void testFromTruncatedUTF8(UConverter *utf8Cnv, UConverter *cnv, const ch
 
     memcpy(utf8, charUTF8, charUTF8Length);
 
-    for(i=0; i<LENGTHOF(badUTF8); ++i) {
+    for(i=0; i<UPRV_LENGTHOF(badUTF8); ++i) {
         /* truncated sequence? */
         int32_t length=strlen(badUTF8[i]);
         if(length>=(1+U8_COUNT_TRAIL_BYTES(badUTF8[i][0]))) {
@@ -2534,10 +2536,11 @@ static void testFromTruncatedUTF8(UConverter *utf8Cnv, UConverter *cnv, const ch
         ucnv_convertEx(cnv, utf8Cnv,
                        &target, output+sizeof(output),
                        &source, utf8+utf8Length,
-                       pivotBuffer, &pivotSource, &pivotTarget, pivotBuffer+LENGTHOF(pivotBuffer),
+                       pivotBuffer, &pivotSource, &pivotTarget, pivotBuffer+UPRV_LENGTHOF(pivotBuffer),
                        TRUE, TRUE, /* reset & flush */
                        &errorCode);
         outputLength=(int32_t)(target-output);
+        (void)outputLength;   /* Suppress set but not used warning. */
         if(errorCode!=U_TRUNCATED_CHAR_FOUND || pivotSource!=pivotBuffer) {
             log_err("unexpected error %s from %s badUTF8[%ld]\n", u_errorName(errorCode), converterName, (long)i);
             continue;
@@ -2578,7 +2581,7 @@ static void testFromBadUTF8(UConverter *utf8Cnv, UConverter *cnv, const char *co
     memcpy(expect, char0, char0Length);
     expectLength=char0Length;
 
-    for(i=0; i<LENGTHOF(badUTF8); ++i) {
+    for(i=0; i<UPRV_LENGTHOF(badUTF8); ++i) {
         int32_t length=strlen(badUTF8[i]);
         memcpy(utf8+utf8Length, badUTF8[i], length);
         utf8Length+=length;
@@ -2628,7 +2631,7 @@ static void TestConvertExFromUTF8() {
         return;
     }
 
-    for(i=0; i<LENGTHOF(converterNames); ++i) {
+    for(i=0; i<UPRV_LENGTHOF(converterNames); ++i) {
         errorCode=U_ZERO_ERROR;
         cnv=ucnv_open(converterNames[i], &errorCode);
         if(U_FAILURE(errorCode)) {
@@ -2687,7 +2690,7 @@ static void TestConvertExFromUTF8_C5F0() {
         return;
     }
 
-    for(i=0; i<LENGTHOF(converterNames); ++i) {
+    for(i=0; i<UPRV_LENGTHOF(converterNames); ++i) {
         errorCode=U_ZERO_ERROR;
         cnv=ucnv_open(converterNames[i], &errorCode);
         ucnv_setFromUCallBack(cnv, UCNV_FROM_U_CALLBACK_ESCAPE, UCNV_ESCAPE_XML_DEC,
@@ -2700,7 +2703,7 @@ static void TestConvertExFromUTF8_C5F0() {
         src=bad_utf8;
         target=dest;
         uprv_memset(dest, 9, sizeof(dest));
-        if(i==LENGTHOF(converterNames)-1) {
+        if(i==UPRV_LENGTHOF(converterNames)-1) {
             /* conversion to UTF-8 yields two U+FFFD directly */
             expected=twoFFFD;
             expectedLength=6;
@@ -2717,7 +2720,7 @@ static void TestConvertExFromUTF8_C5F0() {
             cnv, utf8Cnv,
             &target, dest+expectedLength,
             &src, bad_utf8+sizeof(bad_utf8),
-            pivotBuffer, &pivotSource, &pivotTarget, pivotBuffer+LENGTHOF(pivotBuffer),
+            pivotBuffer, &pivotSource, &pivotTarget, pivotBuffer+UPRV_LENGTHOF(pivotBuffer),
             TRUE, TRUE, &errorCode);
         if( errorCode!=U_STRING_NOT_TERMINATED_WARNING || src!=bad_utf8+2 ||
             target!=dest+expectedLength || 0!=uprv_memcmp(dest, expected, expectedLength) ||
@@ -2908,7 +2911,7 @@ static void TestLMBCSMaxChar(void) {
     };
     int32_t idx;
 
-    for (idx = 0; idx < LENGTHOF(converter); idx++) {
+    for (idx = 0; idx < UPRV_LENGTHOF(converter); idx++) {
         UErrorCode status = U_ZERO_ERROR;
         UConverter *cnv = cnv_open(converter[idx].name, &status);
         if (U_FAILURE(status)) {
@@ -3070,12 +3073,12 @@ testSwap(const char *name, UBool swap) {
     /* convert to EBCDIC */
     pcu=text;
     pc=normal;
-    ucnv_fromUnicode(cnv, &pc, normal+LENGTHOF(normal), &pcu, text+LENGTHOF(text), NULL, TRUE, &errorCode);
+    ucnv_fromUnicode(cnv, &pc, normal+UPRV_LENGTHOF(normal), &pcu, text+UPRV_LENGTHOF(text), NULL, TRUE, &errorCode);
     normalLength=(int32_t)(pc-normal);
 
     pcu=text;
     pc=swapped;
-    ucnv_fromUnicode(swapCnv, &pc, swapped+LENGTHOF(swapped), &pcu, text+LENGTHOF(text), NULL, TRUE, &errorCode);
+    ucnv_fromUnicode(swapCnv, &pc, swapped+UPRV_LENGTHOF(swapped), &pcu, text+UPRV_LENGTHOF(text), NULL, TRUE, &errorCode);
     swappedLength=(int32_t)(pc-swapped);
 
     if(U_FAILURE(errorCode)) {
@@ -3108,12 +3111,12 @@ testSwap(const char *name, UBool swap) {
     /* convert back to Unicode (may not roundtrip) */
     pc=normal;
     pu=uNormal;
-    ucnv_toUnicode(cnv, &pu, uNormal+LENGTHOF(uNormal), (const char **)&pc, normal+normalLength, NULL, TRUE, &errorCode);
+    ucnv_toUnicode(cnv, &pu, uNormal+UPRV_LENGTHOF(uNormal), (const char **)&pc, normal+normalLength, NULL, TRUE, &errorCode);
     normalLength=(int32_t)(pu-uNormal);
 
     pc=normal;
     pu=uSwapped;
-    ucnv_toUnicode(swapCnv, &pu, uSwapped+LENGTHOF(uSwapped), (const char **)&pc, normal+swappedLength, NULL, TRUE, &errorCode);
+    ucnv_toUnicode(swapCnv, &pu, uSwapped+UPRV_LENGTHOF(uSwapped), (const char **)&pc, normal+swappedLength, NULL, TRUE, &errorCode);
     swappedLength=(int32_t)(pu-uSwapped);
 
     if(U_FAILURE(errorCode)) {
@@ -3164,7 +3167,7 @@ TestEBCDICSwapLFNL() {
 
     int i;
 
-    for(i=0; i<LENGTHOF(tests); ++i) {
+    for(i=0; i<UPRV_LENGTHOF(tests); ++i) {
         testSwap(tests[i].name, tests[i].swap);
     }
 }
@@ -3174,8 +3177,6 @@ TestEBCDICSwapLFNL() {
   /* test nothing... */
 }
 #endif
-
-static const UVersionInfo ICU_34 = {3,4,0,0};
 
 static void TestFromUCountPending(){
 #if !UCONFIG_NO_LEGACY_CONVERSION
@@ -3197,7 +3198,7 @@ static void TestFromUCountPending(){
         log_data_err("Could not create converter for test3. Error: %s\n", u_errorName(status));
         return;
     }
-    for(i=0; i<LENGTHOF(fromUnicodeTests); ++i) {
+    for(i=0; i<UPRV_LENGTHOF(fromUnicodeTests); ++i) {
         char tgt[10];
         char* target = tgt;
         char* targetLimit = target + 10;
@@ -3303,7 +3304,7 @@ TestToUCountPending(){
         return;
     }
     ucnv_setToUCallBack(cnv, UCNV_TO_U_CALLBACK_STOP, NULL, oldToUAction, NULL, &status);
-    for(i=0; i<LENGTHOF(toUnicodeTests); ++i) {
+    for(i=0; i<UPRV_LENGTHOF(toUnicodeTests); ++i) {
         UChar tgt[20];
         UChar* target = tgt;
         UChar* targetLimit = target + 20;
@@ -3541,7 +3542,7 @@ TestSubstString() {
         log_data_err("ucnv_open(ISO-8859-1) failed - %s\n", u_errorName(errorCode));
         return;
     }
-    ucnv_setSubstString(cnv, sub, LENGTHOF(sub), &errorCode);
+    ucnv_setSubstString(cnv, sub, UPRV_LENGTHOF(sub), &errorCode);
     if(U_FAILURE(errorCode)) {
         log_err("ucnv_setSubstString(ISO-8859-1, sub[5]) failed - %s\n", u_errorName(errorCode));
     } else {
@@ -3561,7 +3562,7 @@ TestSubstString() {
         log_data_err("ucnv_open(HZ) failed - %s\n", u_errorName(errorCode));
         return;
     }
-    ucnv_setSubstString(cnv, sub, LENGTHOF(sub), &errorCode);
+    ucnv_setSubstString(cnv, sub, UPRV_LENGTHOF(sub), &errorCode);
     if(U_FAILURE(errorCode)) {
         log_err("ucnv_setSubstString(HZ, sub[5]) failed - %s\n", u_errorName(errorCode));
     } else {
@@ -3646,7 +3647,7 @@ static void TestGetName() {
         "x-UTF-16LE-BOM",           "UTF-16LE,version=1"
     };
     int32_t i;
-    for(i = 0; i < LENGTHOF(names); i += 2) {
+    for(i = 0; i < UPRV_LENGTHOF(names); i += 2) {
         UErrorCode errorCode = U_ZERO_ERROR;
         UConverter *cnv = ucnv_open(names[i], &errorCode);
         if(U_SUCCESS(errorCode)) {
@@ -3689,7 +3690,7 @@ static void TestUTFBOM() {
     char bytes[10];
     int32_t i;
 
-    for(i = 0; i < LENGTHOF(names); ++i) {
+    for(i = 0; i < UPRV_LENGTHOF(names); ++i) {
         UErrorCode errorCode = U_ZERO_ERROR;
         UConverter *cnv = ucnv_open(names[i], &errorCode);
         int32_t length = 0;

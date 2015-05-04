@@ -1,5 +1,5 @@
 /********************************************************************
- * Copyright (c) 2011-2012, International Business Machines Corporation
+ * Copyright (c) 2011-2014, International Business Machines Corporation
  * and others. All Rights Reserved.
  ********************************************************************/
 /* C API TEST FOR DATE INTERVAL FORMAT */
@@ -47,13 +47,13 @@ typedef struct {
 
 /* Just a small set of tests for now, the real functionality is tested in the C++ tests */
 static const DateIntervalFormatTestItem testItems[] = {
-    { "en", "MMMdHHmm", tzUSPacific, Date201103021030, Date201103021030 + 7.0*_HOUR,  "Mar 2, 10:30 \\u2013 Mar 2, 17:30" },
-    { "en", "MMMdHHmm", tzAsiaTokyo, Date201103021030, Date201103021030 + 7.0*_HOUR,  "Mar 3, 03:30 \\u2013 Mar 3, 10:30" },
+    { "en", "MMMdHHmm", tzUSPacific, Date201103021030, Date201103021030 + 7.0*_HOUR,  "Mar 2, 10:30 \\u2013 17:30" },
+    { "en", "MMMdHHmm", tzAsiaTokyo, Date201103021030, Date201103021030 + 7.0*_HOUR,  "Mar 3, 03:30 \\u2013 10:30" },
     { "en", "yMMMEd",   tzUSPacific, Date201009270800, Date201009270800 + 12.0*_HOUR, "Mon, Sep 27, 2010" },
     { "en", "yMMMEd",   tzUSPacific, Date201009270800, Date201009270800 + 31.0*_DAY,  "Mon, Sep 27 \\u2013 Thu, Oct 28, 2010" },
     { "en", "yMMMEd",   tzUSPacific, Date201009270800, Date201009270800 + 410.0*_DAY, "Mon, Sep 27, 2010 \\u2013 Fri, Nov 11, 2011" },
     { "de", "Hm",       tzUSPacific, Date201009270800, Date201009270800 + 12.0*_HOUR, "08:00-20:00" },
-    { "de", "Hm",       tzUSPacific, Date201009270800, Date201009270800 + 31.0*_DAY,  "27.9.2010 08:00 - 28.10.2010 08:00" },
+    { "de", "Hm",       tzUSPacific, Date201009270800, Date201009270800 + 31.0*_DAY,  "27.9.2010, 08:00 - 28.10.2010, 08:00" },
     { "ja", "MMMd",     tzUSPacific, Date201009270800, Date201009270800 + 1.0*_DAY,   "9\\u670827\\u65E5\\uFF5E28\\u65E5" },
     { NULL, NULL,       NULL,        0,                0,                             NULL }
 };

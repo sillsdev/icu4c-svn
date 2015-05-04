@@ -1,6 +1,6 @@
 /*
 ***************************************************************************
-*   Copyright (C) 1999-2012 International Business Machines Corporation
+*   Copyright (C) 1999-2014 International Business Machines Corporation
 *   and others. All rights reserved.
 ***************************************************************************
 */
@@ -270,7 +270,6 @@ RuleBasedBreakIterator::operator=(const RuleBasedBreakIterator& that) {
 //-----------------------------------------------------------------------------
 void RuleBasedBreakIterator::init() {
     UErrorCode  status    = U_ZERO_ERROR;
-    fBufferClone          = FALSE;
     fText                 = utext_openUChars(NULL, NULL, 0, &status);
     fCharIter             = NULL;
     fSCharIter            = NULL;
@@ -519,8 +518,8 @@ RuleBasedBreakIterator &RuleBasedBreakIterator::refreshInputText(UText *input, U
 
 
 /**
- * Sets the current iteration position to the beginning of the text.
- * @return The offset of the beginning of the text.
+ * Sets the current iteration position to the beginning of the text, position zero.
+ * @return The new iterator position, which is zero.
  */
 int32_t RuleBasedBreakIterator::first(void) {
     reset();
@@ -593,6 +592,7 @@ int32_t RuleBasedBreakIterator::next(void) {
     }
 
     int32_t startPos = current();
+    fDictionaryCharCount = 0;
     int32_t result = handleNext(fData->fForwardTable);
     if (fDictionaryCharCount > 0) {
         result = checkDictionary(startPos, result, FALSE);
@@ -647,7 +647,6 @@ int32_t RuleBasedBreakIterator::previous(void) {
     // break position before the current position (we back our internal
     // iterator up one step to prevent handlePrevious() from returning
     // the current position), but not necessarily the last one before
-
     // where we started
 
     int32_t start = current();
@@ -680,11 +679,11 @@ int32_t RuleBasedBreakIterator::previous(void) {
     // the result position that we are to return (in lastResult.)  If
     // the backwards rules overshot and the above loop had to do two or more
     // next()s to move up to the desired return position, we will have a valid
-    // tag value. But, if handlePrevious() took us to exactly the correct result positon,
+    // tag value. But, if handlePrevious() took us to exactly the correct result position,
     // we wont have a tag value for that position, which is only set by handleNext().
 
-    // set the current iteration position to be the last break position
-    // before where we started, and then return that value
+    // Set the current iteration position to be the last break position
+    // before where we started, and then return that value.
     utext_setNativeIndex(fText, lastResult);
     fLastRuleStatusIndex  = lastTag;       // for use by getRuleStatus()
     fLastStatusIndexValid = breakTagValid;
@@ -702,6 +701,22 @@ int32_t RuleBasedBreakIterator::previous(void) {
  * @return The position of the first break after the current position.
  */
 int32_t RuleBasedBreakIterator::following(int32_t offset) {
+    // if the offset passed in is already past the end of the text,
+    // just return DONE; if it's before the beginning, return the
+    // text's starting offset
+    if (fText == NULL || offset >= utext_nativeLength(fText)) {
+        last();
+        return next();
+    }
+    else if (offset < 0) {
+        return first();
+    }
+
+    // Move requested offset to a code point start. It might be on a trail surrogate,
+    // or on a trail byte if the input is UTF-8.
+    utext_setNativeIndex(fText, offset);
+    offset = utext_getNativeIndex(fText);
+
     // if we have cached break positions and offset is in the range
     // covered by them, use them
     // TODO: could use binary search
@@ -723,20 +738,7 @@ int32_t RuleBasedBreakIterator::following(int32_t offset) {
         }
     }
 
-    // if the offset passed in is already past the end of the text,
-    // just return DONE; if it's before the beginning, return the
-    // text's starting offset
-    fLastRuleStatusIndex  = 0;
-    fLastStatusIndexValid = TRUE;
-    if (fText == NULL || offset >= utext_nativeLength(fText)) {
-        last();
-        return next();
-    }
-    else if (offset < 0) {
-        return first();
-    }
-
-    // otherwise, set our internal iteration position (temporarily)
+    // Set our internal iteration position (temporarily)
     // to the position passed in.  If this is the _beginning_ position,
     // then we can just use next() to get our return value
 
@@ -748,6 +750,7 @@ int32_t RuleBasedBreakIterator::following(int32_t offset) {
         // move forward one codepoint to prepare for moving back to a
         // safe point.
         // this handles offset being between a supplementary character
+        // TODO: is this still needed, with move to code point boundary handled above?
         (void)UTEXT_NEXT32(fText);
         // handlePrevious will move most of the time to < 1 boundary away
         handlePrevious(fData->fSafeRevTable);
@@ -810,6 +813,21 @@ int32_t RuleBasedBreakIterator::following(int32_t offset) {
  * @return The position of the last boundary before the starting position.
  */
 int32_t RuleBasedBreakIterator::preceding(int32_t offset) {
+    // if the offset passed in is already past the end of the text,
+    // just return DONE; if it's before the beginning, return the
+    // text's starting offset
+    if (fText == NULL || offset > utext_nativeLength(fText)) {
+        return last();
+    }
+    else if (offset < 0) {
+        return first();
+    }
+
+    // Move requested offset to a code point start. It might be on a trail surrogate,
+    // or on a trail byte if the input is UTF-8.
+    utext_setNativeIndex(fText, offset);
+    offset = utext_getNativeIndex(fText);
+
     // if we have cached break positions and offset is in the range
     // covered by them, use them
     if (fCachedBreakPositions != NULL) {
@@ -833,17 +851,6 @@ int32_t RuleBasedBreakIterator::preceding(int32_t offset) {
         else {
             reset();
         }
-    }
-
-    // if the offset passed in is already past the end of the text,
-    // just return DONE; if it's before the beginning, return the
-    // text's starting offset
-    if (fText == NULL || offset > utext_nativeLength(fText)) {
-        // return BreakIterator::DONE;
-        return last();
-    }
-    else if (offset < 0) {
-        return first();
     }
 
     // if we start by updating the current iteration position to the
@@ -1515,19 +1522,7 @@ const uint8_t  *RuleBasedBreakIterator::getBinaryRules(uint32_t &length) {
 }
 
 
-
-
-//-------------------------------------------------------------------------------
-//
-//  BufferClone       TODO:  In my (Andy) opinion, this function should be deprecated.
-//                    Saving one heap allocation isn't worth the trouble.
-//                    Cloning shouldn't be done in tight loops, and
-//                    making the clone copy involves other heap operations anyway.
-//                    And the application code for correctly dealing with buffer
-//                    size problems and the eventual object destruction is ugly.
-//
-//-------------------------------------------------------------------------------
-BreakIterator *  RuleBasedBreakIterator::createBufferClone(void *stackBuffer,
+BreakIterator *  RuleBasedBreakIterator::createBufferClone(void * /*stackBuffer*/,
                                    int32_t &bufferSize,
                                    UErrorCode &status)
 {
@@ -1535,51 +1530,18 @@ BreakIterator *  RuleBasedBreakIterator::createBufferClone(void *stackBuffer,
         return NULL;
     }
 
-    //
-    //  If user buffer size is zero this is a preflight operation to
-    //    obtain the needed buffer size, allowing for worst case misalignment.
-    //
     if (bufferSize == 0) {
-        bufferSize = sizeof(RuleBasedBreakIterator) + U_ALIGNMENT_OFFSET_UP(0);
+        bufferSize = 1;  // preflighting for deprecated functionality
         return NULL;
     }
 
-
-    //
-    //  Check the alignment and size of the user supplied buffer.
-    //  Allocate heap memory if the user supplied memory is insufficient.
-    //
-    char    *buf   = (char *)stackBuffer;
-    uint32_t s      = bufferSize;
-
-    if (stackBuffer == NULL) {
-        s = 0;   // Ignore size, force allocation if user didn't give us a buffer.
+    BreakIterator *clonedBI = clone();
+    if (clonedBI == NULL) {
+        status = U_MEMORY_ALLOCATION_ERROR;
+    } else {
+        status = U_SAFECLONE_ALLOCATED_WARNING;
     }
-    if (U_ALIGNMENT_OFFSET(stackBuffer) != 0) {
-        uint32_t offsetUp = (uint32_t)U_ALIGNMENT_OFFSET_UP(buf);
-        s   -= offsetUp;
-        buf += offsetUp;
-    }
-    if (s < sizeof(RuleBasedBreakIterator)) {
-        // Not enough room in the caller-supplied buffer.
-        // Do a plain-vanilla heap based clone and return that, along with
-        //   a warning that the clone was allocated.
-        RuleBasedBreakIterator *clonedBI = new RuleBasedBreakIterator(*this);
-        if (clonedBI == 0) {
-            status = U_MEMORY_ALLOCATION_ERROR;
-        } else {
-            status = U_SAFECLONE_ALLOCATED_WARNING;
-        }
-        return clonedBI;
-    }
-
-    //
-    //  Clone the source BI into the caller-supplied buffer.
-    //
-    RuleBasedBreakIterator *clone = new(buf) RuleBasedBreakIterator(*this);
-    clone->fBufferClone = TRUE;   // Flag to prevent deleting storage on close (From C code)
-
-    return clone;
+    return (RuleBasedBreakIterator *)clonedBI;
 }
 
 
@@ -1624,30 +1586,6 @@ int32_t RuleBasedBreakIterator::checkDictionary(int32_t startPos,
         return (reverse ? startPos : endPos);
     }
     
-    // Bug 5532.  The dictionary code will crash if the input text is UTF-8
-    //      because native indexes are different from UTF-16 indexes.
-    //      Temporary hack: skip dictionary lookup for UTF-8 encoded text.
-    //      It wont give the right breaks, but it's better than a crash.
-    //
-    //      Check the type of the UText by checking its pFuncs field, which
-    //      is UText's function dispatch table.  It will be the same for all
-    //      UTF-8 UTexts and different for any other UText type.
-    //
-    //      We have no other type of UText available with non-UTF-16 native indexing.
-    //      This whole check will go away once the dictionary code is fixed.
-    static const void *utext_utf8Funcs;
-    if (utext_utf8Funcs == NULL) {
-        // Cache the UTF-8 UText function pointer value.
-        UErrorCode status = U_ZERO_ERROR;
-        UText tempUText = UTEXT_INITIALIZER; 
-        utext_openUTF8(&tempUText, NULL, 0, &status);
-        utext_utf8Funcs = tempUText.pFuncs;
-        utext_close(&tempUText);
-    }
-    if (fText->pFuncs == utext_utf8Funcs) {
-        return (reverse ? startPos : endPos);
-    }
-
     // Starting from the starting point, scan towards the proposed result,
     // looking for the first dictionary character (which may be the one
     // we're on, if we're starting in the middle of a range).
@@ -1749,6 +1687,7 @@ int32_t RuleBasedBreakIterator::checkDictionary(int32_t startPos,
     // If we found breaks, build a new break cache. The first and last entries must
     // be the original starting and ending position.
     if (foundBreakCount > 0) {
+        U_ASSERT(foundBreakCount == breaks.size());
         int32_t totalBreaks = foundBreakCount;
         if (startPos < breaks.elementAti(0)) {
             totalBreaks += 1;
@@ -1790,9 +1729,9 @@ int32_t RuleBasedBreakIterator::checkDictionary(int32_t startPos,
 
 U_NAMESPACE_END
 
-// defined in ucln_cmn.h
 
 static icu::UStack *gLanguageBreakFactories = NULL;
+static icu::UInitOnce gLanguageBreakFactoriesInitOnce = U_INITONCE_INITIALIZER;
 
 /**
  * Release all static memory held by breakiterator.  
@@ -1803,6 +1742,7 @@ static UBool U_CALLCONV breakiterator_cleanup_dict(void) {
         delete gLanguageBreakFactories;
         gLanguageBreakFactories = NULL;
     }
+    gLanguageBreakFactoriesInitOnce.reset();
     return TRUE;
 }
 U_CDECL_END
@@ -1814,35 +1754,28 @@ static void U_CALLCONV _deleteFactory(void *obj) {
 U_CDECL_END
 U_NAMESPACE_BEGIN
 
+static void U_CALLCONV initLanguageFactories() {
+    UErrorCode status = U_ZERO_ERROR;
+    U_ASSERT(gLanguageBreakFactories == NULL);
+    gLanguageBreakFactories = new UStack(_deleteFactory, NULL, status);
+    if (gLanguageBreakFactories != NULL && U_SUCCESS(status)) {
+        ICULanguageBreakFactory *builtIn = new ICULanguageBreakFactory(status);
+        gLanguageBreakFactories->push(builtIn, status);
+#ifdef U_LOCAL_SERVICE_HOOK
+        LanguageBreakFactory *extra = (LanguageBreakFactory *)uprv_svc_hook("languageBreakFactory", &status);
+        if (extra != NULL) {
+            gLanguageBreakFactories->push(extra, status);
+        }
+#endif
+    }
+    ucln_common_registerCleanup(UCLN_COMMON_BREAKITERATOR_DICT, breakiterator_cleanup_dict);
+}
+
+
 static const LanguageBreakEngine*
 getLanguageBreakEngineFromFactory(UChar32 c, int32_t breakType)
 {
-    UBool       needsInit;
-    UErrorCode  status = U_ZERO_ERROR;
-    UMTX_CHECK(NULL, (UBool)(gLanguageBreakFactories == NULL), needsInit);
-    
-    if (needsInit) {
-        UStack  *factories = new UStack(_deleteFactory, NULL, status);
-        if (factories != NULL && U_SUCCESS(status)) {
-            ICULanguageBreakFactory *builtIn = new ICULanguageBreakFactory(status);
-            factories->push(builtIn, status);
-#ifdef U_LOCAL_SERVICE_HOOK
-            LanguageBreakFactory *extra = (LanguageBreakFactory *)uprv_svc_hook("languageBreakFactory", &status);
-            if (extra != NULL) {
-                factories->push(extra, status);
-            }
-#endif
-        }
-        umtx_lock(NULL);
-        if (gLanguageBreakFactories == NULL) {
-            gLanguageBreakFactories = factories;
-            factories = NULL;
-            ucln_common_registerCleanup(UCLN_COMMON_BREAKITERATOR_DICT, breakiterator_cleanup_dict);
-        }
-        umtx_unlock(NULL);
-        delete factories;
-    }
-    
+    umtx_initOnce(gLanguageBreakFactoriesInitOnce, &initLanguageFactories);
     if (gLanguageBreakFactories == NULL) {
         return NULL;
     }

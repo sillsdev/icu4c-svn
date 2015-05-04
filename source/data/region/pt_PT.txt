@@ -1,7 +1,7 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/pt_PT.xml
 // *
@@ -10,17 +10,15 @@ pt_PT{
     Countries{
         009{"Oceânia"}
         015{"Norte de África"}
-        035{"Sudeste Asiático"}
-        053{"Australásia"}
+        029{"Caraíbas"}
         154{"Europa do Norte"}
         AI{"Anguila"}
         AM{"Arménia"}
-        AX{"Ilhas Åland"}
         BH{"Barém"}
         BJ{"Benim"}
-        BQ{"Países Baixos Caribenhos"}
-        BY{"Bielorrússia"}
+        BW{"Botswana"}
         CC{"Ilhas Cocos"}
+        CD{"Congo-Kinshasa"}
         CG{"Congo-Brazzaville"}
         CM{"Camarões"}
         CW{"Curaçau"}
@@ -33,25 +31,20 @@ pt_PT{
         FK{"Ilhas Falkland"}
         FO{"Ilhas Faroé"}
         GL{"Gronelândia"}
+        GS{"Ilhas Geórgia do Sul e Sandwich do Sul"}
         GU{"Guame"}
         GW{"Guiné-Bissau"}
-        HK{"Região Administrativa Especial de Hong Kong"}
         IR{"Irão"}
         KE{"Quénia"}
-        KG{"Quirguizistão"}
-        KN{"São Cristóvão e Neves"}
         KY{"Ilhas Caimão"}
-        KZ{"Cazaquistão"}
         LV{"Letónia"}
         MC{"Mónaco"}
         MG{"Madagáscar"}
         MK{"Macedónia"}
-        MO{"Região Administrativa Especial de Macau"}
         MS{"Monserrate"}
-        MU{"Maurícias"}
+        MU{"Maurícia"}
         NC{"Nova Caledónia"}
         NL{"Países Baixos"}
-        PG{"Papuásia-Nova Guiné"}
         PL{"Polónia"}
         PN{"Pitcairn"}
         PS{"Território Palestiniano"}
@@ -62,15 +55,21 @@ pt_PT{
         SI{"Eslovénia"}
         SM{"São Marino"}
         TC{"Ilhas Turcas e Caicos"}
-        TJ{"Tajiquistão"}
+        TK{"Toquelau"}
         TM{"Turquemenistão"}
         TT{"Trindade e Tobago"}
-        UZ{"Usbequistão"}
         VN{"Vietname"}
         YE{"Iémen"}
         YT{"Maiote"}
         ZW{"Zimbabué"}
-        ZZ{"Região desconhecida ou inválida"}
     }
-    Version{"2.0.78.47"}
+    Countries%variant{
+        CG{"República do Congo"}
+        FK{"Ilhas Malvinas"}
+        MK{"Antiga República Jugoslava da Macedónia"}
+    }
+    CountriesShort{
+        GB{"RU"}
+    }
+    Version{"2.1.8.19"}
 }

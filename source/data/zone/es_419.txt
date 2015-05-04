@@ -1,42 +1,56 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/es_419.xml
 // *
 // ***************************************************************************
 es_419{
-    Version{"2.0.78.47"}
+    Version{"2.1.8.19"}
     zoneStrings{
-        "America:Coral_Harbour"{
-            ec{"Atikokan"}
+        "Africa:Tunis"{
+            ec{"Túnez"}
         }
-        "America:Indiana:Winamac"{
-            ec{"Winamac, Indiana"}
+        "America:North_Dakota:Center"{
+            ec{"Centro, Dakota del Norte"}
         }
-        "America:Kentucky:Monticello"{
-            ec{"Monticello, Kentucky"}
+        "Etc:Unknown"{
+            ec{"Desconocida"}
         }
-        "meta:America_Central"{
-            sd{"CDT"}
-            sg{"CT"}
-            ss{"CST"}
+        "Pacific:Pitcairn"{
+            ec{"Pitcairn"}
         }
-        "meta:America_Eastern"{
-            sd{"EDT"}
-            sg{"ET"}
-            ss{"EST"}
+        "meta:Europe_Central"{
+            sd{"∅∅∅"}
+            sg{"∅∅∅"}
+            ss{"∅∅∅"}
         }
-        "meta:America_Mountain"{
-            sd{"MDT"}
-            sg{"MT"}
-            ss{"MST"}
+        "meta:Europe_Eastern"{
+            sd{"∅∅∅"}
+            sg{"∅∅∅"}
+            ss{"∅∅∅"}
         }
-        "meta:America_Pacific"{
-            sd{"PDT"}
-            sg{"PT"}
-            ss{"PST"}
+        "meta:Europe_Western"{
+            sd{"∅∅∅"}
+            sg{"∅∅∅"}
+            ss{"∅∅∅"}
         }
+        "meta:GMT"{
+            ss{"∅∅∅"}
+        }
+        "meta:Greenland_Eastern"{
+            ld{"hora de verano de Groenlandia oriental"}
+            lg{"hora de Groenlandia oriental"}
+            ls{"Hora estándar de Groenlandia oriental"}
+        }
+        "meta:Marquesas"{
+            ls{"hora de Marquesas"}
+        }
+        "meta:Norfolk"{
+            ls{"hora de la isla Norfolk"}
+        }
+        regionFormatDaylight{"hora de verano de {0}"}
+        regionFormatStandard{"hora estándar de {0}"}
     }
 }

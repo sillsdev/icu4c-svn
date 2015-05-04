@@ -1,13 +1,13 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/sw.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/sw.xml
+ * ICU <specials> source: <path>/common/main/sw.xml
  */
 sw{
     Countries{
@@ -44,7 +44,7 @@ sw{
         AC{"Kisiwa cha Ascension"}
         AD{"Andora"}
         AE{"Falme za Kiarabu"}
-        AF{"Afuganistani"}
+        AF{"Afghanistan"}
         AG{"Antigua na Barbuda"}
         AI{"Anguilla"}
         AL{"Albania"}
@@ -67,7 +67,7 @@ sw{
         BG{"Bulgaria"}
         BH{"Bahareni"}
         BI{"Burundi"}
-        BJ{"Benini"}
+        BJ{"Benin"}
         BL{"Santabathelemi"}
         BM{"Bermuda"}
         BN{"Brunei"}
@@ -81,12 +81,12 @@ sw{
         BY{"Belarusi"}
         BZ{"Belize"}
         CA{"Kanada"}
-        CC{"Visiwa vya Cocos [Keeling]"}
+        CC{"Visiwa vya Cocos (Keeling)"}
         CD{"Jamhuri ya Kidemokrasia ya Kongo"}
         CF{"Jamhuri ya Afrika ya Kati"}
-        CG{"Kongo"}
+        CG{"Kongo - Brazzaville"}
         CH{"Uswisi"}
-        CI{"Kodivaa"}
+        CI{"Côte d’Ivoire"}
         CK{"Visiwa vya Cook"}
         CL{"Chile"}
         CM{"Kameruni"}
@@ -98,7 +98,7 @@ sw{
         CV{"Kepuvede"}
         CW{"Kurakao"}
         CX{"Kisiwa cha Krismasi"}
-        CY{"Kuprosi"}
+        CY{"Saiprasi"}
         CZ{"Jamhuri ya Cheki"}
         DE{"Ujerumani"}
         DG{"Diego Garcia"}
@@ -155,7 +155,7 @@ sw{
         IN{"India"}
         IO{"Eneo la Uingereza katika Bahari Hindi"}
         IQ{"Iraki"}
-        IR{"Uajemi"}
+        IR{"Iran"}
         IS{"Aislandi"}
         IT{"Italia"}
         JE{"Jersey"}
@@ -176,7 +176,7 @@ sw{
         LA{"Laosi"}
         LB{"Lebanoni"}
         LC{"Santalusia"}
-        LI{"Lishenteni"}
+        LI{"Liechtenstein"}
         LK{"Sirilanka"}
         LR{"Liberia"}
         LS{"Lesoto"}
@@ -189,11 +189,11 @@ sw{
         MD{"Moldova"}
         ME{"Montenegro"}
         MF{"Saint Martin"}
-        MG{"Bukini"}
+        MG{"Madagaska"}
         MH{"Visiwa vya Marshal"}
         MK{"Masedonia"}
         ML{"Mali"}
-        MM{"Myama"}
+        MM{"Myanmar (Burma)"}
         MN{"Mongolia"}
         MO{"Macau SAR China"}
         MP{"Visiwa vya Mariana vya Kaskazini"}
@@ -210,8 +210,8 @@ sw{
         NA{"Namibia"}
         NC{"Nyukaledonia"}
         NE{"Nijeri"}
-        NF{"Kisiwa cha Norfok"}
-        NG{"Nijeria"}
+        NF{"Kisiwa cha Norfolk"}
+        NG{"Nigeria"}
         NI{"Nikaragwa"}
         NL{"Uholanzi"}
         NO{"Norwe"}
@@ -230,7 +230,7 @@ sw{
         PM{"Santapieri na Mikeloni"}
         PN{"Pitkairni"}
         PR{"Pwetoriko"}
-        PS{"Ukingo wa Magharibi na Ukanda wa Gaza wa Palestina"}
+        PS{"Maeneo ya Palestina"}
         PT{"Ureno"}
         PW{"Palau"}
         PY{"Paragwai"}
@@ -257,7 +257,7 @@ sw{
         SO{"Somalia"}
         SR{"Surinamu"}
         SS{"Sudani Kusini"}
-        ST{"Sao Tome na Principe"}
+        ST{"São Tomé na Príncipe"}
         SV{"Elsavado"}
         SX{"Santamatini"}
         SY{"Siria"}
@@ -270,7 +270,7 @@ sw{
         TH{"Tailandi"}
         TJ{"Tajikistani"}
         TK{"Tokelau"}
-        TL{"Timori ya Mashariki"}
+        TL{"Timor ya Mashariki"}
         TM{"Turukimenistani"}
         TN{"Tunisia"}
         TO{"Tonga"}
@@ -294,6 +294,7 @@ sw{
         VU{"Vanuatu"}
         WF{"Walis na Futuna"}
         WS{"Samoa"}
+        XK{"Kosovo"}
         YE{"Yemeni"}
         YT{"Mayotte"}
         ZA{"Afrika Kusini"}
@@ -301,5 +302,18 @@ sw{
         ZW{"Zimbabwe"}
         ZZ{"Eneo lisilojulikana"}
     }
-    Version{"2.0.77.46"}
+    Countries%variant{
+        CG{"Jamhuri ya Kongo"}
+        CI{"Ivory Coast"}
+        FK{"Visiwa vya Falkland (Islas Malvinas)"}
+        MK{"Masedonia (FYROM)"}
+    }
+    CountriesShort{
+        GB{"Uingereza"}
+        HK{"Hong Kong"}
+        MO{"Macau"}
+        PS{"Palestina"}
+        US{"US"}
+    }
+    Version{"2.1.8.9"}
 }

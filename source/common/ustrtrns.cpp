@@ -1,7 +1,7 @@
 /*
 ******************************************************************************
 *
-*   Copyright (C) 2001-2012, International Business Machines
+*   Copyright (C) 2001-2014, International Business Machines
 *   Corporation and others.  All Rights Reserved.
 *
 ******************************************************************************
@@ -381,7 +381,7 @@ utf8_nextCharSafeBodyPointer(const uint8_t **ps, const uint8_t *limit, UChar32 c
 
     /* correct sequence - all trail bytes have (b7..b6)==(10)? */
     /* illegal is also set if count>=4 */
-    U_ASSERT(count<sizeof(utf8_minLegal)/sizeof(utf8_minLegal[0]));
+    U_ASSERT(illegal || count<UPRV_LENGTHOF(utf8_minLegal));
     if(illegal || c<utf8_minLegal[count] || U_IS_SURROGATE(c)) {
         /* error handling */
         /* don't go beyond this sequence */

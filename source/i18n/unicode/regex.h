@@ -1,6 +1,6 @@
 /*
 **********************************************************************
-*   Copyright (C) 2002-2012, International Business Machines
+*   Copyright (C) 2002-2014, International Business Machines
 *   Corporation and others.  All Rights Reserved.
 **********************************************************************
 *   file name:  regex.h
@@ -68,19 +68,6 @@ class  UVector;
 class  UVector32;
 class  UVector64;
 
-/**
- *   RBBIPatternDump   Debug function, displays the compiled form of a pattern.
- *   @internal
- */
-#ifdef REGEX_DEBUG
-U_INTERNAL void U_EXPORT2
-    RegexPatternDump(const RegexPattern *pat);
-#else
-    #undef RegexPatternDump
-    #define RegexPatternDump(pat)
-#endif
-
-
 
 /**
   * Class <code>RegexPattern</code> represents a compiled regular expression.  It includes
@@ -93,7 +80,7 @@ U_INTERNAL void U_EXPORT2
   *
   * @stable ICU 2.4
   */
-class U_I18N_API RegexPattern: public UObject {
+class U_I18N_API RegexPattern U_FINAL : public UObject {
 public:
 
     /**
@@ -368,7 +355,6 @@ private:
      * or in a UText, using
      * <code>utext_openUChars(UText *ut, const UChar *text, int64_t textLength, UErrorCode *status);</code>
      *
-     * @internal
      */
     RegexMatcher *matcher(const UChar *input,
         UErrorCode          &status) const;
@@ -612,11 +598,17 @@ private:
     //
     void        init();            // Common initialization, for use by constructors.
     void        zap();             // Common cleanup
-#ifdef REGEX_DEBUG
-    void        dumpOp(int32_t index) const;
-    friend     void U_EXPORT2 RegexPatternDump(const RegexPattern *);
-#endif
 
+    void        dumpOp(int32_t index) const;
+
+  public:
+#ifndef U_HIDE_INTERNAL_API
+    /**
+      * Dump a compiled pattern. Internal debug function.
+      * @internal
+      */
+    void        dumpPattern() const;
+#endif  /* U_HIDE_INTERNAL_API */
 };
 
 
@@ -630,7 +622,7 @@ private:
  *
  * @stable ICU 2.4
  */
-class U_I18N_API RegexMatcher: public UObject {
+class U_I18N_API RegexMatcher U_FINAL : public UObject {
 public:
 
     /**
@@ -726,7 +718,6 @@ private:
      * or in a UText, using
      * <code>utext_openUChars(UText *ut, const UChar *text, int64_t textLength, UErrorCode *status);</code>
      *
-     * @internal
      */
     RegexMatcher(const UnicodeString &regexp, const UChar *input,
         uint32_t flags, UErrorCode &status);
@@ -809,6 +800,21 @@ public:
     */
     virtual UBool find();
 
+
+   /**
+    *  Find the next pattern match in the input string.
+    *  The find begins searching the input at the location following the end of
+    *  the previous match, or at the start of the string if there is no previous match.
+    *  If a match is found, <code>start(), end()</code> and <code>group()</code>
+    *  will provide more information regarding the match.
+    *  <p>Note that if the input string is changed by the application,
+    *     use find(startPos, status) instead of find(), because the saved starting
+    *     position may not be valid with the altered input string.</p>
+    *  @param   status  A reference to a UErrorCode to receive any errors.
+    *  @return  TRUE if a match is found.
+    *  @internal
+    */
+    virtual UBool find(UErrorCode &status);
 
    /**
     *   Resets this RegexMatcher and then attempts to find the next substring of the
@@ -1131,7 +1137,6 @@ private:
      * or in a UText, using
      * <code>utext_openUChars(UText *ut, const UChar *text, int64_t textLength, UErrorCode *status);</code>
      *
-     * @internal
      */
     RegexMatcher &reset(const UChar *input);
 public:
@@ -1754,11 +1759,13 @@ private:
     REStackFrame        *resetStack();
     inline REStackFrame *StateSave(REStackFrame *fp, int64_t savePatIdx, UErrorCode &status);
     void                 IncrementTime(UErrorCode &status);
-    UBool                ReportFindProgress(int64_t matchIndex, UErrorCode &status);
+
+    // Call user find callback function, if set. Return TRUE if operation should be interrupted.
+    inline UBool         findProgressInterrupt(int64_t matchIndex, UErrorCode &status);
     
     int64_t              appendGroup(int32_t groupNum, UText *dest, UErrorCode &status) const;
     
-    UBool                findUsingChunk();
+    UBool                findUsingChunk(UErrorCode &status);
     void                 MatchChunkAt(int32_t startIdx, UBool toEnd, UErrorCode &status);
     UBool                isChunkWordBoundary(int32_t pos);
 

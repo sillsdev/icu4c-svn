@@ -1,13 +1,13 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
-// * Tool: com.ibm.icu.dev.tool.cldr.LDML2ICUConverter.java
-// * Source File:<path>/common/rbnf/zh.xml
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
+// * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
+// * Source File: <path>/common/rbnf/zh.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/rbnf/zh.xml
+ * ICU <specials> source: <path>/xml/rbnf/zh.xml
  */
 zh{
     RBNFRules{
@@ -27,6 +27,21 @@ zh{
             "10: <<>>>;",
             "100: <<>>>;",
             "1000: <<>>>;",
+            "%spellout-numbering-days:",
+            "-x: \u8D1F>>;",
+            "x.x: =#,##0.#=;",
+            "0: \u3007;",
+            "1: \u521D=%spellout-numbering=;",
+            "11: =%spellout-numbering=;",
+            "21: =%%numbering-days=;",
+            "%%numbering-days:",
+            "0: =%spellout-numbering=;",
+            "21: \u5EFF>>;",
+            "30: <<\u5341;",
+            "31: \u4E17>>;",
+            "40: <<\u5341;",
+            "41: \u534C>>;",
+            "50: =%spellout-numbering=;",
             "%spellout-numbering:",
             "-x: \u8D1F>>;",
             "x.x: <<\u70B9>>>;",
@@ -95,7 +110,7 @@ zh{
             "20: <<\u62FE[>>];",
             "100: <<\u4F70[>%%financialnumber2>];",
             "1000: <<\u4EDF[>%%financialnumber3>];",
-            "10000: <<\u842C[>%%financialnumber4>];",
+            "10000: <<\u4E07[>%%financialnumber4>];",
             "100000000: <<\u4EBF[>%%financialnumber5>];",
             "1000000000000: <<\u5146[>%%financialnumber8>];",
             "10000000000000000: <<\u4EAC[>%%financialnumber13>];",
@@ -131,7 +146,7 @@ zh{
             "1000000000000: =%spellout-cardinal-financial=;",
             "%spellout-cardinal:",
             "-x: \u8D1F>>;",
-            "x.x: <<\u70B9>%%spellout-fraction>;",
+            "x.x: <<\u70B9>>>;",
             "0: \u96F6;",
             "1: \u4E00;",
             "2: \u4E8C;",
@@ -181,7 +196,7 @@ zh{
             "1000000000000: =%spellout-cardinal=;",
             "%spellout-cardinal-alternate2:",
             "-x: \u8D1F>>;",
-            "x.x: <<\u70B9>%%spellout-fraction>;",
+            "x.x: =%spellout-cardinal=;",
             "0: \u96F6;",
             "1: \u4E00;",
             "2: \u4E24;",
@@ -229,24 +244,10 @@ zh{
             "10: \u96F6\u4E00=%spellout-cardinal-alternate2=;",
             "20: \u96F6=%spellout-cardinal-alternate2=;",
             "1000000000000: =%spellout-cardinal-alternate2=;",
-            "%%spellout-fraction:",
-            "10: <%%spellout-fraction-digits<;",
-            "100: <%%spellout-fraction-digits<;",
-            "1000: <%%spellout-fraction-digits<;",
-            "10000: <%%spellout-fraction-digits<;",
-            "100000: <%%spellout-fraction-digits<;",
-            "1000000: <%%spellout-fraction-digits<;",
-            "10000000: <%%spellout-fraction-digits<;",
-            "100000000: <%%spellout-fraction-digits<;",
-            "1000000000: <%%spellout-fraction-digits<;",
-            "10000000000: <0<;",
-            "%%spellout-fraction-digits:",
-            "0: =%spellout-numbering=;",
-            "10: <<>>;",
             "%spellout-ordinal:",
             "x.x: =#,###0.#=;",
             "0: \u7B2C=%spellout-numbering=;",
         }
     }
-    Version{"2.0.76.62"}
+    Version{"2.0.97.32"}
 }

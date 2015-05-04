@@ -1,6 +1,6 @@
 /*
 *******************************************************************************
-*   Copyright (C) 2011-2012, International Business Machines
+*   Copyright (C) 2011-2014, International Business Machines
 *   Corporation and others.  All Rights Reserved.
 *******************************************************************************
 *   file name:  ppucd.cpp
@@ -23,8 +23,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define LENGTHOF(array) (int32_t)(sizeof(array)/sizeof((array)[0]))
-
 U_NAMESPACE_BEGIN
 
 PropertyNames::~PropertyNames() {}
@@ -41,7 +39,7 @@ PropertyNames::getPropertyValueEnum(int32_t property, const char *name) const {
 
 UniProps::UniProps()
         : start(U_SENTINEL), end(U_SENTINEL),
-          bmg(U_SENTINEL),
+          bmg(U_SENTINEL), bpb(U_SENTINEL),
           scf(U_SENTINEL), slc(U_SENTINEL), stc(U_SENTINEL), suc(U_SENTINEL),
           digitValue(-1), numericValue(NULL),
           name(NULL), nameAlias(NULL) {
@@ -298,7 +296,7 @@ PreparsedUCD::parseProperty(UniProps &props, const char *field, UnicodeSet &newV
     int32_t prop=pnames->getPropertyEnum(p);
     if(prop<0) {
         for(int32_t i=0;; ++i) {
-            if(i==LENGTHOF(ppucdProperties)) {
+            if(i==UPRV_LENGTHOF(ppucdProperties)) {
                 // Ignore unknown property names.
                 return TRUE;
             }
@@ -356,6 +354,9 @@ PreparsedUCD::parseProperty(UniProps &props, const char *field, UnicodeSet &newV
         case UCHAR_BIDI_MIRRORING_GLYPH:
             props.bmg=U_SENTINEL;
             break;
+        case UCHAR_BIDI_PAIRED_BRACKET:
+            props.bpb=U_SENTINEL;
+            break;
         case UCHAR_SIMPLE_CASE_FOLDING:
             props.scf=U_SENTINEL;
             break;
@@ -409,6 +410,9 @@ PreparsedUCD::parseProperty(UniProps &props, const char *field, UnicodeSet &newV
             break;
         case UCHAR_BIDI_MIRRORING_GLYPH:
             props.bmg=parseCodePoint(v, errorCode);
+            break;
+        case UCHAR_BIDI_PAIRED_BRACKET:
+            props.bpb=parseCodePoint(v, errorCode);
             break;
         case UCHAR_SIMPLE_CASE_FOLDING:
             props.scf=parseCodePoint(v, errorCode);

@@ -1,7 +1,7 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/de_AT.xml
 // *
@@ -14,8 +14,25 @@ de_AT{
             }
         }
     }
-    Version{"2.0.65.46"}
+    Version{"2.1.8.19"}
     calendar{
+        generic{
+            DateTimePatterns{
+                "HH:mm:ss zzzz",
+                "HH:mm:ss z",
+                "HH:mm:ss",
+                "HH:mm",
+                "EEEE, dd. MMMM y G",
+                "dd. MMMM y G",
+                "dd.MM.y G",
+                "dd.MM.yy GGGGG",
+                "{1}, {0}",
+                "{1} 'um' {0}",
+                "{1} 'um' {0}",
+                "{1}, {0}",
+                "{1}, {0}",
+            }
+        }
         gregorian{
             DateTimePatterns{
                 "HH:mm:ss zzzz",
@@ -24,20 +41,40 @@ de_AT{
                 "HH:mm",
                 "EEEE, dd. MMMM y",
                 "dd. MMMM y",
-                "dd.MM.yyyy",
+                "dd. MMM y",
                 "dd.MM.yy",
-                "{1} {0}",
-                "{1} {0}",
-                "{1} {0}",
-                "{1} {0}",
-                "{1} {0}",
+                "{1}, {0}",
+                "{1} 'um' {0}",
+                "{1} 'um' {0}",
+                "{1}, {0}",
+                "{1}, {0}",
+            }
+            intervalFormats{
+                MMMEd{
+                    M{"E, dd. MMM - E, dd. MMM"}
+                    d{"E, dd. - E, dd. MMM"}
+                }
+                MMMd{
+                    M{"dd. MMM - dd. MMM"}
+                    d{"dd.-dd. MMM"}
+                }
+                yMMMEd{
+                    M{"E, dd. MMM - E, dd. MMM y"}
+                    d{"E, dd. - E, dd. MMM y"}
+                    y{"E, dd. MMM y - E, dd. MMM y"}
+                }
+                yMMMd{
+                    M{"dd. MMM - dd. MMM y"}
+                    d{"dd.-dd. MMM y"}
+                    y{"dd. MMM y - dd. MMM y"}
+                }
             }
             monthNames{
                 format{
                     abbreviated{
-                        "Jän",
+                        "Jän.",
                         "Feb.",
-                        "Mär.",
+                        "März",
                         "Apr.",
                         "Mai",
                         "Juni",
@@ -78,8 +115,27 @@ de_AT{
                         "Nov",
                         "Dez",
                     }
+                    wide{
+                        "Jänner",
+                        "Februar",
+                        "März",
+                        "April",
+                        "Mai",
+                        "Juni",
+                        "Juli",
+                        "August",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Dezember",
+                    }
                 }
             }
         }
+    }
+    measurementSystemNames{
+        UK{"Englisches Maßsystem"}
+        US{"Angloamerikanisches Maßsystem"}
+        metric{"Internationales Maßsystem (SI)"}
     }
 }

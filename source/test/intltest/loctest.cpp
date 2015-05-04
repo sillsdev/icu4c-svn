@@ -1,6 +1,6 @@
 /********************************************************************
  * COPYRIGHT:
- * Copyright (c) 1997-2012, International Business Machines Corporation and
+ * Copyright (c) 1997-2014, International Business Machines Corporation and
  * others. All Rights Reserved.
  ********************************************************************/
 
@@ -52,20 +52,20 @@ static const char* const rawData[33][8] = {
         // display langage (French)
         {   "anglais",  "fran\\u00E7ais",   "catalan", "grec",    "norv\\u00E9gien",    "italien", "xx", "chinois" },
         // display script (French)
-        {   "",     "",     "",     "",     "",     "",     "",   "chinois simplifi\\u00E9" },
+        {   "",     "",     "",     "",     "",     "",     "",   "sinogrammes simplifi\\u00E9s" },
         // display country (French)
         {   "\\u00C9tats-Unis",    "France",   "Espagne",  "Gr\\u00E8ce",   "Norv\\u00E8ge", "", "YY", "Chine" },
         // display variant (French)
         {   "",     "",     "",     "",     "NY",     "",     "",   "" },
         // display name (French)
         //{   "anglais (Etats-Unis)", "francais (France)", "catalan (Espagne)", "grec (Grece)", "norvegien (Norvege,Nynorsk)", "italien", "xx (YY)" },
-        {   "anglais (\\u00C9tats-Unis)", "fran\\u00E7ais (France)", "catalan (Espagne)", "grec (Gr\\u00E8ce)", "norv\\u00E9gien (Norv\\u00E8ge, NY)", "italien", "xx (YY)", "chinois (simplifi\\u00E9, Chine)" }, // STILL not right
+        {   "anglais (\\u00C9tats-Unis)", "fran\\u00E7ais (France)", "catalan (Espagne)", "grec (Gr\\u00E8ce)", "norv\\u00E9gien (Norv\\u00E8ge, NY)", "italien", "xx (YY)", "chinois (simplifi\\u00E9, Chine)" },
 
 
         /* display language (Catalan) */
         {   "angl\\u00E8s", "franc\\u00E8s", "catal\\u00E0", "grec",  "noruec", "itali\\u00E0", "", "xin\\u00E8s" },
         /* display script (Catalan) */
-        {   "", "", "",                    "", "", "", "", "xin\\u00E8s simplificat" },
+        {   "", "", "",                    "", "", "", "", "han simplificat" },
         /* display country (Catalan) */
         {   "Estats Units", "Fran\\u00E7a", "Espanya",  "Gr\\u00E8cia", "Noruega", "", "", "Xina" },
         /* display variant (Catalan) */
@@ -84,9 +84,9 @@ static const char* const rawData[33][8] = {
             "\\u039A\\u03B9\\u03BD\\u03B5\\u03B6\\u03B9\\u03BA\\u03AC"
         },
         // display script (Greek)
-        {   "", "", "", "", "", "", "", "\\u0391\\u03c0\\u03bb\\u03bf\\u03c0\\u03bf\\u03b9\\u03b7\\u03bc\\u03ad\\u03bd\\u03b1 \\u03a7\\u03b1\\u03bd" },
+        {   "", "", "", "", "", "", "", "\\u0391\\u03c0\\u03bb\\u03bf\\u03c0\\u03bf\\u03b9\\u03b7\\u03bc\\u03ad\\u03bd\\u03bf \\u03a7\\u03b1\\u03bd" },
         // display country (Greek)[actual values listed below]
-        {   "\\u0397\\u03BD\\u03C9\\u03BC\\u03AD\\u03BD\\u03B5\\u03C2 \\u03A0\\u03BF\\u03BB\\u03B9\\u03C4\\u03B5\\u03AF\\u03B5\\u03C2 \\u03C4\\u03B7\\u03C2 \\u0391\\u03BC\\u03B5\\u03C1\\u03B9\\u03BA\\u03AE\\u03C2",
+        {   "\\u0397\\u03BD\\u03C9\\u03BC\\u03AD\\u03BD\\u03B5\\u03C2 \\u03A0\\u03BF\\u03BB\\u03B9\\u03C4\\u03B5\\u03AF\\u03B5\\u03C2",
             "\\u0393\\u03b1\\u03bb\\u03bb\\u03af\\u03b1",
             "\\u0399\\u03c3\\u03c0\\u03b1\\u03bd\\u03af\\u03b1",
             "\\u0395\\u03bb\\u03bb\\u03ac\\u03b4\\u03b1",
@@ -98,14 +98,14 @@ static const char* const rawData[33][8] = {
         // display variant (Greek)
         {   "", "", "", "", "NY", "", "" },
         // display name (Greek)[actual values listed below]
-        {   "\\u0391\\u03b3\\u03b3\\u03bb\\u03b9\\u03ba\\u03ac (\\u0397\\u03BD\\u03C9\\u03BC\\u03AD\\u03BD\\u03B5\\u03C2 \\u03A0\\u03BF\\u03BB\\u03B9\\u03C4\\u03B5\\u03AF\\u03B5\\u03C2 \\u03C4\\u03B7\\u03C2 \\u0391\\u03BC\\u03B5\\u03C1\\u03B9\\u03BA\\u03AE\\u03C2)",
+        {   "\\u0391\\u03b3\\u03b3\\u03bb\\u03b9\\u03ba\\u03ac (\\u0397\\u03BD\\u03C9\\u03BC\\u03AD\\u03BD\\u03B5\\u03C2 \\u03A0\\u03BF\\u03BB\\u03B9\\u03C4\\u03B5\\u03AF\\u03B5\\u03C2)",
             "\\u0393\\u03b1\\u03bb\\u03bb\\u03b9\\u03ba\\u03ac (\\u0393\\u03b1\\u03bb\\u03bb\\u03af\\u03b1)",
             "\\u039a\\u03b1\\u03c4\\u03b1\\u03bb\\u03b1\\u03bd\\u03b9\\u03ba\\u03ac (\\u0399\\u03c3\\u03c0\\u03b1\\u03bd\\u03af\\u03b1)",
             "\\u0395\\u03bb\\u03bb\\u03b7\\u03bd\\u03b9\\u03ba\\u03ac (\\u0395\\u03bb\\u03bb\\u03ac\\u03b4\\u03b1)",
-            "\\u039d\\u03bf\\u03c1\\u03b2\\u03b7\\u03b3\\u03b9\\u03ba\\u03ac (\\u039d\\u03bf\\u03c1\\u03b2\\u03b7\\u03b3\\u03af\\u03b1,NY)",
+            "\\u039d\\u03bf\\u03c1\\u03b2\\u03b7\\u03b3\\u03b9\\u03ba\\u03ac (\\u039d\\u03bf\\u03c1\\u03b2\\u03b7\\u03b3\\u03af\\u03b1, NY)",
             "\\u0399\\u03c4\\u03b1\\u03bb\\u03b9\\u03ba\\u03ac",
             "",
-            "\\u039A\\u03B9\\u03BD\\u03B5\\u03B6\\u03B9\\u03BA\\u03AC (\\u0391\\u03c0\\u03bb\\u03bf\\u03c0\\u03bf\\u03b9\\u03b7\\u03bc\\u03ad\\u03bd\\u03bf \\u039a\\u03b9\\u03bd\\u03b5\\u03b6\\u03b9\\u03ba\\u03cc,\\u039A\\u03AF\\u03BD\\u03B1)"
+            "\\u039A\\u03B9\\u03BD\\u03B5\\u03B6\\u03B9\\u03BA\\u03AC (\\u0391\\u03c0\\u03bb\\u03bf\\u03c0\\u03bf\\u03b9\\u03b7\\u03bc\\u03ad\\u03bd\\u03bf, \\u039A\\u03AF\\u03BD\\u03B1)"
         },
 
         // display langage (<root>)
@@ -180,59 +180,50 @@ LocaleTest::~LocaleTest()
 
 void LocaleTest::runIndexedTest( int32_t index, UBool exec, const char* &name, char* /*par*/ )
 {
-    switch (index) {
-        TESTCASE(0, TestBasicGetters);
-        TESTCASE(1, TestSimpleResourceInfo);
-        TESTCASE(2, TestDisplayNames);
-        TESTCASE(3, TestSimpleObjectStuff);
-        TESTCASE(4, TestPOSIXParsing);
-        TESTCASE(5, TestGetAvailableLocales);
-        TESTCASE(6, TestDataDirectory);
-        TESTCASE(7, TestISO3Fallback);
-        TESTCASE(8, TestGetLangsAndCountries);
-        TESTCASE(9, TestSimpleDisplayNames);
-        TESTCASE(10, TestUninstalledISO3Names);
-        TESTCASE(11, TestAtypicalLocales);
+    TESTCASE_AUTO_BEGIN;
+    TESTCASE_AUTO(TestBasicGetters);
+    TESTCASE_AUTO(TestSimpleResourceInfo);
+    TESTCASE_AUTO(TestDisplayNames);
+    TESTCASE_AUTO(TestSimpleObjectStuff);
+    TESTCASE_AUTO(TestPOSIXParsing);
+    TESTCASE_AUTO(TestGetAvailableLocales);
+    TESTCASE_AUTO(TestDataDirectory);
+    TESTCASE_AUTO(TestISO3Fallback);
+    TESTCASE_AUTO(TestGetLangsAndCountries);
+    TESTCASE_AUTO(TestSimpleDisplayNames);
+    TESTCASE_AUTO(TestUninstalledISO3Names);
+    TESTCASE_AUTO(TestAtypicalLocales);
 #if !UCONFIG_NO_FORMATTING
-        TESTCASE(12, TestThaiCurrencyFormat);
-        TESTCASE(13, TestEuroSupport);
+    TESTCASE_AUTO(TestThaiCurrencyFormat);
+    TESTCASE_AUTO(TestEuroSupport);
 #endif
-        TESTCASE(14, TestToString);
+    TESTCASE_AUTO(TestToString);
 #if !UCONFIG_NO_FORMATTING
-        TESTCASE(15, Test4139940);
-        TESTCASE(16, Test4143951);
+    TESTCASE_AUTO(Test4139940);
+    TESTCASE_AUTO(Test4143951);
 #endif
-        TESTCASE(17, Test4147315);
-        TESTCASE(18, Test4147317);
-        TESTCASE(19, Test4147552);
-        TESTCASE(20, TestVariantParsing);
+    TESTCASE_AUTO(Test4147315);
+    TESTCASE_AUTO(Test4147317);
+    TESTCASE_AUTO(Test4147552);
+    TESTCASE_AUTO(TestVariantParsing);
 #if !UCONFIG_NO_FORMATTING
-        TESTCASE(21, Test4105828);
+    TESTCASE_AUTO(Test4105828);
 #endif
-        TESTCASE(22, TestSetIsBogus);
-        TESTCASE(23, TestParallelAPIValues);
-        TESTCASE(24, TestKeywordVariants);
-        TESTCASE(25, TestKeywordVariantParsing);
-        TESTCASE(26, TestSetKeywordValue);
-        TESTCASE(27, TestGetBaseName);
+    TESTCASE_AUTO(TestSetIsBogus);
+    TESTCASE_AUTO(TestParallelAPIValues);
+    TESTCASE_AUTO(TestKeywordVariants);
+    TESTCASE_AUTO(TestKeywordVariantParsing);
+    TESTCASE_AUTO(TestSetKeywordValue);
+    TESTCASE_AUTO(TestGetBaseName);
 #if !UCONFIG_NO_FILE_IO
-        TESTCASE(28, TestGetLocale);
+    TESTCASE_AUTO(TestGetLocale);
 #endif
-        TESTCASE(29, TestVariantWithOutCountry);
-        TESTCASE(30, TestCanonicalization);
-        TESTCASE(31, TestCurrencyByDate);
-	TESTCASE(32, TestGetVariantWithKeywords);
-
-        // keep the last index in sync with the condition in default:
-
-        default:
-            if (index <= 28) { // keep this in sync with the last index!
-                name = "(test omitted by !UCONFIG_NO_FORMATTING)";
-            } else {
-                name = "";
-            }
-            break; //needed to end loop
-    }
+    TESTCASE_AUTO(TestVariantWithOutCountry);
+    TESTCASE_AUTO(TestCanonicalization);
+    TESTCASE_AUTO(TestCurrencyByDate);
+    TESTCASE_AUTO(TestGetVariantWithKeywords);
+    TESTCASE_AUTO(TestIsRightToLeft);
+    TESTCASE_AUTO_END;
 }
 
 void LocaleTest::TestBasicGetters() {
@@ -868,8 +859,8 @@ LocaleTest::TestGetLangsAndCountries()
       ;
 
     /* TODO: Change this test to be more like the cloctst version? */
-    if (testCount != 538)
-        errln("Expected getISOLanguages() to return 538 languages; it returned %d", testCount);
+    if (testCount != 560)
+        errln("Expected getISOLanguages() to return 560 languages; it returned %d", testCount);
     else {
         for (i = 0; i < 15; i++) {
             int32_t j;
@@ -899,8 +890,8 @@ LocaleTest::TestGetLangsAndCountries()
     for(testCount=0;test[testCount];testCount++)
       ;
 
-    if (testCount != 246){
-        errln("Expected getISOCountries to return 246 countries; it returned %d", testCount);
+    if (testCount != 249){
+        errln("Expected getISOCountries to return 249 countries; it returned %d", testCount);
     }else {
         for (i = 0; i < spot2Len; i++) {
             int32_t j;
@@ -959,7 +950,7 @@ LocaleTest::TestSimpleDisplayNames()
     // names, and other stuff like that.  This test just checks specific language
     // and country codes to make sure we have the correct names for them.
     char languageCodes[] [4] = { "he", "id", "iu", "ug", "yi", "za" };
-    UnicodeString languageNames [] = { "Hebrew", "Indonesian", "Inuktitut", "Uighur", "Yiddish",
+    UnicodeString languageNames [] = { "Hebrew", "Indonesian", "Inuktitut", "Uyghur", "Yiddish",
                                "Zhuang" };
 
     for (int32_t i = 0; i < 6; i++) {
@@ -1135,7 +1126,7 @@ LocaleTest::TestThaiCurrencyFormat()
     UErrorCode status = U_ZERO_ERROR;
     DecimalFormat *thaiCurrency = (DecimalFormat*)NumberFormat::createCurrencyInstance(
                     Locale("th", "TH"), status);
-    UChar posPrefix = 0x0e3f;
+    UnicodeString posPrefix("THB", 3, US_INV);  // per cldrbug 7618
     UnicodeString temp;
 
     if(U_FAILURE(status) || !thaiCurrency)
@@ -1143,8 +1134,8 @@ LocaleTest::TestThaiCurrencyFormat()
         dataerrln("Couldn't get th_TH currency -> " + UnicodeString(u_errorName(status)));
         return;
     }
-    if (thaiCurrency->getPositivePrefix(temp) != UnicodeString(&posPrefix, 1, 1))
-        errln("Thai currency prefix wrong: expected 0x0e3f, got \"" +
+    if (thaiCurrency->getPositivePrefix(temp) != posPrefix)
+        errln("Thai currency prefix wrong: expected THB, got \"" +
                         thaiCurrency->getPositivePrefix(temp) + "\"");
     if (thaiCurrency->getPositiveSuffix(temp) != "")
         errln("Thai currency suffix wrong: expected \"\", got \"" +
@@ -1399,7 +1390,7 @@ LocaleTest::Test4147315()
   UnicodeString temp;
     // Try with codes that are the wrong length but happen to match text
     // at a valid offset in the mapping table
-    Locale locale("aaa", "CCC");
+    Locale locale("xxx", "CCC");
 
     const char *result = locale.getISO3Country();
 
@@ -1420,7 +1411,7 @@ LocaleTest::Test4147317()
     UnicodeString temp;
     // Try with codes that are the wrong length but happen to match text
     // at a valid offset in the mapping table
-    Locale locale("aaa", "CCC");
+    Locale locale("xxx", "CCC");
 
     const char *result = locale.getISO3Language();
 
@@ -1714,6 +1705,7 @@ LocaleTest::TestKeywordVariantParsing(void) {
         *buffer = 0;
         Locale l(testCases[i].localeID);
         resultLen = l.getKeywordValue(testCases[i].keyword, buffer, 256, status);
+        (void)resultLen;  // Suppress unused variable warning.
         if(uprv_strcmp(testCases[i].expectedValue, buffer) != 0) {
             err("Expected to extract \"%s\" from \"%s\" for keyword \"%s\". Got \"%s\" instead\n",
                 testCases[i].expectedValue, testCases[i].localeID, testCases[i].keyword, buffer);
@@ -1748,6 +1740,7 @@ LocaleTest::TestSetKeywordValue(void) {
 
         *buffer = 0;
         resultLen = l.getKeywordValue(testCases[i].keyword, buffer, 256, status);
+        (void)resultLen;  // Suppress unused variable warning.
         if(uprv_strcmp(testCases[i].value, buffer) != 0) {
             err("Expected to extract \"%s\" for keyword \"%s\". Got \"%s\" instead\n",
                 testCases[i].value, testCases[i].keyword, buffer);
@@ -2543,4 +2536,16 @@ void LocaleTest::TestGetVariantWithKeywords(void)
   int32_t len = l.getKeywordValue("foo", buffer, 50, status);
   buffer[len] = '\0';
   test_assert(strcmp("value", buffer) == 0);
+}
+
+void LocaleTest::TestIsRightToLeft() {
+    assertFalse("root LTR", Locale::getRoot().isRightToLeft());
+    assertFalse("zh LTR", Locale::getChinese().isRightToLeft());
+    assertTrue("ar RTL", Locale("ar").isRightToLeft());
+    assertTrue("und-EG RTL", Locale("und-EG").isRightToLeft(), FALSE, TRUE);
+    assertFalse("fa-Cyrl LTR", Locale("fa-Cyrl").isRightToLeft());
+    assertTrue("en-Hebr RTL", Locale("en-Hebr").isRightToLeft());
+    assertTrue("ckb RTL", Locale("ckb").isRightToLeft(), FALSE, TRUE);  // Sorani Kurdish
+    assertFalse("fil LTR", Locale("fil").isRightToLeft());
+    assertFalse("he-Zyxw LTR", Locale("he-Zyxw").isRightToLeft());
 }

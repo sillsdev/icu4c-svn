@@ -1,83 +1,235 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/fr_CA.xml
 // *
 // ***************************************************************************
 fr_CA{
     Currencies{
-        AFN{
-            "AFN",
-            "afghani afghan",
+        ARS{
+            "ARS",
+            "peso argentin",
         }
-        BAM{
-            "BAM",
-            "mark convertible bosniaque",
+        AUD{
+            "$ AU",
+            "dollar australien",
         }
-        BDT{
-            "BDT",
-            "taka bangladeshi",
+        AZN{
+            "AZN",
+            "manat azerbaïdjanais",
+        }
+        BMD{
+            "BMD",
+            "dollar bermudien",
+        }
+        BND{
+            "BND",
+            "dollar brunéien",
+        }
+        BSD{
+            "BSD",
+            "dollar bahaméen",
+        }
+        BZD{
+            "BZD",
+            "dollar bélizéen",
         }
         CAD{
             "$",
             "dollar canadien",
         }
+        CLP{
+            "CLP",
+            "peso chilien",
+        }
         CNY{
             "CN¥",
             "yuan renminbi chinois",
         }
-        DJF{
-            "DJF",
-            "franc djiboutien",
+        COP{
+            "COP",
+            "peso colombien",
         }
-        IDR{
-            "IDR",
-            "roupie indonésienne",
+        CVE{
+            "CVE",
+            "escudo du Cap-Vert",
         }
-        MMK{
-            "MMK",
-            "kyat myanmarais",
+        FJD{
+            "FJD",
+            "dollar fidjien",
         }
-        MNT{
-            "MNT",
-            "tugrik mongol",
+        FKP{
+            "FKP",
+            "livre des Îles Malouines",
         }
-        MVR{
-            "MVR",
-            "rufiyaa maldivien",
+        GBP{
+            "£",
+            "livre sterling",
         }
-        MYR{
-            "MYR",
-            "ringgit malais",
+        GIP{
+            "GIP",
+            "livre de Gibraltar",
+        }
+        HKD{
+            "$ HK",
+            "dollar de Hong Kong",
+        }
+        ILS{
+            "ILS",
+            "nouveau shekel israélien",
+        }
+        INR{
+            "INR",
+            "roupie indienne",
+        }
+        JPY{
+            "¥",
+            "yen japonais",
+        }
+        KRW{
+            "KRW",
+            "won sud-coréen",
+        }
+        LAK{
+            "LAK",
+            "kip laotien",
+        }
+        LBP{
+            "LBP",
+            "livre libanaise",
+        }
+        MXN{
+            "MXN",
+            "peso mexicain",
+        }
+        NAD{
+            "NAD",
+            "dollar namibien",
+        }
+        NZD{
+            "$ NZ",
+            "dollar néo-zélandais",
         }
         PGK{
             "PGK",
-            "kina papouan-néo-guinéen",
+            "kina papou-néo-guinéen",
+        }
+        QAR{
+            "QAR",
+            "riyal du Qatar",
+        }
+        SBD{
+            "SBD",
+            "dollar des îles Salomon",
+        }
+        SGD{
+            "$ SG",
+            "dollar de Singapour",
+        }
+        SRD{
+            "SRD",
+            "dollar du Suriname",
+        }
+        THB{
+            "THB",
+            "baht thaïlandais",
         }
         TOP{
             "TOP",
-            "pa’anga tongan",
+            "pa’anga",
+        }
+        TTD{
+            "TTD",
+            "dollar de Trinité-et-Tobago",
+        }
+        USD{
+            "$ US",
+            "dollar des États-Unis",
+        }
+        UYU{
+            "UYU",
+            "peso uruguayen",
+        }
+        VND{
+            "VND",
+            "dông vietnamien",
         }
         VUV{
             "VUV",
-            "vatu vanuatuan",
+            "vatu",
         }
         WST{
             "WST",
-            "tala samoan",
+            "tala",
+        }
+        XAF{
+            "XAF",
+            "franc CFA (BEAC)",
         }
         XOF{
-            "F CFA",
+            "XOF",
             "franc CFA (BCEAO)",
+        }
+        XPF{
+            "XPF",
+            "franc CFP",
         }
     }
     CurrencyPlurals{
+        AZN{
+            one{"manat azerbaïdjanais"}
+            other{"manats azerbaïdjanais"}
+        }
+        CVE{
+            one{"escudo du Cap-Vert"}
+            other{"escudos du Cap-Vert"}
+        }
+        FKP{
+            one{"livre des Îles Malouines"}
+            other{"livres des Îles Malouines"}
+        }
+        GEL{
+            one{"lari géorgien"}
+            other{"laris géorgiens"}
+        }
         GYD{
             one{"dollar guyanien"}
             other{"dollars guyaniens"}
         }
+        LAK{
+            one{"kip laotien"}
+            other{"kips laotiens"}
+        }
+        PGK{
+            one{"kina papou-néo-guinéen"}
+            other{"kinas papou-néo-guinéens"}
+        }
+        QAR{
+            one{"riyal du Qatar"}
+            other{"riyals du Qatar"}
+        }
+        SRD{
+            one{"dollar du Suriname"}
+            other{"dollars du Suriname"}
+        }
+        TOP{
+            one{"pa’anga"}
+            other{"pa’angas"}
+        }
+        VUV{
+            one{"vatu"}
+            other{"vatus"}
+        }
+        WST{
+            one{"tala"}
+            other{"talas"}
+        }
+        XXX{
+            one{"devise inconnue ou non valide"}
+            other{"devise inconnue ou non valide"}
+        }
     }
-    Version{"2.0.78.47"}
+    Version{"2.1.8.19"}
 }

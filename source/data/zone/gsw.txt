@@ -1,16 +1,16 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/gsw.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/gsw.xml
+ * ICU <specials> source: <path>/common/main/gsw.xml
  */
 gsw{
-    Version{"2.0.78.47"}
+    Version{"2.1.7.41"}
     zoneStrings{
         "Africa:Accra"{
             ec{"Akkra"}
@@ -88,10 +88,7 @@ gsw{
             ec{"St. Vincent"}
         }
         "Antarctica:DumontDUrville"{
-            ec{"Dumont D'Urville"}
-        }
-        "Antarctica:South_Pole"{
-            ec{"Süüdpol"}
+            ec{"Dumont D’Urville"}
         }
         "Antarctica:Vostok"{
             ec{"Woschtok"}
@@ -292,20 +289,10 @@ gsw{
             lg{"Weschtafrikanischi Ziit"}
             ls{"Weschtafrikanischi Schtandardziit"}
         }
-        "meta:Aktyubinsk"{
-            ld{"Aktyubinsk-Summerziit"}
-            lg{"Aktyubinsk-Ziit"}
-            ls{"Aktyubinsk-Schtandardziit"}
-        }
         "meta:Alaska"{
             ld{"Alaska-Summerziit"}
             lg{"Alaska-Ziit"}
             ls{"Alaska-Schtandardziit"}
-        }
-        "meta:Alaska_Hawaii"{
-            ld{"Alaska-Hawaii-Summerziit"}
-            lg{"Alaska-Hawaii-Ziit"}
-            ls{"Alaska-Hawaii-Schtandardziit"}
         }
         "meta:Almaty"{
             ld{"Almaty-Summerziit"}
@@ -316,6 +303,11 @@ gsw{
             ld{"Amazonas-Summerziit"}
             lg{"Amazonas-Ziit"}
             ls{"Amazonas-Schtandardziit"}
+        }
+        "meta:America_Central"{
+            ld{"Amerika-Zentraal Summerziit"}
+            lg{"Amerika-Zentraal Ziit"}
+            ls{"Amerika-Zentraal Schtandardziit"}
         }
         "meta:Europe_Central"{
             ld{"Mitteleuropäischi Summerziit"}

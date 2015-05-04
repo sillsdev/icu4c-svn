@@ -1,6 +1,6 @@
 /********************************************************************
  * COPYRIGHT: 
- * Copyright (c) 1997-2011, International Business Machines Corporation and
+ * Copyright (c) 1997-2014, International Business Machines Corporation and
  * others. All Rights Reserved.
  ********************************************************************/
 
@@ -24,8 +24,6 @@
 using namespace std;
 
 #endif
-
-#define LENGTHOF(array) (int32_t)((sizeof(array)/sizeof((array)[0])))
 
 UnicodeStringTest::~UnicodeStringTest() {}
 
@@ -113,9 +111,9 @@ UnicodeStringTest::TestBasicManipulation()
         errln("operator+=() failed:  expected \"" + expectedValue + "\"\n,got \"" + test2 + "\"");
     
     if (test1.length() != 70)
-        errln("length() failed: expected 70, got " + test1.length());
+        errln(UnicodeString("length() failed: expected 70, got ") + test1.length());
     if (test2.length() != 30)
-        errln("length() failed: expected 30, got " + test2.length());
+        errln(UnicodeString("length() failed: expected 30, got ") + test2.length());
 
     UnicodeString test3;
     test3.append((UChar32)0x20402);
@@ -123,7 +121,7 @@ UnicodeStringTest::TestBasicManipulation()
         errln((UnicodeString)"append failed for UChar32, expected \"\\\\ud841\\\\udc02\", got " + prettify(test3));
     }
     if(test3.length() != 2){
-        errln("append or length failed for UChar32, expected 2, got " + test3.length());
+        errln(UnicodeString("append or length failed for UChar32, expected 2, got ") + test3.length());
     }
     test3.append((UChar32)0x0074);
     if(test3 != CharsToUnicodeString("\\uD841\\uDC02t")){
@@ -199,9 +197,9 @@ UnicodeStringTest::TestBasicManipulation()
         }
 
         UChar buffer[10]={ 0x61, 0x62, 0x20ac, 0xd900, 0xdc05, 0,   0x62, 0xffff, 0xdbff, 0xdfff };
-        UnicodeString s, t(buffer, -1, LENGTHOF(buffer));
+        UnicodeString s, t(buffer, -1, UPRV_LENGTHOF(buffer));
 
-        if(s.setTo(buffer, -1, LENGTHOF(buffer)).length()!=u_strlen(buffer)) {
+        if(s.setTo(buffer, -1, UPRV_LENGTHOF(buffer)).length()!=u_strlen(buffer)) {
             errln("UnicodeString.setTo(buffer, length, capacity) does not work with length==-1");
         }
         if(t.length()!=u_strlen(buffer)) {
@@ -216,11 +214,11 @@ UnicodeStringTest::TestBasicManipulation()
         }
 
         buffer[u_strlen(buffer)]=0xe4;
-        UnicodeString u(buffer, -1, LENGTHOF(buffer));
-        if(s.setTo(buffer, -1, LENGTHOF(buffer)).length()!=LENGTHOF(buffer)) {
+        UnicodeString u(buffer, -1, UPRV_LENGTHOF(buffer));
+        if(s.setTo(buffer, -1, UPRV_LENGTHOF(buffer)).length()!=UPRV_LENGTHOF(buffer)) {
             errln("UnicodeString.setTo(buffer without NUL, length, capacity) does not work with length==-1");
         }
-        if(u.length()!=LENGTHOF(buffer)) {
+        if(u.length()!=UPRV_LENGTHOF(buffer)) {
             errln("UnicodeString(buffer without NUL, length, capacity) does not work with length==-1");
         }
 
@@ -243,7 +241,7 @@ UnicodeStringTest::TestBasicManipulation()
         static const UChar utf16[]={ 0x61, 0xE4, 0xDF, 0x4E00 };
         UnicodeString from8a = UnicodeString((const char *)utf8);
         UnicodeString from8b = UnicodeString((const char *)utf8, (int32_t)sizeof(utf8)-1);
-        UnicodeString from16(FALSE, utf16, LENGTHOF(utf16));
+        UnicodeString from16(FALSE, utf16, UPRV_LENGTHOF(utf16));
         if(from8a != from16 || from8b != from16) {
             errln("UnicodeString(const char * U_CHARSET_IS_UTF8) failed");
         }
@@ -721,14 +719,15 @@ UnicodeStringTest::TestSearching()
           (startPos = test1.indexOf(test2, startPos)) != -1 ? (++occurrences, startPos += 4) : 0)
         ;
     if (occurrences != 6)
-        errln("indexOf failed: expected to find 6 occurrences, found " + occurrences);
-    
+        errln(UnicodeString("indexOf failed: expected to find 6 occurrences, found ") + occurrences);
+
     for ( occurrences = 0, startPos = 10;
           startPos != -1 && startPos < test1.length();
           (startPos = test1.indexOf(test2, startPos)) != -1 ? (++occurrences, startPos += 4) : 0)
         ;
     if (occurrences != 4)
-        errln("indexOf with starting offset failed: expected to find 4 occurrences, found " + occurrences);
+        errln(UnicodeString("indexOf with starting offset failed: "
+                            "expected to find 4 occurrences, found ") + occurrences);
 
     int32_t endPos = 28;
     for ( occurrences = 0, startPos = 5;
@@ -736,7 +735,8 @@ UnicodeStringTest::TestSearching()
           (startPos = test1.indexOf(test2, startPos, endPos - startPos)) != -1 ? (++occurrences, startPos += 4) : 0)
         ;
     if (occurrences != 4)
-        errln("indexOf with starting and ending offsets failed: expected to find 4 occurrences, found " + occurrences);
+        errln(UnicodeString("indexOf with starting and ending offsets failed: "
+                            "expected to find 4 occurrences, found ") + occurrences);
 
     //using UChar32 string
     for ( startPos=0, occurrences=0;
@@ -751,7 +751,7 @@ UnicodeStringTest::TestSearching()
           (startPos = test3.indexOf(test4, startPos)) != -1 ? (++occurrences, startPos += 2) : 0)
         ;
     if (occurrences != 2)
-        errln("indexOf failed: expected to find 2 occurrences, found " + occurrences);
+        errln(UnicodeString("indexOf failed: expected to find 2 occurrences, found ") + occurrences);
     //---
 
     for ( occurrences = 0, startPos = 0;
@@ -759,21 +759,24 @@ UnicodeStringTest::TestSearching()
           (startPos = test1.indexOf(testChar, startPos)) != -1 ? (++occurrences, startPos += 1) : 0)
         ;
     if (occurrences != 16)
-        errln("indexOf with character failed: expected to find 16 occurrences, found " + occurrences);
+        errln(UnicodeString("indexOf with character failed: "
+                            "expected to find 16 occurrences, found ") + occurrences);
 
     for ( occurrences = 0, startPos = 10;
           startPos != -1 && startPos < test1.length();
           (startPos = test1.indexOf(testChar, startPos)) != -1 ? (++occurrences, startPos += 1) : 0)
         ;
     if (occurrences != 12)
-        errln("indexOf with character & start offset failed: expected to find 12 occurrences, found " + occurrences);
+        errln(UnicodeString("indexOf with character & start offset failed: "
+                            "expected to find 12 occurrences, found ") + occurrences);
 
     for ( occurrences = 0, startPos = 5, endPos = 28;
           startPos != -1 && startPos < test1.length();
           (startPos = test1.indexOf(testChar, startPos, endPos - startPos)) != -1 ? (++occurrences, startPos += 1) : 0)
         ;
     if (occurrences != 10)
-        errln("indexOf with character & start & end offsets failed: expected to find 10 occurrences, found " + occurrences);
+        errln(UnicodeString("indexOf with character & start & end offsets failed: "
+                            "expected to find 10 occurrences, found ") + occurrences);
 
     //testing for UChar32
     UnicodeString subString;
@@ -816,14 +819,16 @@ UnicodeStringTest::TestSearching()
           (startPos = test1.lastIndexOf(test2, 5, startPos - 5)) != -1 ? ++occurrences : 0)
         ;
     if (occurrences != 4)
-        errln("lastIndexOf with starting and ending offsets failed: expected to find 4 occurrences, found " + occurrences);
+        errln(UnicodeString("lastIndexOf with starting and ending offsets failed: "
+                            "expected to find 4 occurrences, found ") + occurrences);
 
     for ( occurrences = 0, startPos = 32;
           startPos != -1;
           (startPos = test1.lastIndexOf(testChar, 5, startPos - 5)) != -1 ? ++occurrences : 0)
         ;
     if (occurrences != 11)
-        errln("lastIndexOf with character & start & end offsets failed: expected to find 11 occurrences, found " + occurrences);
+        errln(UnicodeString("lastIndexOf with character & start & end offsets failed: "
+                            "expected to find 11 occurrences, found ") + occurrences);
 
     //testing UChar32
     startPos=test3.length();
@@ -1167,6 +1172,14 @@ UnicodeStringTest::TestMiscellaneous()
         errln("UnicodeString(shared buffer).remove().getTerminatedBuffer() "
               "modified another copy of the string!");
     }
+
+    // ticket #9740
+    test1.setTo(TRUE, ucs, 3);
+    assertEquals("length of read-only alias", 3, test1.length());
+    test1.trim();
+    assertEquals("length of read-only alias after trim()", 2, test1.length());
+    assertEquals("length of terminated buffer of read-only alias + trim()",
+                 2, u_strlen(test1.getTerminatedBuffer()));
 }
 
 void
@@ -1395,7 +1408,7 @@ UnicodeStringTest::TestCountChar32(void) {
         0xd804, 0xdc04, 0xd805, 0xdc05,
         0x67
     };
-    UnicodeString string(str, LENGTHOF(str));
+    UnicodeString string(str, UPRV_LENGTHOF(str));
     int32_t start, length, number;
 
     /* test hasMoreChar32Than() */
@@ -1649,11 +1662,11 @@ public:
     TestEnumeration() : i(0) {}
 
     virtual int32_t count(UErrorCode& /*status*/) const {
-        return LENGTHOF(testEnumStrings);
+        return UPRV_LENGTHOF(testEnumStrings);
     }
 
     virtual const UnicodeString *snext(UErrorCode &status) {
-        if(U_SUCCESS(status) && i<LENGTHOF(testEnumStrings)) {
+        if(U_SUCCESS(status) && i<UPRV_LENGTHOF(testEnumStrings)) {
             unistr=UnicodeString(testEnumStrings[i++], "");
             return &unistr;
         }
@@ -1675,7 +1688,7 @@ public:
 private:
     static const char fgClassID;
 
-    int32_t i, length;
+    int32_t i;
 };
 
 const char TestEnumeration::fgClassID=0;
@@ -1691,7 +1704,7 @@ UnicodeStringTest::TestStringEnumeration() {
     const char *pc;
 
     // test the next() default implementation and ensureCharsCapacity()
-    for(i=0; i<LENGTHOF(testEnumStrings); ++i) {
+    for(i=0; i<UPRV_LENGTHOF(testEnumStrings); ++i) {
         status=U_ZERO_ERROR;
         pc=ten.next(&length, status);
         s=UnicodeString(testEnumStrings[i], "");
@@ -1706,7 +1719,7 @@ UnicodeStringTest::TestStringEnumeration() {
 
     // test the unext() default implementation
     ten.reset(status);
-    for(i=0; i<LENGTHOF(testEnumStrings); ++i) {
+    for(i=0; i<UPRV_LENGTHOF(testEnumStrings); ++i) {
         status=U_ZERO_ERROR;
         pu=ten.unext(&length, status);
         s=UnicodeString(testEnumStrings[i], "");
@@ -1735,7 +1748,7 @@ UnicodeStringTest::TestStringEnumeration() {
     }
     
     // test  uenum_next()
-    for(i=0; i<LENGTHOF(testEnumStrings); ++i) {
+    for(i=0; i<UPRV_LENGTHOF(testEnumStrings); ++i) {
         status=U_ZERO_ERROR;
         pc=uenum_next(uten, &length, &status);
         if(U_FAILURE(status) || pc==NULL || strcmp(pc, testEnumStrings[i]) != 0) {
@@ -1749,7 +1762,7 @@ UnicodeStringTest::TestStringEnumeration() {
 
     // test the uenum_unext()
     uenum_reset(uten, &status);
-    for(i=0; i<LENGTHOF(testEnumStrings); ++i) {
+    for(i=0; i<UPRV_LENGTHOF(testEnumStrings); ++i) {
         status=U_ZERO_ERROR;
         pu=uenum_unext(uten, &length, &status);
         s=UnicodeString(testEnumStrings[i], "");
@@ -1776,7 +1789,7 @@ namespace bogus {
     public:
         enum EInvariant { kInvariant };
         UnicodeString() : i(1) {}
-        UnicodeString(UBool /*isTerminated*/, const UChar * /*text*/, int32_t textLength) : i(textLength) {}
+        UnicodeString(UBool /*isTerminated*/, const UChar * /*text*/, int32_t textLength) : i(textLength) {(void)i;}
         UnicodeString(const char * /*src*/, int32_t length, enum EInvariant /*inv*/
 ) : i(length) {}
     private:
@@ -1814,8 +1827,8 @@ UnicodeStringTest::TestUTF32() {
         0x41, 0xfffd, 0x61, 0xfffd, 0xfffd, 0xfffd, 0x5a, 0xd900, 0xdc00, 0x7a,
         0xd800, 0xdc00, 0xd840, 0xdc00, 0xdb40, 0xdc00, 0xdbff, 0xdfff
     };
-    UnicodeString from32 = UnicodeString::fromUTF32(utf32, LENGTHOF(utf32));
-    UnicodeString expected(FALSE, expected_utf16, LENGTHOF(expected_utf16));
+    UnicodeString from32 = UnicodeString::fromUTF32(utf32, UPRV_LENGTHOF(utf32));
+    UnicodeString expected(FALSE, expected_utf16, UPRV_LENGTHOF(expected_utf16));
     if(from32 != expected) {
         errln("UnicodeString::fromUTF32() did not create the expected string.");
     }
@@ -1829,9 +1842,9 @@ UnicodeStringTest::TestUTF32() {
     UChar32 result32[16];
     UErrorCode errorCode = U_ZERO_ERROR;
     int32_t length32 =
-        UnicodeString(FALSE, utf16, LENGTHOF(utf16)).
-        toUTF32(result32, LENGTHOF(result32), errorCode);
-    if( length32 != LENGTHOF(expected_utf32) ||
+        UnicodeString(FALSE, utf16, UPRV_LENGTHOF(utf16)).
+        toUTF32(result32, UPRV_LENGTHOF(result32), errorCode);
+    if( length32 != UPRV_LENGTHOF(expected_utf32) ||
         0 != uprv_memcmp(result32, expected_utf32, length32*4) ||
         result32[length32] != 0
     ) {
@@ -1873,7 +1886,7 @@ UnicodeStringTest::TestUTF8() {
         0xdb40, 0xdc00, 0xdbff, 0xdfff
     };
     UnicodeString from8 = UnicodeString::fromUTF8(StringPiece((const char *)utf8, (int32_t)sizeof(utf8)));
-    UnicodeString expected(FALSE, expected_utf16, LENGTHOF(expected_utf16));
+    UnicodeString expected(FALSE, expected_utf16, UPRV_LENGTHOF(expected_utf16));
 
     if(from8 != expected) {
         errln("UnicodeString::fromUTF8(StringPiece) did not create the expected string.");
@@ -1893,7 +1906,7 @@ UnicodeStringTest::TestUTF8() {
         0x41, 0xef, 0xbf, 0xbd, 0x61, 0xef, 0xbf, 0xbd, 0x5a, 0xf1, 0x90, 0x80, 0x80, 0x7a,
         0xf0, 0x90, 0x80, 0x80, 0xf4, 0x8f, 0xbf, 0xbf
     };
-    UnicodeString us(FALSE, utf16, LENGTHOF(utf16));
+    UnicodeString us(FALSE, utf16, UPRV_LENGTHOF(utf16));
 
     char buffer[64];
     TestCheckedArrayByteSink sink(buffer, (int32_t)sizeof(buffer));

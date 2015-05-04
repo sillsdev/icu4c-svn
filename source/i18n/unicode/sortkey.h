@@ -1,6 +1,6 @@
 /*
  *****************************************************************************
- * Copyright (C) 1996-2012, International Business Machines Corporation and others.
+ * Copyright (C) 1996-2014, International Business Machines Corporation and others.
  * All Rights Reserved.
  *****************************************************************************
  *
@@ -29,7 +29,6 @@
  */
  
 #if !UCONFIG_NO_COLLATION
-#ifndef U_HIDE_DEPRECATED_API
 
 #include "unicode/uobject.h"
 #include "unicode/unistr.h"
@@ -39,6 +38,7 @@ U_NAMESPACE_BEGIN
 
 /* forward declaration */
 class RuleBasedCollator;
+class CollationKeyByteSink;
 
 /**
  *
@@ -182,6 +182,7 @@ public:
     uint8_t*                toByteArray(int32_t& count) const;
 #endif
 
+#ifndef U_HIDE_DEPRECATED_API 
     /**
     * Convenience method which does a string(bit-wise) comparison of the
     * two collation keys.
@@ -192,6 +193,7 @@ public:
     * @deprecated ICU 2.6 use the overload with error code
     */
     Collator::EComparisonResult compareTo(const CollationKey& target) const;
+#endif  /* U_HIDE_DEPRECATED_API */
 
     /**
     * Convenience method which does a string(bit-wise) comparison of the
@@ -331,7 +333,6 @@ CollationKey::getByteArray(int32_t &count) const
 
 U_NAMESPACE_END
 
-#endif  /* U_HIDE_DEPRECATED_API */
 #endif /* #if !UCONFIG_NO_COLLATION */
 
 #endif

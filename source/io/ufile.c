@@ -1,7 +1,7 @@
 /*
 ******************************************************************************
 *
-*   Copyright (C) 1998-2012, International Business Machines
+*   Copyright (C) 1998-2014, International Business Machines
 *   Corporation and others.  All Rights Reserved.
 *
 ******************************************************************************
@@ -18,12 +18,23 @@
 ******************************************************************************
 */
 
+/*
+ * fileno is not declared when building with GCC in strict mode.
+ */
+#if defined(__GNUC__) && defined(__STRICT_ANSI__)
+#undef __STRICT_ANSI__
+#endif
+
 #include "locmap.h"
 #include "unicode/ustdio.h"
+
+#if !UCONFIG_NO_CONVERSION
+
 #include "ufile.h"
 #include "unicode/uloc.h"
 #include "unicode/ures.h"
 #include "unicode/ucnv.h"
+#include "unicode/ustring.h"
 #include "cstring.h"
 #include "cmemory.h"
 
@@ -137,6 +148,35 @@ u_fopen(const char    *filename,
         fclose(systemFile);
     }
 
+    return result; /* not a file leak */
+}
+
+U_CAPI UFILE* U_EXPORT2
+u_fopen_u(const UChar   *filename,
+        const char    *perm,
+        const char    *locale,
+        const char    *codepage)
+{
+    UFILE     *result;
+    char buffer[256];
+
+    u_austrcpy(buffer, filename);
+
+    result = u_fopen(buffer, perm, locale, codepage);
+#if U_PLATFORM_USES_ONLY_WIN32_API
+    /* Try Windows API _wfopen if the above fails. */
+    if (!result) {
+        FILE *systemFile = _wfopen(filename, (UChar*)perm);
+        if (systemFile) {
+            result = finit_owner(systemFile, locale, codepage, TRUE);
+        }
+        if (!result) {
+            /* Something bad happened.
+               Maybe the converter couldn't be opened. */
+            fclose(systemFile);
+        }
+    }
+#endif
     return result; /* not a file leak */
 }
 
@@ -298,4 +338,11 @@ u_fgetConverter(UFILE *file)
 {
     return file->fConverter;
 }
+#if !UCONFIG_NO_FORMATTING
+U_CAPI const UNumberFormat* U_EXPORT2 u_fgetNumberFormat(UFILE *file)
+{
+    return u_locbund_getNumberFormat(&file->str.fBundle, UNUM_DECIMAL);
+}
+#endif
 
+#endif

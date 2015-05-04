@@ -1,5 +1,5 @@
 /*************************************************************************
- * Copyright (c) 1999-2011, International Business Machines
+ * Copyright (c) 1999-2014, International Business Machines
  * Corporation and others. All Rights Reserved.
  *************************************************************************
  *   Date        Name        Description
@@ -57,7 +57,7 @@ public:
 
     void TestExtended();
     UChar *ReadAndConvertFile(const char *fileName, int &ulen, const char *encoding, UErrorCode &status);
-    void executeTest(TestParams *);
+    void executeTest(TestParams *, UErrorCode &status);
 
     void TestWordBreaks();
     void TestWordBoundary();
@@ -71,6 +71,7 @@ public:
     void TestTailoredBreaks();
     void TestDictRules();
     void TestBug5532();
+    void TestBug9983();
 
     void TestDebug();
     void TestProperties();

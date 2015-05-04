@@ -1,13 +1,13 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/et.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/et.xml
+ * ICU <specials> source: <path>/common/main/et.xml
  */
 et{
     Countries{
@@ -86,7 +86,7 @@ et{
         CF{"Kesk-Aafrika Vabariik"}
         CG{"Kongo-Brazzaville"}
         CH{"Šveits"}
-        CI{"Côte d'Ivoire"}
+        CI{"Côte d’Ivoire"}
         CK{"Cooki saared"}
         CL{"Tšiili"}
         CM{"Kamerun"}
@@ -142,7 +142,7 @@ et{
         GW{"Guinea-Bissau"}
         GY{"Guyana"}
         HK{"Hongkong - Hiina erihalduspiirkond"}
-        HM{"Heard ja McDonald saared"}
+        HM{"Heardi ja McDonaldi saared"}
         HN{"Honduras"}
         HR{"Horvaatia"}
         HT{"Haiti"}
@@ -193,7 +193,7 @@ et{
         MH{"Marshalli saared"}
         MK{"Makedoonia"}
         ML{"Mali"}
-        MM{"Myanmar"}
+        MM{"Myanmar (Birma)"}
         MN{"Mongoolia"}
         MO{"Macau - Hiina erihalduspiirkond"}
         MP{"Põhja-Mariaanid"}
@@ -228,9 +228,9 @@ et{
         PK{"Pakistan"}
         PL{"Poola"}
         PM{"Saint Pierre ja Miquelon"}
-        PN{"Pitcairn"}
+        PN{"Pitcairni saared"}
         PR{"Puerto Rico"}
-        PS{"Palestiina ala"}
+        PS{"Palestiina alad"}
         PT{"Portugal"}
         PW{"Belau"}
         PY{"Paraguay"}
@@ -294,11 +294,26 @@ et{
         VU{"Vanuatu"}
         WF{"Wallis ja Futuna"}
         WS{"Samoa"}
+        XK{"Kosovo"}
         YE{"Jeemen"}
         YT{"Mayotte"}
         ZA{"Lõuna-Aafrika Vabariik"}
         ZM{"Sambia"}
         ZW{"Zimbabwe"}
+        ZZ{"Tundmatu piirkond"}
     }
-    Version{"2.0.78.32"}
+    Countries%variant{
+        CD{"Kongo-Kinshasa"}
+        CG{"Kongo (Vabariik)"}
+        CI{"Elevandiluurannik"}
+        FK{"Falklandi saared (Malviini saared)"}
+    }
+    CountriesShort{
+        GB{"Suurbritannia"}
+        HK{"Hongkong"}
+        MO{"Macau"}
+        PS{"Palestiina"}
+        US{"USA"}
+    }
+    Version{"2.1.8.9"}
 }

@@ -1,7 +1,7 @@
 /*
 *******************************************************************************
 *
-*   Copyright (C) 2005-2012, International Business Machines
+*   Copyright (C) 2005-2014, International Business Machines
 *   Corporation and others.  All Rights Reserved.
 *
 *******************************************************************************
@@ -516,8 +516,17 @@ utext_copy(UText *ut,
 
 U_CAPI UText * U_EXPORT2
 utext_clone(UText *dest, const UText *src, UBool deep, UBool readOnly, UErrorCode *status) {
-    UText *result;
-    result = src->pFuncs->clone(dest, src, deep, status);
+    if (U_FAILURE(*status)) {
+        return dest;
+    }
+    UText *result = src->pFuncs->clone(dest, src, deep, status);
+    if (U_FAILURE(*status)) {
+        return result;
+    }
+    if (result == NULL) {
+        *status = U_MEMORY_ALLOCATION_ERROR;
+        return result;
+    }
     if (readOnly) {
         utext_freeze(result);
     }
@@ -805,6 +814,11 @@ shallowTextClone(UText * dest, const UText * src, UErrorCode * status) {
     adjustPointer(dest, &dest->q, src);
     adjustPointer(dest, &dest->r, src);
     adjustPointer(dest, (const void **)&dest->chunkContents, src);
+
+    // The newly shallow-cloned UText does _not_ own the underlying storage for the text.
+    // (The source for the clone may or may not have owned the text.)
+
+    dest->providerProperties &= ~I32_FLAG(UTEXT_PROVIDER_OWNS_TEXT);
 
     return dest;
 }
@@ -1217,14 +1231,10 @@ fillForward:
                 int32_t  cIx      = srcIx;
                 int32_t  dIx      = destIx;
                 int32_t  dIxSaved = destIx;
-                U8_NEXT(s8, srcIx, strLen, c);
+                U8_NEXT_OR_FFFD(s8, srcIx, strLen, c);
                 if (c==0 && nulTerminated) {
                     srcIx--;
                     break;
-                }
-                if (c<0) {
-                    // Illegal UTF-8.  Replace with sub character.
-                    c = 0x0fffd;
                 }
 
                 U16_APPEND_UNSAFE(buf, destIx, c);
@@ -1334,15 +1344,11 @@ fillReverse:
                 int32_t  sIx      = srcIx;  // ix of last byte of multi-byte u8 char
 
                 // Get the full character from the UTF8 string.
-                //   use code derived from tbe macros in utf.8
+                //   use code derived from tbe macros in utf8.h
                 //   Leaves srcIx pointing at the first byte of the UTF-8 char.
                 //
-                if (c<=0xbf) {
-                    c=utf8_prevCharSafeBody(s8, 0, &srcIx, c, -1);
-                    // leaves srcIx at first byte of the multi-byte char.
-                } else {
-                    c=0x0fffd;
-                }
+                c=utf8_prevCharSafeBody(s8, 0, &srcIx, c, -3);
+                // leaves srcIx at first byte of the multi-byte char.
 
                 // Store the character in UTF-16 buffer.
                 if (c<0x10000) {
@@ -1415,10 +1421,7 @@ utext_strFromUTF8(UChar *dest,
         if(ch <=0x7f){
             *pDest++=(UChar)ch;
         }else{
-            ch=utf8_nextCharSafeBody(pSrc, &index, srcLength, ch, -1);
-            if(ch<0){
-                ch = 0xfffd;
-            }
+            ch=utf8_nextCharSafeBody(pSrc, &index, srcLength, ch, -3);
             if(U_IS_BMP(ch)){
                 *(pDest++)=(UChar)ch;
             }else{
@@ -1438,10 +1441,7 @@ utext_strFromUTF8(UChar *dest,
         if(ch <= 0x7f){
             reqLength++;
         }else{
-            ch=utf8_nextCharSafeBody(pSrc, &index, srcLength, ch, -1);
-            if(ch<0){
-                ch = 0xfffd;
-            }
+            ch=utf8_nextCharSafeBody(pSrc, &index, srcLength, ch, -3);
             reqLength+=U16_LENGTH(ch);
         }
     }
@@ -1589,7 +1589,7 @@ utf8TextClose(UText *ut) {
 U_CDECL_END
 
 
-static const struct UTextFuncs utf8Funcs = 
+static const struct UTextFuncs utf8Funcs =
 {
     sizeof(UTextFuncs),
     0, 0, 0,             // Reserved alignment padding
@@ -1876,7 +1876,7 @@ repTextExtract(UText *ut,
     UnicodeString buffer(dest, 0, destCapacity); // writable alias
     rep->extractBetween(start32, limit32, buffer);
     repTextAccess(ut, limit32, TRUE);
-    
+
     return u_terminateUChars(dest, destCapacity, length, status);
 }
 
@@ -1998,7 +1998,7 @@ repTextCopy(UText *ut,
     repTextAccess(ut, nativeIterIndex, TRUE);
 }
 
-static const struct UTextFuncs repFuncs = 
+static const struct UTextFuncs repFuncs =
 {
     sizeof(UTextFuncs),
     0, 0, 0,           // Reserved alignment padding
@@ -2006,8 +2006,8 @@ static const struct UTextFuncs repFuncs =
     repTextLength,
     repTextAccess,
     repTextExtract,
-    repTextReplace,   
-    repTextCopy,   
+    repTextReplace,
+    repTextCopy,
     NULL,              // MapOffsetToNative,
     NULL,              // MapIndexToUTF16,
     repTextClose,
@@ -2249,7 +2249,7 @@ unistrTextCopy(UText *ut,
 
 }
 
-static const struct UTextFuncs unistrFuncs = 
+static const struct UTextFuncs unistrFuncs =
 {
     sizeof(UTextFuncs),
     0, 0, 0,             // Reserved alignment padding
@@ -2257,8 +2257,8 @@ static const struct UTextFuncs unistrFuncs =
     unistrTextLength,
     unistrTextAccess,
     unistrTextExtract,
-    unistrTextReplace,   
-    unistrTextCopy,   
+    unistrTextReplace,
+    unistrTextCopy,
     NULL,                // MapOffsetToNative,
     NULL,                // MapIndexToUTF16,
     unistrTextClose,
@@ -2562,7 +2562,7 @@ ucstrTextExtract(UText *ut,
     return di;
 }
 
-static const struct UTextFuncs ucstrFuncs = 
+static const struct UTextFuncs ucstrFuncs =
 {
     sizeof(UTextFuncs),
     0, 0, 0,           // Reserved alignment padding
@@ -2779,14 +2779,14 @@ charIterTextExtract(UText *ut,
         }
         srci += len;
     }
-    
+
     charIterTextAccess(ut, copyLimit, TRUE);
 
     u_terminateUChars(dest, destCapacity, desti, status);
     return desti;
 }
 
-static const struct UTextFuncs charIterFuncs = 
+static const struct UTextFuncs charIterFuncs =
 {
     sizeof(UTextFuncs),
     0, 0, 0,             // Reserved alignment padding
@@ -2846,6 +2846,3 @@ utext_openCharacterIterator(UText *ut, CharacterIterator *ci, UErrorCode *status
     }
     return ut;
 }
-
-
-

@@ -1,13 +1,13 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/fi.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/fi.xml
+ * ICU <specials> source: <path>/common/main/fi.xml
  */
 fi{
     Currencies{
@@ -65,7 +65,7 @@ fi{
         }
         ARL{
             "ARL",
-            "Argentiinan ley-peso (1970-1983)",
+            "Argentiinan ley-peso (1970–1983)",
         }
         ARM{
             "ARM",
@@ -89,7 +89,7 @@ fi{
         }
         AWG{
             "AWG",
-            "Aruban guldeni",
+            "Aruban floriini",
         }
         AZM{
             "AZM",
@@ -361,7 +361,7 @@ fi{
         }
         ESA{
             "ESA",
-            "Espanjan peseta (A-tili)",
+            "Espanjan peseta (A–tili)",
         }
         ESB{
             "ESB",
@@ -380,7 +380,7 @@ fi{
             "euro",
         }
         FIM{
-            "FIM",
+            "mk",
             "Suomen markka",
         }
         FJD{
@@ -661,7 +661,7 @@ fi{
         }
         MKD{
             "MKD",
-            "Makedonian dinaari",
+            "Makedonian denaari",
         }
         MKN{
             "MKN",
@@ -698,6 +698,10 @@ fi{
         MUR{
             "MUR",
             "Mauritiuksen rupia",
+        }
+        MVP{
+            "MVP",
+            "Malediivien rupia (1947–1981)",
         }
         MVR{
             "MVR",
@@ -1119,9 +1123,17 @@ fi{
             "XRE",
             "RINET-rahastot",
         }
+        XSU{
+            "XSU",
+            "etelä-amerikkalaisen ALBA:n laskentayksikkö sucre",
+        }
         XTS{
             "XTS",
             "testaustarkoitukseen varattu valuuttakoodi",
+        }
+        XUA{
+            "XUA",
+            "afrikkalainen ADB-laskentayksikkö",
         }
         XXX{
             "XXX",
@@ -1161,6 +1173,10 @@ fi{
         }
         ZMK{
             "ZMK",
+            "Sambian kwacha (1968–2012)",
+        }
+        ZMW{
+            "ZMW",
             "Sambian kwacha",
         }
         ZRN{
@@ -1184,6 +1200,57 @@ fi{
             "Zimbabwen dollari (2008)",
         }
     }
+    Currencies%narrow{
+        ARS{"$"}
+        AUD{"$"}
+        BBD{"$"}
+        BDT{"৳"}
+        BMD{"$"}
+        BND{"$"}
+        BRL{"R$"}
+        BSD{"$"}
+        BYR{"р."}
+        BZD{"$"}
+        CAD{"$"}
+        CLP{"$"}
+        CNY{"¥"}
+        COP{"$"}
+        CRC{"₡"}
+        DOP{"$"}
+        EUR{"€"}
+        FJD{"$"}
+        GBP{"£"}
+        GIP{"£"}
+        GYD{"$"}
+        HKD{"$"}
+        ILS{"₪"}
+        INR{"₹"}
+        JMD{"$"}
+        JPY{"¥"}
+        KHR{"៛"}
+        KRW{"₩"}
+        KYD{"$"}
+        LAK{"₭"}
+        LRD{"$"}
+        MNT{"₮"}
+        MXN{"$"}
+        NAD{"$"}
+        NGN{"₦"}
+        NZD{"$"}
+        PHP{"₱"}
+        PYG{"₲"}
+        SBD{"$"}
+        SGD{"$"}
+        SRD{"$"}
+        SSP{"£"}
+        TRY{"₺"}
+        TTD{"$"}
+        TWD{"NT$"}
+        UAH{"₴"}
+        USD{"$"}
+        UYU{"$U"}
+        VND{"₫"}
+    }
     CurrencyPlurals{
         ADP{
             one{"Andorran peseta"}
@@ -1194,8 +1261,8 @@ fi{
             other{"Arabiemiirikuntien dirhamia"}
         }
         AFA{
-            one{"Afganistanin afgaani (1927-2002)"}
-            other{"Afganistanin afgaania (1927-2002)"}
+            one{"Afganistanin afgaani (1927–2002)"}
+            other{"Afganistanin afgaania (1927–2002)"}
         }
         AFN{
             one{"Afganistanin afgaani"}
@@ -1238,8 +1305,8 @@ fi{
             other{"Argentiinan australia"}
         }
         ARL{
-            one{"Argentiinan ley-peso (1970-1983)"}
-            other{"Argentiinan ley-pesoa (1970-1983)"}
+            one{"Argentiinan ley-peso (1970–1983)"}
+            other{"Argentiinan ley-pesoa (1970–1983)"}
         }
         ARM{
             one{"Argentiinan peso (1881–1970)"}
@@ -1262,8 +1329,8 @@ fi{
             other{"Australian dollaria"}
         }
         AWG{
-            one{"Aruban guldeni"}
-            other{"Aruban guldenia"}
+            one{"Aruban floriini"}
+            other{"Aruban floriinia"}
         }
         AZM{
             one{"Azerbaidžanin manat (1993–2006)"}
@@ -1351,7 +1418,7 @@ fi{
         }
         BOV{
             one{"Bolivian mvdol"}
-            other{"Bolivian mvdol'ia"}
+            other{"Bolivian mvdol’ia"}
         }
         BRB{
             one{"Brasilian uusi cruzeiro (1967–1986)"}
@@ -1519,7 +1586,7 @@ fi{
         }
         ECV{
             one{"Ecuadorin UVC"}
-            other{"Ecuadorin UVC'ta"}
+            other{"Ecuadorin UVC’ta"}
         }
         EEK{
             one{"Viron kruunu"}
@@ -1534,8 +1601,8 @@ fi{
             other{"Eritrean nakfaa"}
         }
         ESA{
-            one{"Espanjan peseta (A-tili)"}
-            other{"Espanjan pesetaa (A-tili)"}
+            one{"Espanjan peseta (A–tili)"}
+            other{"Espanjan pesetaa (A–tili)"}
         }
         ESB{
             one{"Espanjan peseta (vaihdettava tili)"}
@@ -1834,8 +1901,8 @@ fi{
             other{"Madagaskarin frangia"}
         }
         MKD{
-            one{"Makedonian dinaari"}
-            other{"Makedonian dinaaria"}
+            one{"Makedonian denaari"}
+            other{"Makedonian denaaria"}
         }
         MKN{
             one{"Makedonian dinaari (1992–1993)"}
@@ -1873,6 +1940,10 @@ fi{
             one{"Mauritiuksen rupia"}
             other{"Mauritiuksen rupiaa"}
         }
+        MVP{
+            one{"Malediivien rupia (1947–1981)"}
+            other{"Malediivien rupiaa (1947–1981)"}
+        }
         MVR{
             one{"Malediivien rufiyaa"}
             other{"Malediivien rufiyaata"}
@@ -1891,7 +1962,7 @@ fi{
         }
         MXV{
             one{"Meksikon UDI"}
-            other{"Meksikon UDI'ta"}
+            other{"Meksikon UDI’ta"}
         }
         MYR{
             one{"Malesian ringgit"}
@@ -2239,7 +2310,7 @@ fi{
         }
         XBA{
             one{"EURCO"}
-            other{"EURCO'a"}
+            other{"EURCO’a"}
         }
         XBB{
             one{"Euroopan rahayksikkö (EMU)"}
@@ -2247,11 +2318,11 @@ fi{
         }
         XBC{
             one{"EUA (XBC)"}
-            other{"EUA'ta (XBC)"}
+            other{"EUA’ta (XBC)"}
         }
         XBD{
             one{"EUA (XBD)"}
-            other{"EUA'ta (XBD)"}
+            other{"EUA’ta (XBD)"}
         }
         XCD{
             one{"Itä-Karibian dollari"}
@@ -2293,9 +2364,17 @@ fi{
             one{"RINET-rahastoyksikkö"}
             other{"RINET-rahastoyksikköä"}
         }
+        XSU{
+            one{"sucre"}
+            other{"sucrea"}
+        }
         XTS{
             one{"testaustarkoitukseen varattu valuuttakoodi"}
             other{"testaustarkoitukseen varattua valuuttakoodia"}
+        }
+        XUA{
+            one{"ADB-laskentayksikkö"}
+            other{"ADB-laskentayksikköä"}
         }
         XXX{
             one{"tuntematon rahayksikkö"}
@@ -2334,6 +2413,10 @@ fi{
             other{"Etelä-Afrikan randia"}
         }
         ZMK{
+            one{"Sambian kwacha (1968–2012)"}
+            other{"Sambian kwachaa (1968–2012)"}
+        }
+        ZMW{
             one{"Sambian kwacha"}
             other{"Sambian kwachaa"}
         }
@@ -2362,5 +2445,5 @@ fi{
         one{"{0} {1}"}
         other{"{0} {1}"}
     }
-    Version{"2.0.78.39"}
+    Version{"2.1.8.9"}
 }

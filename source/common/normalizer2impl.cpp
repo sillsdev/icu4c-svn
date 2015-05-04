@@ -1,7 +1,7 @@
 /*
 *******************************************************************************
 *
-*   Copyright (C) 2009-2012, International Business Machines
+*   Copyright (C) 2009-2014, International Business Machines
 *   Corporation and others.  All Rights Reserved.
 *
 *******************************************************************************
@@ -253,50 +253,12 @@ struct CanonIterData : public UMemory {
 };
 
 Normalizer2Impl::~Normalizer2Impl() {
-    udata_close(memory);
-    utrie2_close(normTrie);
-    delete (CanonIterData *)canonIterDataSingleton.fInstance;
-}
-
-UBool U_CALLCONV
-Normalizer2Impl::isAcceptable(void *context,
-                              const char * /* type */, const char * /*name*/,
-                              const UDataInfo *pInfo) {
-    if(
-        pInfo->size>=20 &&
-        pInfo->isBigEndian==U_IS_BIG_ENDIAN &&
-        pInfo->charsetFamily==U_CHARSET_FAMILY &&
-        pInfo->dataFormat[0]==0x4e &&    /* dataFormat="Nrm2" */
-        pInfo->dataFormat[1]==0x72 &&
-        pInfo->dataFormat[2]==0x6d &&
-        pInfo->dataFormat[3]==0x32 &&
-        pInfo->formatVersion[0]==2
-    ) {
-        Normalizer2Impl *me=(Normalizer2Impl *)context;
-        uprv_memcpy(me->dataVersion, pInfo->dataVersion, 4);
-        return TRUE;
-    } else {
-        return FALSE;
-    }
+    delete fCanonIterData;
 }
 
 void
-Normalizer2Impl::load(const char *packageName, const char *name, UErrorCode &errorCode) {
-    if(U_FAILURE(errorCode)) {
-        return;
-    }
-    memory=udata_openChoice(packageName, "nrm", name, isAcceptable, this, &errorCode);
-    if(U_FAILURE(errorCode)) {
-        return;
-    }
-    const uint8_t *inBytes=(const uint8_t *)udata_getMemory(memory);
-    const int32_t *inIndexes=(const int32_t *)inBytes;
-    int32_t indexesLength=inIndexes[IX_NORM_TRIE_OFFSET]/4;
-    if(indexesLength<=IX_MIN_MAYBE_YES) {
-        errorCode=U_INVALID_FORMAT_ERROR;  // Not enough indexes.
-        return;
-    }
-
+Normalizer2Impl::init(const int32_t *inIndexes, const UTrie2 *inTrie,
+                      const uint16_t *inExtraData, const uint8_t *inSmallFCD) {
     minDecompNoCP=inIndexes[IX_MIN_DECOMP_NO_CP];
     minCompNoMaybeCP=inIndexes[IX_MIN_COMP_NO_MAYBE_CP];
 
@@ -306,23 +268,12 @@ Normalizer2Impl::load(const char *packageName, const char *name, UErrorCode &err
     limitNoNo=inIndexes[IX_LIMIT_NO_NO];
     minMaybeYes=inIndexes[IX_MIN_MAYBE_YES];
 
-    int32_t offset=inIndexes[IX_NORM_TRIE_OFFSET];
-    int32_t nextOffset=inIndexes[IX_EXTRA_DATA_OFFSET];
-    normTrie=utrie2_openFromSerialized(UTRIE2_16_VALUE_BITS,
-                                       inBytes+offset, nextOffset-offset, NULL,
-                                       &errorCode);
-    if(U_FAILURE(errorCode)) {
-        return;
-    }
+    normTrie=inTrie;
 
-    offset=nextOffset;
-    nextOffset=inIndexes[IX_SMALL_FCD_OFFSET];
-    maybeYesCompositions=(const uint16_t *)(inBytes+offset);
+    maybeYesCompositions=inExtraData;
     extraData=maybeYesCompositions+(MIN_NORMAL_MAYBE_YES-minMaybeYes);
 
-    // smallFCD: new in formatVersion 2
-    offset=nextOffset;
-    smallFCD=inBytes+offset;
+    smallFCD=inSmallFCD;
 
     // Build tccc180[].
     // gennorm2 enforces lccc=0 for c<MIN_CCC_LCCC_CP=U+0300.
@@ -357,7 +308,69 @@ uint8_t Normalizer2Impl::getTrailCCFromCompYesAndZeroCC(const UChar *cpStart, co
     }
 }
 
+namespace {
+
+class LcccContext {
+public:
+    LcccContext(const Normalizer2Impl &ni, UnicodeSet &s) : impl(ni), set(s) {}
+
+    void handleRange(UChar32 start, UChar32 end, uint16_t norm16) {
+        if(impl.isAlgorithmicNoNo(norm16)) {
+            // Range of code points with same-norm16-value algorithmic decompositions.
+            // They might have different non-zero FCD16 values.
+            do {
+                uint16_t fcd16=impl.getFCD16(start);
+                if(fcd16>0xff) { set.add(start); }
+            } while(++start<=end);
+        } else {
+            uint16_t fcd16=impl.getFCD16(start);
+            if(fcd16>0xff) { set.add(start, end); }
+        }
+    }
+
+private:
+    const Normalizer2Impl &impl;
+    UnicodeSet &set;
+};
+
+struct PropertyStartsContext {
+    PropertyStartsContext(const Normalizer2Impl &ni, const USetAdder *adder)
+            : impl(ni), sa(adder) {}
+
+    const Normalizer2Impl &impl;
+    const USetAdder *sa;
+};
+
+}  // namespace
+
 U_CDECL_BEGIN
+
+static UBool U_CALLCONV
+enumLcccRange(const void *context, UChar32 start, UChar32 end, uint32_t value) {
+    ((LcccContext *)context)->handleRange(start, end, (uint16_t)value);
+    return TRUE;
+}
+
+static UBool U_CALLCONV
+enumNorm16PropertyStartsRange(const void *context, UChar32 start, UChar32 end, uint32_t value) {
+    /* add the start code point to the USet */
+    const PropertyStartsContext *ctx=(const PropertyStartsContext *)context;
+    const USetAdder *sa=ctx->sa;
+    sa->add(sa->set, start);
+    if(start!=end && ctx->impl.isAlgorithmicNoNo((uint16_t)value)) {
+        // Range of code points with same-norm16-value algorithmic decompositions.
+        // They might have different non-zero FCD16 values.
+        uint16_t prevFCD16=ctx->impl.getFCD16(start);
+        while(++start<=end) {
+            uint16_t fcd16=ctx->impl.getFCD16(start);
+            if(fcd16!=prevFCD16) {
+                sa->add(sa->set, start);
+                prevFCD16=fcd16;
+            }
+        }
+    }
+    return TRUE;
+}
 
 static UBool U_CALLCONV
 enumPropertyStartsRange(const void *context, UChar32 start, UChar32 /*end*/, uint32_t /*value*/) {
@@ -375,9 +388,17 @@ segmentStarterMapper(const void * /*context*/, uint32_t value) {
 U_CDECL_END
 
 void
+Normalizer2Impl::addLcccChars(UnicodeSet &set) const {
+    /* add the start code point of each same-value range of each trie */
+    LcccContext context(*this, set);
+    utrie2_enum(normTrie, NULL, enumLcccRange, &context);
+}
+
+void
 Normalizer2Impl::addPropertyStarts(const USetAdder *sa, UErrorCode & /*errorCode*/) const {
     /* add the start code point of each same-value range of each trie */
-    utrie2_enum(normTrie, NULL, enumPropertyStartsRange, sa);
+    PropertyStartsContext context(*this, sa);
+    utrie2_enum(normTrie, NULL, enumNorm16PropertyStartsRange, &context);
 
     /* add Hangul LV syllables and LV+1 because of skippables */
     for(UChar c=Hangul::HANGUL_BASE; c<Hangul::HANGUL_LIMIT; c+=Hangul::JAMO_T_COUNT) {
@@ -392,8 +413,7 @@ Normalizer2Impl::addCanonIterPropertyStarts(const USetAdder *sa, UErrorCode &err
     /* add the start code point of each same-value range of the canonical iterator data trie */
     if(ensureCanonIterData(errorCode)) {
         // currently only used for the SEGMENT_STARTER property
-        utrie2_enum(((CanonIterData *)canonIterDataSingleton.fInstance)->trie,
-                    segmentStarterMapper, enumPropertyStartsRange, sa);
+        utrie2_enum(fCanonIterData->trie, segmentStarterMapper, enumPropertyStartsRange, sa);
     }
 }
 
@@ -418,6 +438,38 @@ Normalizer2Impl::copyLowPrefixFromNulTerminated(const UChar *src,
         }
     }
     return src;
+}
+
+UnicodeString &
+Normalizer2Impl::decompose(const UnicodeString &src, UnicodeString &dest,
+                           UErrorCode &errorCode) const {
+    if(U_FAILURE(errorCode)) {
+        dest.setToBogus();
+        return dest;
+    }
+    const UChar *sArray=src.getBuffer();
+    if(&dest==&src || sArray==NULL) {
+        errorCode=U_ILLEGAL_ARGUMENT_ERROR;
+        dest.setToBogus();
+        return dest;
+    }
+    decompose(sArray, sArray+src.length(), dest, src.length(), errorCode);
+    return dest;
+}
+
+void
+Normalizer2Impl::decompose(const UChar *src, const UChar *limit,
+                           UnicodeString &dest,
+                           int32_t destLengthEstimate,
+                           UErrorCode &errorCode) const {
+    if(destLengthEstimate<0 && limit!=NULL) {
+        destLengthEstimate=(int32_t)(limit-src);
+    }
+    dest.remove();
+    ReorderingBuffer buffer(*this, dest);
+    if(buffer.init(destLengthEstimate, errorCode)) {
+        decompose(src, limit, &buffer, errorCode);
+    }
 }
 
 // Dual functionality:
@@ -1791,59 +1843,43 @@ void CanonIterData::addToStartSet(UChar32 origin, UChar32 decompLead, UErrorCode
     }
 }
 
-class CanonIterDataSingleton {
-public:
-    CanonIterDataSingleton(SimpleSingleton &s, Normalizer2Impl &ni, UErrorCode &ec) :
-        singleton(s), impl(ni), errorCode(ec) {}
-    CanonIterData *getInstance(UErrorCode &errorCode) {
-        void *duplicate;
-        CanonIterData *instance=
-            (CanonIterData *)singleton.getInstance(createInstance, this, duplicate, errorCode);
-        delete (CanonIterData *)duplicate;
-        return instance;
-    }
-    static void *createInstance(const void *context, UErrorCode &errorCode);
-    UBool rangeHandler(UChar32 start, UChar32 end, uint32_t value) {
-        if(value!=0) {
-            impl.makeCanonIterDataFromNorm16(start, end, (uint16_t)value, *newData, errorCode);
-        }
-        return U_SUCCESS(errorCode);
-    }
-
-private:
-    SimpleSingleton &singleton;
-    Normalizer2Impl &impl;
-    CanonIterData *newData;
-    UErrorCode &errorCode;
-};
-
 U_CDECL_BEGIN
 
 // Call Normalizer2Impl::makeCanonIterDataFromNorm16() for a range of same-norm16 characters.
+//     context: the Normalizer2Impl
 static UBool U_CALLCONV
 enumCIDRangeHandler(const void *context, UChar32 start, UChar32 end, uint32_t value) {
-    return ((CanonIterDataSingleton *)context)->rangeHandler(start, end, value);
+    UErrorCode errorCode = U_ZERO_ERROR;
+    if (value != 0) {
+        Normalizer2Impl *impl = (Normalizer2Impl *)context;
+        impl->makeCanonIterDataFromNorm16(
+            start, end, (uint16_t)value, *impl->fCanonIterData, errorCode);
+    }
+    return U_SUCCESS(errorCode);
+}
+
+
+
+// UInitOnce instantiation function for CanonIterData
+
+static void U_CALLCONV 
+initCanonIterData(Normalizer2Impl *impl, UErrorCode &errorCode) {
+    U_ASSERT(impl->fCanonIterData == NULL);
+    impl->fCanonIterData = new CanonIterData(errorCode);
+    if (impl->fCanonIterData == NULL) {
+        errorCode=U_MEMORY_ALLOCATION_ERROR;
+    }
+    if (U_SUCCESS(errorCode)) {
+        utrie2_enum(impl->getNormTrie(), NULL, enumCIDRangeHandler, impl);
+        utrie2_freeze(impl->fCanonIterData->trie, UTRIE2_32_VALUE_BITS, &errorCode);
+    }
+    if (U_FAILURE(errorCode)) {
+        delete impl->fCanonIterData;
+        impl->fCanonIterData = NULL;
+    }
 }
 
 U_CDECL_END
-
-void *CanonIterDataSingleton::createInstance(const void *context, UErrorCode &errorCode) {
-    CanonIterDataSingleton *me=(CanonIterDataSingleton *)context;
-    me->newData=new CanonIterData(errorCode);
-    if(me->newData==NULL) {
-        errorCode=U_MEMORY_ALLOCATION_ERROR;
-        return NULL;
-    }
-    if(U_SUCCESS(errorCode)) {
-        utrie2_enum(me->impl.getNormTrie(), NULL, enumCIDRangeHandler, me);
-        utrie2_freeze(me->newData->trie, UTRIE2_32_VALUE_BITS, &errorCode);
-        if(U_SUCCESS(errorCode)) {
-            return me->newData;
-        }
-    }
-    delete me->newData;
-    return NULL;
-}
 
 void Normalizer2Impl::makeCanonIterDataFromNorm16(UChar32 start, UChar32 end, uint16_t norm16,
                                                   CanonIterData &newData,
@@ -1921,17 +1957,16 @@ void Normalizer2Impl::makeCanonIterDataFromNorm16(UChar32 start, UChar32 end, ui
 UBool Normalizer2Impl::ensureCanonIterData(UErrorCode &errorCode) const {
     // Logically const: Synchronized instantiation.
     Normalizer2Impl *me=const_cast<Normalizer2Impl *>(this);
-    CanonIterDataSingleton(me->canonIterDataSingleton, *me, errorCode).getInstance(errorCode);
+    umtx_initOnce(me->fCanonIterDataInitOnce, &initCanonIterData, me, errorCode);
     return U_SUCCESS(errorCode);
 }
 
 int32_t Normalizer2Impl::getCanonValue(UChar32 c) const {
-    return (int32_t)utrie2_get32(((CanonIterData *)canonIterDataSingleton.fInstance)->trie, c);
+    return (int32_t)utrie2_get32(fCanonIterData->trie, c);
 }
 
 const UnicodeSet &Normalizer2Impl::getCanonStartSet(int32_t n) const {
-    return *(const UnicodeSet *)(
-        ((CanonIterData *)canonIterDataSingleton.fInstance)->canonStartSets[n]);
+    return *(const UnicodeSet *)fCanonIterData->canonStartSets[n];
 }
 
 UBool Normalizer2Impl::isCanonSegmentStarter(UChar32 c) const {

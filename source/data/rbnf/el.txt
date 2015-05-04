@@ -1,13 +1,13 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
-// * Tool: com.ibm.icu.dev.tool.cldr.LDML2ICUConverter.java
-// * Source File:<path>/common/rbnf/el.xml
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
+// * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
+// * Source File: <path>/common/rbnf/el.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/rbnf/el.xml
+ * ICU <specials> source: <path>/xml/rbnf/el.xml
  */
 el{
     RBNFRules{
@@ -303,5 +303,5 @@ el{
             "1000000000000000000: =#,##0=.;",
         }
     }
-    Version{"2.0.77.34"}
+    Version{"2.0.82.42"}
 }

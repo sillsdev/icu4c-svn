@@ -1,13 +1,13 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/ff.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/ff.xml
+ * ICU <specials> source: <path>/common/main/ff.xml
  */
 ff{
     Countries{
@@ -100,7 +100,7 @@ ff{
         HU{"Onngiri"}
         ID{"Enndonesii"}
         IE{"Irlannda"}
-        IL{"Israa'iila"}
+        IL{"Israa’iila"}
         IN{"Enndo"}
         IO{"Keeriindi britaani to maayo enndo"}
         IQ{"Iraak"}
@@ -237,5 +237,5 @@ ff{
         ZM{"Sammbi"}
         ZW{"Simbaabuwe"}
     }
-    Version{"2.0.78.30"}
+    Version{"2.1.7.39"}
 }

@@ -1,13 +1,13 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/cs.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/cs.xml
+ * ICU <specials> source: <path>/common/main/cs.xml
  */
 cs{
     Countries{
@@ -23,7 +23,7 @@ cs{
         017{"Střední Afrika"}
         018{"Jižní Afrika"}
         019{"Amerika"}
-        021{"Severní Amerika oblast"}
+        021{"Severní Amerika (oblast)"}
         029{"Karibik"}
         030{"Východní Asie"}
         034{"Jižní Asie"}
@@ -31,7 +31,7 @@ cs{
         039{"Jižní Evropa"}
         053{"Australasie"}
         054{"Melanésie"}
-        057{"Mikronésie oblast"}
+        057{"Mikronésie (region)"}
         061{"Polynésie"}
         142{"Asie"}
         143{"Střední Asie"}
@@ -41,7 +41,7 @@ cs{
         154{"Severní Evropa"}
         155{"Západní Evropa"}
         419{"Latinská Amerika"}
-        AC{"Ostrov Ascension"}
+        AC{"Ascension"}
         AD{"Andorra"}
         AE{"Spojené arabské emiráty"}
         AF{"Afghánistán"}
@@ -57,7 +57,7 @@ cs{
         AT{"Rakousko"}
         AU{"Austrálie"}
         AW{"Aruba"}
-        AX{"Alandy"}
+        AX{"Ålandy"}
         AZ{"Ázerbájdžán"}
         BA{"Bosna a Hercegovina"}
         BB{"Barbados"}
@@ -82,9 +82,9 @@ cs{
         BZ{"Belize"}
         CA{"Kanada"}
         CC{"Kokosové ostrovy"}
-        CD{"Kongo - Kinshasa"}
+        CD{"Kongo – Kinshasa"}
         CF{"Středoafrická republika"}
-        CG{"Kongo - Brazzaville"}
+        CG{"Kongo – Brazzaville"}
         CH{"Švýcarsko"}
         CI{"Pobřeží slonoviny"}
         CK{"Cookovy ostrovy"}
@@ -97,7 +97,7 @@ cs{
         CU{"Kuba"}
         CV{"Kapverdy"}
         CW{"Curaçao"}
-        CX{"Vánoční ostrovy"}
+        CX{"Vánoční ostrov"}
         CY{"Kypr"}
         CZ{"Česká republika"}
         DE{"Německo"}
@@ -141,7 +141,7 @@ cs{
         GU{"Guam"}
         GW{"Guinea-Bissau"}
         GY{"Guyana"}
-        HK{"Hongkong - ZAO Číny"}
+        HK{"Hongkong – ZAO Číny"}
         HM{"Heardův ostrov a McDonaldovy ostrovy"}
         HN{"Honduras"}
         HR{"Chorvatsko"}
@@ -167,7 +167,7 @@ cs{
         KH{"Kambodža"}
         KI{"Kiribati"}
         KM{"Komory"}
-        KN{"Svatý Kitts a Nevis"}
+        KN{"Svatý Kryštof a Nevis"}
         KP{"Severní Korea"}
         KR{"Jižní Korea"}
         KW{"Kuvajt"}
@@ -188,14 +188,14 @@ cs{
         MC{"Monako"}
         MD{"Moldavsko"}
         ME{"Černá Hora"}
-        MF{"Svatý Martin"}
+        MF{"Svatý Martin (Francie)"}
         MG{"Madagaskar"}
         MH{"Marshallovy ostrovy"}
         MK{"Makedonie"}
         ML{"Mali"}
-        MM{"Myanmar"}
+        MM{"Myanmar (Barma)"}
         MN{"Mongolsko"}
-        MO{"Macao - ZAO Číny"}
+        MO{"Macao – ZAO Číny"}
         MP{"Severní Mariany"}
         MQ{"Martinik"}
         MR{"Mauritánie"}
@@ -227,7 +227,7 @@ cs{
         PH{"Filipíny"}
         PK{"Pákistán"}
         PL{"Polsko"}
-        PM{"Svatý Pierre a Miquelon"}
+        PM{"Saint-Pierre a Miquelon"}
         PN{"Pitcairnovy ostrovy"}
         PR{"Portoriko"}
         PS{"Palestinská území"}
@@ -259,13 +259,13 @@ cs{
         SS{"Jižní Súdán"}
         ST{"Svatý Tomáš a Princův ostrov"}
         SV{"Salvador"}
-        SX{"Sint Maarten"}
+        SX{"Svatý Martin (Nizozemsko)"}
         SY{"Sýrie"}
         SZ{"Svazijsko"}
         TA{"Tristan da Cunha"}
-        TC{"Ostrovy Turks a Caicos"}
+        TC{"Turks a Caicos"}
         TD{"Čad"}
-        TF{"Francouzská jižní teritoria"}
+        TF{"Francouzská jižní území"}
         TG{"Togo"}
         TH{"Thajsko"}
         TJ{"Tádžikistán"}
@@ -294,6 +294,7 @@ cs{
         VU{"Vanuatu"}
         WF{"Wallis a Futuna"}
         WS{"Samoa"}
+        XK{"Kosovo"}
         YE{"Jemen"}
         YT{"Mayotte"}
         ZA{"Jihoafrická republika"}
@@ -301,5 +302,18 @@ cs{
         ZW{"Zimbabwe"}
         ZZ{"Neznámá oblast"}
     }
-    Version{"2.0.78.38"}
+    Countries%variant{
+        CD{"Kongo (DRK)"}
+        CG{"Kongo (republika)"}
+        FK{"Falklandské ostrovy (Malvíny)"}
+        MK{"Makedonie (FYROM)"}
+    }
+    CountriesShort{
+        GB{"VB"}
+        HK{"Hongkong"}
+        MO{"Macao"}
+        PS{"Palestina"}
+        US{"USA"}
+    }
+    Version{"2.1.8.9"}
 }

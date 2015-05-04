@@ -1,6 +1,6 @@
 /*
 *******************************************************************************
-*   Copyright (C) 2010-2012, International Business Machines
+*   Copyright (C) 2010-2012,2014, International Business Machines
 *   Corporation and others.  All Rights Reserved.
 *******************************************************************************
 *   file name:  stringtriebuilder.h
@@ -162,6 +162,7 @@ protected:
      * @internal
      */
     Node *registerFinalValue(int32_t value, UErrorCode &errorCode);
+#endif  /* U_HIDE_INTERNAL_API */
 
     /*
      * C++ note:
@@ -183,6 +184,7 @@ protected:
     /** @internal */
     UHashtable *nodes;
 
+#ifndef U_HIDE_INTERNAL_API
     /** @internal */
     class Node : public UObject {
     public:
@@ -239,9 +241,6 @@ protected:
     protected:
         int32_t hash;
         int32_t offset;
-    private:
-        // No ICU "poor man's RTTI" for this class nor its subclasses.
-        virtual UClassID getDynamicClassID() const;
     };
 
     // This class should not be overridden because
@@ -396,10 +395,6 @@ protected:
     virtual int32_t writeValueAndType(UBool hasValue, int32_t value, int32_t node) = 0;
     /** @internal */
     virtual int32_t writeDeltaTo(int32_t jumpTarget) = 0;
-
-private:
-    // No ICU "poor man's RTTI" for this class nor its subclasses.
-    virtual UClassID getDynamicClassID() const;
 };
 
 U_NAMESPACE_END

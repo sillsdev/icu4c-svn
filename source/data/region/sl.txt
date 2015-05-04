@@ -1,13 +1,13 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/sl.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/sl.xml
+ * ICU <specials> source: <path>/common/main/sl.xml
  */
 sl{
     Countries{
@@ -57,7 +57,7 @@ sl{
         AT{"Avstrija"}
         AU{"Avstralija"}
         AW{"Aruba"}
-        AX{"Alandsko otočje"}
+        AX{"Ålandski otoki"}
         AZ{"Azerbajdžan"}
         BA{"Bosna in Hercegovina"}
         BB{"Barbados"}
@@ -68,7 +68,7 @@ sl{
         BH{"Bahrajn"}
         BI{"Burundi"}
         BJ{"Benin"}
-        BL{"Saint Barthelemy"}
+        BL{"Saint Barthélemy"}
         BM{"Bermudi"}
         BN{"Brunej"}
         BO{"Bolivija"}
@@ -87,7 +87,7 @@ sl{
         CG{"Kongo - Brazzaville"}
         CH{"Švica"}
         CI{"Slonokoščena obala"}
-        CK{"Cookovo otočje"}
+        CK{"Cookovi otoki"}
         CL{"Čile"}
         CM{"Kamerun"}
         CN{"Kitajska"}
@@ -142,7 +142,7 @@ sl{
         GW{"Gvineja Bissau"}
         GY{"Gvajana"}
         HK{"Posebno administrativno območje LR Kitajske Hong Kong"}
-        HM{"Otok Heard in otočje McDonald"}
+        HM{"Heardov otok in McDonaldovi otoki"}
         HN{"Honduras"}
         HR{"Hrvaška"}
         HT{"Haiti"}
@@ -193,7 +193,7 @@ sl{
         MH{"Marshallovi otoki"}
         MK{"Makedonija"}
         ML{"Mali"}
-        MM{"Mjanmar [Burma]"}
+        MM{"Mjanmar (Burma)"}
         MN{"Mongolija"}
         MO{"Posebno administrativno območje LR Kitajske Macao"}
         MP{"Severni Marianski otoki"}
@@ -294,6 +294,7 @@ sl{
         VU{"Vanuatu"}
         WF{"Wallis in Futuna"}
         WS{"Samoa"}
+        XK{"Kosovo"}
         YE{"Jemen"}
         YT{"Mayotte"}
         ZA{"Južnoafriška republika"}
@@ -301,5 +302,18 @@ sl{
         ZW{"Zimbabve"}
         ZZ{"Neznano ali neveljavno območje"}
     }
-    Version{"2.0.78.38"}
+    Countries%variant{
+        CD{"Kongo (Demokratična republika Kongo)"}
+        CG{"Kongo (Republika)"}
+        FK{"Falklandski otoki (Malvinski otoki)"}
+        MK{"Makedonija (FYROM)"}
+    }
+    CountriesShort{
+        GB{"ZK"}
+        HK{"Hongkong"}
+        MO{"Macao"}
+        PS{"Palestina"}
+        US{"ZDA"}
+    }
+    Version{"2.1.8.9"}
 }

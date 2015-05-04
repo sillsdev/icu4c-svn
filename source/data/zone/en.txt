@@ -1,16 +1,16 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/en.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/en.xml
+ * ICU <specials> source: <path>/common/main/en.xml
  */
 en{
-    Version{"2.0.78.36"}
+    Version{"2.1.8.87"}
     zoneStrings{
         "Africa:Sao_Tome"{
             ec{"São Tomé"}
@@ -22,7 +22,7 @@ en{
             ec{"Curaçao"}
         }
         "America:St_Barthelemy"{
-            ec{"Saint Barthélemy"}
+            ec{"St. Barthélemy"}
         }
         "Antarctica:DumontDUrville"{
             ec{"Dumont d’Urville"}
@@ -34,10 +34,13 @@ en{
             ec{"Unknown City"}
         }
         "Europe:Dublin"{
-            ld{"Irish Summer Time"}
+            ld{"Irish Standard Time"}
         }
         "Europe:London"{
             ld{"British Summer Time"}
+        }
+        "Europe:Uzhgorod"{
+            ec{"Uzhhorod"}
         }
         "Indian:Reunion"{
             ec{"Réunion"}
@@ -69,11 +72,6 @@ en{
             lg{"West Africa Time"}
             ls{"West Africa Standard Time"}
         }
-        "meta:Aktyubinsk"{
-            ld{"Aktyubinsk Summer Time"}
-            lg{"Aktyubinsk Time"}
-            ls{"Aktyubinsk Standard Time"}
-        }
         "meta:Alaska"{
             ld{"Alaska Daylight Time"}
             lg{"Alaska Time"}
@@ -81,11 +79,6 @@ en{
             sd{"AKDT"}
             sg{"AKT"}
             ss{"AKST"}
-        }
-        "meta:Alaska_Hawaii"{
-            ld{"Alaska-Hawaii Daylight Time"}
-            lg{"Alaska-Hawaii Time"}
-            ls{"Alaska-Hawaii Standard Time"}
         }
         "meta:Almaty"{
             ld{"Almaty Summer Time"}
@@ -134,6 +127,11 @@ en{
             lg{"Anadyr Time"}
             ls{"Anadyr Standard Time"}
         }
+        "meta:Apia"{
+            ld{"Apia Daylight Time"}
+            lg{"Apia Time"}
+            ls{"Apia Standard Time"}
+        }
         "meta:Aqtau"{
             ld{"Aqtau Summer Time"}
             lg{"Aqtau Time"}
@@ -163,11 +161,6 @@ en{
             ld{"Armenia Summer Time"}
             lg{"Armenia Time"}
             ls{"Armenia Standard Time"}
-        }
-        "meta:Ashkhabad"{
-            ld{"Ashkhabad Summer Time"}
-            lg{"Ashkhabad Time"}
-            ls{"Ashkhabad Standard Time"}
         }
         "meta:Atlantic"{
             ld{"Atlantic Daylight Time"}
@@ -207,31 +200,16 @@ en{
             lg{"Azores Time"}
             ls{"Azores Standard Time"}
         }
-        "meta:Baku"{
-            ld{"Baku Summer Time"}
-            lg{"Baku Time"}
-            ls{"Baku Standard Time"}
-        }
         "meta:Bangladesh"{
             ld{"Bangladesh Summer Time"}
             lg{"Bangladesh Time"}
             ls{"Bangladesh Standard Time"}
-        }
-        "meta:Bering"{
-            ld{"Bering Daylight Time"}
-            lg{"Bering Time"}
-            ls{"Bering Standard Time"}
         }
         "meta:Bhutan"{
             ls{"Bhutan Time"}
         }
         "meta:Bolivia"{
             ls{"Bolivia Time"}
-        }
-        "meta:Borneo"{
-            ld{"Borneo Summer Time"}
-            lg{"Borneo Time"}
-            ls{"Borneo Standard Time"}
         }
         "meta:Brasilia"{
             ld{"Brasilia Summer Time"}
@@ -251,9 +229,6 @@ en{
         }
         "meta:Chamorro"{
             ls{"Chamorro Standard Time"}
-        }
-        "meta:Changbai"{
-            ls{"Changbai Time"}
         }
         "meta:Chatham"{
             ld{"Chatham Daylight Time"}
@@ -296,22 +271,11 @@ en{
             lg{"Cuba Time"}
             ls{"Cuba Standard Time"}
         }
-        "meta:Dacca"{
-            ls{"Dacca Time"}
-        }
         "meta:Davis"{
             ls{"Davis Time"}
         }
         "meta:DumontDUrville"{
             ls{"Dumont-d’Urville Time"}
-        }
-        "meta:Dushanbe"{
-            ld{"Dushanbe Summer Time"}
-            lg{"Dushanbe Time"}
-            ls{"Dushanbe Standard Time"}
-        }
-        "meta:Dutch_Guiana"{
-            ls{"Dutch Guiana Time"}
         }
         "meta:East_Timor"{
             ls{"East Timor Time"}
@@ -334,6 +298,9 @@ en{
             lg{"Eastern European Time"}
             ls{"Eastern European Standard Time"}
         }
+        "meta:Europe_Further_Eastern"{
+            ls{"Further-eastern European Time"}
+        }
         "meta:Europe_Western"{
             ld{"Western European Summer Time"}
             lg{"Western European Time"}
@@ -353,12 +320,7 @@ en{
             ls{"French Guiana Time"}
         }
         "meta:French_Southern"{
-            ls{"French Southern and Antarctic Time"}
-        }
-        "meta:Frunze"{
-            ld{"Frunze Summer Time"}
-            lg{"Frunze Time"}
-            ls{"Frunze Standard Time"}
+            ls{"French Southern & Antarctic Time"}
         }
         "meta:GMT"{
             ls{"Greenwich Mean Time"}
@@ -377,11 +339,6 @@ en{
         }
         "meta:Gilbert_Islands"{
             ls{"Gilbert Islands Time"}
-        }
-        "meta:Greenland_Central"{
-            ld{"Central Greenland Summer Time"}
-            lg{"Central Greenland Time"}
-            ls{"Central Greenland Standard Time"}
         }
         "meta:Greenland_Eastern"{
             ld{"East Greenland Summer Time"}
@@ -463,22 +420,11 @@ en{
             lg{"Petropavlovsk-Kamchatski Time"}
             ls{"Petropavlovsk-Kamchatski Standard Time"}
         }
-        "meta:Karachi"{
-            ls{"Karachi Time"}
-        }
-        "meta:Kashgar"{
-            ls{"Kashgar Time"}
-        }
         "meta:Kazakhstan_Eastern"{
             ls{"East Kazakhstan Time"}
         }
         "meta:Kazakhstan_Western"{
             ls{"West Kazakhstan Time"}
-        }
-        "meta:Kizilorda"{
-            ld{"Kizilorda Summer Time"}
-            lg{"Kizilorda Time"}
-            ls{"Kizilorda Standard Time"}
         }
         "meta:Korea"{
             ld{"Korean Daylight Time"}
@@ -493,14 +439,6 @@ en{
             lg{"Krasnoyarsk Time"}
             ls{"Krasnoyarsk Standard Time"}
         }
-        "meta:Kuybyshev"{
-            ld{"Kuybyshev Summer Time"}
-            lg{"Kuybyshev Time"}
-            ls{"Kuybyshev Standard Time"}
-        }
-        "meta:Kwajalein"{
-            ls{"Kwajalein Time"}
-        }
         "meta:Kyrgystan"{
             ls{"Kyrgystan Time"}
         }
@@ -509,9 +447,6 @@ en{
         }
         "meta:Line_Islands"{
             ls{"Line Islands Time"}
-        }
-        "meta:Long_Shu"{
-            ls{"Long-Shu Time"}
         }
         "meta:Lord_Howe"{
             ld{"Lord Howe Daylight Time"}
@@ -530,9 +465,6 @@ en{
             ld{"Magadan Summer Time"}
             lg{"Magadan Time"}
             ls{"Magadan Standard Time"}
-        }
-        "meta:Malaya"{
-            ls{"Malaya Time"}
         }
         "meta:Malaysia"{
             ls{"Malaysia Time"}
@@ -553,6 +485,16 @@ en{
         }
         "meta:Mawson"{
             ls{"Mawson Time"}
+        }
+        "meta:Mexico_Northwest"{
+            ld{"Northwest Mexico Daylight Time"}
+            lg{"Northwest Mexico Time"}
+            ls{"Northwest Mexico Standard Time"}
+        }
+        "meta:Mexico_Pacific"{
+            ld{"Mexican Pacific Daylight Time"}
+            lg{"Mexican Pacific Time"}
+            ls{"Mexican Pacific Standard Time"}
         }
         "meta:Mongolia"{
             ld{"Ulan Bator Summer Time"}
@@ -642,9 +584,9 @@ en{
             ls{"Phoenix Islands Time"}
         }
         "meta:Pierre_Miquelon"{
-            ld{"Saint Pierre and Miquelon Daylight Time"}
-            lg{"Saint Pierre and Miquelon Time"}
-            ls{"Saint Pierre and Miquelon Standard Time"}
+            ld{"St. Pierre & Miquelon Daylight Time"}
+            lg{"St. Pierre & Miquelon Time"}
+            ls{"St. Pierre & Miquelon Standard Time"}
         }
         "meta:Pitcairn"{
             ls{"Pitcairn Time"}
@@ -673,21 +615,13 @@ en{
             lg{"Samara Time"}
             ls{"Samara Standard Time"}
         }
-        "meta:Samarkand"{
-            ld{"Samarkand Summer Time"}
-            lg{"Samarkand Time"}
-            ls{"Samarkand Standard Time"}
-        }
         "meta:Samoa"{
+            ld{"Samoa Daylight Time"}
+            lg{"Samoa Time"}
             ls{"Samoa Standard Time"}
         }
         "meta:Seychelles"{
             ls{"Seychelles Time"}
-        }
-        "meta:Shevchenko"{
-            ld{"Shevchenko Summer Time"}
-            lg{"Shevchenko Time"}
-            ls{"Shevchenko Standard Time"}
         }
         "meta:Singapore"{
             ls{"Singapore Standard Time"}
@@ -700,11 +634,6 @@ en{
         }
         "meta:Suriname"{
             ls{"Suriname Time"}
-        }
-        "meta:Sverdlovsk"{
-            ld{"Sverdlovsk Summer Time"}
-            lg{"Sverdlovsk Time"}
-            ls{"Sverdlovsk Standard Time"}
         }
         "meta:Syowa"{
             ls{"Syowa Time"}
@@ -720,16 +649,6 @@ en{
         "meta:Tajikistan"{
             ls{"Tajikistan Time"}
         }
-        "meta:Tashkent"{
-            ld{"Tashkent Summer Time"}
-            lg{"Tashkent Time"}
-            ls{"Tashkent Standard Time"}
-        }
-        "meta:Tbilisi"{
-            ld{"Tbilisi Summer Time"}
-            lg{"Tbilisi Time"}
-            ls{"Tbilisi Standard Time"}
-        }
         "meta:Tokelau"{
             ls{"Tokelau Time"}
         }
@@ -741,11 +660,6 @@ en{
         "meta:Truk"{
             ls{"Chuuk Time"}
         }
-        "meta:Turkey"{
-            ld{"Turkey Summer Time"}
-            lg{"Turkey Time"}
-            ls{"Turkey Standard Time"}
-        }
         "meta:Turkmenistan"{
             ld{"Turkmenistan Summer Time"}
             lg{"Turkmenistan Time"}
@@ -754,18 +668,10 @@ en{
         "meta:Tuvalu"{
             ls{"Tuvalu Time"}
         }
-        "meta:Uralsk"{
-            ld{"Uralʹsk Summer Time"}
-            lg{"Uralʹsk Time"}
-            ls{"Uralʹsk Standard Time"}
-        }
         "meta:Uruguay"{
             ld{"Uruguay Summer Time"}
             lg{"Uruguay Time"}
             ls{"Uruguay Standard Time"}
-        }
-        "meta:Urumqi"{
-            ls{"Urumqi Time"}
         }
         "meta:Uzbekistan"{
             ld{"Uzbekistan Summer Time"}
@@ -797,7 +703,7 @@ en{
             ls{"Wake Island Time"}
         }
         "meta:Wallis"{
-            ls{"Wallis and Futuna Time"}
+            ls{"Wallis & Futuna Time"}
         }
         "meta:Yakutsk"{
             ld{"Yakutsk Summer Time"}
@@ -809,20 +715,11 @@ en{
             lg{"Yekaterinburg Time"}
             ls{"Yekaterinburg Standard Time"}
         }
-        "meta:Yerevan"{
-            ld{"Yerevan Summer Time"}
-            lg{"Yerevan Time"}
-            ls{"Yerevan Standard Time"}
-        }
-        "meta:Yukon"{
-            ld{"Yukon Daylight Time"}
-            lg{"Yukon Time"}
-            ls{"Yukon Standard Time"}
-        }
         fallbackFormat{"{1} ({0})"}
-        fallbackRegionFormat{"{1} Time ({0})"}
         gmtFormat{"GMT{0}"}
         hourFormat{"+HH:mm;-HH:mm"}
         regionFormat{"{0} Time"}
+        regionFormatDaylight{"{0} Daylight Time"}
+        regionFormatStandard{"{0} Standard Time"}
     }
 }

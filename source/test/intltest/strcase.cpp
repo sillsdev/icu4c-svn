@@ -1,7 +1,7 @@
 /*
 *******************************************************************************
 *
-*   Copyright (C) 2002-2012, International Business Machines
+*   Copyright (C) 2002-2014, International Business Machines
 *   Corporation and others.  All Rights Reserved.
 *
 *******************************************************************************
@@ -26,8 +26,7 @@
 #include "ucase.h"
 #include "ustrtest.h"
 #include "unicode/tstdtmod.h"
-
-#define LENGTHOF(array) (int32_t)(sizeof(array)/sizeof((array)[0]))
+#include "cmemory.h"
 
 StringCaseTest::~StringCaseTest() {}
 
@@ -397,8 +396,7 @@ StringCaseTest::TestCasingImpl(const UnicodeString &input,
 #if !UCONFIG_NO_BREAK_ITERATION
     if(iter!=NULL) {
         // Clone the break iterator so that the UCaseMap can safely adopt it.
-        int32_t size=1;  // Not 0 because that only gives preflighting.
-        UBreakIterator *clone=ubrk_safeClone((UBreakIterator *)iter, NULL, &size, errorCode);
+        UBreakIterator *clone=ubrk_safeClone((UBreakIterator *)iter, NULL, NULL, errorCode);
         ucasemap_setBreakIterator(csm.getAlias(), clone, errorCode);
     }
 #endif
@@ -492,7 +490,7 @@ StringCaseTest::TestCasing() {
                         // or even just { 0 } as boundaries.
                         static const UChar rules[] = { 0x2e, 0x2a, 0x3b };  // ".*;"
                         UParseError parseError;
-                        iter.adoptInstead(ubrk_openRules(rules, LENGTHOF(rules), NULL, 0, &parseError, &status));
+                        iter.adoptInstead(ubrk_openRules(rules, UPRV_LENGTHOF(rules), NULL, 0, &parseError, &status));
                     }
                 }
 #endif

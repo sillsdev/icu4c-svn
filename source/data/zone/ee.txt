@@ -1,16 +1,16 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/ee.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/ee.xml
+ * ICU <specials> source: <path>/common/main/ee.xml
  */
 ee{
-    Version{"2.0.78.39"}
+    Version{"2.1.8.9"}
     zoneStrings{
         "Africa:Abidjan"{
             ec{"Abidzan nutomegaƒoƒome"}
@@ -429,9 +429,6 @@ ee{
         "America:Montevideo"{
             ec{"Montevideo nutomegaƒoƒome"}
         }
-        "America:Montreal"{
-            ec{"Montreal nutomegaƒoƒome"}
-        }
         "America:Montserrat"{
             ec{"Montserrat nutomegaƒoƒome"}
         }
@@ -513,9 +510,6 @@ ee{
         "America:Scoresbysund"{
             ec{"Skɔsbisund nutomegaƒoƒome"}
         }
-        "America:Shiprock"{
-            ec{"Tsiprɔk nutomegaƒoƒome"}
-        }
         "America:St_Barthelemy"{
             ec{"St. Barthelemy nutomegaƒoƒome"}
         }
@@ -577,7 +571,7 @@ ee{
             ec{"Davis nutomegaƒoƒome"}
         }
         "Antarctica:DumontDUrville"{
-            ec{"Dumont d'Urville nutomegaƒoƒome"}
+            ec{"Dumont d’Urville nutomegaƒoƒome"}
         }
         "Antarctica:Mawson"{
             ec{"Mawson nutomegaƒoƒome"}
@@ -590,9 +584,6 @@ ee{
         }
         "Antarctica:Rothera"{
             ec{"Rothera nutomegaƒoƒome"}
-        }
-        "Antarctica:South_Pole"{
-            ec{"South Pole nutomegaƒoƒome"}
         }
         "Antarctica:Syowa"{
             ec{"Syowa nutomegaƒoƒome"}
@@ -1224,7 +1215,9 @@ ee{
             lg{"Atlantic gaƒoƒome"}
             ls{"Atlantic gaƒoƒoɖoanyime"}
         }
-        fallbackRegionFormat{"{1} gaƒoƒo ({0})"}
+        "meta:Suriname"{
+            ls{"Suriname gaƒoƒome"}
+        }
         regionFormat{"{0} gaƒoƒo"}
     }
 }

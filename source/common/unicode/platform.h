@@ -1,7 +1,7 @@
 /*
 ******************************************************************************
 *
-*   Copyright (C) 1997-2012, International Business Machines
+*   Copyright (C) 1997-2014, International Business Machines
 *   Corporation and others.  All Rights Reserved.
 *
 ******************************************************************************
@@ -123,8 +123,6 @@
 #define U_PF_LINUX 4000
 /** Android is based on Linux. @internal */
 #define U_PF_ANDROID 4050
-/** "Classic" Mac OS (1984-2001) @internal */
-#define U_PF_CLASSIC_MACOS 8000
 /** z/OS is the successor to OS/390 which was the successor to MVS. @internal */
 #define U_PF_OS390 9000
 /** "IBM i" is the current name of what used to be i5/OS and earlier OS/400. @internal */
@@ -144,6 +142,13 @@
 #   include <android/api-level.h>
 #elif defined(linux) || defined(__linux__) || defined(__linux)
 #   define U_PLATFORM U_PF_LINUX
+#elif defined(__APPLE__) && defined(__MACH__)
+#   include <TargetConditionals.h>
+#   if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE  /* variant of TARGET_OS_MAC */
+#       define U_PLATFORM U_PF_IPHONE
+#   else
+#       define U_PLATFORM U_PF_DARWIN
+#   endif
 #elif defined(BSD) || defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__MirBSD__)
 #   define U_PLATFORM U_PF_BSD
 #elif defined(sun) || defined(__sun)
@@ -162,15 +167,6 @@
 #   define U_PLATFORM U_PF_HPUX
 #elif defined(sgi) || defined(__sgi)
 #   define U_PLATFORM U_PF_IRIX
-#elif defined(__APPLE__) && defined(__MACH__)
-#   include <TargetConditionals.h>
-#   if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE  /* variant of TARGET_OS_MAC */
-#       define U_PLATFORM U_PF_IPHONE
-#   else
-#       define U_PLATFORM U_PF_DARWIN
-#   endif
-#elif defined(macintosh)
-#   define U_PLATFORM U_PF_CLASSIC_MACOS
 #elif defined(__QNX__) || defined(__QNXNTO__)
 #   define U_PLATFORM U_PF_QNX
 #elif defined(__TOS_MVS__)
@@ -230,7 +226,7 @@
  */
 #ifdef U_PLATFORM_IMPLEMENTS_POSIX
     /* Use the predefined value. */
-#elif U_PLATFORM_USES_ONLY_WIN32_API || U_PLATFORM == U_PF_CLASSIC_MACOS
+#elif U_PLATFORM_USES_ONLY_WIN32_API
 #   define U_PLATFORM_IMPLEMENTS_POSIX 0
 #else
 #   define U_PLATFORM_IMPLEMENTS_POSIX 1
@@ -272,7 +268,7 @@
 #ifdef U_HAVE_STDINT_H
     /* Use the predefined value. */
 #elif U_PLATFORM_USES_ONLY_WIN32_API
-#   if defined(__BORLANDC__) || (defined(_MSC_VER) && _MSC_VER>=1600)
+#   if defined(__BORLANDC__) || U_PLATFORM == U_PF_MINGW || (defined(_MSC_VER) && _MSC_VER>=1600)
         /* Windows Visual Studio 9 and below do not have stdint.h & inttypes.h, but VS 2010 adds them. */
 #       define U_HAVE_STDINT_H 1
 #   else
@@ -339,8 +335,6 @@
  */
 #ifdef U_HAVE_STD_STRING
     /* Use the predefined value. */
-#elif U_PLATFORM == U_PF_ANDROID
-#   define U_HAVE_STD_STRING 0
 #else
 #   define U_HAVE_STD_STRING 1
 #endif
@@ -581,7 +575,7 @@
  */
 #ifdef U_SIZEOF_WCHAR_T
     /* Use the predefined value. */
-#elif (U_PLATFORM == U_PF_ANDROID && __ANDROID_API__ < 9) || U_PLATFORM == U_PF_CLASSIC_MACOS
+#elif (U_PLATFORM == U_PF_ANDROID && __ANDROID_API__ < 9)
     /*
      * Classic Mac OS and Mac OS X before 10.3 (Panther) did not support wchar_t or wstring.
      * Newer Mac OS X has size 4.

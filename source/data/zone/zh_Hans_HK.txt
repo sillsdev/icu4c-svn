@@ -1,19 +1,19 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/zh_Hans_HK.xml
 // *
 // ***************************************************************************
 zh_Hans_HK{
-    Version{"2.0.78.47"}
+    Version{"2.1.8.19"}
     zoneStrings{
         "America:Danmarkshavn"{
             ec{"丹马克沙伏"}
         }
-        "America:Grand_Turk"{
-            ec{"大特克"}
+        "America:Pangnirtung"{
+            ec{"旁尼唐"}
         }
         "America:Santo_Domingo"{
             ec{"圣多明戈"}
@@ -30,9 +30,6 @@ zh_Hans_HK{
         "Europe:Zaporozhye"{
             ec{"扎波罗什"}
         }
-        "Indian:Antananarivo"{
-            ec{"安塔那那利佛"}
-        }
         "meta:Cocos"{
             ls{"科科斯岛时间"}
         }
@@ -44,11 +41,6 @@ zh_Hans_HK{
         }
         "meta:Gilbert_Islands"{
             ls{"吉尔柏特群岛时间"}
-        }
-        "meta:Kizilorda"{
-            ld{"克孜勒奥尔达夏令时间"}
-            lg{"克孜勒奥尔达时间"}
-            ls{"克孜勒奥尔达标准时间"}
         }
         "meta:Phoenix_Islands"{
             ls{"凤凰岛时间"}
@@ -70,5 +62,6 @@ zh_Hans_HK{
         "meta:Tuvalu"{
             ls{"吐瓦鲁时间"}
         }
+        gmtFormat{"GMT {0}"}
     }
 }

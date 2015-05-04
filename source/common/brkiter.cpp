@@ -1,10 +1,10 @@
 /*
 *******************************************************************************
-* Copyright (C) 1997-2011, International Business Machines Corporation and
+* Copyright (C) 1997-2014, International Business Machines Corporation and
 * others. All Rights Reserved.
 *******************************************************************************
 *
-* File TXTBDRY.CPP
+* File brkiter.cpp
 *
 * Modification History:
 *
@@ -35,6 +35,7 @@
 #include "uresimp.h"
 #include "uassert.h"
 #include "ubrkimpl.h"
+#include "charstr.h"
 
 // *****************************************************************************
 // class BreakIterator
@@ -52,7 +53,7 @@ BreakIterator::buildInstance(const Locale& loc, const char *type, int32_t kind, 
 {
     char fnbuff[256];
     char ext[4]={'\0'};
-    char actualLocale[ULOC_FULLNAME_CAPACITY];
+    CharString actualLocale;
     int32_t size;
     const UChar* brkfname = NULL;
     UResourceBundle brkRulesStack;
@@ -93,9 +94,7 @@ BreakIterator::buildInstance(const Locale& loc, const char *type, int32_t kind, 
 
         // Use the string if we found it
         if (U_SUCCESS(status) && brkfname) {
-            uprv_strncpy(actualLocale,
-                ures_getLocaleInternal(brkName, &status),
-                sizeof(actualLocale)/sizeof(actualLocale[0]));
+            actualLocale.append(ures_getLocaleInternal(brkName, &status), -1, status);
 
             UChar* extStart=u_strchr(brkfname, 0x002e);
             int len = 0;
@@ -123,7 +122,8 @@ BreakIterator::buildInstance(const Locale& loc, const char *type, int32_t kind, 
     // If there is a result, set the valid locale and actual locale, and the kind
     if (U_SUCCESS(status) && result != NULL) {
         U_LOCALE_BASED(locBased, *(BreakIterator*)result);
-        locBased.setLocaleIDs(ures_getLocaleByType(b, ULOC_VALID_LOCALE, &status), actualLocale);
+        locBased.setLocaleIDs(ures_getLocaleByType(b, ULOC_VALID_LOCALE, &status), 
+                              actualLocale.data());
         result->setBreakType(kind);
     }
 
@@ -204,7 +204,6 @@ BreakIterator::getAvailableLocales(int32_t& count)
 
 BreakIterator::BreakIterator()
 {
-    fBufferClone = FALSE;
     *validLocale = *actualLocale = 0;
 }
 
@@ -266,11 +265,13 @@ ICUBreakIteratorService::~ICUBreakIteratorService() {}
 
 // -------------------------------------
 
+// defined in ucln_cmn.h
 U_NAMESPACE_END
 
-// defined in ucln_cmn.h
-
+static icu::UInitOnce gInitOnce;
 static icu::ICULocaleService* gService = NULL;
+
+
 
 /**
  * Release all static memory held by breakiterator.
@@ -282,40 +283,33 @@ static UBool U_CALLCONV breakiterator_cleanup(void) {
         delete gService;
         gService = NULL;
     }
+    gInitOnce.reset();
 #endif
     return TRUE;
 }
 U_CDECL_END
 U_NAMESPACE_BEGIN
 
+static void U_CALLCONV 
+initService(void) {
+    gService = new ICUBreakIteratorService();
+    ucln_common_registerCleanup(UCLN_COMMON_BREAKITERATOR, breakiterator_cleanup);
+}
+
 static ICULocaleService*
 getService(void)
 {
-    UBool needsInit;
-    UMTX_CHECK(NULL, (UBool)(gService == NULL), needsInit);
-
-    if (needsInit) {
-        ICULocaleService  *tService = new ICUBreakIteratorService();
-        umtx_lock(NULL);
-        if (gService == NULL) {
-            gService = tService;
-            tService = NULL;
-            ucln_common_registerCleanup(UCLN_COMMON_BREAKITERATOR, breakiterator_cleanup);
-        }
-        umtx_unlock(NULL);
-        delete tService;
-    }
+    umtx_initOnce(gInitOnce, &initService);
     return gService;
 }
+
 
 // -------------------------------------
 
 static inline UBool
 hasService(void)
 {
-    UBool retVal;
-    UMTX_CHECK(NULL, gService != NULL, retVal);
-    return retVal;
+    return !gInitOnce.isReset() && getService() != NULL;
 }
 
 // -------------------------------------
@@ -442,6 +436,34 @@ const char *
 BreakIterator::getLocaleID(ULocDataLocaleType type, UErrorCode& status) const {
     U_LOCALE_BASED(locBased, *this);
     return locBased.getLocaleID(type, status);
+}
+
+
+// This implementation of getRuleStatus is a do-nothing stub, here to
+// provide a default implementation for any derived BreakIterator classes that
+// do not implement it themselves.
+int32_t BreakIterator::getRuleStatus() const {
+    return 0;
+}
+
+// This implementation of getRuleStatusVec is a do-nothing stub, here to
+// provide a default implementation for any derived BreakIterator classes that
+// do not implement it themselves.
+int32_t BreakIterator::getRuleStatusVec(int32_t *fillInVec, int32_t capacity, UErrorCode &status) {
+    if (U_FAILURE(status)) {
+        return 0;
+    }
+    if (capacity < 1) {
+        status = U_BUFFER_OVERFLOW_ERROR;
+        return 1;
+    }
+    *fillInVec = 0;
+    return 1;
+}
+
+BreakIterator::BreakIterator (const Locale& valid, const Locale& actual) {
+  U_LOCALE_BASED(locBased, (*this));
+  locBased.setLocaleIDs(valid, actual);
 }
 
 U_NAMESPACE_END

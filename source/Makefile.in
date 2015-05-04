@@ -1,6 +1,6 @@
 #******************************************************************************
 #
-#   Copyright (C) 1998-2012, International Business Machines
+#   Copyright (C) 1998-2014, International Business Machines
 #   Corporation and others.  All Rights Reserved.
 #
 #******************************************************************************
@@ -29,15 +29,18 @@ subdir = .
 #AUTOCONF = @AUTOCONF@
 
 ## Optional directory setup
-@LAYOUT_TRUE@LAYOUT = layout layoutex
+@LAYOUT_TRUE@LAYOUT = layout
+@LAYOUTEX_TRUE@LAYOUTEX = layoutex
 @ICUIO_TRUE@ICUIO = io
 @EXTRAS_TRUE@EXTRA = extra
 @TESTS_TRUE@TEST = test
 @SAMPLES_TRUE@SAMPLE = samples
+@TOOLS_TRUE@TOOLS = tools
 
 ## pkgconfig setup. Always have uc and i18n. Others are optional.
 ALL_PKGCONFIG_SUFFIX=uc i18n
-@LAYOUT_TRUE@ALL_PKGCONFIG_SUFFIX+= le lx
+@LAYOUT_TRUE@ALL_PKGCONFIG_SUFFIX+= le
+@LAYOUTEX_TRUE@ALL_PKGCONFIG_SUFFIX+= lx
 @ICUIO_TRUE@ALL_PKGCONFIG_SUFFIX+= io
 
 DOXYGEN = @DOXYGEN@
@@ -52,10 +55,10 @@ ALL_PKGCONFIG_FILES=$(ALL_PKGCONFIG_SUFFIX:%=$(top_builddir)/config/icu-%.pc)
 INSTALLED_BUILT_FILES = $(top_builddir)/config/Makefile.inc $(top_builddir)/config/pkgdata.inc $(top_builddir)/config/icu-config @platform_make_fragment@ $(EXTRA_DATA:%=$(DESTDIR)$(pkglibdir)/%) $(ALL_PKGCONFIG_FILES)
 
 ## Files built (autoconfed) but not installed
-LOCAL_BUILT_FILES = icudefs.mk config/icucross.mk
+LOCAL_BUILT_FILES = icudefs.mk config/icucross.mk config/icucross.inc
 
 DOCDIRS = common i18n
-SUBDIRS =  stubdata common i18n $(LAYOUT) tools data $(ICUIO) $(EXTRA) $(SAMPLE) $(TEST)
+SUBDIRS =  stubdata common i18n $(LAYOUT) $(LAYOUTEX) $(ICUIO) $(TOOLS) data $(EXTRA) $(SAMPLE) $(TEST)
 
 SECTION = 1
 
@@ -88,6 +91,9 @@ check-recursive: all
 xcheck: all xcheck-recursive
 xperf: all xperf-recursive
 check-exhaustive: all check-exhaustive-recursive
+
+pcheck: all tests
+	@$(MAKE) -C test pcheck
 
 check-exhaustive-local: check-local
 
@@ -127,7 +133,7 @@ $(DOCZIP): doc
 endif
 
 LOCAL_SUBDIRS = $(SUBDIRS)
-CLEAN_FIRST_SUBDIRS = tools
+CLEAN_FIRST_SUBDIRS = $(TOOLS)
 
 $(LIBDIR) $(BINDIR):
 	-$(MKINSTALLDIRS) $@
@@ -158,6 +164,11 @@ ifndef VERBOSE
 	@echo "Note: rebuild with \"$(MAKE) VERBOSE=1 $(MAKECMDGOALS)\" to show all compiler parameters."
 endif
 install-local: install-icu install-manx
+
+# always installs. Used by layoutex.
+install-pkgconfig: $(ALL_PKGCONFIG_FILES)
+	@$(MKINSTALLDIRS) $(DESTDIR)$(libdir)/pkgconfig
+	$(INSTALL_DATA) $(ALL_PKGCONFIG_FILES) $(DESTDIR)$(libdir)/pkgconfig/
 
 install-icu: $(INSTALLED_BUILT_FILES)
 	@$(MKINSTALLDIRS) $(DESTDIR)$(pkgdatadir)/config
@@ -206,7 +217,7 @@ clean-local:
 
 distclean-local: clean-local
 	$(RMV) $(top_builddir)/config/Makefile.inc $(top_builddir)/config/pkgdata.inc $(top_builddir)/config/icu-config $(top_builddir)/config/icu.pc $(ALL_PKGCONFIG_FILES)
-	$(RMV) config.cache config.log config.status $(top_builddir)/config/icucross.mk autom4te.cache uconfig.h.prepend
+	$(RMV) config.cache config.log config.status $(top_builddir)/config/icucross.mk $(top_builddir)/config/icucross.inc autom4te.cache uconfig.h.prepend
 	$(RMV) Makefile config/Makefile icudefs.mk $(LIBDIR) $(BINDIR)
 	-$(RMV) dist
 
@@ -220,8 +231,8 @@ xcheck-local: $(top_builddir)/config/icu-config $(top_builddir)/config/Makefile.
 	@test "passed" = "$(shell $(MAKE) --no-print-directory -f $(top_builddir)/config/Makefile.inc SELFCHECK=1 selfcheck)" || (echo "FAIL: Makefile.inc could not run properly." ; exit 1 )
 	@echo "PASS: config selfcheck OK"
 
-#$(srcdir)/configure : $(srcdir)/configure.in $(top_srcdir)/aclocal.m4
-#	cd $(srcdir) && $(AUTOCONF)
+#$(srcdir)/configure : $(srcdir)/configure.ac $(top_srcdir)/aclocal.m4
+#	cd $(srcdir) && aclocal && $(AUTOCONF)
 
 icudefs.mk: $(srcdir)/icudefs.mk.in  $(top_builddir)/config.status
 	cd $(top_builddir) \
@@ -238,6 +249,11 @@ config/icucross.mk: $(top_builddir)/icudefs.mk  $(top_builddir)/Makefile
 	  echo "PKGDATA_INVOKE=$(LDLIBRARYPATH_ENVVAR)=$(LIBRARY_PATH_PREFIX)"'$$(cross_buildroot)/stubdata:$$(cross_buildroot)/tools/ctestfw:$$(TOOLLIBDIR):$$$$'"$(LDLIBRARYPATH_ENVVAR) " ;\
 	  echo ) >> $@
 
+config/icucross.inc: $(top_builddir)/icudefs.mk  $(top_builddir)/Makefile @platform_make_fragment@
+	@echo rebuilding $@
+	@(grep '^CURR_FULL_DIR' $(top_builddir)/icudefs.mk ; \
+	  grep '^CURR_FULL_DIR' @platform_make_fragment@ || echo ""; \
+	   ) > $@
 
 config/icu.pc: $(srcdir)/config/icu.pc.in
 	cd $(top_builddir) \
@@ -275,11 +291,22 @@ config/icu-le.pc: config/icu.pc Makefile icudefs.mk
 	@echo "Libs:" "${ICULIBS_LE}" >> $@
 	@echo $@ updated.
 
+ICULEHB_LIBS=@ICULEHB_LIBS@
+USING_HB=
+ifneq ($(ICULEHB_LIBS),)
+USING_HB=(Using HarfBuzz)
+endif
+
+
 config/icu-lx.pc: config/icu.pc Makefile icudefs.mk
 	@cat config/icu.pc > $@
-	@echo "Description: $(PACKAGE_ICU_DESCRIPTION): Paragraph Layout library" >> $@
+	@echo "Description: $(PACKAGE_ICU_DESCRIPTION): Paragraph Layout library $(USING_HB)" >> $@
 	@echo "Name: $(PACKAGE)-lx" >> $@
+ifneq ($(ICULEHB_LIBS),)
+	@echo "Requires: icu-le-hb icu-uc" >> $@
+else
 	@echo "Requires: icu-le" >> $@
+endif
 	@echo "Libs:" "${ICULIBS_LX}" >> $@
 	@echo $@ updated.
 
@@ -356,7 +383,7 @@ update-windows-makefiles: config.status
 
 # For building a source distribution.
 distcheck dist-local:
-	$(MAKE) -C . -f config/dist.mk srcdir="$(srcdir)" top_srcdir="$(top_srcdir)" $@
+	$(MAKE) -C . -f $(top_srcdir)/config/dist.mk srcdir="$(srcdir)" top_srcdir="$(top_srcdir)" $@
 
 ifeq ($(DESTDIR),)
 releaseDist:

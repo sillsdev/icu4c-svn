@@ -1,16 +1,16 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2012 International Business Machines
-// * Corporation and others.  All Rights Reserved.
+// * Copyright (C) 2014 International Business Machines
+// * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/el.xml
 // *
 // ***************************************************************************
 /**
- *  ICU <specials> source: <path>/xml/main/el.xml
+ * ICU <specials> source: <path>/common/main/el.xml
  */
 el{
-    Version{"2.0.78.32"}
+    Version{"2.1.8.9"}
     zoneStrings{
         "Africa:Abidjan"{
             ec{"Αμπιτζάν"}
@@ -86,6 +86,9 @@ el{
         }
         "Africa:Johannesburg"{
             ec{"Γιοχάνεσμπουργκ"}
+        }
+        "Africa:Juba"{
+            ec{"Γιούμπα"}
         }
         "Africa:Kampala"{
             ec{"Καμπάλα"}
@@ -172,7 +175,7 @@ el{
             ec{"Άνκορατζ"}
         }
         "America:Anguilla"{
-            ec{"Ανγκουίλλα"}
+            ec{"Ανγκουίλα"}
         }
         "America:Antigua"{
             ec{"Αντίγκουα"}
@@ -210,8 +213,11 @@ el{
         "America:Bahia"{
             ec{"Μπάχια"}
         }
+        "America:Bahia_Banderas"{
+            ec{"Μπαχία Ντε Μπαντέρας"}
+        }
         "America:Barbados"{
-            ec{"Μπαρμπέιντος"}
+            ec{"Μπαρμπάντος"}
         }
         "America:Belem"{
             ec{"Μπέλεμ"}
@@ -253,7 +259,7 @@ el{
             ec{"Καγιένε"}
         }
         "America:Cayman"{
-            ec{"Κέυμαν"}
+            ec{"Κέιμαν"}
         }
         "America:Chicago"{
             ec{"Σικάγο"}
@@ -269,6 +275,9 @@ el{
         }
         "America:Costa_Rica"{
             ec{"Κόστα Ρίκα"}
+        }
+        "America:Creston"{
+            ec{"Κρέστον"}
         }
         "America:Cuiaba"{
             ec{"Κουϊάμπα"}
@@ -289,7 +298,7 @@ el{
             ec{"Ντένβερ"}
         }
         "America:Detroit"{
-            ec{"Ντητρόιτ"}
+            ec{"Ντιτρόιτ"}
         }
         "America:Dominica"{
             ec{"Δομινίκα"}
@@ -301,7 +310,7 @@ el{
             ec{"Εϊρουνέπε"}
         }
         "America:El_Salvador"{
-            ec{"Σαλβαδόρ"}
+            ec{"Ελ Σαλβαδόρ"}
         }
         "America:Fortaleza"{
             ec{"Φορταλέζα"}
@@ -316,7 +325,7 @@ el{
             ec{"Γκους Μπέι"}
         }
         "America:Grand_Turk"{
-            ec{"Γραντ Τουρκ"}
+            ec{"Γκραντ Τουρκ"}
         }
         "America:Grenada"{
             ec{"Γρενάδα"}
@@ -364,7 +373,7 @@ el{
             ec{"Γουίναμακ, Ιντιάνα"}
         }
         "America:Indianapolis"{
-            ec{"Ινδιανάπολη"}
+            ec{"Ιντιανάπολις"}
         }
         "America:Inuvik"{
             ec{"Ινούβικ"}
@@ -384,6 +393,9 @@ el{
         "America:Kentucky:Monticello"{
             ec{"Μοντιτσέλο, Κεντάκι"}
         }
+        "America:Kralendijk"{
+            ec{"Κραλέντικ"}
+        }
         "America:La_Paz"{
             ec{"Λα Παζ"}
         }
@@ -397,7 +409,7 @@ el{
             ec{"Λούισβιλ"}
         }
         "America:Lower_Princes"{
-            ec{"[Lower Prince's Quarter]"}
+            ec{"Lower Prince’s Quarter (Άγιος Μαρτίνος Ολλανδίας)"}
         }
         "America:Maceio"{
             ec{"Μασέιο"}
@@ -414,6 +426,9 @@ el{
         "America:Martinique"{
             ec{"Μαρτινίκα"}
         }
+        "America:Matamoros"{
+            ec{"Ματαμόρος"}
+        }
         "America:Mazatlan"{
             ec{"Μαζατλάν"}
         }
@@ -425,6 +440,9 @@ el{
         }
         "America:Merida"{
             ec{"Μέριντα"}
+        }
+        "America:Metlakatla"{
+            ec{"Μετλακάτλα"}
         }
         "America:Mexico_City"{
             ec{"Πόλη του Μεξικού"}
@@ -440,9 +458,6 @@ el{
         }
         "America:Montevideo"{
             ec{"Μοντεβιδέο"}
-        }
-        "America:Montreal"{
-            ec{"Μόντρεαλ"}
         }
         "America:Montserrat"{
             ec{"Μονσεράτ"}
@@ -470,6 +485,9 @@ el{
         }
         "America:North_Dakota:New_Salem"{
             ec{"Νιου Σάλεμ, Βόρεια Ντακότα"}
+        }
+        "America:Ojinaga"{
+            ec{"Οχινάγκα"}
         }
         "America:Panama"{
             ec{"Παναμάς"}
@@ -513,6 +531,9 @@ el{
         "America:Rio_Branco"{
             ec{"Ρίο Μπράνκο"}
         }
+        "America:Santa_Isabel"{
+            ec{"Σάντα Ιζαμπέλ"}
+        }
         "America:Santarem"{
             ec{"Σανταρέμ"}
         }
@@ -528,8 +549,8 @@ el{
         "America:Scoresbysund"{
             ec{"Σκορεσμπίσουντ"}
         }
-        "America:Shiprock"{
-            ec{"Σίπροκ"}
+        "America:Sitka"{
+            ec{"Σίτκα"}
         }
         "America:St_Barthelemy"{
             ec{"Άγιος Βαρθολομαίος"}
@@ -577,7 +598,7 @@ el{
             ec{"Γουάιτχορς"}
         }
         "America:Winnipeg"{
-            ec{"Γούνιπεγκ"}
+            ec{"Γουίνιπεγκ"}
         }
         "America:Yakutat"{
             ec{"Γιακούτατ"}
@@ -594,6 +615,9 @@ el{
         "Antarctica:DumontDUrville"{
             ec{"Ντιμόντ Ντερβίλ"}
         }
+        "Antarctica:Macquarie"{
+            ec{"Μακουάρι"}
+        }
         "Antarctica:Mawson"{
             ec{"Μόουσον"}
         }
@@ -606,11 +630,11 @@ el{
         "Antarctica:Rothera"{
             ec{"Ροθέρα"}
         }
-        "Antarctica:South_Pole"{
-            ec{"Νότιος Πόλος"}
-        }
         "Antarctica:Syowa"{
             ec{"Σίοβα"}
+        }
+        "Antarctica:Troll"{
+            ec{"Τρολ"}
         }
         "Antarctica:Vostok"{
             ec{"Βόστοκ"}
@@ -693,6 +717,9 @@ el{
         "Asia:Harbin"{
             ec{"Χαρμπίν"}
         }
+        "Asia:Hebron"{
+            ec{"Χεμπρόν"}
+        }
         "Asia:Hong_Kong"{
             ec{"Χονγκ Κονγκ"}
         }
@@ -726,6 +753,9 @@ el{
         "Asia:Katmandu"{
             ec{"Κατμαντού"}
         }
+        "Asia:Khandyga"{
+            ec{"Χαντίγκα"}
+        }
         "Asia:Krasnoyarsk"{
             ec{"Κρασνογιάρσκ"}
         }
@@ -756,6 +786,9 @@ el{
         "Asia:Nicosia"{
             ec{"Λευκωσία"}
         }
+        "Asia:Novokuznetsk"{
+            ec{"Νοβοκουζνέτσκ"}
+        }
         "Asia:Novosibirsk"{
             ec{"Νοβοσιμπίρσκ"}
         }
@@ -772,7 +805,7 @@ el{
             ec{"Πόντιανακ"}
         }
         "Asia:Pyongyang"{
-            ec{"Πιονγκ Γιανγκ"}
+            ec{"Πιονγκγιάνγκ"}
         }
         "Asia:Qatar"{
             ec{"Κατάρ"}
@@ -811,7 +844,7 @@ el{
             ec{"Τασκένδη"}
         }
         "Asia:Tbilisi"{
-            ec{"Τμπιλίσι"}
+            ec{"Τιφλίδα"}
         }
         "Asia:Tehran"{
             ec{"Τεχεράνη"}
@@ -828,6 +861,9 @@ el{
         "Asia:Urumqi"{
             ec{"Ουρουμκί"}
         }
+        "Asia:Ust-Nera"{
+            ec{"Ουστ-Νερά"}
+        }
         "Asia:Vientiane"{
             ec{"Βιεντιάνε"}
         }
@@ -838,7 +874,7 @@ el{
             ec{"Γιάκουτσκ"}
         }
         "Asia:Yekaterinburg"{
-            ec{"Αικατερινούπολη"}
+            ec{"Αικατερίνμπουργκ"}
         }
         "Asia:Yerevan"{
             ec{"Γερεβάν"}
@@ -877,7 +913,7 @@ el{
             ec{"Αδελαΐδα"}
         }
         "Australia:Brisbane"{
-            ec{"Μπρίσμπεϊν"}
+            ec{"Μπρισμπέιν"}
         }
         "Australia:Broken_Hill"{
             ec{"Μπρόκεν Χιλ"}
@@ -909,51 +945,6 @@ el{
         "Australia:Sydney"{
             ec{"Σίδνεϊ"}
         }
-        "Etc:GMT"{
-            ec{"[GMT]"}
-        }
-        "Etc:GMT-1"{
-            ec{"[GMT-1]"}
-        }
-        "Etc:GMT-10"{
-            ec{"[GMT-10]"}
-        }
-        "Etc:GMT-11"{
-            ec{"[GMT-11]"}
-        }
-        "Etc:GMT-12"{
-            ec{"[GMT-12]"}
-        }
-        "Etc:GMT-13"{
-            ec{"[GMT-13]"}
-        }
-        "Etc:GMT-14"{
-            ec{"[GMT-14]"}
-        }
-        "Etc:GMT-2"{
-            ec{"[GMT-2]"}
-        }
-        "Etc:GMT-3"{
-            ec{"[GMT-3]"}
-        }
-        "Etc:GMT-4"{
-            ec{"[GMT-4]"}
-        }
-        "Etc:GMT-5"{
-            ec{"[GMT-5]"}
-        }
-        "Etc:GMT-6"{
-            ec{"[GMT-6]"}
-        }
-        "Etc:GMT-7"{
-            ec{"[GMT-7]"}
-        }
-        "Etc:GMT-8"{
-            ec{"[GMT-8]"}
-        }
-        "Etc:GMT-9"{
-            ec{"[GMT-9]"}
-        }
         "Etc:Unknown"{
             ec{"Άγνωστη πόλη"}
         }
@@ -984,8 +975,11 @@ el{
         "Europe:Budapest"{
             ec{"Βουδαπέστη"}
         }
+        "Europe:Busingen"{
+            ec{"Μπίσινγκεν"}
+        }
         "Europe:Chisinau"{
-            ec{"Τσισινάου"}
+            ec{"Κισινάου"}
         }
         "Europe:Copenhagen"{
             ec{"Κοπεγχάγη"}
@@ -1013,13 +1007,13 @@ el{
             ec{"Τζέρσεϊ"}
         }
         "Europe:Kaliningrad"{
-            ec{"Καλλίπολη"}
+            ec{"Καλίνινγκραντ"}
         }
         "Europe:Kiev"{
             ec{"Κίεβο"}
         }
         "Europe:Lisbon"{
-            ec{"Λισσαβώνα"}
+            ec{"Λισαβόνα"}
         }
         "Europe:Ljubljana"{
             ec{"Λιουμπλιάνα"}
@@ -1077,7 +1071,7 @@ el{
             ec{"Σαράγεβο"}
         }
         "Europe:Simferopol"{
-            ec{"Συμφερούπολη"}
+            ec{"Συμφερόπολη"}
         }
         "Europe:Skopje"{
             ec{"Σκόπια"}
@@ -1281,17 +1275,12 @@ el{
             ls{"Ώρα Ανατολικής Αφρικής"}
         }
         "meta:Africa_Southern"{
-            ls{"Ώρα Νότιας Αφρικής"}
+            ls{"Χειμερινή ώρα Νότιας Αφρικής"}
         }
         "meta:Africa_Western"{
             ld{"Θερινή ώρα Δυτικής Αφρικής"}
             lg{"Ώρα Δυτικής Αφρικής"}
             ls{"Χειμερινή ώρα Δυτικής Αφρικής"}
-        }
-        "meta:Aktyubinsk"{
-            ld{"Θερινή ώρα Ακτιουμπίνσκ"}
-            lg{"Ώρα Ακτιουμπίνσκ"}
-            ls{"Χειμερινή ώρα Ακτιουμπίνσκ"}
         }
         "meta:Alaska"{
             ld{"Θερινή ώρα Αλάσκας"}
@@ -1304,29 +1293,34 @@ el{
             ls{"Χειμερινή ώρα Αμαζονίου"}
         }
         "meta:America_Central"{
-            ld{"Κεντρική θερινή ώρα"}
-            lg{"Κεντρική ώρα"}
-            ls{"Κεντρική χειμερινή ώρα"}
+            ld{"Κεντρική θερινή ώρα Βόρειας Αμερικής"}
+            lg{"Κεντρική ώρα Βόρειας Αμερικής"}
+            ls{"Κεντρική χειμερινή ώρα Βόρειας Αμερικής"}
         }
         "meta:America_Eastern"{
-            ld{"Ανατολική θερινή ώρα"}
-            lg{"Ανατολική ώρα"}
-            ls{"Ανατολική χειμερινή ώρα"}
+            ld{"Ανατολική θερινή ώρα Βόρειας Αμερικής"}
+            lg{"Ανατολική ώρα Βόρειας Αμερικής"}
+            ls{"Ανατολική χειμερινή ώρα Βόρειας Αμερικής"}
         }
         "meta:America_Mountain"{
-            ld{"Ορεινή θερινή ώρα"}
-            lg{"Ορεινή ώρα"}
-            ls{"Ορεινή χειμερινή ώρα"}
+            ld{"Ορεινή θερινή ώρα Βόρειας Αμερικής"}
+            lg{"Ορεινή ώρα Βόρειας Αμερικής"}
+            ls{"Ορεινή χειμερινή ώρα Βόρειας Αμερικής"}
         }
         "meta:America_Pacific"{
-            ld{"Θερινή ώρα Ειρηνικού"}
-            lg{"Ώρα Ειρηνικού"}
-            ls{"Χειμερινή ώρα Ειρηνικού"}
+            ld{"Θερινή ώρα Βόρειας Αμερικής"}
+            lg{"Ώρα Βόρειας Αμερικής"}
+            ls{"Χειμερινή ώρα Βόρειας Αμερικής"}
         }
         "meta:Anadyr"{
             ld{"Θερινή ώρα Αναντίρ"}
             lg{"Ώρα Αναντίρ"}
             ls{"Χειμερινή ώρα Αναντίρ"}
+        }
+        "meta:Apia"{
+            ld{"Θερινή ώρα Απία"}
+            lg{"Ώρα Απία"}
+            ls{"Χειμερινή ώρα Απία"}
         }
         "meta:Arabian"{
             ld{"Αραβική θερινή ώρα"}
@@ -1382,11 +1376,6 @@ el{
             ld{"Θερινή ώρα Αζορών"}
             lg{"Ώρα Αζορών"}
             ls{"Χειμερινή ώρα Αζορών"}
-        }
-        "meta:Baku"{
-            ld{"Θερινή ώρα Μπακού"}
-            lg{"Ώρα Μπακού"}
-            ls{"Χειμερινή ώρα Μπακού"}
         }
         "meta:Bangladesh"{
             ld{"Θερινή ώρα Μπανγκλαντές"}
@@ -1489,6 +1478,9 @@ el{
             sg{"EET"}
             ss{"EET"}
         }
+        "meta:Europe_Further_Eastern"{
+            ls{"Ώρα περαιτέρω Ανατολικής Ευρώπης"}
+        }
         "meta:Europe_Western"{
             ld{"Θερινή ώρα Δυτικής Ευρώπης"}
             lg{"Ώρα Δυτικής Ευρώπης"}
@@ -1498,9 +1490,9 @@ el{
             ss{"WET"}
         }
         "meta:Falkland"{
-            ld{"Θερινή ώρα Νησιών Φόλκλαντ"}
-            lg{"Ώρα Νησιών Φόλκλαντ"}
-            ls{"Χειμερινή ώρα Νησιών Φόλκλαντ"}
+            ld{"Θερινή ώρα Νησιών Φώκλαντ"}
+            lg{"Ώρα Νησιών Φώκλαντ"}
+            ls{"Χειμερινή ώρα Νησιών Φώκλαντ"}
         }
         "meta:Fiji"{
             ld{"Θερινή ώρα Φίτζι"}
@@ -1611,7 +1603,7 @@ el{
             ls{"Ώρα Ανατολικού Καζακστάν"}
         }
         "meta:Kazakhstan_Western"{
-            ls{"Ώρα δυτικού Καζακστάν"}
+            ls{"Ώρα Δυτικού Καζακστάν"}
         }
         "meta:Korea"{
             ld{"Θερινή ώρα Κορέας"}
@@ -1625,9 +1617,6 @@ el{
             ld{"Θερινή ώρα Κρασνόγιαρσκ"}
             lg{"Ώρα Κρασνόγιαρσκ"}
             ls{"Χειμερινή ώρα Κρασνόγιαρσκ"}
-        }
-        "meta:Kwajalein"{
-            ls{"Ώρα Κουαχαλέιν"}
         }
         "meta:Kyrgystan"{
             ls{"Ώρα Κιργιστάν"}
@@ -1649,7 +1638,7 @@ el{
             ls{"Ώρα Νησιού Μακουάρι"}
         }
         "meta:Magadan"{
-            ld{"Θερινή ώρα Μαγκαντάν"}
+            ld{"Θερινή ώρα Μάγκανταν"}
             lg{"Ώρα Μάγκανταν"}
             ls{"Χειμερινή ώρα Μάγκανταν"}
         }
@@ -1672,6 +1661,16 @@ el{
         }
         "meta:Mawson"{
             ls{"Ώρα Μόσον"}
+        }
+        "meta:Mexico_Northwest"{
+            ld{"Θερινή ώρα Βορειοδυτικού Μεξικού"}
+            lg{"Ώρα Βορειοδυτικού Μεξικού"}
+            ls{"Χειμερινή ώρα Βορειοδυτικού Μεξικού"}
+        }
+        "meta:Mexico_Pacific"{
+            ld{"Θερινή ώρα Ειρηνικού Μεξικού"}
+            lg{"Ώρα Ειρηνικού Μεξικού"}
+            ls{"Χειμερινή ώρα Ειρηνικού Μεξικού"}
         }
         "meta:Mongolia"{
             ld{"Θερινή ώρα Ουλάν Μπατόρ"}
@@ -1788,7 +1787,9 @@ el{
             ls{"Χειμερινή ώρα Σάμαρας"}
         }
         "meta:Samoa"{
-            ls{"Ώρα Σαμόα"}
+            ld{"Θερινή ώρα Σαμόα"}
+            lg{"Ώρα Σαμόα"}
+            ls{"Χειμερινή ώρα Σαμόα"}
         }
         "meta:Seychelles"{
             ls{"Ώρα Σεϋχελλών"}
@@ -1819,11 +1820,6 @@ el{
         "meta:Tajikistan"{
             ls{"Ώρα Τατζικιστάν"}
         }
-        "meta:Tbilisi"{
-            ld{"Θερινή ώρα Τυφλίδας"}
-            lg{"Ώρα Τυφλίδας"}
-            ls{"Χειμερινή ώρα Τυφλίδας"}
-        }
         "meta:Tokelau"{
             ls{"Ώρα Τοκελάου"}
         }
@@ -1834,11 +1830,6 @@ el{
         }
         "meta:Truk"{
             ls{"Ώρα Τσουκ"}
-        }
-        "meta:Turkey"{
-            ld{"Θερινή ώρα Τουρκίας"}
-            lg{"Ώρα Τουρκίας"}
-            ls{"Χειμερινή ώρα Τουρκίας"}
         }
         "meta:Turkmenistan"{
             ld{"Θερινή ώρα Τουρκμενιστάν"}
@@ -1891,20 +1882,16 @@ el{
             ls{"Χειμερινή ώρα Γιακούτσκ"}
         }
         "meta:Yekaterinburg"{
-            ld{"Θερινή ώρα Γεκατερίνμπουργκ"}
-            lg{"Ώρα Γεκατερίνμπουργκ"}
-            ls{"Χειμερινή ώρα Γεκατερίνμπουργκ"}
+            ld{"Θερινή ώρα Αικατερίνμπουργκ"}
+            lg{"Ώρα Αικατερίνμπουργκ"}
+            ls{"Χειμερινή ώρα Αικατερίνμπουργκ"}
         }
-        "meta:Yerevan"{
-            ld{"Θερινή ώρα Ερεβάν"}
-            lg{"Ώρα Ερεβάν"}
-            ls{"Χειμερινή ώρα Ερεβάν"}
-        }
-        fallbackFormat{"{1} ({0})"}
-        fallbackRegionFormat{"Ώρα {1} ({0})"}
+        fallbackFormat{"[{1} ({0})]"}
         gmtFormat{"GMT{0}"}
         gmtZeroFormat{"GMT"}
         hourFormat{"+HH:mm;-HH:mm"}
-        regionFormat{"Ώρα {0}"}
+        regionFormat{"Ώρα ({0})"}
+        regionFormatDaylight{"Θερινή ώρα ({0})"}
+        regionFormatStandard{"Χειμερινή ώρα ({0})"}
     }
 }

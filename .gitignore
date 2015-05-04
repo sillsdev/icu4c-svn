@@ -7,3 +7,5 @@
 /installi686
 *.o
 *.d
+Debug/
+Release/

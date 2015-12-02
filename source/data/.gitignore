@@ -11,3 +11,6 @@
 /pkgdataMakefile
 /x64
 /x86
+/build-dir
+/build-local
+/packagedata

@@ -1,6 +1,6 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2015 International Business Machines
+// * Copyright (C) 2016 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/zh_Hant.xml
@@ -47,7 +47,6 @@ zh_Hant{
         AI{"安圭拉"}
         AL{"阿爾巴尼亞"}
         AM{"亞美尼亞"}
-        AN{"荷屬安地列斯"}
         AO{"安哥拉"}
         AQ{"南極洲"}
         AR{"阿根廷"}
@@ -313,5 +312,5 @@ zh_Hant{
         FK{"福克蘭群島（馬爾維納斯群島）"}
         MK{"前南斯拉夫馬其頓共和國"}
     }
-    Version{"2.1.19.89"}
+    Version{"2.1.23.90"}
 }

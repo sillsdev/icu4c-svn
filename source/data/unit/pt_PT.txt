@@ -1,13 +1,13 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2015 International Business Machines
+// * Copyright (C) 2016 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/pt_PT.xml
 // *
 // ***************************************************************************
 pt_PT{
-    Version{"2.1.19.79"}
+    Version{"2.1.24.13"}
     units{
         acceleration{
             g-force{
@@ -28,6 +28,13 @@ pt_PT{
                 other{"{0} quilómetros quadrados"}
             }
         }
+        concentr{
+            karat{
+                dnam{"quilates"}
+                one{"{0} quilate"}
+                other{"{0} quilates"}
+            }
+        }
         consumption{
             liter-per-100kilometers{
                 dnam{"litros por 100 quilómetros"}
@@ -42,6 +49,7 @@ pt_PT{
         }
         duration{
             century{
+                one{"{0} século"}
                 other{"{0} séculos"}
             }
             hour{
@@ -89,13 +97,6 @@ pt_PT{
                 other{"{0} picómetros"}
             }
         }
-        proportion{
-            karat{
-                dnam{"quilates"}
-                one{"{0} quilate"}
-                other{"{0} quilates"}
-            }
-        }
         speed{
             kilometer-per-hour{
                 dnam{"quilómetros por hora"}
@@ -103,15 +104,7 @@ pt_PT{
                 other{"{0} quilómetros por hora"}
             }
         }
-        temperature{
-            generic{
-                other{"{0}°"}
-            }
-        }
         volume{
-            cubic-centimeter{
-                per{"por centímetro cúbico"}
-            }
             cubic-kilometer{
                 dnam{"quilómetros cúbicos"}
                 one{"{0} quilómetro cúbico"}
@@ -188,6 +181,13 @@ pt_PT{
                 dnam{"yd²"}
             }
         }
+        concentr{
+            karat{
+                dnam{"quilates"}
+                one{"{0} kt"}
+                other{"{0} kt"}
+            }
+        }
         consumption{
             liter-per-100kilometers{
                 dnam{"l/100km"}
@@ -223,9 +223,6 @@ pt_PT{
                 one{"{0} milha"}
                 other{"{0} milhas"}
             }
-            mile-scandinavian{
-                other{"{0} smi"}
-            }
             nautical-mile{
                 dnam{"nmi"}
                 one{"{0} nmi"}
@@ -254,13 +251,6 @@ pt_PT{
             millibar{
                 one{"{0} mb"}
                 other{"{0} mb"}
-            }
-        }
-        proportion{
-            karat{
-                dnam{"quilates"}
-                one{"{0} kt"}
-                other{"{0} kt"}
             }
         }
         speed{

@@ -1,13 +1,13 @@
 ﻿// ***************************************************************************
 // *
-// * Copyright (C) 2015 International Business Machines
+// * Copyright (C) 2016 International Business Machines
 // * Corporation and others. All Rights Reserved.
 // * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
 // * Source File: <path>/common/main/my.xml
 // *
 // ***************************************************************************
 my{
-    Version{"2.1.19.17"}
+    Version{"2.1.23.84"}
     durationUnits{
         hm{"h:mm"}
         hms{"h:mm:ss"}
@@ -88,6 +88,12 @@ my{
         }
         compound{
             per{"{0}လျှင်{1}နှုန်း"}
+        }
+        concentr{
+            karat{
+                dnam{"ကရက်"}
+                other{"{0} ကရက်"}
+            }
         }
         consumption{
             liter-per-100kilometers{
@@ -386,7 +392,7 @@ my{
             pound{
                 dnam{"ပေါင်"}
                 other{"{0}ပေါင်"}
-                per{"တစ်ပေါင်လျှင်"}
+                per{"{0}တစ်ပေါင်လျှင်"}
             }
             ton{
                 dnam{"တန်"}
@@ -439,12 +445,6 @@ my{
             pound-per-square-inch{
                 dnam{"ပေါင်/စတုရန်းလက်မ"}
                 other{"၁စတုရန်းလက်မ {0}ပေါင်နှုန်း"}
-            }
-        }
-        proportion{
-            karat{
-                dnam{"ကရက်"}
-                other{"{0} ကရက်"}
             }
         }
         speed{
@@ -512,7 +512,7 @@ my{
             cubic-meter{
                 dnam{"ကုဗမီတာ"}
                 other{"{0}ကုဗမီတာ"}
-                per{"တစ်ကုဗစင်တီမီတာလျှင်"}
+                per{"{0}တစ်ကုဗမီတာလျှင်"}
             }
             cubic-mile{
                 dnam{"ကုဗမိုင်"}
@@ -852,6 +852,12 @@ my{
         }
         compound{
             per{"{0}/{1}"}
+        }
+        concentr{
+            karat{
+                dnam{"ကရက်"}
+                other{"{0} kt"}
+            }
         }
         consumption{
             liter-per-100kilometers{
@@ -1203,12 +1209,6 @@ my{
             pound-per-square-inch{
                 dnam{"ပေါင်/စတုရန်းလက်မ"}
                 other{"{0} psi"}
-            }
-        }
-        proportion{
-            karat{
-                dnam{"ကရက်"}
-                other{"{0} kt"}
             }
         }
         speed{

@@ -19,7 +19,7 @@ class PluralRules;
 class U_I18N_API SharedPluralRules : public SharedObject {
 public:
     SharedPluralRules(PluralRules *prToAdopt) : ptr(prToAdopt) { }
-    virtual ~SharedPluralRules();
+    virtual ~SharedPluralRules() { delete ptr; }
     const PluralRules *operator->() const { return ptr; }
     const PluralRules &operator*() const { return *ptr; }
 private:

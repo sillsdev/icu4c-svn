@@ -9,3 +9,17 @@
 *.d
 Debug/
 Release/
+source/data/out
+source/tools/genrb/x86
+source/tools/icuinfo/x86
+source/test/testdata/out
+*.sdf
+*.opensdf
+*.suo
+*.bak
+*.vcxproj.user
+*~
+source/stubdata/stubdatabuilt.txt
+source/extra/uconv/pkgdatain.txt
+source/extra/uconv/resources/fr.res
+source/extra/uconv/resources/root.res

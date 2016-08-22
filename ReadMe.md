@@ -6,6 +6,10 @@ Changes should be submitted to the git repo at [https://gerrit.lsdev.sil.org/icu
 
 ## Special long-lived branches ##
 
+**Fieldworks**
+
+Based on the 54.1 release tag, this branch contains some specific changes for the [Fieldworks project](https://github.com/sillsdev/fieldworks)
+
 **MinimumStaticallyLinked54**
 
 This branch is based on -- but has two major differences from -- the 54.1 release tag:

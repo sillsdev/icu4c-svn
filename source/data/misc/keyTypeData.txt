@@ -1,11 +1,5 @@
-﻿// ***************************************************************************
-// *
-// * Copyright (C) 2016 International Business Machines
-// * Corporation and others. All Rights Reserved.
-// * Tool: org.unicode.cldr.icu.NewLdml2IcuConverter
-// * Source File: <path>/common/bcp47/*.xml
-// *
-// ***************************************************************************
+﻿// © 2016 and later: Unicode, Inc. and others.
+// License & terms of use: http://www.unicode.org/copyright.html#License
 keyTypeData:table(nofallback){
     bcpTypeAlias{
         ca{
@@ -154,6 +148,11 @@ keyTypeData:table(nofallback){
         }
         colreorder{
             REORDER_CODE{""}
+            currency{""}
+            digit{""}
+            punct{""}
+            space{""}
+            symbol{""}
         }
         colstrength{
             identical{"identic"}
@@ -585,6 +584,7 @@ keyTypeData:table(nofallback){
             ussystem{""}
         }
         numbers{
+            adlm{""}
             ahom{""}
             arab{""}
             arabext{""}
@@ -592,6 +592,7 @@ keyTypeData:table(nofallback){
             armnlow{""}
             bali{""}
             beng{""}
+            bhks{""}
             brah{""}
             cakm{""}
             cham{""}
@@ -639,6 +640,7 @@ keyTypeData:table(nofallback){
             mymrshan{""}
             mymrtlng{""}
             native{""}
+            newa{""}
             nkoo{""}
             olck{""}
             orya{""}
@@ -672,6 +674,7 @@ keyTypeData:table(nofallback){
             hex{""}
             numericPinyin{"npinyin"}
             publishing{"publish"}
+            zawgyi{""}
         }
         sd{
             SUBDIVISION_CODE{""}

@@ -1,0 +1,21 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<MinRuntimesDirectory>$(MSBuildThisFileDirectory)\..\runtimes</MinRuntimesDirectory>
+		<MinRuntimeWinX86>$(MinRuntimesDirectory)\win7-x86\native</MinRuntimeWinX86>
+		<MinRuntimeWinX64>$(MinRuntimesDirectory)\win7-x64\native</MinRuntimeWinX64>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(OS)'=='Windows_NT'">
+		<MinIcuLibsX86 Include="$(MinRuntimeWinX86)\icu*.dll" />
+		<MinIcuLibsX64 Include="$(MinRuntimeWinX64)\icu*.dll" />
+
+		<None Include="@(MinIcuLibsX86)">
+			<Link>lib\x86\%(FileName)%(Extension)</Link>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="@(MinIcuLibsX64)">
+			<Link>lib\x64\%(FileName)%(Extension)</Link>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>

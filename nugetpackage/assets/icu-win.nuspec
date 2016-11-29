@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+	<metadata>
+		<id>Icu4c.Win</id>
+		<version>$version$</version>
+		<authors>SIL International</authors>
+		<copyright>Copyright (c) 2016 SIL International</copyright>
+		<licenseUrl>https://github.com/sillsdev/icu4c/blob/trunk/license.html</licenseUrl>
+		<projectUrl>https://github.com/sillsdev/icu4c</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<tags>native</tags>
+		<summary>ICU - International Components for Unicode</summary>
+		<description>ICU - International Components for Unicode
+
+This package contains a minimal build of ICU4C for Windows as described in https://github.com/sillsdev/icu-dotnet#windows-1.
+
+For Linux it is recommended to install the official ICU that comes with the system.
+		</description>
+		<language>en-US</language>
+
+		<references/>
+	</metadata>
+</package>

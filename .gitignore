@@ -18,6 +18,7 @@ source/test/testdata/out
 *.suo
 *.bak
 *.vcxproj.user
+*~
 source/stubdata/stubdatabuilt.txt
 source/extra/uconv/pkgdatain.txt
 source/extra/uconv/resources/fr.res

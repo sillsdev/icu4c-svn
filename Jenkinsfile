@@ -4,7 +4,8 @@
 
 ansiColor('xterm') {
     timestamps {
-        properties([parameters([choice(name: 'buildKind', choices: ['Continuous', 'Release'],
+
+        properties([parameters([choice(name: 'buildKind', choices: 'Continuous\nRelease',
             description: 'Is this a continuous (pre-release) or a release build?')])])
 
         node('windows') {

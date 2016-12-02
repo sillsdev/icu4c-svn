@@ -29,7 +29,7 @@ ansiColor('xterm') {
 
                 stage('Pack nuget') {
                     bat """
-                    "${tool 'MSBuild'}" /t:BuildPackage /p:PkgVersion=${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}
+                    "${tool 'msbuild12'}" /t:BuildPackage /p:PkgVersion=${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}
                     """
                 }
             }

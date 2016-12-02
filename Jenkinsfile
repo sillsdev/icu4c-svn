@@ -4,6 +4,9 @@
 
 ansiColor('xterm') {
     timestamps {
+        properties([parameters([choice(name: 'buildKind', choices: ['Continuous', 'Release'],
+            description: 'Is this a continuous (pre-release) or a release build?')])])
+
         node('windows') {
             def msbuild = tool 'msbuild12'
 
@@ -36,7 +39,7 @@ ansiColor('xterm') {
                 }
             }
 
-            archive includes: "*.nupkg"
+            archiveArtifacts "*.nupkg"
         }
     }
 }

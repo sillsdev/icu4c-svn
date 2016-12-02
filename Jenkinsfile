@@ -17,8 +17,7 @@ ansiColor('xterm') {
                 checkout scm
 
                 // We expect that the branch name contains the ICU version number, otherwise default to 54
-                echo "BRANCH_NAME=${env.BRANCH_NAME}"
-                def IcuVersion = env.BRANCH_NAME =~ /[0-9]+/ ?: 54
+                def IcuVersion = (env.BRANCH_NAME =~ /[0-9]+/)[0][1] ?: 54
                 echo "IcuVersion=${IcuVersion}"
                 def PreRelease = buildKind != 'Release' ? "-beta${BUILD_NUMBER}" : ""
                 echo "PreRelease=${PreRelease}"

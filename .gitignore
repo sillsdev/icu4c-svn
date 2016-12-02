@@ -17,6 +17,7 @@ source/tools/icuinfo/x86
 *.suo
 *.bak
 *.vcxproj.user
+*~
 source/stubdata/stubdatabuilt.txt
 source/extra/uconv/pkgdatain.txt
 source/extra/uconv/resources/fr.res

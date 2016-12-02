@@ -11,6 +11,15 @@ ansiColor('xterm') {
         node('windows') {
             def msbuild = tool 'msbuild12'
 
+            // We expect that the branch name contains the ICU version number, otherwise default to 54
+            def IcuVersion = env.BRANCH_NAME =~ /[0-9]+/ ?: 54
+
+            def PreRelease = buildKind != 'Release' ? "-beta${BUILD_NUMBER}" : ""
+
+            def PkgVersion = "${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}"
+
+            currentBuild.displayName = PkgVersion
+
             milestone label: 'Checkout'
 
             stage('Checkout') {
@@ -28,14 +37,9 @@ ansiColor('xterm') {
 
                 milestone label: 'Build nuget package'
 
-                def PreRelease = buildKind != 'Release' ? "-beta${BUILD_NUMBER}" : ""
-
-                // We expect that the branch name contains the ICU version number, otherwise default to 54
-                def IcuVersion = env.BRANCH_NAME =~ /[0-9]+/ ?: 54
-
                 stage('Pack nuget') {
                     bat """
-                    "${msbuild}" /t:BuildPackage /p:PkgVersion=${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}
+                    "${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
                     """
                 }
             }

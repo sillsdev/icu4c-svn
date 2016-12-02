@@ -22,6 +22,8 @@ ansiColor('xterm') {
             def PreRelease = buildKind != 'Release' ? "-beta${BUILD_NUMBER}" : ""
             def PkgVersion = "${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}"
 
+            echo "PkgVersion=${PkgVersion}"
+
             currentBuild.displayName = PkgVersion
 
             dir("nugetpackage/build") {

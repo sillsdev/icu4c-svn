@@ -4,6 +4,8 @@
 
 ansiColor('xterm') {
     timestamps {
+        def msbuild = tool 'msbuild12'
+
         node('windows') {
             milestone label: 'Checkout'
 
@@ -16,7 +18,7 @@ ansiColor('xterm') {
 
                 stage('Build ICU') {
                     bat """
-                    "${tool 'MSBuild'}" /t:Build
+                    "${msbuild}" /t:Build
                     """
                 }
 
@@ -29,7 +31,7 @@ ansiColor('xterm') {
 
                 stage('Pack nuget') {
                     bat """
-                    "${tool 'msbuild12'}" /t:BuildPackage /p:PkgVersion=${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}
+                    "${msbuild}" /t:BuildPackage /p:PkgVersion=${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}
                     """
                 }
             }

@@ -10,11 +10,11 @@
 		<MinIcuLibsX64 Include="$(MinRuntimeWinX64)\icu*.dll" />
 
 		<None Include="@(MinIcuLibsX86)">
-			<Link>lib\x86\%(FileName)%(Extension)</Link>
+			<Link>lib\win-x86\%(FileName)%(Extension)</Link>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Include="@(MinIcuLibsX64)">
-			<Link>lib\x64\%(FileName)%(Extension)</Link>
+			<Link>lib\win-x64\%(FileName)%(Extension)</Link>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

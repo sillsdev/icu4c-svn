@@ -4,9 +4,9 @@
 
 ansiColor('xterm') {
     timestamps {
-        def msbuild = tool 'msbuild12'
-
         node('windows') {
+            def msbuild = tool 'msbuild12'
+
             milestone label: 'Checkout'
 
             stage('Checkout') {

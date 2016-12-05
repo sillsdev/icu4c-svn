@@ -46,17 +46,27 @@
 	</Target>
 
 	<ItemGroup>
-		<Artifacts Include='$(RootDir)\bin\icudt*.dll;$(RootDir)\bin\icuin*.dll;$(RootDir)\bin\icuuc*.dll'/>
-		<NuGetAssets Include='$(MSBuildProjectDirectory)/../assets/**/*'/>
+		<LibArtifacts Include='$(RootDir)\bin\i*.dll'/>
+		<LibNuGetAssets Include='$(MSBuildProjectDirectory)/../assets/lib/**/*'/>
+		<BinArtifacts Include='$(RootDir)\bin\*.exe'/>
+		<BinNuGetAssets Include='$(MSBuildProjectDirectory)/../assets/bin/**/*'/>
 	</ItemGroup>
 
 	<Target Name="BuildPackage" DependsOnTargets="CleanNuGet;CheckPrerequisites">
-		<MakeDir Directories="$(NuGetBuildDir)"/>
-		<Copy SourceFiles="@(Artifacts)" DestinationFolder="$(NuGetBuildDir)\build"/>
-		<Copy SourceFiles="@(NuGetAssets)"
-			DestinationFiles="@(NuGetAssets->'$(NuGetBuildDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
-		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(MSBuildProjectDirectory)/.. icu-win.nuspec"
-			WorkingDirectory="$(NuGetBuildDir)"/>
+		<!-- Libraries -->
+		<MakeDir Directories="$(NuGetBuildDir)\lib"/>
+		<Copy SourceFiles="@(LibArtifacts)" DestinationFolder="$(NuGetBuildDir)\lib\build"/>
+		<Copy SourceFiles="@(LibNuGetAssets)"
+			DestinationFiles="@(LibNuGetAssets->'$(NuGetBuildDir)\lib\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(MSBuildProjectDirectory)/.. icu-win-full-lib.nuspec"
+			WorkingDirectory="$(NuGetBuildDir)\lib"/>
+		<!-- Binaries -->
+		<MakeDir Directories="$(NuGetBuildDir)\bin"/>
+		<Copy SourceFiles="@(BinArtifacts)" DestinationFolder="$(NuGetBuildDir)\bin\build"/>
+		<Copy SourceFiles="@(BinNuGetAssets)"
+			DestinationFiles="@(BinNuGetAssets->'$(NuGetBuildDir)\bin\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(MSBuildProjectDirectory)/.. icu-win-full-bin.nuspec"
+			WorkingDirectory="$(NuGetBuildDir)\bin"/>
 	</Target>
 
 </Project>

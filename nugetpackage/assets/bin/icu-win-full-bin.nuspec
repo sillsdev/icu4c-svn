@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package>
 	<metadata>
-		<id>Icu4c.Win</id>
+		<id>Icu4c.Win.Full.Bin</id>
 		<version>$version$</version>
 		<authors>SIL International</authors>
 		<copyright>Copyright (c) 2016 SIL International</copyright>
@@ -12,7 +12,7 @@
 		<summary>ICU - International Components for Unicode</summary>
 		<description>ICU - International Components for Unicode
 
-This package contains a minimal build of ICU4C for Windows as described in https://github.com/sillsdev/icu-dotnet#windows-1.
+This package contains the binary tools of a full build of ICU4C for Windows.
 
 The major version number of the nuget package corresponds to the ICU release.
 

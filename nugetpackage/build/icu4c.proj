@@ -1,0 +1,62 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<RootDir Condition="'$(teamcity_version)' == '' Or '$(OS)'!='Windows_NT'">$(MSBuildProjectDirectory)\..\..</RootDir>
+		<RootDir Condition="'$(teamcity_version)' != '' And '$(OS)'=='Windows_NT'">$(teamcity_build_checkoutDir)</RootDir>
+		<teamcity_agent_home_dir Condition="'$(teamcity_agent_home_dir)'=='' And '$(OS)'!='Windows_NT'">/var/lib/TeamCity/agent</teamcity_agent_home_dir>
+		<Solution>allinone.sln</Solution>
+		<SolutionDir>$(RootDir)/source/allinone</SolutionDir>
+		<Configuration>Release</Configuration>
+		<icu_ver Condition="'$(icu_ver)' == ''">54</icu_ver>
+		<BuildCounter Condition="'$(BuildCounter)' == ''">0</BuildCounter>
+		<NuGetBuildDir>$(MSBuildProjectDirectory)/../NuGetBuild</NuGetBuildDir>
+		<PreRelease Condition="'$(PreRelease)' == ''"></PreRelease>
+		<PkgVersion Condition="'$(PkgVersion)' == ''">$(icu_ver).1.$(BuildCounter)$(PreRelease)</PkgVersion>
+	</PropertyGroup>
+
+	<Import Project="NuGet.targets"/>
+
+	<Target Name="Build">
+		<CallTarget Targets="Clean"/>
+		<CallTarget Targets="Compile"/>
+		<Message Text="Build Complete"/>
+		<CallTarget Targets="BuildPackage"/>
+	</Target>
+
+	<Target Name="Compile" DependsOnTargets="CheckPrerequisites">
+		<MSBuild Projects="$(SolutionDir)/$(Solution)"
+			Targets="Rebuild"
+			Properties="Configuration=$(Configuration)" />
+	</Target>
+
+	<ItemGroup>
+		<ExistingObjectFiles
+			Include="**/x86/**/*"
+			Exclude="$(RootDir)/.hg/**/*;$(RootDir)/.git/**/*"
+		/>
+		<NuGetPackage Include="$(MSBuildProjectDirectory)/../*.nupkg"/>
+	</ItemGroup>
+
+	<Target Name="Clean" DependsOnTargets="CleanNuGet">
+		<Delete Files="@(ExistingObjectFiles)" />
+	</Target>
+
+	<Target Name="CleanNuGet">
+		<Delete Files="@(NuGetPackage)"/>
+		<RemoveDir Directories="$(NuGetBuildDir)" />
+	</Target>
+
+	<ItemGroup>
+		<Artifacts Include='$(RootDir)\bin\icudt*.dll;$(RootDir)\bin\icuin*.dll;$(RootDir)\bin\icuuc*.dll'/>
+		<NuGetAssets Include='$(MSBuildProjectDirectory)/../assets/**/*'/>
+	</ItemGroup>
+
+	<Target Name="BuildPackage" DependsOnTargets="CleanNuGet;CheckPrerequisites">
+		<MakeDir Directories="$(NuGetBuildDir)"/>
+		<Copy SourceFiles="@(Artifacts)" DestinationFolder="$(NuGetBuildDir)\build"/>
+		<Copy SourceFiles="@(NuGetAssets)"
+			DestinationFiles="@(NuGetAssets->'$(NuGetBuildDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(MSBuildProjectDirectory)/.. icu-win.nuspec"
+			WorkingDirectory="$(NuGetBuildDir)"/>
+	</Target>
+
+</Project>

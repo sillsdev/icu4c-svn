@@ -14,7 +14,9 @@
 
 This package contains a minimal build of ICU4C for Windows as described in https://github.com/sillsdev/icu-dotnet#windows-1.
 
-For Linux it is recommended to install the official ICU that comes with the system.
+The major version number of the nuget package corresponds to the ICU release.
+
+For Linux it is recommended to install the official ICU package that comes with the system.
 		</description>
 		<language>en-US</language>
 

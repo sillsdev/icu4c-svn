@@ -5,6 +5,7 @@
 /lib64
 /installx86_64
 /installi686
+out/
 *.o
 *.d
 Debug/

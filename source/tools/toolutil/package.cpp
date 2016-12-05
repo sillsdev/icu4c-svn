@@ -338,7 +338,7 @@ readFile(const char *path, const char *name, int32_t &length, char &type) {
     if(fileLength!=(int32_t)fread(data, 1, fileLength, file)) {
         fprintf(stderr, "icupkg: error reading \"%s\"\n", filename);
         fclose(file);
-        free(data);
+        uprv_free(data);
         exit(U_FILE_ACCESS_ERROR);
     }
 
@@ -354,7 +354,7 @@ readFile(const char *path, const char *name, int32_t &length, char &type) {
     typeEnum=getTypeEnumForInputData(data, length, &errorCode);
     if(typeEnum<0 || U_FAILURE(errorCode)) {
         fprintf(stderr, "icupkg: not an ICU data file: \"%s\"\n", filename);
-        free(data);
+        uprv_free(data);
 #if !UCONFIG_NO_LEGACY_CONVERSION
         exit(U_INVALID_FORMAT_ERROR);
 #else
@@ -421,11 +421,11 @@ Package::Package()
 Package::~Package() {
     int32_t idx;
 
-    free(inData);
+    uprv_free(inData);
 
     for(idx=0; idx<itemCount; ++idx) {
         if(items[idx].isDataOwned) {
-            free(items[idx].data);
+            uprv_free(items[idx].data);
         }
     }
 
@@ -1050,7 +1050,7 @@ Package::addItem(const char *name, uint8_t *data, int32_t length, UBool isDataOw
     } else {
         // same-name item found, replace it
         if(items[idx].isDataOwned) {
-            free(items[idx].data);
+            uprv_free(items[idx].data);
         }
 
         // keep the item's name since it is the same
@@ -1089,7 +1089,7 @@ Package::removeItem(int32_t idx) {
     if(idx>=0) {
         // remove the item
         if(items[idx].isDataOwned) {
-            free(items[idx].data);
+            uprv_free(items[idx].data);
         }
 
         // move the following items up

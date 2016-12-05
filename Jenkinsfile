@@ -8,7 +8,7 @@ ansiColor('xterm') {
         properties([parameters([choice(name: 'buildKind', choices: 'Continuous\nRelease',
             description: 'Is this a continuous (pre-release) or a release build?')])])
 
-        node('windows') {
+        node('windows && supported') {
             def msbuild = tool 'msbuild12'
 
             milestone label: 'Checkout'

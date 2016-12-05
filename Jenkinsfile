@@ -11,8 +11,6 @@ ansiColor('xterm') {
         node('windows && supported') {
             def msbuild = tool 'msbuild12'
 
-            milestone label: 'Checkout'
-
             stage('Checkout') {
                 checkout scm
 
@@ -25,17 +23,15 @@ ansiColor('xterm') {
             }
 
             dir("nugetpackage/build") {
-                milestone label: 'Compile'
-
                 stage('Build ICU') {
+                    echo "Compiling ICU"
                     bat """
                     "${msbuild}" /t:Build
                     """
                 }
 
-                milestone label: 'Build nuget package'
-
                 stage('Pack nuget') {
+                    echo "Creating nuget package"
                     bat """
                     "${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
                     """

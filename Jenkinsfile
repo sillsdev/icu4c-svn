@@ -23,23 +23,25 @@ ansiColor('xterm') {
                 currentBuild.displayName = PkgVersion
             }
 
-            dir("nugetpackage/build") {
-                stage('Build ICU') {
-                    echo "Compiling ICU"
-                    bat """
-                    "${msbuild}" /t:Build
-                    """
+            dir("nugetpackage") {
+                dir("build") {
+                    stage('Build ICU') {
+                        echo "Compiling ICU"
+                        bat """
+                        "${msbuild}" /t:Build
+                        """
+                    }
+
+                    stage('Pack nuget') {
+                        echo "Creating nuget package ${PkgVersion}"
+                        bat """
+                        "${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
+                        """
+                    }
                 }
 
-                stage('Pack nuget') {
-                    echo "Creating nuget package ${PkgVersion}"
-                    bat """
-                    "${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
-                    """
-                }
+                archiveArtifacts "*.nupkg"
             }
-
-            archiveArtifacts "*.nupkg"
         }
     }
 }

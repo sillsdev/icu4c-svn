@@ -11,13 +11,14 @@ ansiColor('xterm') {
         node('windows && supported') {
             def msbuild = tool 'msbuild12'
 
+            def PkgVersion
             stage('Checkout') {
                 checkout scm
 
                 // We expect that the branch name contains the ICU version number, otherwise default to 54
                 def IcuVersion = (env.BRANCH_NAME =~ /[0-9]+/)[0] ?: 54
                 def PreRelease = buildKind != 'Release' ? "-beta${BUILD_NUMBER}" : ""
-                def PkgVersion = "${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}"
+                PkgVersion = "${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}"
 
                 currentBuild.displayName = PkgVersion
             }
@@ -31,7 +32,7 @@ ansiColor('xterm') {
                 }
 
                 stage('Pack nuget') {
-                    echo "Creating nuget package"
+                    echo "Creating nuget package ${PkgVersion}"
                     bat """
                     "${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
                     """

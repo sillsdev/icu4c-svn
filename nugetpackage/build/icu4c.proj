@@ -18,8 +18,6 @@
 	<Target Name="Build">
 		<CallTarget Targets="Clean"/>
 		<CallTarget Targets="Compile"/>
-		<Message Text="Build Complete"/>
-		<CallTarget Targets="BuildPackage"/>
 	</Target>
 
 	<Target Name="Compile" DependsOnTargets="CheckPrerequisites">

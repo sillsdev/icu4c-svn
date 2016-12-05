@@ -8,41 +8,40 @@ ansiColor('xterm') {
         properties([parameters([choice(name: 'buildKind', choices: 'Continuous\nRelease',
             description: 'Is this a continuous (pre-release) or a release build?')])])
 
-        node('windows') {
+        node('windows && supported') {
             def msbuild = tool 'msbuild12'
 
-            milestone label: 'Checkout'
-
+            def PkgVersion
             stage('Checkout') {
                 checkout scm
 
                 // We expect that the branch name contains the ICU version number, otherwise default to 54
                 def IcuVersion = (env.BRANCH_NAME =~ /[0-9]+/)[0] ?: 54
                 def PreRelease = buildKind != 'Release' ? "-beta${BUILD_NUMBER}" : ""
-                def PkgVersion = "${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}"
+                PkgVersion = "${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}"
 
                 currentBuild.displayName = PkgVersion
             }
 
-            dir("nugetpackage/build") {
-                milestone label: 'Compile'
+            dir("nugetpackage") {
+                dir("build") {
+                    stage('Build ICU') {
+                        echo "Compiling ICU"
+                        bat """
+                        "${msbuild}" /t:Build
+                        """
+                    }
 
-                stage('Build ICU') {
-                    bat """
-                    "${msbuild}" /t:Build
-                    """
+                    stage('Pack nuget') {
+                        echo "Creating nuget package ${PkgVersion}"
+                        bat """
+                        "${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
+                        """
+                    }
                 }
 
-                milestone label: 'Build nuget package'
-
-                stage('Pack nuget') {
-                    bat """
-                    "${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
-                    """
-                }
+                archiveArtifacts "*.nupkg"
             }
-
-            archiveArtifacts "*.nupkg"
         }
     }
 }

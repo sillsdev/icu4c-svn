@@ -88,7 +88,7 @@
     <ClCompile>
       <PreprocessorDefinitions>U_ATTRIBUTE_DEPRECATED=;WIN32;NDEBUG;_CRT_SECURE_NO_DEPRECATE;U_COMMON_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -127,7 +127,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>U_ATTRIBUTE_DEPRECATED=;WIN32;_DEBUG;_CRT_SECURE_NO_DEPRECATE;U_COMMON_IMPLEMENTATION;RBBI_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -167,7 +167,7 @@
     <ClCompile>
       <PreprocessorDefinitions>U_ATTRIBUTE_DEPRECATED=;WIN64;WIN32;NDEBUG;_CRT_SECURE_NO_DEPRECATE;U_COMMON_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -204,7 +204,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>U_ATTRIBUTE_DEPRECATED=;WIN64;WIN32;_DEBUG;_CRT_SECURE_NO_DEPRECATE;U_COMMON_IMPLEMENTATION;RBBI_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>

@@ -5,6 +5,10 @@
 ansiColor('xterm') {
     timestamps {
 
+        // Set default. This is only needed for the first build where the properties below
+        // don't set the variable yet.
+        buildKind = 'Continuous'
+
         properties([parameters([choice(name: 'buildKind', choices: 'Continuous\nRelease',
             description: 'Is this a continuous (pre-release) or a release build?')])])
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+	<metadata>
+		<id>Icu4c.Win.Full.Bin</id>
+		<version>$version$</version>
+		<authors>SIL International</authors>
+		<copyright>Copyright (c) 2016-2017 SIL International</copyright>
+		<licenseUrl>https://github.com/sillsdev/icu4c/blob/trunk/license.html</licenseUrl>
+		<projectUrl>https://github.com/sillsdev/icu4c</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<tags>native</tags>
+		<summary>ICU - International Components for Unicode</summary>
+		<description>ICU - International Components for Unicode
+
+This package contains the binary tools of a full build of ICU4C for Windows (32- and 64-bit).
+
+The major version number of the nuget package corresponds to the ICU release.
+
+For Linux it is recommended to install the official ICU package that comes with the system.
+		</description>
+		<language>en-US</language>
+		<dependencies>
+			<dependency id="Icu4c.Win.Full.Lib" version="[$version$]"/>
+		</dependencies>
+
+		<references/>
+	</metadata>
+</package>

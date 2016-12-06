@@ -1,0 +1,9 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup Condition="'$(OS)'=='Windows_NT'">
+		<IcuLibs Include="$(MSBuildThisFileDirectory)\**\icu*.dll" />
+		<None Include="@(IcuLibs)">
+			<Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>

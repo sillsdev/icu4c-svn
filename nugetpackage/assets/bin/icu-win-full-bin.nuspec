@@ -19,6 +19,9 @@ The major version number of the nuget package corresponds to the ICU release.
 For Linux it is recommended to install the official ICU package that comes with the system.
 		</description>
 		<language>en-US</language>
+		<dependencies>
+			<dependency id="Icu4c.Win.Full.Lib" version="[$IcuVer$.0,$IcuVer$.999]"/>
+		</dependencies>
 
 		<references/>
 	</metadata>

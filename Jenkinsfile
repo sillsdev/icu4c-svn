@@ -9,14 +9,13 @@ ansiColor('xterm') {
             parameters([choice(name: 'buildKind', choices: 'Continuous\nRelease',
                 description: 'Is this a continuous (pre-release) or a release build?')]),
             // Add Gerrit Trigger
-            pipelineTriggers([gerrit(gerritBuildFailedVerifiedValue: -1, gerritBuildSuccessfulVerifiedValue: 1,
-                gerritBuildUnstableCodeReviewValue: -1,
-                gerritProjects: [[branches: [[compareType: 'PLAIN', pattern: env.BRANCH_NAME]],
+            pipelineTriggers([gerrit(gerritProjects: [[branches: [[compareType: 'PLAIN', pattern: env.BRANCH_NAME]],
                 compareType: 'PLAIN', disableStrictForbiddenFileVerification: false, pattern: 'icu4c']],
                 serverName: 'defaultServer', triggerOnEvents: [
                     patchsetCreated(excludeDrafts: false, excludeNoCodeChange: true, excludeTrivialRebase: false),
                     refUpdated()
-                ])])
+                ])
+            ])
         ])
 
         // Set default. This is only needed for the first build.
@@ -33,7 +32,6 @@ ansiColor('xterm') {
             node('windows && supported') {
                 def msbuild = tool 'msbuild12'
                 def git = tool(name: 'Default', type: 'git')
-                echo "env['GERRIT_CHANGE_NUMBER']=${env['GERRIT_CHANGE_NUMBER']}"
 
                 stage('Checkout') {
                     checkout scm
@@ -63,10 +61,9 @@ ansiColor('xterm') {
                     dir("build") {
                         stage('Build ICU') {
                             echo "Compiling ICU"
-                            /*bat """
+                            bat """
                                 "${msbuild}" /t:Build
                                 """
-                                */
                         }
 
                         stage('Pack nuget') {

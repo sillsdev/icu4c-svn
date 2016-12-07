@@ -4,9 +4,16 @@
 
 ansiColor('xterm') {
     timestamps {
-        properties([parameters([choice(name: 'buildKind', choices: 'Continuous\nRelease',
-            description: 'Is this a continuous (pre-release) or a release build?')]),
-            pipelineTriggers([[$class: 'GitHubPushTrigger']])])
+        properties(
+            // Add buildKind parameter
+            [parameters([choice(name: 'buildKind', choices: 'Continuous\nRelease',
+                description: 'Is this a continuous (pre-release) or a release build?')]),
+            // Add Gerrit Trigger
+            pipelineTriggers([gerrit(customUrl: '', gerritProjects: [[branches: [[compareType: 'ANT', pattern: '**']],
+                compareType: 'PLAIN', disableStrictForbiddenFileVerification: false, pattern: 'icu4c']],
+                triggerOnEvents: [patchsetCreated(excludeDrafts: false, excludeNoCodeChange: true, excludeTrivialRebase: false),
+                refUpdated()])])
+        ])
 
         // Set default. This is only needed for the first build.
         buildKind = buildKind ?: 'Continuous'

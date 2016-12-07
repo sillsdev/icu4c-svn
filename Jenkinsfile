@@ -9,7 +9,7 @@ ansiColor('xterm') {
             [parameters([choice(name: 'buildKind', choices: 'Continuous\nRelease',
                 description: 'Is this a continuous (pre-release) or a release build?')]),
             // Add Gerrit Trigger
-            pipelineTriggers([gerrit(customUrl: '', gerritProjects: [[branches: [[compareType: 'ANT', pattern: '**']],
+            pipelineTriggers([gerrit(customUrl: '', gerritProjects: [[branches: [[compareType: 'PLAIN', pattern: env.BRANCH_NAME]],
                 compareType: 'PLAIN', disableStrictForbiddenFileVerification: false, pattern: 'icu4c']],
                 triggerOnEvents: [patchsetCreated(excludeDrafts: false, excludeNoCodeChange: true, excludeTrivialRebase: false),
                 refUpdated()])])

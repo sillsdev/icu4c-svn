@@ -1,0 +1,8 @@
+Verified+1: Jenkins CI <jenkins@sil.org>
+Code-Review+2: Eberhard Beilharz <eb1@sil.org>
+Verified-Linux+1: Eberhard Beilharz <eb1@sil.org>
+Submitted-by: Eberhard Beilharz <eb1@sil.org>
+Submitted-at: Wed, 07 Dec 2016 18:43:04 +0000
+Reviewed-on: https://gerrit.lsdev.sil.org/4800
+Project: icu4c
+Branch: refs/heads/MinimumStaticallyLinked56

@@ -89,13 +89,13 @@ ansiColor('xterm') {
                 // workaround for a problem with gerrit trigger plugin:
                 // I couldn't get it to report back the verified/code-review results, it only reported
                 // a comment but didn't set the result. So we explicitly set the results.
-                if (currentBuild.Result == "SUCCESS") {
+                if (currentBuild.result == "SUCCESS") {
                     verified = 1
                     codereview = 0
-                } else if (currentBuild.Result == "FAILED") {
+                } else if (currentBuild.result == "FAILED") {
                     verified = -1
                     codereview = 0
-                } else if (currentBuild.Result == "UNSABLE") {
+                } else if (currentBuild.result == "UNSTABLE") {
                     verified = 0
                     codereview = -1
                 }

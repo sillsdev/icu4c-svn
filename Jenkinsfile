@@ -26,8 +26,7 @@ ansiColor('xterm') {
 
                 // We expect that the branch name contains the ICU version number, otherwise default to 54
                 def IcuVersion = (env.BRANCH_NAME =~ /[0-9]+/)[0] ?: 54
-                def PreReleaseLabel = GERRIT_CHANGE_NUMBER ? "ci" : "beta"
-                def PreRelease = buildKind != 'Release' ? "-${PreReleaseLabel}${BUILD_NUMBER}" : ""
+                def PreRelease = GERRIT_CHANGE_NUMBER ? "-ci" : (buildKind != 'Release' ? "-beta" : "")
                 PkgVersion = "${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}"
 
                 currentBuild.displayName = PkgVersion

@@ -31,6 +31,7 @@ ansiColor('xterm') {
 
         node('windows && supported') {
             def msbuild = tool 'msbuild12'
+            def git = tool(name: 'Default', type: 'Git')
             echo "env['GERRIT_CHANGE_NUMBER']=${env['GERRIT_CHANGE_NUMBER']}"
 
             stage('Checkout') {
@@ -42,8 +43,8 @@ ansiColor('xterm') {
                 // build by the Gerrit plugin...
                 if (isGerritChange) {
                     def changeBranch = "change-${GERRIT_CHANGE_NUMBER}-${GERRIT_PATCHSET_NUMBER}"
-                    bat "git fetch origin ${GERRIT_REFSPEC}:${changeBranch}"
-                    bat "git checkout ${changeBranch}"
+                    bat "${git} fetch origin ${GERRIT_REFSPEC}:${changeBranch}"
+                    bat "${git} checkout ${changeBranch}"
                 }
 
                 // We expect that the branch name contains the ICU version number, otherwise default to 54

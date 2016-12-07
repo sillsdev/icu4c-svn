@@ -5,16 +5,13 @@
 ansiColor('xterm') {
     timestamps {
         properties([parameters([choice(name: 'buildKind', choices: 'Continuous\nRelease',
-            description: 'Is this a continuous (pre-release) or a release build?'),
-         choice(name: 'Xtest', choices: 'Continuous\nRelease',
-             description: 'Is this a continuous (pre-release) or a release build?')]),
-             pipelineTriggers([[$class: 'GitHubPushTrigger']])])
+            description: 'Is this a continuous (pre-release) or a release build?')]),
+            pipelineTriggers([[$class: 'GitHubPushTrigger']])])
 
         // Set default. This is only needed for the first build.
-        buildKind = buildKind ?: 'XContinuous'
+        buildKind = buildKind ?: 'Continuous'
 
         node('windows && supported') {
-            echo "buildKind=${buildKind}"
             def msbuild = tool 'msbuild12'
 
             def PkgVersion

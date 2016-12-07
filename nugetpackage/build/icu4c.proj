@@ -53,7 +53,7 @@
 		<Copy SourceFiles="@(Artifacts)" DestinationFolder="$(NuGetBuildDir)\build"/>
 		<Copy SourceFiles="@(NuGetAssets)"
 			DestinationFiles="@(NuGetAssets->'$(NuGetBuildDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
-		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(MSBuildProjectDirectory)/.. icu-win.nuspec"
+		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(MSBuildProjectDirectory)/.. icu-win-min.nuspec"
 			WorkingDirectory="$(NuGetBuildDir)"/>
 	</Target>
 

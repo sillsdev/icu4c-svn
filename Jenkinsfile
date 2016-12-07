@@ -29,61 +29,68 @@ ansiColor('xterm') {
             isGerritChange = false
         }
 
-        node('windows && supported') {
-            def msbuild = tool 'msbuild12'
-            def git = tool(name: 'Default', type: 'git')
-            echo "env['GERRIT_CHANGE_NUMBER']=${env['GERRIT_CHANGE_NUMBER']}"
+        try {
+            node('windows && supported') {
+                def msbuild = tool 'msbuild12'
+                def git = tool(name: 'Default', type: 'git')
+                echo "env['GERRIT_CHANGE_NUMBER']=${env['GERRIT_CHANGE_NUMBER']}"
 
-            stage('Checkout') {
-                checkout scm
+                stage('Checkout') {
+                    checkout scm
 
-                // Workaround until gerrit-trigger plugin allows to checkout change directly
-                // (https://wiki.jenkins-ci.org/display/JENKINS/Gerrit+Trigger#GerritTrigger-PipelineJobs)
-                // Fetch the changeset to a local branch using the build parameters provided to the
-                // build by the Gerrit plugin...
-                if (isGerritChange) {
-                    bat """
-                        "${git}" fetch git://${GERRIT_HOST}/${GERRIT_PROJECT} ${GERRIT_REFSPEC}
-                        "${git}" checkout -q FETCH_HEAD"
-                        "${git}" rev-parse HEAD
-                        """
-                    echo "Checked out ${GERRIT_PATCHSET_REVISION}"
-                }
-
-                // We expect that the branch name contains the ICU version number, otherwise default to 54
-                def IcuVersion = (env.BRANCH_NAME =~ /[0-9]+/)[0] ?: 54
-                def PreRelease = isGerritChange ? "-ci" : (buildKind != 'Release' ? "-beta" : "")
-                PkgVersion = "${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}"
-
-                currentBuild.displayName = PkgVersion
-            }
-
-            dir("nugetpackage") {
-                dir("build") {
-                    stage('Build ICU') {
-                        echo "Compiling ICU"
-                        /*bat """
-                            "${msbuild}" /t:Build
-                            """
-                            */
-                    }
-
-                    stage('Pack nuget') {
-                        echo "Creating nuget package ${PkgVersion}"
+                    // Workaround until gerrit-trigger plugin allows to checkout change directly
+                    // (https://wiki.jenkins-ci.org/display/JENKINS/Gerrit+Trigger#GerritTrigger-PipelineJobs)
+                    // Fetch the changeset to a local branch using the build parameters provided to the
+                    // build by the Gerrit plugin...
+                    if (isGerritChange) {
                         bat """
-                            "${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
+                            "${git}" fetch git://${GERRIT_HOST}/${GERRIT_PROJECT} ${GERRIT_REFSPEC}
+                            "${git}" checkout -q FETCH_HEAD"
+                            "${git}" rev-parse HEAD
                             """
+                        echo "Checked out ${GERRIT_PATCHSET_REVISION}"
                     }
+
+                    // We expect that the branch name contains the ICU version number, otherwise default to 54
+                    def IcuVersion = (env.BRANCH_NAME =~ /[0-9]+/)[0] ?: 54
+                    def PreRelease = isGerritChange ? "-ci" : (buildKind != 'Release' ? "-beta" : "")
+                    PkgVersion = "${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}"
+
+                    currentBuild.displayName = PkgVersion
                 }
 
-                if (!isGerritChange) {
-                    archiveArtifacts "*.nupkg"
-                }
+                dir("nugetpackage") {
+                    dir("build") {
+                        stage('Build ICU') {
+                            echo "Compiling ICU"
+                            /*bat """
+                                "${msbuild}" /t:Build
+                                """
+                                */
+                        }
 
-                setGerritReview()
+                        stage('Pack nuget') {
+                            echo "Creating nuget package ${PkgVersion}"
+                            bat """
+                                "${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
+                                """
+                        }
+                    }
+
+                    if (!isGerritChange) {
+                        archiveArtifacts "*.nupkg"
+                    }
+
+                    currentBuild.result = "SUCCESS"
+
+                    setGerritReview()
+                }
             }
+        } catch(error) {
+            currentBuild.result = "FAILED"
         }
 
+        /*
         if (isGerritChange) {
             node('master') {
                 echo "result=${currentBuild.result}"
@@ -107,5 +114,6 @@ ansiColor('xterm') {
                 sh "ssh -p ${GERRIT_PORT} ${GERRIT_HOST} gerrit review ${GERRIT_CHANGE_NUMBER},${GERRIT_PATCHSET_NUMBER} --verified ${verified} --code-review ${codereview}"
             }
         }
+        */
     }
 }

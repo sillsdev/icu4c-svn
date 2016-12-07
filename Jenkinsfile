@@ -44,8 +44,8 @@ ansiColor('xterm') {
                 if (isGerritChange) {
                     def changeBranch = "change-${GERRIT_CHANGE_NUMBER}-${GERRIT_PATCHSET_NUMBER}"
                     bat """
-                        "${git}" fetch origin ${GERRIT_REFSPEC}:${changeBranch}
-                        "${git}" checkout ${changeBranch}"
+                        "${git}" fetch origin ${GERRIT_REFSPEC}
+                        "${git}" checkout -b ${changeBranch} FETCH_HEAD"
                         """
                 }
 

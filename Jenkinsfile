@@ -31,7 +31,7 @@ ansiColor('xterm') {
 
         node('windows && supported') {
             def msbuild = tool 'msbuild12'
-            def git = tool(name: 'Default', type: 'Git')
+            def git = tool(name: 'Default', type: 'git')
             echo "env['GERRIT_CHANGE_NUMBER']=${env['GERRIT_CHANGE_NUMBER']}"
 
             stage('Checkout') {

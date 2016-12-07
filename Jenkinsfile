@@ -42,11 +42,12 @@ ansiColor('xterm') {
                 // Fetch the changeset to a local branch using the build parameters provided to the
                 // build by the Gerrit plugin...
                 if (isGerritChange) {
-                    def changeBranch = "change-${GERRIT_CHANGE_NUMBER}-${GERRIT_PATCHSET_NUMBER}"
                     bat """
                         "${git}" fetch git://${GERRIT_HOST}/${GERRIT_PROJECT} ${GERRIT_REFSPEC}
-                        "${git}" checkout -b ${changeBranch} FETCH_HEAD"
+                        "${git}" checkout -q FETCH_HEAD"
+                        "${git}" rev-parse HEAD
                         """
+                    echo "Checked out ${GERRIT_PATCHSET_REVISION}"
                 }
 
                 // We expect that the branch name contains the ICU version number, otherwise default to 54
@@ -83,27 +84,27 @@ ansiColor('xterm') {
             }
         }
 
-        /*
-        node('master') {
-            // workaround for a problem with gerrit trigger plugin:
-            // I couldn't get it to report back the verified/code-review results, it only reported
-            // a comment but didn't set the result. So we explicitly set the results.
-            if (currentBuild.Result == "SUCCESS") {
-                verified = 1
-                codereview = 0
-            } else if (currentBuild.Result == "FAILED") {
-                verified = -1
-                codereview = 0
-            } else if (currentBuild.Result == "UNSABLE") {
-                verified = 0
-                codereview = -1
+        if (isGerritChange) {
+            node('master') {
+                // workaround for a problem with gerrit trigger plugin:
+                // I couldn't get it to report back the verified/code-review results, it only reported
+                // a comment but didn't set the result. So we explicitly set the results.
+                if (currentBuild.Result == "SUCCESS") {
+                    verified = 1
+                    codereview = 0
+                } else if (currentBuild.Result == "FAILED") {
+                    verified = -1
+                    codereview = 0
+                } else if (currentBuild.Result == "UNSABLE") {
+                    verified = 0
+                    codereview = -1
+                }
+                else {
+                    verified = 0
+                    codereview = 0
+                }
+                sh "ssh -p ${GERRIT_PORT} ${GERRIT_HOST} gerrit ${GERRIT_CHANGE_NUMBER},${GERRIT_PATCHSET_NUMBER} --verified ${verified} --code-review ${codereview}"
             }
-            else {
-                verified = 0
-                codereview = 0
-            }
-            sh "ssh -p 59418 gerrit.lsdev.sil.org gerrit ${env['GERRIT_CHANGE_NUMBER']},${env['GERRIT_PATCHSET_NUMBER']} --verified ${verified} --code-review ${codereview}"
         }
-        */
     }
 }

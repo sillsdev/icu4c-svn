@@ -86,6 +86,7 @@ ansiColor('xterm') {
 
         if (isGerritChange) {
             node('master') {
+                echo "result=${currentBuild.result}"
                 // workaround for a problem with gerrit trigger plugin:
                 // I couldn't get it to report back the verified/code-review results, it only reported
                 // a comment but didn't set the result. So we explicitly set the results.

@@ -90,7 +90,6 @@ ansiColor('xterm') {
             currentBuild.result = "FAILED"
         }
 
-        /*
         if (isGerritChange) {
             node('master') {
                 echo "result=${currentBuild.result}"
@@ -114,6 +113,5 @@ ansiColor('xterm') {
                 sh "ssh -p ${GERRIT_PORT} ${GERRIT_HOST} gerrit review ${GERRIT_CHANGE_NUMBER},${GERRIT_PATCHSET_NUMBER} --verified ${verified} --code-review ${codereview}"
             }
         }
-        */
     }
 }

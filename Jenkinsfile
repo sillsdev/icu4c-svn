@@ -103,7 +103,7 @@ ansiColor('xterm') {
                     verified = 0
                     codereview = 0
                 }
-                sh "ssh -p ${GERRIT_PORT} ${GERRIT_HOST} gerrit ${GERRIT_CHANGE_NUMBER},${GERRIT_PATCHSET_NUMBER} --verified ${verified} --code-review ${codereview}"
+                sh "ssh -p ${GERRIT_PORT} ${GERRIT_HOST} gerrit review ${GERRIT_CHANGE_NUMBER},${GERRIT_PATCHSET_NUMBER} --verified ${verified} --code-review ${codereview}"
             }
         }
     }

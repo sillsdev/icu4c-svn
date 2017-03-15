@@ -1,5 +1,5 @@
 #!groovy
-// Copyright (c) 2016 SIL International
+// Copyright (c) 2016-2017 SIL International
 // This software is licensed under the MIT license (http://opensource.org/licenses/MIT)
 
 ansiColor('xterm') {
@@ -62,15 +62,15 @@ ansiColor('xterm') {
                         stage('Build ICU') {
                             echo "Compiling ICU"
                             bat """
-                                "${msbuild}" /t:Build
-                                """
+                            "${msbuild}" /t:Build
+                            """
                         }
 
                         stage('Pack nuget') {
                             echo "Creating nuget package ${PkgVersion}"
                             bat """
-                                "${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
-                                """
+                            "${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
+                            """
                         }
                     }
 

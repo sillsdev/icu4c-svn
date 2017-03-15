@@ -1,0 +1,6 @@
+Verified-1: Jenkins Test Installation
+Submitted-by: Eberhard Beilharz <eb1@sil.org>
+Submitted-at: Wed, 15 Mar 2017 18:12:31 +0000
+Reviewed-on: https://gerrit.lsdev.sil.org/5090
+Project: icu4c
+Branch: refs/heads/FullStaticallyLinked56

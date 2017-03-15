@@ -24,11 +24,14 @@
 		<MSBuild Projects="$(SolutionDir)/$(Solution)"
 			Targets="Rebuild"
 			Properties="Configuration=$(Configuration)" />
+		<MSBuild Projects="$(SolutionDir)/$(Solution)"
+			Targets="Rebuild"
+			Properties="Configuration=$(Configuration);Platform=x64" />
 	</Target>
 
 	<ItemGroup>
 		<ExistingObjectFiles
-			Include="**/x86/**/*"
+			Include="**/x86/**/*;**/x64/**/*"
 			Exclude="$(RootDir)/.hg/**/*;$(RootDir)/.git/**/*"
 		/>
 		<NuGetPackage Include="$(MSBuildProjectDirectory)/../*.nupkg"/>
@@ -45,22 +48,26 @@
 
 	<ItemGroup>
 		<LibArtifacts Include='$(RootDir)\bin\i*.dll'/>
+		<LibArtifacts64 Include='$(RootDir)\bin64\i*.dll'/>
 		<LibNuGetAssets Include='$(MSBuildProjectDirectory)/../assets/lib/**/*'/>
 		<BinArtifacts Include='$(RootDir)\bin\*.exe'/>
+		<BinArtifacts64 Include='$(RootDir)\bin64\*.exe'/>
 		<BinNuGetAssets Include='$(MSBuildProjectDirectory)/../assets/bin/**/*'/>
 	</ItemGroup>
 
 	<Target Name="BuildPackage" DependsOnTargets="CleanNuGet;CheckPrerequisites">
 		<!-- Libraries -->
 		<MakeDir Directories="$(NuGetBuildDir)\lib"/>
-		<Copy SourceFiles="@(LibArtifacts)" DestinationFolder="$(NuGetBuildDir)\lib\build"/>
+		<Copy SourceFiles="@(LibArtifacts)" DestinationFolder="$(NuGetBuildDir)\lib\build\x86"/>
+		<Copy SourceFiles="@(LibArtifacts64)" DestinationFolder="$(NuGetBuildDir)\lib\build\x64"/>
 		<Copy SourceFiles="@(LibNuGetAssets)"
 			DestinationFiles="@(LibNuGetAssets->'$(NuGetBuildDir)\lib\%(RecursiveDir)%(Filename)%(Extension)')" />
 		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(MSBuildProjectDirectory)/.. -Properties IcuVer=$(icu_ver) icu-win-full-lib.nuspec"
 			WorkingDirectory="$(NuGetBuildDir)\lib"/>
 		<!-- Binaries -->
 		<MakeDir Directories="$(NuGetBuildDir)\bin"/>
-		<Copy SourceFiles="@(BinArtifacts)" DestinationFolder="$(NuGetBuildDir)\bin\build"/>
+		<Copy SourceFiles="@(BinArtifacts)" DestinationFolder="$(NuGetBuildDir)\bin\build\x86"/>
+		<Copy SourceFiles="@(BinArtifacts64)" DestinationFolder="$(NuGetBuildDir)\bin\build\x64"/>
 		<Copy SourceFiles="@(BinNuGetAssets)"
 			DestinationFiles="@(BinNuGetAssets->'$(NuGetBuildDir)\bin\%(RecursiveDir)%(Filename)%(Extension)')" />
 		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(MSBuildProjectDirectory)/.. -Properties IcuVer=$(icu_ver) icu-win-full-bin.nuspec"

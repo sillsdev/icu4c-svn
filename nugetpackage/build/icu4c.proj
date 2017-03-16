@@ -24,11 +24,14 @@
 		<MSBuild Projects="$(SolutionDir)/$(Solution)"
 			Targets="Rebuild"
 			Properties="Configuration=$(Configuration)" />
+		<MSBuild Projects="$(SolutionDir)/$(Solution)"
+			Targets="Rebuild"
+			Properties="Configuration=$(Configuration);Platform=x64" />
 	</Target>
 
 	<ItemGroup>
 		<ExistingObjectFiles
-			Include="**/x86/**/*"
+			Include="**/x86/**/*;**/x64/**/*"
 			Exclude="$(RootDir)/.hg/**/*;$(RootDir)/.git/**/*"
 		/>
 		<NuGetPackage Include="$(MSBuildProjectDirectory)/../*.nupkg"/>
@@ -45,12 +48,14 @@
 
 	<ItemGroup>
 		<Artifacts Include='$(RootDir)\bin\icudt*.dll;$(RootDir)\bin\icuin*.dll;$(RootDir)\bin\icuuc*.dll'/>
+		<Artifacts64 Include='$(RootDir)\bin64\icudt*.dll;$(RootDir)\bin64\icuin*.dll;$(RootDir)\bin64\icuuc*.dll'/>
 		<NuGetAssets Include='$(MSBuildProjectDirectory)/../assets/**/*'/>
 	</ItemGroup>
 
 	<Target Name="BuildPackage" DependsOnTargets="CleanNuGet;CheckPrerequisites">
 		<MakeDir Directories="$(NuGetBuildDir)"/>
-		<Copy SourceFiles="@(Artifacts)" DestinationFolder="$(NuGetBuildDir)\build"/>
+		<Copy SourceFiles="@(Artifacts)" DestinationFolder="$(NuGetBuildDir)\build\x86"/>
+		<Copy SourceFiles="@(Artifacts64)" DestinationFolder="$(NuGetBuildDir)\build\x64"/>
 		<Copy SourceFiles="@(NuGetAssets)"
 			DestinationFiles="@(NuGetAssets->'$(NuGetBuildDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
 		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(MSBuildProjectDirectory)/.. icu-win-min.nuspec"

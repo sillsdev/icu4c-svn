@@ -11,8 +11,10 @@ Debug/
 Release/
 source/data/out
 source/tools/genrb/x86
+source/tools/genrb/x64
 source/tools/icuinfo/x86
 source/test/testdata/out
+source/tools/icuinfo/x64
 *.sdf
 *.opensdf
 *.suo

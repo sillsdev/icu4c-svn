@@ -24,6 +24,9 @@
 		<MSBuild Projects="$(SolutionDir)/$(Solution)"
 			Targets="Rebuild"
 			Properties="Configuration=$(Configuration)" />
+		<MSBuild Projects="$(SolutionDir)/$(Solution)"
+			Targets="Rebuild"
+			Properties="Configuration=$(Configuration);Platform=x64" />
 	</Target>
 
 	<ItemGroup>

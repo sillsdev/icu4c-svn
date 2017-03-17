@@ -49,10 +49,11 @@ ansiColor('xterm') {
 						echo "Checked out ${GERRIT_PATCHSET_REVISION}"
 					}
 
-					// We expect that the branch name contains the ICU version number, otherwise default to 54
-					def IcuVersion = (env.BRANCH_NAME =~ /[0-9]+/)[0] ?: 54
+					def uvernum = readfile 'source/common/unicode/uvernum.h'
+					def IcuVersion = (uvernum =~ "#define U_ICU_VERSION_MAJOR_NUM ([0-9]+)")[0][1]
+					def IcuMinor = (uvernum =~ "#define U_ICU_VERSION_MINOR_NUM ([0-9]+)")[0][1])
 					def PreRelease = isGerritChange ? "-ci" : (buildKind != 'Release' ? "-beta" : "")
-					PkgVersion = "${IcuVersion}.1.${BUILD_NUMBER}${PreRelease}"
+					PkgVersion = "${IcuVersion}.${IcuMinor}.${BUILD_NUMBER}${PreRelease}"
 
 					currentBuild.displayName = PkgVersion
 				}

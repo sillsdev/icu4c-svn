@@ -69,3 +69,15 @@ tools/icuinfo/icuinfo
 /source/test/testdata/pkgdataMakefile
 /source/tools/gentest/gentest
 /source/tools/icuinfo/icuinfo
+
+*.ncb
+*.opt
+*.suo
+*.sdf
+*.opensdf
+ipch
+.vs
+Debug
+*.db
+*.opendb
+

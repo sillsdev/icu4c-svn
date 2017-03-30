@@ -11,6 +11,12 @@ bin/
 lib/
 bin64/
 lib64/
+bin32uwp/
+lib32uwp/
+bin64uwp/
+lib64uwp/
+commondata/
+
 icudefs.mk
 pkgdata.inc
 common/svchook.mk
@@ -27,6 +33,7 @@ data/build-dir
 data/build-local
 data/icupkg.inc
 data/out/
+data/data/
 data/packagedata
 data/pkgdataMakefile
 extra/uconv/pkgdata.inc

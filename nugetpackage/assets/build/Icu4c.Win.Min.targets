@@ -1,8 +1,20 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<RuntimesDirectory>$(MSBuildThisFileDirectory)\..\runtimes</RuntimesDirectory>
+		<RuntimeWinX86>$(RuntimesDirectory)\win7-x86\native</RuntimeWinX86>
+		<RuntimeWinX64>$(RuntimesDirectory)\win7-x64\native</RuntimeWinX64>
+	</PropertyGroup>
+
 	<ItemGroup Condition="'$(OS)'=='Windows_NT'">
-		<IcuLibs Include="$(MSBuildThisFileDirectory)\**\icu*.dll" />
-		<None Include="@(IcuLibs)">
-			<Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
+		<IcuLibsX86 Include="$(RuntimeWinX86)\icu*.dll" />
+		<IcuLibsX64 Include="$(RuntimeWinX64)\icu*.dll" />
+
+		<None Include="@(IcuLibsX86)">
+			<Link>lib\x86\%(FileName)%(Extension)</Link>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="@(IcuLibsX64)">
+			<Link>lib\x64\%(FileName)%(Extension)</Link>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

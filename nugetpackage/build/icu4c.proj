@@ -3,8 +3,9 @@
 		<RootDir Condition="'$(teamcity_version)' == '' Or '$(OS)'!='Windows_NT'">$(MSBuildProjectDirectory)\..\..</RootDir>
 		<RootDir Condition="'$(teamcity_version)' != '' And '$(OS)'=='Windows_NT'">$(teamcity_build_checkoutDir)</RootDir>
 		<teamcity_agent_home_dir Condition="'$(teamcity_agent_home_dir)'=='' And '$(OS)'!='Windows_NT'">/var/lib/TeamCity/agent</teamcity_agent_home_dir>
+		<SourceDir>$(RootDir)/source</SourceDir>
 		<Solution>allinone.sln</Solution>
-		<SolutionDir>$(RootDir)/source/allinone</SolutionDir>
+		<SolutionDir>$(SourceDir)/allinone</SolutionDir>
 		<Configuration>Release</Configuration>
 		<icu_ver Condition="'$(icu_ver)' == ''">54</icu_ver>
 		<BuildCounter Condition="'$(BuildCounter)' == ''">0</BuildCounter>
@@ -12,6 +13,15 @@
 		<PreRelease Condition="'$(PreRelease)' == ''"></PreRelease>
 		<PkgVersion Condition="'$(PkgVersion)' == ''">$(icu_ver).1.$(BuildCounter)$(PreRelease)</PkgVersion>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<PlatformToBuild Include="x86">
+			<Platform>Win32</Platform>
+		</PlatformToBuild>
+		<PlatformToBuild Include="x64">
+			<Platform>x64</Platform>
+		</PlatformToBuild>
+	</ItemGroup>
 
 	<Import Project="NuGet.targets"/>
 
@@ -21,38 +31,43 @@
 	</Target>
 
 	<Target Name="Compile" DependsOnTargets="CheckPrerequisites">
+		<Message Text="Building $(Solution) for 'Configuration=$(Configuration);Platform=%(PlatformToBuild.Platform)'" />
 		<MSBuild Projects="$(SolutionDir)/$(Solution)"
 			Targets="Rebuild"
-			Properties="Configuration=$(Configuration)" />
-		<MSBuild Projects="$(SolutionDir)/$(Solution)"
-			Targets="Rebuild"
-			Properties="Configuration=$(Configuration);Platform=x64" />
+			Properties="Configuration=$(Configuration);Platform=%(PlatformToBuild.Platform)" />
 	</Target>
 
+	<Target Name="Clean" DependsOnTargets="CleanNuGet">
+		<Message Text="Deleting object files matching: '$(SourceDir)/**/%(PlatformToBuild.Identity)/**/*'" />
 	<ItemGroup>
 		<ExistingObjectFiles
-			Include="**/x86/**/*;**/x64/**/*"
-			Exclude="$(RootDir)/.hg/**/*;$(RootDir)/.git/**/*"
-		/>
-		<NuGetPackage Include="$(MSBuildProjectDirectory)/../*.nupkg"/>
+				Include="$(SourceDir)/**/%(PlatformToBuild.Identity)/**/*"
+				Exclude="$(RootDir)/.hg/**/*;$(RootDir)/.git/**/*" />
 	</ItemGroup>
-
-	<Target Name="Clean" DependsOnTargets="CleanNuGet">
 		<Delete Files="@(ExistingObjectFiles)" />
 	</Target>
 
 	<Target Name="CleanNuGet">
+		<ItemGroup>
+			<NuGetPackage Include="$(MSBuildProjectDirectory)/../*.nupkg"/>
+		</ItemGroup>
+
 		<Delete Files="@(NuGetPackage)"/>
 		<RemoveDir Directories="$(NuGetBuildDir)" />
 	</Target>
 
-	<ItemGroup>
-		<Artifacts Include='$(RootDir)\bin\icudt*.dll;$(RootDir)\bin\icuin*.dll;$(RootDir)\bin\icuuc*.dll'/>
-		<Artifacts64 Include='$(RootDir)\bin64\icudt*.dll;$(RootDir)\bin64\icuin*.dll;$(RootDir)\bin64\icuuc*.dll'/>
-		<NuGetAssets Include='$(MSBuildProjectDirectory)/../assets/**/*'/>
-	</ItemGroup>
-
 	<Target Name="BuildPackage" DependsOnTargets="CleanNuGet;CheckPrerequisites">
+		<PropertyGroup>
+			<NuGetOutputDir>$(MSBuildProjectDirectory)/..</NuGetOutputDir>
+			<NuGetRuntimeFolderWinX86>runtimes/win7-x86/native</NuGetRuntimeFolderWinX86>
+			<NuGetRuntimeFolderWinX64>runtimes/win7-x64/native</NuGetRuntimeFolderWinX64>
+		</PropertyGroup>
+		<ItemGroup>
+			<Artifacts Include='$(RootDir)\bin\icudt*.dll;$(RootDir)\bin\icuin*.dll;$(RootDir)\bin\icuuc*.dll'/>
+			<Artifacts64 Include='$(RootDir)\bin64\icudt*.dll;$(RootDir)\bin64\icuin*.dll;$(RootDir)\bin64\icuuc*.dll'/>
+			<NuGetAssets Include='$(MSBuildProjectDirectory)/../assets/**/*'/>
+		</ItemGroup>
+
 		<MakeDir Directories="$(NuGetBuildDir)"/>
 		<Copy SourceFiles="@(Artifacts)" DestinationFolder="$(NuGetBuildDir)\build\x86"/>
 		<Copy SourceFiles="@(Artifacts64)" DestinationFolder="$(NuGetBuildDir)\build\x64"/>

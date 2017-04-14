@@ -1,4 +1,4 @@
-// Copyright (C) 2016 and later: Unicode, Inc. and others.
+// © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /*
 *******************************************************************************
@@ -8,7 +8,7 @@
 *
 *******************************************************************************
 *   file name:  strcase.cpp
-*   encoding:   US-ASCII
+*   encoding:   UTF-8
 *   tab size:   8 (not used)
 *   indentation:4
 *
@@ -19,6 +19,8 @@
 */
 
 #include "unicode/std_string.h"
+#include "unicode/casemap.h"
+#include "unicode/edits.h"
 #include "unicode/uchar.h"
 #include "unicode/ures.h"
 #include "unicode/uloc.h"
@@ -31,9 +33,53 @@
 #include "unicode/tstdtmod.h"
 #include "cmemory.h"
 
+struct EditChange {
+    UBool change;
+    int32_t oldLength, newLength;
+};
+
+class StringCaseTest: public IntlTest {
+public:
+    StringCaseTest();
+    virtual ~StringCaseTest();
+
+    void runIndexedTest(int32_t index, UBool exec, const char *&name, char *par=0);
+
+    void TestCaseConversion();
+
+    void TestCasingImpl(const UnicodeString &input,
+                        const UnicodeString &output,
+                        int32_t whichCase,
+                        void *iter, const char *localeID, uint32_t options);
+    void TestCasing();
+    void TestFullCaseFoldingIterator();
+    void TestGreekUpper();
+    void TestLongUpper();
+    void TestMalformedUTF8();
+    void TestBufferOverflow();
+    void TestEdits();
+    void TestCaseMapWithEdits();
+    void TestCaseMapUTF8WithEdits();
+    void TestLongUnicodeString();
+    void TestBug13127();
+
+private:
+    void assertGreekUpper(const char16_t *s, const char16_t *expected);
+    void checkEditsIter(
+        const UnicodeString &name, Edits::Iterator ei1, Edits::Iterator ei2,  // two equal iterators
+        const EditChange expected[], int32_t expLength, UBool withUnchanged,
+        UErrorCode &errorCode);
+
+    Locale GREEK_LOCALE_;
+};
+
 StringCaseTest::StringCaseTest() : GREEK_LOCALE_("el") {}
 
 StringCaseTest::~StringCaseTest() {}
+
+extern IntlTest *createStringCaseTest() {
+    return new StringCaseTest();
+}
 
 void
 StringCaseTest::runIndexedTest(int32_t index, UBool exec, const char *&name, char * /*par*/) {
@@ -44,12 +90,17 @@ StringCaseTest::runIndexedTest(int32_t index, UBool exec, const char *&name, cha
     TESTCASE_AUTO(TestCaseConversion);
 #if !UCONFIG_NO_BREAK_ITERATION && !UCONFIG_NO_FILE_IO && !UCONFIG_NO_LEGACY_CONVERSION
     TESTCASE_AUTO(TestCasing);
+    TESTCASE_AUTO(TestBug13127);
 #endif
     TESTCASE_AUTO(TestFullCaseFoldingIterator);
     TESTCASE_AUTO(TestGreekUpper);
     TESTCASE_AUTO(TestLongUpper);
     TESTCASE_AUTO(TestMalformedUTF8);
     TESTCASE_AUTO(TestBufferOverflow);
+    TESTCASE_AUTO(TestEdits);
+    TESTCASE_AUTO(TestCaseMapWithEdits);
+    TESTCASE_AUTO(TestCaseMapUTF8WithEdits);
+    TESTCASE_AUTO(TestLongUnicodeString);
     TESTCASE_AUTO_END;
 }
 
@@ -582,9 +633,9 @@ StringCaseTest::TestFullCaseFoldingIterator() {
 }
 
 void
-StringCaseTest::assertGreekUpper(const char *s, const char *expected) {
-    UnicodeString s16 = UnicodeString(s).unescape();
-    UnicodeString expected16 = UnicodeString(expected).unescape();
+StringCaseTest::assertGreekUpper(const char16_t *s, const char16_t *expected) {
+    UnicodeString s16(s);
+    UnicodeString expected16(expected);
     UnicodeString msg = UnicodeString("UnicodeString::toUpper/Greek(\"") + s16 + "\")";
     UnicodeString result16(s16);
     result16.toUpper(GREEK_LOCALE_);
@@ -619,7 +670,6 @@ StringCaseTest::assertGreekUpper(const char *s, const char *expected) {
         }
     }
 
-#if U_HAVE_STD_STRING
     UErrorCode errorCode = U_ZERO_ERROR;
     LocalUCaseMapPointer csm(ucasemap_open("el", 0, &errorCode));
     assertSuccess("ucasemap_open", errorCode);
@@ -655,98 +705,43 @@ StringCaseTest::assertGreekUpper(const char *s, const char *expected) {
             expectedErrorCode = U_STRING_NOT_TERMINATED_WARNING;
         } else {
             expectedErrorCode = U_ZERO_ERROR;
-            assertEquals(msg + cap + " NUL", 0, dest8b[length]);
+            // Casts to int32_t to avoid matching UBool.
+            assertEquals(msg + cap + " NUL", (int32_t)0, (int32_t)dest8b[length]);
         }
         assertEquals(msg + cap + " errorCode", expectedErrorCode, errorCode);
         if (cap >= expected8Length) {
             assertEquals(msg + cap + " (memcmp)", 0, memcmp(dest8, dest8b, expected8Length));
         }
     }
-#endif
 }
 
 void
 StringCaseTest::TestGreekUpper() {
-    // See UCharacterCaseTest.java for human-readable strings.
-
     // http://bugs.icu-project.org/trac/ticket/5456
-    assertGreekUpper("\\u03AC\\u03B4\\u03B9\\u03BA\\u03BF\\u03C2, "
-                     "\\u03BA\\u03B5\\u03AF\\u03BC\\u03B5\\u03BD\\u03BF, "
-                     "\\u03AF\\u03C1\\u03B9\\u03B4\\u03B1",
-                     "\\u0391\\u0394\\u0399\\u039A\\u039F\\u03A3, "
-                     "\\u039A\\u0395\\u0399\\u039C\\u0395\\u039D\\u039F, "
-                     "\\u0399\\u03A1\\u0399\\u0394\\u0391");
+    assertGreekUpper(u"άδικος, κείμενο, ίριδα", u"ΑΔΙΚΟΣ, ΚΕΙΜΕΝΟ, ΙΡΙΔΑ");
     // https://bugzilla.mozilla.org/show_bug.cgi?id=307039
     // https://bug307039.bmoattachments.org/attachment.cgi?id=194893
-    assertGreekUpper("\\u03A0\\u03B1\\u03C4\\u03AC\\u03C4\\u03B1",
-                     "\\u03A0\\u0391\\u03A4\\u0391\\u03A4\\u0391");
-    assertGreekUpper("\\u0391\\u03AD\\u03C1\\u03B1\\u03C2, "
-                     "\\u039C\\u03C5\\u03C3\\u03C4\\u03AE\\u03C1\\u03B9\\u03BF, "
-                     "\\u03A9\\u03C1\\u03B1\\u03AF\\u03BF",
-                     "\\u0391\\u0395\\u03A1\\u0391\\u03A3, "
-                     "\\u039C\\u03A5\\u03A3\\u03A4\\u0397\\u03A1\\u0399\\u039F, "
-                     "\\u03A9\\u03A1\\u0391\\u0399\\u039F");
-    assertGreekUpper("\\u039C\\u03B1\\u0390\\u03BF\\u03C5, \\u03A0\\u03CC\\u03C1\\u03BF\\u03C2, "
-                     "\\u03A1\\u03CD\\u03B8\\u03BC\\u03B9\\u03C3\\u03B7",
-                     "\\u039C\\u0391\\u03AA\\u039F\\u03A5, \\u03A0\\u039F\\u03A1\\u039F\\u03A3, "
-                     "\\u03A1\\u03A5\\u0398\\u039C\\u0399\\u03A3\\u0397");
-    assertGreekUpper("\\u03B0, \\u03A4\\u03B7\\u03C1\\u03CE, \\u039C\\u03AC\\u03B9\\u03BF\\u03C2",
-                     "\\u03AB, \\u03A4\\u0397\\u03A1\\u03A9, \\u039C\\u0391\\u03AA\\u039F\\u03A3");
-    assertGreekUpper("\\u03AC\\u03C5\\u03BB\\u03BF\\u03C2",
-                     "\\u0391\\u03AB\\u039B\\u039F\\u03A3");
-    assertGreekUpper("\\u0391\\u03AB\\u039B\\u039F\\u03A3",
-                     "\\u0391\\u03AB\\u039B\\u039F\\u03A3");
-    assertGreekUpper("\\u0386\\u03BA\\u03BB\\u03B9\\u03C4\\u03B1 "
-                     "\\u03C1\\u03AE\\u03BC\\u03B1\\u03C4\\u03B1 \\u03AE "
-                     "\\u03AC\\u03BA\\u03BB\\u03B9\\u03C4\\u03B5\\u03C2 "
-                     "\\u03BC\\u03B5\\u03C4\\u03BF\\u03C7\\u03AD\\u03C2",
-                     "\\u0391\\u039A\\u039B\\u0399\\u03A4\\u0391 "
-                     "\\u03A1\\u0397\\u039C\\u0391\\u03A4\\u0391 \\u0397\\u0301 "
-                     "\\u0391\\u039A\\u039B\\u0399\\u03A4\\u0395\\u03A3 "
-                     "\\u039C\\u0395\\u03A4\\u039F\\u03A7\\u0395\\u03A3");
+    assertGreekUpper(u"Πατάτα", u"ΠΑΤΑΤΑ");
+    assertGreekUpper(u"Αέρας, Μυστήριο, Ωραίο", u"ΑΕΡΑΣ, ΜΥΣΤΗΡΙΟ, ΩΡΑΙΟ");
+    assertGreekUpper(u"Μαΐου, Πόρος, Ρύθμιση", u"ΜΑΪΟΥ, ΠΟΡΟΣ, ΡΥΘΜΙΣΗ");
+    assertGreekUpper(u"ΰ, Τηρώ, Μάιος", u"Ϋ, ΤΗΡΩ, ΜΑΪΟΣ");
+    assertGreekUpper(u"άυλος", u"ΑΫΛΟΣ");
+    assertGreekUpper(u"ΑΫΛΟΣ", u"ΑΫΛΟΣ");
+    assertGreekUpper(u"Άκλιτα ρήματα ή άκλιτες μετοχές", u"ΑΚΛΙΤΑ ΡΗΜΑΤΑ Ή ΑΚΛΙΤΕΣ ΜΕΤΟΧΕΣ");
     // http://www.unicode.org/udhr/d/udhr_ell_monotonic.html
-    assertGreekUpper("\\u0395\\u03C0\\u03B5\\u03B9\\u03B4\\u03AE \\u03B7 "
-                     "\\u03B1\\u03BD\\u03B1\\u03B3\\u03BD\\u03CE\\u03C1\\u03B9\\u03C3\\u03B7 "
-                     "\\u03C4\\u03B7\\u03C2 \\u03B1\\u03BE\\u03B9\\u03BF\\u03C0\\u03C1\\u03AD"
-                     "\\u03C0\\u03B5\\u03B9\\u03B1\\u03C2",
-                     "\\u0395\\u03A0\\u0395\\u0399\\u0394\\u0397 \\u0397 "
-                     "\\u0391\\u039D\\u0391\\u0393\\u039D\\u03A9\\u03A1\\u0399\\u03A3\\u0397 "
-                     "\\u03A4\\u0397\\u03A3 \\u0391\\u039E\\u0399\\u039F\\u03A0\\u03A1\\u0395"
-                     "\\u03A0\\u0395\\u0399\\u0391\\u03A3");
-    assertGreekUpper("\\u03BD\\u03BF\\u03BC\\u03B9\\u03BA\\u03BF\\u03CD \\u03AE "
-                     "\\u03B4\\u03B9\\u03B5\\u03B8\\u03BD\\u03BF\\u03CD\\u03C2",
-                     "\\u039D\\u039F\\u039C\\u0399\\u039A\\u039F\\u03A5 \\u0397\\u0301 "
-                     "\\u0394\\u0399\\u0395\\u0398\\u039D\\u039F\\u03A5\\u03A3");
+    assertGreekUpper(u"Επειδή η αναγνώριση της αξιοπρέπειας", u"ΕΠΕΙΔΗ Η ΑΝΑΓΝΩΡΙΣΗ ΤΗΣ ΑΞΙΟΠΡΕΠΕΙΑΣ");
+    assertGreekUpper(u"νομικού ή διεθνούς", u"ΝΟΜΙΚΟΥ Ή ΔΙΕΘΝΟΥΣ");
     // http://unicode.org/udhr/d/udhr_ell_polytonic.html
-    assertGreekUpper("\\u1F18\\u03C0\\u03B5\\u03B9\\u03B4\\u1F74 \\u1F21 "
-                     "\\u1F00\\u03BD\\u03B1\\u03B3\\u03BD\\u1F7D\\u03C1\\u03B9\\u03C3\\u03B7",
-                     "\\u0395\\u03A0\\u0395\\u0399\\u0394\\u0397 \\u0397 "
-                     "\\u0391\\u039D\\u0391\\u0393\\u039D\\u03A9\\u03A1\\u0399\\u03A3\\u0397");
-    assertGreekUpper("\\u03BD\\u03BF\\u03BC\\u03B9\\u03BA\\u03BF\\u1FE6 \\u1F22 "
-                     "\\u03B4\\u03B9\\u03B5\\u03B8\\u03BD\\u03BF\\u1FE6\\u03C2",
-                     "\\u039D\\u039F\\u039C\\u0399\\u039A\\u039F\\u03A5 \\u0397\\u0301 "
-                     "\\u0394\\u0399\\u0395\\u0398\\u039D\\u039F\\u03A5\\u03A3");
+    assertGreekUpper(u"Ἐπειδὴ ἡ ἀναγνώριση", u"ΕΠΕΙΔΗ Η ΑΝΑΓΝΩΡΙΣΗ");
+    assertGreekUpper(u"νομικοῦ ἢ διεθνοῦς", u"ΝΟΜΙΚΟΥ Ή ΔΙΕΘΝΟΥΣ");
     // From Google bug report
-    assertGreekUpper("\\u039D\\u03AD\\u03BF, "
-                     "\\u0394\\u03B7\\u03BC\\u03B9\\u03BF\\u03C5\\u03C1\\u03B3\\u03AF\\u03B1",
-                     "\\u039D\\u0395\\u039F, "
-                     "\\u0394\\u0397\\u039C\\u0399\\u039F\\u03A5\\u03A1\\u0393\\u0399\\u0391");
+    assertGreekUpper(u"Νέο, Δημιουργία", u"ΝΕΟ, ΔΗΜΙΟΥΡΓΙΑ");
     // http://crbug.com/234797
-    assertGreekUpper("\\u0395\\u03BB\\u03AC\\u03C4\\u03B5 \\u03BD\\u03B1 \\u03C6\\u03AC\\u03C4\\u03B5 "
-                     "\\u03C4\\u03B1 \\u03BA\\u03B1\\u03BB\\u03CD\\u03C4\\u03B5\\u03C1\\u03B1 "
-                     "\\u03C0\\u03B1\\u03CA\\u03B4\\u03AC\\u03BA\\u03B9\\u03B1!",
-                     "\\u0395\\u039B\\u0391\\u03A4\\u0395 \\u039D\\u0391 \\u03A6\\u0391\\u03A4\\u0395 "
-                     "\\u03A4\\u0391 \\u039A\\u0391\\u039B\\u03A5\\u03A4\\u0395\\u03A1\\u0391 "
-                     "\\u03A0\\u0391\\u03AA\\u0394\\u0391\\u039A\\u0399\\u0391!");
-    assertGreekUpper("\\u039C\\u03B1\\u0390\\u03BF\\u03C5, \\u03C4\\u03C1\\u03CC\\u03BB\\u03B5\\u03CA",
-                     "\\u039C\\u0391\\u03AA\\u039F\\u03A5, \\u03A4\\u03A1\\u039F\\u039B\\u0395\\u03AA");
-    assertGreekUpper("\\u03A4\\u03BF \\u03AD\\u03BD\\u03B1 \\u03AE \\u03C4\\u03BF "
-                     "\\u03AC\\u03BB\\u03BB\\u03BF.",
-                     "\\u03A4\\u039F \\u0395\\u039D\\u0391 \\u0397\\u0301 \\u03A4\\u039F "
-                     "\\u0391\\u039B\\u039B\\u039F.");
+    assertGreekUpper(u"Ελάτε να φάτε τα καλύτερα παϊδάκια!", u"ΕΛΑΤΕ ΝΑ ΦΑΤΕ ΤΑ ΚΑΛΥΤΕΡΑ ΠΑΪΔΑΚΙΑ!");
+    assertGreekUpper(u"Μαΐου, τρόλεϊ", u"ΜΑΪΟΥ, ΤΡΟΛΕΪ");
+    assertGreekUpper(u"Το ένα ή το άλλο.", u"ΤΟ ΕΝΑ Ή ΤΟ ΑΛΛΟ.");
     // http://multilingualtypesetting.co.uk/blog/greek-typesetting-tips/
-    assertGreekUpper("\\u03C1\\u03C9\\u03BC\\u03AD\\u03B9\\u03BA\\u03B1",
-                     "\\u03A1\\u03A9\\u039C\\u0395\\u03AA\\u039A\\u0391");
+    assertGreekUpper(u"ρωμέικα", u"ΡΩΜΕΪΚΑ");
 }
 
 void
@@ -786,11 +781,14 @@ void StringCaseTest::TestMalformedUTF8() {
     }
     char src[1] = { (char)0x85 };  // malformed UTF-8
     char dest[3] = { 0, 0, 0 };
-    int32_t destLength = ucasemap_utf8ToTitle(csm.getAlias(), dest, 3, src, 1, errorCode);
+    int32_t destLength;
+#if !UCONFIG_NO_BREAK_ITERATION
+    destLength = ucasemap_utf8ToTitle(csm.getAlias(), dest, 3, src, 1, errorCode);
     if (errorCode.isFailure() || destLength != 1 || dest[0] != src[0]) {
         errln("ucasemap_utf8ToTitle(\\x85) failed: %s destLength=%d dest[0]=0x%02x",
               errorCode.errorName(), (int)destLength, dest[0]);
     }
+#endif
 
     errorCode.reset();
     dest[0] = 0;
@@ -828,23 +826,324 @@ void StringCaseTest::TestBufferOverflow() {
     }
 
     UnicodeString data("hello world");
-    int32_t result = ucasemap_toTitle(csm.getAlias(), NULL, 0, data.getBuffer(), data.length(), errorCode);
+    int32_t result;
+#if !UCONFIG_NO_BREAK_ITERATION
+    result = ucasemap_toTitle(csm.getAlias(), NULL, 0, data.getBuffer(), data.length(), errorCode);
     if (errorCode.get() != U_BUFFER_OVERFLOW_ERROR || result != data.length()) {
         errln("%s:%d ucasemap_toTitle(\"hello world\") failed: "
               "expected (U_BUFFER_OVERFLOW_ERROR, %d), got (%s, %d)",
               __FILE__, __LINE__, data.length(), errorCode.errorName(), result);
     }
+#endif
     errorCode.reset();
 
-#if U_HAVE_STD_STRING
     std::string data_utf8;
     data.toUTF8String(data_utf8);
+#if !UCONFIG_NO_BREAK_ITERATION
     result = ucasemap_utf8ToTitle(csm.getAlias(), NULL, 0, data_utf8.c_str(), data_utf8.length(), errorCode);
     if (errorCode.get() != U_BUFFER_OVERFLOW_ERROR || result != (int32_t)data_utf8.length()) {
         errln("%s:%d ucasemap_toTitle(\"hello world\") failed: "
               "expected (U_BUFFER_OVERFLOW_ERROR, %d), got (%s, %d)",
               __FILE__, __LINE__, data_utf8.length(), errorCode.errorName(), result);
     }
+#endif
     errorCode.reset();
-#endif  // U_HAVE_STD_STRING
+}
+
+void StringCaseTest::checkEditsIter(
+        const UnicodeString &name,
+        Edits::Iterator ei1, Edits::Iterator ei2,  // two equal iterators
+        const EditChange expected[], int32_t expLength, UBool withUnchanged,
+        UErrorCode &errorCode) {
+    assertFalse(name, ei2.findSourceIndex(-1, errorCode));
+
+    int32_t expSrcIndex = 0;
+    int32_t expDestIndex = 0;
+    int32_t expReplIndex = 0;
+    for (int32_t expIndex = 0; expIndex < expLength; ++expIndex) {
+        const EditChange &expect = expected[expIndex];
+        UnicodeString msg = UnicodeString(name).append(u' ') + expIndex;
+        if (withUnchanged || expect.change) {
+            assertTrue(msg, ei1.next(errorCode));
+            assertEquals(msg, expect.change, ei1.hasChange());
+            assertEquals(msg, expect.oldLength, ei1.oldLength());
+            assertEquals(msg, expect.newLength, ei1.newLength());
+            assertEquals(msg, expSrcIndex, ei1.sourceIndex());
+            assertEquals(msg, expDestIndex, ei1.destinationIndex());
+            assertEquals(msg, expReplIndex, ei1.replacementIndex());
+        }
+
+        if (expect.oldLength > 0) {
+            assertTrue(msg, ei2.findSourceIndex(expSrcIndex, errorCode));
+            assertEquals(msg, expect.change, ei2.hasChange());
+            assertEquals(msg, expect.oldLength, ei2.oldLength());
+            assertEquals(msg, expect.newLength, ei2.newLength());
+            assertEquals(msg, expSrcIndex, ei2.sourceIndex());
+            assertEquals(msg, expDestIndex, ei2.destinationIndex());
+            assertEquals(msg, expReplIndex, ei2.replacementIndex());
+            if (!withUnchanged) {
+                // For some iterators, move past the current range
+                // so that findSourceIndex() has to look before the current index.
+                ei2.next(errorCode);
+                ei2.next(errorCode);
+            }
+        }
+
+        expSrcIndex += expect.oldLength;
+        expDestIndex += expect.newLength;
+        if (expect.change) {
+            expReplIndex += expect.newLength;
+        }
+    }
+    // TODO: remove casts from u"" when merging into trunk
+    UnicodeString msg = UnicodeString(name).append(u" end");
+    assertFalse(msg, ei1.next(errorCode));
+    assertFalse(msg, ei1.hasChange());
+    assertEquals(msg, 0, ei1.oldLength());
+    assertEquals(msg, 0, ei1.newLength());
+    assertEquals(msg, expSrcIndex, ei1.sourceIndex());
+    assertEquals(msg, expDestIndex, ei1.destinationIndex());
+    assertEquals(msg, expReplIndex, ei1.replacementIndex());
+
+    assertFalse(name, ei2.findSourceIndex(expSrcIndex, errorCode));
+}
+
+void StringCaseTest::TestEdits() {
+    IcuTestErrorCode errorCode(*this, "TestEdits");
+    Edits edits;
+    assertFalse("new Edits", edits.hasChanges());
+    assertEquals("new Edits", 0, edits.lengthDelta());
+    edits.addUnchanged(1);  // multiple unchanged ranges are combined
+    edits.addUnchanged(10000);  // too long, and they are split
+    edits.addReplace(0, 0);
+    edits.addUnchanged(2);
+    assertFalse("unchanged 10003", edits.hasChanges());
+    assertEquals("unchanged 10003", 0, edits.lengthDelta());
+    edits.addReplace(1, 1);  // multiple short equal-length edits are compressed
+    edits.addUnchanged(0);
+    edits.addReplace(1, 1);
+    edits.addReplace(1, 1);
+    edits.addReplace(0, 10);
+    edits.addReplace(100, 0);
+    edits.addReplace(3000, 4000);  // variable-length encoding
+    edits.addReplace(100000, 100000);
+    assertTrue("some edits", edits.hasChanges());
+    assertEquals("some edits", 10 - 100 + 1000, edits.lengthDelta());
+    UErrorCode outErrorCode = U_ZERO_ERROR;
+    assertFalse("edits done: copyErrorTo", edits.copyErrorTo(outErrorCode));
+
+    static const EditChange coarseExpectedChanges[] = {
+            { FALSE, 10003, 10003 },
+            { TRUE, 103103, 104013 }
+    };
+    checkEditsIter(u"coarse",
+            edits.getCoarseIterator(), edits.getCoarseIterator(),
+            coarseExpectedChanges, UPRV_LENGTHOF(coarseExpectedChanges), TRUE, errorCode);
+    checkEditsIter(u"coarse changes",
+            edits.getCoarseChangesIterator(), edits.getCoarseChangesIterator(),
+            coarseExpectedChanges, UPRV_LENGTHOF(coarseExpectedChanges), FALSE, errorCode);
+
+    static const EditChange fineExpectedChanges[] = {
+            { FALSE, 10003, 10003 },
+            { TRUE, 1, 1 },
+            { TRUE, 1, 1 },
+            { TRUE, 1, 1 },
+            { TRUE, 0, 10 },
+            { TRUE, 100, 0 },
+            { TRUE, 3000, 4000 },
+            { TRUE, 100000, 100000 }
+    };
+    checkEditsIter(u"fine",
+            edits.getFineIterator(), edits.getFineIterator(),
+            fineExpectedChanges, UPRV_LENGTHOF(fineExpectedChanges), TRUE, errorCode);
+    checkEditsIter(u"fine changes",
+            edits.getFineChangesIterator(), edits.getFineChangesIterator(),
+            fineExpectedChanges, UPRV_LENGTHOF(fineExpectedChanges), FALSE, errorCode);
+
+    edits.reset();
+    assertFalse("reset", edits.hasChanges());
+    assertEquals("reset", 0, edits.lengthDelta());
+    Edits::Iterator ei = edits.getCoarseChangesIterator();
+    assertFalse("reset then iterator", ei.next(errorCode));
+}
+
+void StringCaseTest::TestCaseMapWithEdits() {
+    IcuTestErrorCode errorCode(*this, "TestEdits");
+    UChar dest[20];
+    Edits edits;
+
+    int32_t length = CaseMap::toLower("tr", UCASEMAP_OMIT_UNCHANGED_TEXT,
+                                      u"IstanBul", 8, dest, UPRV_LENGTHOF(dest), &edits, errorCode);
+    assertEquals(u"toLower(IstanBul)", UnicodeString(u"ıb"), UnicodeString(TRUE, dest, length));
+    static const EditChange lowerExpectedChanges[] = {
+            { TRUE, 1, 1 },
+            { FALSE, 4, 4 },
+            { TRUE, 1, 1 },
+            { FALSE, 2, 2 }
+    };
+    checkEditsIter(u"toLower(IstanBul)",
+            edits.getFineIterator(), edits.getFineIterator(),
+            lowerExpectedChanges, UPRV_LENGTHOF(lowerExpectedChanges),
+            TRUE, errorCode);
+
+    edits.reset();
+    length = CaseMap::toUpper("el", UCASEMAP_OMIT_UNCHANGED_TEXT,
+                              u"Πατάτα", 6, dest, UPRV_LENGTHOF(dest), &edits, errorCode);
+    assertEquals(u"toUpper(Πατάτα)", UnicodeString(u"ΑΤΑΤΑ"), UnicodeString(TRUE, dest, length));
+    static const EditChange upperExpectedChanges[] = {
+            { FALSE, 1, 1 },
+            { TRUE, 1, 1 },
+            { TRUE, 1, 1 },
+            { TRUE, 1, 1 },
+            { TRUE, 1, 1 },
+            { TRUE, 1, 1 }
+    };
+    checkEditsIter(u"toUpper(Πατάτα)",
+            edits.getFineIterator(), edits.getFineIterator(),
+            upperExpectedChanges, UPRV_LENGTHOF(upperExpectedChanges),
+            TRUE, errorCode);
+
+    edits.reset();
+
+#if !UCONFIG_NO_BREAK_ITERATION
+    length = CaseMap::toTitle("nl",
+                              UCASEMAP_OMIT_UNCHANGED_TEXT |
+                              U_TITLECASE_NO_BREAK_ADJUSTMENT |
+                              U_TITLECASE_NO_LOWERCASE,
+                              NULL, u"IjssEL IglOo", 12,
+                              dest, UPRV_LENGTHOF(dest), &edits, errorCode);
+    assertEquals(u"toTitle(IjssEL IglOo)", UnicodeString(u"J"), UnicodeString(TRUE, dest, length));
+    static const EditChange titleExpectedChanges[] = {
+            { FALSE, 1, 1 },
+            { TRUE, 1, 1 },
+            { FALSE, 10, 10 }
+    };
+    checkEditsIter(u"toTitle(IjssEL IglOo)",
+            edits.getFineIterator(), edits.getFineIterator(),
+            titleExpectedChanges, UPRV_LENGTHOF(titleExpectedChanges),
+            TRUE, errorCode);
+#endif
+
+    edits.reset();
+    length = CaseMap::fold(UCASEMAP_OMIT_UNCHANGED_TEXT | U_FOLD_CASE_EXCLUDE_SPECIAL_I,
+                           u"IßtanBul", 8, dest, UPRV_LENGTHOF(dest), &edits, errorCode);
+    assertEquals(u"foldCase(IßtanBul)", UnicodeString(u"ıssb"), UnicodeString(TRUE, dest, length));
+    static const EditChange foldExpectedChanges[] = {
+            { TRUE, 1, 1 },
+            { TRUE, 1, 2 },
+            { FALSE, 3, 3 },
+            { TRUE, 1, 1 },
+            { FALSE, 2, 2 }
+    };
+    checkEditsIter(u"foldCase(IßtanBul)",
+            edits.getFineIterator(), edits.getFineIterator(),
+            foldExpectedChanges, UPRV_LENGTHOF(foldExpectedChanges),
+            TRUE, errorCode);
+}
+
+void StringCaseTest::TestCaseMapUTF8WithEdits() {
+    IcuTestErrorCode errorCode(*this, "TestEdits");
+    char dest[50];
+    Edits edits;
+
+    int32_t length = CaseMap::utf8ToLower("tr", UCASEMAP_OMIT_UNCHANGED_TEXT,
+                                          u8"IstanBul", 8, dest, UPRV_LENGTHOF(dest), &edits, errorCode);
+    assertEquals(u"toLower(IstanBul)", UnicodeString(u"ıb"),
+                 UnicodeString::fromUTF8(StringPiece(dest, length)));
+    static const EditChange lowerExpectedChanges[] = {
+            { TRUE, 1, 2 },
+            { FALSE, 4, 4 },
+            { TRUE, 1, 1 },
+            { FALSE, 2, 2 }
+    };
+    checkEditsIter(u"toLower(IstanBul)",
+            edits.getFineIterator(), edits.getFineIterator(),
+            lowerExpectedChanges, UPRV_LENGTHOF(lowerExpectedChanges),
+            TRUE, errorCode);
+
+    edits.reset();
+    length = CaseMap::utf8ToUpper("el", UCASEMAP_OMIT_UNCHANGED_TEXT,
+                                  u8"Πατάτα", 6 * 2, dest, UPRV_LENGTHOF(dest), &edits, errorCode);
+    assertEquals(u"toUpper(Πατάτα)", UnicodeString(u"ΑΤΑΤΑ"),
+                 UnicodeString::fromUTF8(StringPiece(dest, length)));
+    static const EditChange upperExpectedChanges[] = {
+            { FALSE, 2, 2 },
+            { TRUE, 2, 2 },
+            { TRUE, 2, 2 },
+            { TRUE, 2, 2 },
+            { TRUE, 2, 2 },
+            { TRUE, 2, 2 }
+    };
+    checkEditsIter(u"toUpper(Πατάτα)",
+            edits.getFineIterator(), edits.getFineIterator(),
+            upperExpectedChanges, UPRV_LENGTHOF(upperExpectedChanges),
+            TRUE, errorCode);
+
+    edits.reset();
+#if !UCONFIG_NO_BREAK_ITERATION
+    length = CaseMap::utf8ToTitle("nl",
+                                  UCASEMAP_OMIT_UNCHANGED_TEXT |
+                                  U_TITLECASE_NO_BREAK_ADJUSTMENT |
+                                  U_TITLECASE_NO_LOWERCASE,
+                                  NULL, u8"IjssEL IglOo", 12,
+                                  dest, UPRV_LENGTHOF(dest), &edits, errorCode);
+    assertEquals(u"toTitle(IjssEL IglOo)", UnicodeString(u"J"),
+                 UnicodeString::fromUTF8(StringPiece(dest, length)));
+    static const EditChange titleExpectedChanges[] = {
+            { FALSE, 1, 1 },
+            { TRUE, 1, 1 },
+            { FALSE, 10, 10 }
+    };
+    checkEditsIter(u"toTitle(IjssEL IglOo)",
+            edits.getFineIterator(), edits.getFineIterator(),
+            titleExpectedChanges, UPRV_LENGTHOF(titleExpectedChanges),
+            TRUE, errorCode);
+#endif
+
+    edits.reset();
+    length = CaseMap::utf8Fold(UCASEMAP_OMIT_UNCHANGED_TEXT | U_FOLD_CASE_EXCLUDE_SPECIAL_I,
+                               u8"IßtanBul", 1 + 2 + 6, dest, UPRV_LENGTHOF(dest), &edits, errorCode);
+    assertEquals(u"foldCase(IßtanBul)", UnicodeString(u"ıssb"),
+                 UnicodeString::fromUTF8(StringPiece(dest, length)));
+    static const EditChange foldExpectedChanges[] = {
+            { TRUE, 1, 2 },
+            { TRUE, 2, 2 },
+            { FALSE, 3, 3 },
+            { TRUE, 1, 1 },
+            { FALSE, 2, 2 }
+    };
+    checkEditsIter(u"foldCase(IßtanBul)",
+            edits.getFineIterator(), edits.getFineIterator(),
+            foldExpectedChanges, UPRV_LENGTHOF(foldExpectedChanges),
+            TRUE, errorCode);
+}
+
+void StringCaseTest::TestLongUnicodeString() {
+    // Code coverage for UnicodeString case mapping code handling
+    // long strings or many changes in a string.
+    UnicodeString s(TRUE,
+        (const UChar *)
+        u"aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeF"
+        u"aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeF"
+        u"aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeF"
+        u"aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeF"
+        u"aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeF"
+        u"aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeF", 6 * 51);
+    UnicodeString expected(TRUE,
+        (const UChar *)
+        u"AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDDEEEEEEEEEEF"
+        u"AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDDEEEEEEEEEEF"
+        u"AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDDEEEEEEEEEEF"
+        u"AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDDEEEEEEEEEEF"
+        u"AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDDEEEEEEEEEEF"
+        u"AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDDEEEEEEEEEEF", 6 * 51);
+    s.toUpper(Locale::getRoot());
+    assertEquals("string length 306", expected, s);
+}
+
+void StringCaseTest::TestBug13127() {
+    // Test case crashed when the bug was present.
+    const char16_t *s16 = u"日本語";
+    UnicodeString s(TRUE, s16, -1);
+    s.toTitle(0, Locale::getEnglish());
 }

@@ -1,4 +1,4 @@
-// Copyright (C) 2016 and later: Unicode, Inc. and others.
+// © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /*************************************************************************
  * Copyright (c) 1999-2016, International Business Machines
@@ -76,6 +76,9 @@ public:
     void TestBug9983();
     void TestBug7547();
     void TestBug12797();
+    void TestBug12918();
+    void TestBug12932();
+    void TestEmoji();
 
     void TestDebug();
     void TestProperties();

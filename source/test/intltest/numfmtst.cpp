@@ -1,4 +1,4 @@
-// Copyright (C) 2016 and later: Unicode, Inc. and others.
+// © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /********************************************************************
  * COPYRIGHT:
@@ -22,6 +22,7 @@
 #include "unicode/ustring.h"
 #include "unicode/measfmt.h"
 #include "unicode/curramt.h"
+#include "unicode/strenum.h"
 #include "digitlst.h"
 #include "textfile.h"
 #include "tokiter.h"
@@ -3244,7 +3245,7 @@ void NumberFormatTest::TestHostClone()
     UDate now = Calendar::getNow();
     NumberFormat *full = NumberFormat::createInstance(loc, status);
     if (full == NULL || U_FAILURE(status)) {
-        dataerrln("FAIL: Can't create Relative date instance - %s", u_errorName(status));
+        dataerrln("FAIL: Can't create NumberFormat date instance - %s", u_errorName(status));
         return;
     }
     UnicodeString result1;
@@ -4343,9 +4344,9 @@ NumberFormatTest::TestParseCurrencyInUCurr() {
         "Cypriot Pound1.00",
         "Cypriot pound1.00",
         "Cypriot pounds1.00",
-        "Czech Republic Koruna1.00",
-        "Czech Republic koruna1.00",
-        "Czech Republic korunas1.00",
+        "Czech Koruna1.00",
+        "Czech koruna1.00",
+        "Czech korunas1.00",
         "Czechoslovak Hard Koruna1.00",
         "Czechoslovak hard koruna1.00",
         "Czechoslovak hard korunas1.00",
@@ -5466,9 +5467,9 @@ NumberFormatTest::TestParseCurrencyInUCurr() {
         "1.00 Cypriot Pound random",
         "1.00 Cypriot pound random",
         "1.00 Cypriot pounds random",
-        "1.00 Czech Republic Koruna random",
-        "1.00 Czech Republic koruna random",
-        "1.00 Czech Republic korunas random",
+        "1.00 Czech Koruna random",
+        "1.00 Czech koruna random",
+        "1.00 Czech korunas random",
         "1.00 Czechoslovak Hard Koruna random",
         "1.00 Czechoslovak hard koruna random",
         "1.00 Czechoslovak hard korunas random",

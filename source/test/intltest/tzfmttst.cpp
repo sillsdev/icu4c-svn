@@ -1,4 +1,4 @@
-// Copyright (C) 2016 and later: Unicode, Inc. and others.
+// © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /*
 *******************************************************************************
@@ -82,6 +82,7 @@ TimeZoneFormatTest::runIndexedTest( int32_t index, UBool exec, const char* &name
         TESTCASE(3, TestISOFormat);
         TESTCASE(4, TestFormat);
         TESTCASE(5, TestFormatTZDBNames);
+        TESTCASE(6, TestFormatCustomZone);
         default: name = ""; break;
     }
 }
@@ -1210,6 +1211,43 @@ TimeZoneFormatTest::TestFormatTZDBNames(void) {
             dataerrln(UnicodeString("Formatted time zone type (Test Case ") + i + "), returned="
                 + timeType + ", expected=" + DATA[i].timeType);
         }
+    }
+}
+
+void
+TimeZoneFormatTest::TestFormatCustomZone(void) {
+    struct {
+        const char* id;
+        int32_t offset;
+        const char* expected;
+    } TESTDATA[] = {
+        { "abc", 3600000, "GMT+01:00" },                    // unknown ID
+        { "$abc", -3600000, "GMT-01:00" },                 // unknown, with ASCII variant char '$'
+        { "\\u00c1\\u00df\\u00c7", 5400000, "GMT+01:30"},    // unknown, with non-ASCII chars
+        { 0, 0, 0 }
+    };
+
+    UDate now = Calendar::getNow();
+
+    for (int32_t i = 0; ; i++) {
+        const char *id = TESTDATA[i].id;
+        if (id == 0) {
+            break;
+        }
+        UnicodeString tzid = UnicodeString(id, -1, US_INV).unescape();
+        SimpleTimeZone tz(TESTDATA[i].offset, tzid);
+
+        UErrorCode status = U_ZERO_ERROR;
+        LocalPointer<TimeZoneFormat> tzfmt(TimeZoneFormat::createInstance(Locale("en"), status));
+        if (tzfmt.isNull()) {
+            dataerrln("FAIL: TimeZoneFormat::createInstance failed for en");
+            return;
+        }
+        UnicodeString tzstr;
+        UnicodeString expected = UnicodeString(TESTDATA[i].expected, -1, US_INV).unescape();
+
+        tzfmt->format(UTZFMT_STYLE_SPECIFIC_LONG, tz, now, tzstr, NULL);
+        assertEquals(UnicodeString("Format result for ") + tzid, expected, tzstr);
     }
 }
 

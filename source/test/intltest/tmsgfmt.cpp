@@ -1,4 +1,4 @@
-// Copyright (C) 2016 and later: Unicode, Inc. and others.
+// © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /********************************************************************
  * COPYRIGHT: 
@@ -32,6 +32,7 @@
 #include "unicode/messagepattern.h"
 #include "unicode/selfmt.h"
 #include "unicode/gregocal.h"
+#include "unicode/strenum.h"
 #include <stdio.h>
 
 void
@@ -780,6 +781,7 @@ void TestMessageFormat::testMsgFormatSelect(/* char* par */)
     err = U_ZERO_ERROR;
     //Create the MessageFormat with Plural format with embedded select format(nested pattern)
     MessageFormat* msgFmt5 = internalCreate(t5.unescape(), Locale("fr"),err,(char*)"From TestMessageFormat::TestSelectFormat create t5");
+    // with no data the above should fail but it seems to construct an invalid MessageFormat with no reported error. See #13079
     if (!U_FAILURE(err)) {
         //Arguments 
         Formattable testArgs10[] = {"Kirti",(int32_t)6,"female"};  

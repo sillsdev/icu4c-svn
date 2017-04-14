@@ -1,4 +1,4 @@
-// Copyright (C) 2016 and later: Unicode, Inc. and others.
+// © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /********************************************************************
  * COPYRIGHT:
@@ -25,7 +25,7 @@
 #include "caltest.h"  // for fieldName
 #include <stdio.h> // for sprintf
 
-#if U_PLATFORM_HAS_WIN32_API
+#if U_PLATFORM_USES_ONLY_WIN32_API
 #include "windttst.h"
 #endif
 
@@ -2374,7 +2374,7 @@ void DateFormatTest::TestZTimeZoneParsing(void) {
 
 void DateFormatTest::TestHost(void)
 {
-#if U_PLATFORM_HAS_WIN32_API
+#if U_PLATFORM_USES_ONLY_WIN32_API
     Win32DateTimeTest::testLocales(this);
 #endif
 }
@@ -2604,6 +2604,10 @@ void DateFormatTest::TestDateFormatSymbolsClone(void)
     Locale loc("de_CH_LUCERNE");
     LocalPointer<DateFormat> fmt(
             DateFormat::createDateInstance(DateFormat::kDefault, loc));
+    if (fmt.isNull()) {
+        dataerrln("FAIL: DateFormat::createDateInstance failed for %s", loc.getName());
+        return;
+    }
     Locale valid1;
     Locale actual1;
     if (!getActualAndValidLocales(*fmt, valid1, actual1)) {

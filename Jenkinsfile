@@ -51,7 +51,7 @@ ansiColor('xterm') {
 
 					def uvernum = readfile 'source/common/unicode/uvernum.h'
 					def IcuVersion = (uvernum =~ "#define U_ICU_VERSION_MAJOR_NUM ([0-9]+)")[0][1]
-					def IcuMinor = (uvernum =~ "#define U_ICU_VERSION_MINOR_NUM ([0-9]+)")[0][1])
+					def IcuMinor = (uvernum =~ "#define U_ICU_VERSION_MINOR_NUM ([0-9]+)")[0][1]
 					def PreRelease = isGerritChange ? "-ci" : (buildKind != 'Release' ? "-beta" : "")
 					PkgVersion = "${IcuVersion}.${IcuMinor}.${BUILD_NUMBER}${PreRelease}"
 

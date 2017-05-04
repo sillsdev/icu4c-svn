@@ -215,7 +215,7 @@
  * @stable ICU 2.4
  */
 #ifndef UCONFIG_ONLY_COLLATION
-#   define UCONFIG_ONLY_COLLATION 0
+#   define UCONFIG_ONLY_COLLATION 1
 #endif
 
 #if UCONFIG_ONLY_COLLATION
@@ -307,7 +307,7 @@
  * @stable ICU 2.4
  */
 #ifndef UCONFIG_NO_LEGACY_CONVERSION
-#   define UCONFIG_NO_LEGACY_CONVERSION 0
+#   define UCONFIG_NO_LEGACY_CONVERSION 1
 #endif
 
 /**

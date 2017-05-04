@@ -237,9 +237,15 @@ CNV_FILES_SPECIAL=$(UCM_SOURCE_SPECIAL:.ucm=.cnv)
 !INCLUDE "$(ICUSRCDATA)\$(ICUBRK)\brkfiles.mk"
 !IF EXISTS("$(ICUSRCDATA)\$(ICUBRK)\brklocal.mk")
 !INCLUDE "$(ICUSRCDATA)\$(ICUBRK)\brklocal.mk"
+!IFDEF BRK_SOURCE_LOCAL
 BRK_SOURCE=$(BRK_SOURCE) $(BRK_SOURCE_LOCAL)
+!ENDIF
+!IFDEF BRK_DICT_SOURCE_LOCAL
 BRK_DICT_SOURCE=$(BRK_DICT_SOURCE) $(BRK_DICT_SOURCE_LOCAL)
+!ENDIF
+!IFDEF BRK_RES_SOURCE_LOCAL
 BRK_RES_SOURCE=$(BRK_RES_SOURCE) $(BRK_RES_SOURCE_LOCAL)
+!ENDIF
 !ELSE
 !MESSAGE Information: cannot find "brklocal.mk". Not building user-additional break iterator files.
 !ENDIF
@@ -272,7 +278,9 @@ ALL_RES = $(ALL_RES) $(ICUBRK)\res_index.res
 !INCLUDE "$(ICUSRCDATA)\$(ICULOC)\resfiles.mk"
 !IF EXISTS("$(ICUSRCDATA)\$(ICULOC)\reslocal.mk")
 !INCLUDE "$(ICUSRCDATA)\$(ICULOC)\reslocal.mk"
+!IFDEF GENRB_SOURCE_LOCAL
 GENRB_SOURCE=$(GENRB_SOURCE) $(GENRB_SOURCE_LOCAL)
+!ENDIF
 !ELSE
 !MESSAGE Information: cannot find "reslocal.mk". Not building user-additional resource bundle files.
 !ENDIF
@@ -291,7 +299,9 @@ ALL_RES = $(ALL_RES) res_index.res
 !INCLUDE "$(ICUSRCDATA)\curr\resfiles.mk"
 !IF EXISTS("$(ICUSRCDATA)\curr\reslocal.mk")
 !INCLUDE "$(ICUSRCDATA)\curr\reslocal.mk"
+!IFDEF CURR_SOURCE_LOCAL
 CURR_SOURCE=$(CURR_SOURCE) $(CURR_SOURCE_LOCAL)
+!ENDIF
 !ELSE
 !MESSAGE Information: cannot find "curr\reslocal.mk". Not building user-additional resource bundle files.
 !ENDIF
@@ -312,7 +322,9 @@ ALL_RES = $(ALL_RES) curr\res_index.res
 !INCLUDE "$(ICUSRCDATA)\lang\resfiles.mk"
 !IF EXISTS("$(ICUSRCDATA)\lang\reslocal.mk")
 !INCLUDE "$(ICUSRCDATA)\lang\reslocal.mk"
+!IFDEF LANG_SOURCE_LOCAL
 LANG_SOURCE=$(LANG_SOURCE) $(LANG_SOURCE_LOCAL)
+!ENDIF
 !ELSE
 !MESSAGE Information: cannot find "lang\reslocal.mk". Not building user-additional resource bundle files.
 !ENDIF
@@ -333,7 +345,9 @@ ALL_RES = $(ALL_RES) lang\res_index.res
 !INCLUDE "$(ICUSRCDATA)\region\resfiles.mk"
 !IF EXISTS("$(ICUSRCDATA)\region\reslocal.mk")
 !INCLUDE "$(ICUSRCDATA)\region\reslocal.mk"
+!IFDEF REGION_SOURCE_LOCAL
 REGION_SOURCE=$(REGION_SOURCE) $(REGION_SOURCE_LOCAL)
+!ENDIF
 !ELSE
 !MESSAGE Information: cannot find "region\reslocal.mk". Not building user-additional resource bundle files.
 !ENDIF
@@ -354,7 +368,9 @@ ALL_RES = $(ALL_RES) region\res_index.res
 !INCLUDE "$(ICUSRCDATA)\zone\resfiles.mk"
 !IF EXISTS("$(ICUSRCDATA)\zone\reslocal.mk")
 !INCLUDE "$(ICUSRCDATA)\zone\reslocal.mk"
+!IFDEF ZONE_SOURCE_LOCAL
 ZONE_SOURCE=$(ZONE_SOURCE) $(ZONE_SOURCE_LOCAL)
+!ENDIF
 !ELSE
 !MESSAGE Information: cannot find "zone\reslocal.mk". Not building user-additional resource bundle files.
 !ENDIF
@@ -376,7 +392,9 @@ ALL_RES = $(ALL_RES) zone\res_index.res
 !INCLUDE "$(ICUSRCDATA)\unit\resfiles.mk"
 !IF EXISTS("$(ICUSRCDATA)\unit\reslocal.mk")
 !INCLUDE "$(ICUSRCDATA)\unit\reslocal.mk"
+!IFDEF UNIT_SOURCE_LOCAL
 UNIT_SOURCE=$(UNIT_SOURCE) $(UNIT_SOURCE_LOCAL)
+!ENDIF
 !ELSE
 !MESSAGE Information: cannot find "unit\reslocal.mk". Not building user-additional resource bundle files.
 !ENDIF
@@ -397,7 +415,9 @@ ALL_RES = $(ALL_RES) unit\res_index.res
 !INCLUDE "$(ICUSRCDATA)\$(ICUCOL)\colfiles.mk"
 !IF EXISTS("$(ICUSRCDATA)\$(ICUCOL)\collocal.mk")
 !INCLUDE "$(ICUSRCDATA)\$(ICUCOL)\collocal.mk"
+!IFDEF COLLATION_SOURCE_LOCAL
 COLLATION_SOURCE=$(COLLATION_SOURCE) $(COLLATION_SOURCE_LOCAL)
+!ENDIF
 !ELSE
 !MESSAGE Information: cannot find "collocal.mk". Not building user-additional resource bundle files.
 !ENDIF
@@ -418,7 +438,9 @@ ALL_RES = $(ALL_RES) $(ICUCOL)\res_index.res
 !INCLUDE "$(ICUSRCDATA)\$(ICURBNF)\rbnffiles.mk"
 !IF EXISTS("$(ICUSRCDATA)\$(ICURBNF)\rbnflocal.mk")
 !INCLUDE "$(ICUSRCDATA)\$(ICURBNF)\rbnflocal.mk"
+!IFDEF RBNF_SOURCE_LOCAL
 RBNF_SOURCE=$(RBNF_SOURCE) $(RBNF_SOURCE_LOCAL)
+!ENDIF
 !ELSE
 !MESSAGE Information: cannot find "rbnflocal.mk". Not building user-additional resource bundle files.
 !ENDIF

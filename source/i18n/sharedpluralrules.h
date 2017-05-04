@@ -14,6 +14,8 @@
 #include "unicode/utypes.h"
 #include "sharedobject.h"
 
+#if !UCONFIG_NO_FORMATTING
+
 U_NAMESPACE_BEGIN
 
 class PluralRules;
@@ -31,5 +33,6 @@ private:
 };
 
 U_NAMESPACE_END
+#endif /* #if !UCONFIG_NO_FORMATTING */
 
 #endif

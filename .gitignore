@@ -66,9 +66,11 @@ tools/icuinfo/icuinfo
 /source/data/packagedata
 /source/data/pkgdataMakefile
 /source/extra/uconv/pkgdataMakefile
+/source/extra/uconv/pkgdatain.txt
 /source/extra/uconv/uconvmsg/
 /source/samples/cal/icucal
 /source/samples/date/icudate
+/source/stubdata/stubdatabuilt.txt
 /source/test/cintltst/cintltst
 /source/test/intltest/intltest
 /source/test/iotest/iotest
@@ -87,4 +89,13 @@ ipch
 Debug
 *.db
 *.opendb
-
+*~
+*.obj
+*.user
+*.res
+*.tlog
+*.pdb
+x86/
+x64/
+/obj/
+/include/

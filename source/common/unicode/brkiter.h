@@ -31,6 +31,8 @@
 
 #if UCONFIG_NO_BREAK_ITERATION
 
+#include "unicode/strenum.h"
+
 U_NAMESPACE_BEGIN
 
 /*

@@ -1141,9 +1141,11 @@ void StringCaseTest::TestLongUnicodeString() {
     assertEquals("string length 306", expected, s);
 }
 
+#if !UCONFIG_NO_BREAK_ITERATION
 void StringCaseTest::TestBug13127() {
     // Test case crashed when the bug was present.
     const char16_t *s16 = u"日本語";
     UnicodeString s(TRUE, s16, -1);
     s.toTitle(0, Locale::getEnglish());
 }
+#endif

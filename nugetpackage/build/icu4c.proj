@@ -69,8 +69,8 @@
 		</ItemGroup>
 
 		<MakeDir Directories="$(NuGetBuildDir)"/>
-		<Copy SourceFiles="@(Artifacts)" DestinationFolder="$(NuGetBuildDir)\lib\$(NuGetRuntimeFolderWinX86)"/>
-		<Copy SourceFiles="@(Artifacts64)" DestinationFolder="$(NuGetBuildDir)\lib\$(NuGetRuntimeFolderWinX64)"/>
+		<Copy SourceFiles="@(Artifacts)" DestinationFolder="$(NuGetBuildDir)\$(NuGetRuntimeFolderWinX86)"/>
+		<Copy SourceFiles="@(Artifacts64)" DestinationFolder="$(NuGetBuildDir)\$(NuGetRuntimeFolderWinX64)"/>
 		<Copy SourceFiles="@(NuGetAssets)"
 			DestinationFiles="@(NuGetAssets->'$(NuGetBuildDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
 		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(NuGetOutputDir) icu-win-min.nuspec"

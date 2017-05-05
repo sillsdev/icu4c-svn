@@ -23,6 +23,7 @@ ansiColor('xterm') {
 
 		try {
 			node('windows && supported') {
+				echo "Testing again!!!"
 				def msbuild = tool 'msbuild12'
 				def git = tool(name: 'Default', type: 'git')
 
@@ -43,16 +44,20 @@ ansiColor('xterm') {
 					dir("build") {
 						stage('Build ICU') {
 							echo "Compiling ICU"
+						/*
 							bat """
 							"${msbuild}" /t:Build
 							"""
+							*/
 						}
 
 						stage('Pack nuget') {
 							echo "Creating nuget package ${PkgVersion}"
+							/*
 							bat """
 							"${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
 							"""
+							*/
 						}
 					}
 

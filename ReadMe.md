@@ -1,6 +1,6 @@
 # Icu4c
 
-**NOTE:** See the original project's readme at [readme.html](https://github.com/sillsdev/icu4c/blob/FullStaticallyLinked56/readme.html)
+**NOTE:** See the original project's readme at [readme.html](https://github.com/sillsdev/icu4c/blob/FullStaticallyLinked58/readme.html)
 
 This project is a mirror of the svn project at <http://source.icu-project.org/repos/icu/icu/> (see [icu-project.org](http://icu-project.org)).
 

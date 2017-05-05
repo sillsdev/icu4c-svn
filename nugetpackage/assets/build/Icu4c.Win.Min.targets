@@ -1,19 +1,19 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
-		<RuntimesDirectory>$(MSBuildThisFileDirectory)\..\runtimes</RuntimesDirectory>
-		<RuntimeWinX86>$(RuntimesDirectory)\win7-x86\native</RuntimeWinX86>
-		<RuntimeWinX64>$(RuntimesDirectory)\win7-x64\native</RuntimeWinX64>
+		<MinRuntimesDirectory>$(MSBuildThisFileDirectory)\..\runtimes</MinRuntimesDirectory>
+		<MinRuntimeWinX86>$(MinRuntimesDirectory)\win7-x86\native</MinRuntimeWinX86>
+		<MinRuntimeWinX64>$(MinRuntimesDirectory)\win7-x64\native</MinRuntimeWinX64>
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(OS)'=='Windows_NT'">
-		<IcuLibsX86 Include="$(RuntimeWinX86)\icu*.dll" />
-		<IcuLibsX64 Include="$(RuntimeWinX64)\icu*.dll" />
+		<MinIcuLibsX86 Include="$(MinRuntimeWinX86)\icu*.dll" />
+		<MinIcuLibsX64 Include="$(MinRuntimeWinX64)\icu*.dll" />
 
-		<None Include="@(IcuLibsX86)">
+		<None Include="@(MinIcuLibsX86)">
 			<Link>lib\x86\%(FileName)%(Extension)</Link>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Include="@(IcuLibsX64)">
+		<None Include="@(MinIcuLibsX64)">
 			<Link>lib\x64\%(FileName)%(Extension)</Link>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

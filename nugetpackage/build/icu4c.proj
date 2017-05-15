@@ -39,12 +39,16 @@
 
 	<Target Name="Clean" DependsOnTargets="CleanNuGet">
 		<Message Text="Deleting object files matching: '$(SourceDir)/**/%(PlatformToBuild.Identity)/**/*'" />
-	<ItemGroup>
-		<ExistingObjectFiles
+		<ItemGroup>
+			<ExistingObjectFiles
 				Include="$(SourceDir)/**/%(PlatformToBuild.Identity)/**/*"
 				Exclude="$(RootDir)/.hg/**/*;$(RootDir)/.git/**/*" />
-	</ItemGroup>
-		<Delete Files="@(ExistingObjectFiles)" />
+		</ItemGroup>
+		<Delete Condition="'$(OS)'=='Windows_NT'"
+			 Files="@(ExistingObjectFiles)" />
+		<Exec Condition="'$(OS)'!='Windows_NT'"
+			Command="find $(SourceDir) -name %(PlatformToBuild.Identity) -type d -print0 | xargs -0 rm -rf"
+			WorkingDirectory="$(RootDir)" />
 	</Target>
 
 	<Target Name="CleanNuGet">

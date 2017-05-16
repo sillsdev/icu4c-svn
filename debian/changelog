@@ -1,0 +1,5 @@
+icu-fw (54.1.0) stable; urgency=medium
+
+  * Create separate package.
+
+ -- Eberhard Beilharz <eb1@sil.org>  Tue, 16 May 2017 15:58:06 +0700

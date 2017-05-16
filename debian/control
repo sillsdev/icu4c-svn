@@ -1,0 +1,46 @@
+Source: icu-fw
+Section: libs
+Priority: optional
+Maintainer: Eberhard Beilharz <eb1@sil.org>
+Standards-Version: 3.9.6
+Homepage: http://www.icu-project.org
+Vcs-Git: git://github.com/sillsdev/icu4c.git
+Vcs-Browser: https://github.com/sillsdev/icu4c
+Build-Depends: debhelper (>= 9.0.0), dpkg-dev (>= 1.16.1~),
+	autotools-dev,
+	g++
+
+Package: libicu54-fw
+Section: libs
+Multi-Arch: same
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: International Components for Unicode
+ ICU is a C++ and C library that provides robust and full-featured
+ Unicode and locale support.  This package contains a FieldWorks
+ specific version of the runtime libraries for ICU.
+
+Package: libicu54-fw-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, libicu54-fw (= ${binary:Version})
+Description: International Components for Unicode
+ ICU is a C++ and C library that provides robust and full-featured
+ Unicode and locale support.  This package contains a FieldWorks
+ specific version of the debugging symbols for the libraries.
+
+Package: icu-fw-devtools
+Section: libdevel
+Architecture: any
+Multi-Arch: foreign
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Development utilities for International Components for Unicode
+ ICU is a C++ and C library that provides robust and full-featured
+ Unicode and locale support. This package contains FieldWorks specific
+ versions of the programs used to manipulate data files found in the ICU
+ sources.
+

@@ -62,7 +62,7 @@ Description: Development utilities for International Components for Unicode
 Package: icu-dev-fw
 Section: libs
 Architecture: all
-Depends: libicu54-fw (= ${binary:Version})
+Depends: icu-fw (= ${binary:Version})
 Description: International Components for Unicode
  FieldWorks specific version of ICU.
  .

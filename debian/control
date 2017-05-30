@@ -13,7 +13,8 @@ Build-Depends: debhelper (>= 9.0.0), dpkg-dev (>= 1.16.1~),
 Package: icu-fw
 Section: libs
 Architecture: all
-Depends: libicu54-fw, icu54-bin-fw
+Depends: libicu54-fw  (= ${binary:Version}),
+ icu54-bin-fw (= ${binary:Version})
 Description: International Components for Unicode
  FieldWorks specific version of ICU.
  .
@@ -48,7 +49,8 @@ Package: icu54-bin-fw
 Section: libs
 Architecture: any
 Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends},
+ libicu54-fw (= ${binary:Version})
 Conflicts: fieldworks-applications (< 9.0)
 Breaks: fieldworks-applications (< 9.0)
 Description: Development utilities for International Components for Unicode
@@ -60,7 +62,7 @@ Description: Development utilities for International Components for Unicode
 Package: icu-dev-fw
 Section: libs
 Architecture: all
-Depends: libicu54-fw
+Depends: libicu54-fw (= ${binary:Version})
 Description: International Components for Unicode
  FieldWorks specific version of ICU.
  .

@@ -1,3 +1,9 @@
+icu-fw (54.1.1) stable; urgency=medium
+
+  * Fix versions of dependencies
+
+ -- Eberhard Beilharz <eb1@sil.org>  Tue, 30 May 2017 14:26:08 +0200
+
 icu-fw (54.1.0) stable; urgency=medium
 
   * Create separate package.

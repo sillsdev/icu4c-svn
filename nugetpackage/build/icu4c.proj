@@ -18,9 +18,9 @@
 		<PlatformToBuild Include="x86">
 			<Platform>Win32</Platform>
 		</PlatformToBuild>
-		<!--<PlatformToBuild Include="x64">
+		<PlatformToBuild Include="x64">
 			<Platform>x64</Platform>
-		</PlatformToBuild>-->
+		</PlatformToBuild>
 	</ItemGroup>
 
 	<Target Name="Build">

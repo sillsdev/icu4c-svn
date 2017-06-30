@@ -62,6 +62,11 @@ ansiColor('xterm') {
 
 					currentBuild.result = "SUCCESS"
 				}
+
+				stage('Cleanup') {
+					echo "Free disk space by removing all files except .git repo"
+					bat "${git} clean -dxf"
+				}
 			}
 		} catch(error) {
 			currentBuild.result = "FAILED"

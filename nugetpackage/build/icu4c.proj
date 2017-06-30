@@ -11,7 +11,7 @@
 		<BuildCounter Condition="'$(BuildCounter)' == ''">0</BuildCounter>
 		<NuGetBuildDir>$(MSBuildProjectDirectory)/../NuGetBuild</NuGetBuildDir>
 		<PreRelease Condition="'$(PreRelease)' == ''"></PreRelease>
-		<PkgVersion Condition="'$(PkgVersion)' == ''">$(icu_ver).1.$(BuildCounter)$(PreRelease)</PkgVersion>
+		<PkgVersion Condition="'$(PkgVersion)' == ''">58.2.$(BuildCounter)$(PreRelease)</PkgVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

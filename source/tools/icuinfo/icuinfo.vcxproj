@@ -62,7 +62,7 @@
       <Outputs>..\..\..\bin\$(TargetFileName);%(Outputs)</Outputs>
     </CustomBuildStep>
     <ClCompile>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeaderOutputFile>x86\Release/icuinfo.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>x86\Release/</AssemblerListingLocation>
@@ -88,7 +88,7 @@
       <Outputs>..\..\..\bin\$(TargetFileName);%(Outputs)</Outputs>
     </CustomBuildStep>
     <ClCompile>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>Debug/icuinfo.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <ObjectFileName>Debug/</ObjectFileName>
@@ -115,7 +115,7 @@
       <Outputs>..\..\..\bin64\$(TargetFileName);%(Outputs)</Outputs>
     </CustomBuildStep>
     <ClCompile>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeaderOutputFile>x64\Release/icuinfo.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>x64\Release/</AssemblerListingLocation>
@@ -138,7 +138,7 @@
       <Outputs>..\..\..\bin64\$(TargetFileName);%(Outputs)</Outputs>
     </CustomBuildStep>
     <ClCompile>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>Debug/icuinfo.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <ObjectFileName>Debug/</ObjectFileName>

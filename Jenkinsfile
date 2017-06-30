@@ -65,7 +65,9 @@ ansiColor('xterm') {
 
 				stage('Cleanup') {
 					echo "Free disk space by removing all files except .git repo"
-					bat "${git} clean -dxf"
+					bat """
+					"${git}" clean -dxf
+					"""
 				}
 			}
 		} catch(error) {

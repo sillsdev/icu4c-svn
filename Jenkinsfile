@@ -44,14 +44,14 @@ ansiColor('xterm') {
 						stage('Build ICU') {
 							echo "Compiling ICU"
 							bat """
-							"${msbuild}" /t:Build
+							"${msbuild}" /t:Build /p:icu_ver=${IcuVersion}
 							"""
 						}
 
 						stage('Pack nuget') {
 							echo "Creating nuget package ${PkgVersion}"
 							bat """
-							"${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
+							"${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}  /p:icu_ver=${IcuVersion}
 							"""
 						}
 					}

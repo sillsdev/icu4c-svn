@@ -30,7 +30,7 @@ ansiColor('xterm') {
 					checkout scm
 
 					def uvernum = readFile 'source/common/unicode/uvernum.h'
-					def IcuVersion = (uvernum =~ "#define U_ICU_VERSION_MAJOR_NUM ([0-9]+)")[0][1]
+					IcuVersion = (uvernum =~ "#define U_ICU_VERSION_MAJOR_NUM ([0-9]+)")[0][1]
 					def IcuMinor = (uvernum =~ "#define U_ICU_VERSION_MINOR_NUM ([0-9]+)")[0][1]
 					def PreRelease = isPR ? "-${BRANCH_NAME}" :
 						(buildKindVar != 'Release' ? "-beta" : "")

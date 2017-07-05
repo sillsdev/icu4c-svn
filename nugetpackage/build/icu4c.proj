@@ -7,11 +7,10 @@
 		<Solution>allinone.sln</Solution>
 		<SolutionDir>$(SourceDir)/allinone</SolutionDir>
 		<Configuration>Release</Configuration>
-		<icu_ver Condition="'$(icu_ver)' == ''">56</icu_ver>
 		<BuildCounter Condition="'$(BuildCounter)' == ''">0</BuildCounter>
 		<NuGetBuildDir>$(MSBuildProjectDirectory)/../NuGetBuild</NuGetBuildDir>
 		<PreRelease Condition="'$(PreRelease)' == ''"></PreRelease>
-		<PkgVersion Condition="'$(PkgVersion)' == ''">$(icu_ver).1.$(BuildCounter)$(PreRelease)</PkgVersion>
+		<PkgVersion Condition="'$(PkgVersion)' == ''">59.1.$(BuildCounter)$(PreRelease)</PkgVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -77,7 +76,7 @@
 		<Copy SourceFiles="@(LibArtifacts64)" DestinationFolder="$(NuGetBuildDir)\lib\$(NuGetRuntimeFolderWinX64)"/>
 		<Copy SourceFiles="@(LibNuGetAssets)"
 			DestinationFiles="@(LibNuGetAssets->'$(NuGetBuildDir)\lib\%(RecursiveDir)%(Filename)%(Extension)')" />
-		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(NuGetOutputDir) -Properties IcuVer=$(icu_ver) icu-win-full-lib.nuspec"
+		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(NuGetOutputDir) icu-win-full-lib.nuspec"
 			WorkingDirectory="$(NuGetBuildDir)\lib"/>
 		<!-- Binaries -->
 		<MakeDir Directories="$(NuGetBuildDir)\bin"/>
@@ -85,7 +84,7 @@
 		<Copy SourceFiles="@(BinArtifacts64)" DestinationFolder="$(NuGetBuildDir)\bin\build\x64"/>
 		<Copy SourceFiles="@(BinNuGetAssets)"
 			DestinationFiles="@(BinNuGetAssets->'$(NuGetBuildDir)\bin\%(RecursiveDir)%(Filename)%(Extension)')" />
-		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(NuGetOutputDir) -Properties IcuVer=$(icu_ver) icu-win-full-bin.nuspec"
+		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(NuGetOutputDir) icu-win-full-bin.nuspec"
 			WorkingDirectory="$(NuGetBuildDir)\bin"/>
 	</Target>
 

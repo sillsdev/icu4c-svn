@@ -30,7 +30,7 @@ ansiColor('xterm') {
 					checkout scm
 
 					def uvernum = readFile 'source/common/unicode/uvernum.h'
-					IcuVersion = (uvernum =~ "#define U_ICU_VERSION_MAJOR_NUM ([0-9]+)")[0][1]
+					def IcuVersion = (uvernum =~ "#define U_ICU_VERSION_MAJOR_NUM ([0-9]+)")[0][1]
 					def IcuMinor = (uvernum =~ "#define U_ICU_VERSION_MINOR_NUM ([0-9]+)")[0][1]
 					def PreRelease = isPR ? "-${BRANCH_NAME}" :
 						(buildKindVar != 'Release' ? "-beta" : "")
@@ -44,14 +44,14 @@ ansiColor('xterm') {
 						stage('Build ICU') {
 							echo "Compiling ICU"
 							bat """
-							"${msbuild}" /t:Build /p:icu_ver=${IcuVersion}
+							"${msbuild}" /t:Build
 							"""
 						}
 
 						stage('Pack nuget') {
 							echo "Creating nuget package ${PkgVersion}"
 							bat """
-							"${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}  /p:icu_ver=${IcuVersion}
+							"${msbuild}" /t:BuildPackage /p:PkgVersion=${PkgVersion}
 							"""
 						}
 					}

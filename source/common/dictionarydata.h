@@ -21,6 +21,7 @@
 #include "unicode/utext.h"
 #include "unicode/udata.h"
 #include "udataswp.h"
+#include "unicode/uniset.h"
 #include "unicode/uobject.h"
 #include "unicode/ustringtrie.h"
 
@@ -92,7 +93,7 @@ public:
      */
     virtual int32_t matches(UText *text, int32_t maxLength, int32_t limit,
                             int32_t *lengths, int32_t *cpLengths, int32_t *values,
-                            int32_t *prefix) const = 0;
+                            int32_t *prefix, UnicodeSet const* ignoreSet = NULL, int32_t minLength = 0) const = 0;
 
     /** @return DictionaryData::TRIE_TYPE_XYZ */
     virtual int32_t getType() const = 0;
@@ -107,7 +108,7 @@ public:
     virtual ~UCharsDictionaryMatcher();
     virtual int32_t matches(UText *text, int32_t maxLength, int32_t limit,
                             int32_t *lengths, int32_t *cpLengths, int32_t *values,
-                            int32_t *prefix) const;
+                            int32_t *prefix, UnicodeSet const* ignoreSet = NULL, int32_t minLength = 0) const;
     virtual int32_t getType() const;
 private:
     const UChar *characters;
@@ -125,7 +126,7 @@ public:
     virtual ~BytesDictionaryMatcher();
     virtual int32_t matches(UText *text, int32_t maxLength, int32_t limit,
                             int32_t *lengths, int32_t *cpLengths, int32_t *values,
-                            int32_t *prefix) const;
+                            int32_t *prefix, UnicodeSet const* ignoreSet = NULL, int32_t minLength = 0) const;
     virtual int32_t getType() const;
 private:
     UChar32 transform(UChar32 c) const;

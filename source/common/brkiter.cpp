@@ -411,7 +411,9 @@ BreakIterator::makeInstance(const Locale& loc, int32_t kind, UErrorCode& status)
             char lbKeyValue[kKeyValueLenMax] = {0};
             UErrorCode kvStatus = U_ZERO_ERROR;
             int32_t kLen = loc.getKeywordValue("lb", lbKeyValue, kKeyValueLenMax, kvStatus);
-            if (U_SUCCESS(kvStatus) && kLen > 0 && (uprv_strcmp(lbKeyValue,"strict")==0 || uprv_strcmp(lbKeyValue,"normal")==0 || uprv_strcmp(lbKeyValue,"loose")==0)) {
+            if (U_SUCCESS(kvStatus) && kLen > 0 && (uprv_strcmp(lbKeyValue,"strict")==0
+                || uprv_strcmp(lbKeyValue,"normal")==0 || uprv_strcmp(lbKeyValue,"loose")==0
+                || uprv_strcmp(lbKeyValue,"nodict")==0)) {
                 uprv_strcat(lbType, "_");
                 uprv_strcat(lbType, lbKeyValue);
             }

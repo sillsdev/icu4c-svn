@@ -8,17 +8,15 @@ root{
         line_loose:process(dependency){"line_normal.brk"}
         line_normal:process(dependency){"line_normal.brk"}
         line_strict:process(dependency){"line.brk"}
+        line_nodict:process(dependency){"line_normal.brk"}
         sentence:process(dependency){"sent.brk"}
         title:process(dependency){"title.brk"}
         word:process(dependency){"word.brk"}
     }
-    dictionaries{
-        Hani:process(dependency){"cjdict.dict"}
-        Hira:process(dependency){"cjdict.dict"}
-        Kana:process(dependency){"cjdict.dict"}
-        Khmr:process(dependency){"khmerdict.dict"}
-        Laoo:process(dependency){"laodict.dict"}
-        Mymr:process(dependency){"burmesedict.dict"}
-        Thai:process(dependency){"thaidict.dict"}
-    }
+//    dictionaries{
+//        Khmr:process(dependency){"khmerdict.dict"}
+//        Laoo:process(dependency){"laodict.dict"}
+//        Mymr:process(dependency){"burmesedict.dict"}
+//        Thai:process(dependency){"thaidict.dict"}
+//    }
 }

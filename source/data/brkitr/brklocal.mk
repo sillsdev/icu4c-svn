@@ -34,19 +34,21 @@ BRK_RES_ALIAS_SOURCE = $(BRK_RES_SYNTHETIC_ALIAS)
 
 
 # List of dictionary files (dict).
-BRK_DICT_SOURCE = burmesedict.txt cjdict.txt khmerdict.txt laodict.txt\
+BRK_DICT_SOURCE = 
+
+#   burmesedict.txt khmerdict.txt laodict.txt\
  thaidict.txt
 
 
 # List of break iterator files (brk).
 BRK_SOURCE = char.txt line.txt\
- line_normal.txt line_normal_cj.txt line_normal_fi.txt\
- line_loose_cj.txt\
- sent.txt sent_el.txt title.txt word.txt
+ line_normal.txt line_normal_cj.txt \
+ line_loose_cj.txt \
+ sent.txt title.txt word.txt word_ja.txt
 
 
 # Ordinary resources
-BRK_RES_SOURCE = de.txt el.txt en.txt en_US.txt\
- es.txt fi.txt fr.txt it.txt ja.txt\
+BRK_RES_SOURCE = de.txt en.txt en_US.txt\
+ es.txt fr.txt it.txt ja.txt\
  pt.txt ru.txt zh.txt zh_Hant.txt
 

@@ -178,7 +178,7 @@ for i in locales/*.txt; do
   esac
 
   # Add 'roc' calendar to zh_Hant*.
-  [ "$(basename $i .txt)" =~ 'zh_Hant' ] && { EXTRA_CAL="${EXTRA_CAL}|roc"; }
+  [[ "$(basename $i .txt)" =~ 'zh_Hant' ]] && { EXTRA_CAL="${EXTRA_CAL}|roc"; }
 
   CAL_PATTERN="(${COMMON_CALENDARS}${EXTRA_CAL:+|${EXTRA_CAL}})"
   echo $CAL_PATTERN
@@ -201,11 +201,13 @@ for i in mappings/*.mk; do
     echo "UCM_SOURCE_${MAPPINGS}=" >> $i
 done
 
-echo LANG_SOUCE= >> lang/reslocal.mk
-echo COLLATION_SOURCE= >> coll/collocal.mk
-echo UNIT_SOURCE= >> unit/reslocal.mk
-echo ZONE_SOURCE= >> zone/reslocal.mk
-echo GENRB_SOURCE= >> locales/reslocal.mk
+echo LANG_SOURCE= en.txt >> lang/reslocal.mk
+echo CURR_SOURCE= en.txt >> curr/reslocal.mk
+echo COLLATION_SOURCE= en.txt >> coll/collocal.mk
+echo COLLATION_ALIAS_SOURCE= >> coll/collocal.mk
+echo UNIT_SOURCE= en.txt >> unit/reslocal.mk
+echo ZONE_SOURCE= en.txt >> zone/reslocal.mk
+echo GENRB_SOURCE= en.txt >> locales/reslocal.mk
 
 
 echo DONE

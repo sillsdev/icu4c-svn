@@ -178,7 +178,7 @@ for i in locales/*.txt; do
   esac
 
   # Add 'roc' calendar to zh_Hant*.
-  [[ "$(basename $i .txt)" =~ 'zh_Hant' ]] && { EXTRA_CAL="${EXTRA_CAL}|roc"; }
+  [ "$(basename $i .txt)" =~ 'zh_Hant' ] && { EXTRA_CAL="${EXTRA_CAL}|roc"; }
 
   CAL_PATTERN="(${COMMON_CALENDARS}${EXTRA_CAL:+|${EXTRA_CAL}})"
   echo $CAL_PATTERN
@@ -196,7 +196,7 @@ done
 # Don't include any converters. Saves lots of space
 for i in mappings/*.mk; do
     MAPPINGS=`echo $i | sed -r 's/^.*?ucm([^.]+)\.mk/\1/; y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/'`
-    if [ "$MAPPINGS" == "LOCAL" ] then MAPPINGS="CORE"; fi 
+    if [ "$MAPPINGS" = "LOCAL" ] ; then MAPPINGS="CORE"; fi 
     echo $i: $MAPPINGS
     echo "UCM_SOURCE_${MAPPINGS}=" >> $i
 done

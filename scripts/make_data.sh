@@ -89,9 +89,9 @@ function main() {
 
   echo "PASS2: Building the final ICU data with custom pool bundles"
   build_data
-  ls -l out/tmp/icudt*l.dat
+  ls -l out/icudt*l.dat
 
-  clean_up_src
+#  clean_up_src
 
   echo "Done."
 }

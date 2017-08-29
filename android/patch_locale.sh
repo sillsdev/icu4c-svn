@@ -193,4 +193,19 @@ for i in locales/*.txt; do
           }' -i $i
 done
 
-echo DONE.
+# Don't include any converters. Saves lots of space
+for i in mappings/*.mk; do
+    MAPPINGS=`echo $i | sed -r 's/^.*?ucm([^.]+)\.mk/\1/; y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/'`
+    if [ "$MAPPINGS" == "LOCAL" ] then MAPPINGS="CORE"; fi 
+    echo $i: $MAPPINGS
+    echo "UCM_SOURCE_${MAPPINGS}=" >> $i
+done
+
+echo LANG_SOUCE= >> lang/reslocal.mk
+echo COLLATION_SOURCE= >> coll/collocal.mk
+echo UNIT_SOURCE= >> unit/reslocal.mk
+echo ZONE_SOURCE= >> zone/reslocal.mk
+echo GENRB_SOURCE= >> locale/reslocal.mk
+
+
+echo DONE

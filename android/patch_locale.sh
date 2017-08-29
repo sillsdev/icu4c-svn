@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright (c) 2012 The Chromium Authors. All rights reserved.
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
@@ -205,7 +205,7 @@ echo LANG_SOUCE= >> lang/reslocal.mk
 echo COLLATION_SOURCE= >> coll/collocal.mk
 echo UNIT_SOURCE= >> unit/reslocal.mk
 echo ZONE_SOURCE= >> zone/reslocal.mk
-echo GENRB_SOURCE= >> locale/reslocal.mk
+echo GENRB_SOURCE= >> locales/reslocal.mk
 
 
 echo DONE

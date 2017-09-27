@@ -69,16 +69,16 @@
 	<Target Name="BuildPackage" DependsOnTargets="CleanNuGet;CheckPrerequisites">
 		<!-- Libraries -->
 		<MakeDir Directories="$(NuGetBuildDir)\lib"/>
-		<Copy SourceFiles="@(LibArtifacts)" DestinationFolder="$(NuGetBuildDir)\lib\build\x86"/>
-		<Copy SourceFiles="@(LibArtifacts64)" DestinationFolder="$(NuGetBuildDir)\lib\build\x64"/>
+		<Copy SourceFiles="@(LibArtifacts)" DestinationFolder="$(NuGetBuildDir)\lib\build\win-x86"/>
+		<Copy SourceFiles="@(LibArtifacts64)" DestinationFolder="$(NuGetBuildDir)\lib\build\win-x64"/>
 		<Copy SourceFiles="@(LibNuGetAssets)"
 			DestinationFiles="@(LibNuGetAssets->'$(NuGetBuildDir)\lib\%(RecursiveDir)%(Filename)%(Extension)')" />
 		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(MSBuildProjectDirectory)/.. -Properties IcuVer=$(icu_ver) icu-win-fw-lib.nuspec"
 			WorkingDirectory="$(NuGetBuildDir)\lib"/>
 		<!-- Binaries -->
 		<MakeDir Directories="$(NuGetBuildDir)\bin"/>
-		<Copy SourceFiles="@(BinArtifacts)" DestinationFolder="$(NuGetBuildDir)\bin\build\x86"/>
-		<Copy SourceFiles="@(BinArtifacts64)" DestinationFolder="$(NuGetBuildDir)\bin\build\x64"/>
+		<Copy SourceFiles="@(BinArtifacts)" DestinationFolder="$(NuGetBuildDir)\bin\build\win-x86"/>
+		<Copy SourceFiles="@(BinArtifacts64)" DestinationFolder="$(NuGetBuildDir)\bin\build\win-x64"/>
 		<Copy SourceFiles="@(BinNuGetAssets)"
 			DestinationFiles="@(BinNuGetAssets->'$(NuGetBuildDir)\bin\%(RecursiveDir)%(Filename)%(Extension)')" />
 		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(MSBuildProjectDirectory)/.. -Properties IcuVer=$(icu_ver) icu-win-fw-bin.nuspec"

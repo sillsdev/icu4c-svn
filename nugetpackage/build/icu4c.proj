@@ -91,8 +91,8 @@
 			WorkingDirectory="$(NuGetBuildDir)\lib"/>
 		<!-- Binaries -->
 		<MakeDir Directories="$(NuGetBuildDir)\bin"/>
-		<Copy SourceFiles="@(BinArtifacts)" DestinationFolder="$(NuGetBuildDir)\bin\build\x86"/>
-		<Copy SourceFiles="@(BinArtifacts64)" DestinationFolder="$(NuGetBuildDir)\bin\build\x64"/>
+		<Copy SourceFiles="@(BinArtifacts)" DestinationFolder="$(NuGetBuildDir)\bin\build\win-x86"/>
+		<Copy SourceFiles="@(BinArtifacts64)" DestinationFolder="$(NuGetBuildDir)\bin\build\win-x64"/>
 		<Copy SourceFiles="@(BinNuGetAssets)"
 			DestinationFiles="@(BinNuGetAssets->'$(NuGetBuildDir)\bin\%(RecursiveDir)%(Filename)%(Extension)')" />
 		<Exec Command="$(MSBuildProjectDirectory)\nuget pack -Version $(PkgVersion) -OutputDirectory $(NuGetOutputDir) icu-win-fw-bin.nuspec"

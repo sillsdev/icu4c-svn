@@ -9,7 +9,7 @@ ansiColor('xterm') {
 			parameters([
 				choice(name: 'buildKind', choices: 'Continuous\nRelease\nReleaseCandidate',
 					description: 'Is this a continuous (pre-release) or a release build?'),
-				string(name: 'DistributionsToPackage', defaultValue: 'trusty xenial',
+				string(name: 'DistributionsToPackage', defaultValue: 'bionic xenial trusty',
 					description: 'The distributions to build packages for (separated by space)'),
 				string(name: 'ArchesToPackage', defaultValue: 'amd64 i386',
 					description: 'The architectures to build packages for (separated by space)')

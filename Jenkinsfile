@@ -1,5 +1,5 @@
 #!groovy
-// Copyright (c) 2016-2017 SIL International
+// Copyright (c) 2016-2018 SIL International
 // This software is licensed under the MIT license (http://opensource.org/licenses/MIT)
 
 ansiColor('xterm') {
@@ -35,11 +35,10 @@ ansiColor('xterm') {
 					def git = tool(name: 'Default', type: 'git')
 
 					stage('Checkout Windows') {
-						checkout scm
-
-						bat """
-							"${git}" fetch origin --tags
-							"""
+						checkout([$class: 'GitSCM', branches: [[name: BRANCH_NAME]],
+							doGenerateSubmoduleConfigurations: false, extensions:
+								[[$class: 'CloneOption', depth: 1, noTags: false, shallow: true]],
+							userRemoteConfigs: [[url: 'https://github.com/sillsdev/icu4c']]])
 
 						def uvernum = readFile 'source/common/unicode/uvernum.h'
 						def IcuVersion = (uvernum =~ "#define U_ICU_VERSION_MAJOR_NUM ([0-9]+)")[0][1]
@@ -80,7 +79,10 @@ ansiColor('xterm') {
 					stage('Checkout Linux') {
 						dir('icu-fw')
 						{
-							checkout scm
+							checkout([$class: 'GitSCM', branches: [[name: BRANCH_NAME]],
+								doGenerateSubmoduleConfigurations: false, extensions:
+									[[$class: 'CloneOption', depth: 1, noTags: false, shallow: true]],
+								userRemoteConfigs: [[url: 'https://github.com/sillsdev/icu4c']]])
 
 							def uvernum = readFile 'source/common/unicode/uvernum.h'
 							def IcuVersion = (uvernum =~ "#define U_ICU_VERSION_MAJOR_NUM ([0-9]+)")[0][1]
@@ -137,6 +139,7 @@ ansiColor('xterm') {
 				}
 			})
 		} catch(error) {
+			echo error
 			currentBuild.result = "FAILED"
 		}
 	}

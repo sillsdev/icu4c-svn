@@ -19,7 +19,7 @@ ansiColor('xterm') {
 
 		// Set default. This is only needed for the first build.
 		def buildKindVar = params.buildKind ?: 'Continuous'
-		def supported_distros = 'trusty xenial'
+		def supported_distros = 'bionic xenial trusty'
 
 		try {
 			isPR = BRANCH_NAME.startsWith("PR-") ? true : false

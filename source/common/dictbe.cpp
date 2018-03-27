@@ -215,7 +215,9 @@ DictionaryBreakEngine::scanFwdClusters(UText *text, int32_t textEnd, int32_t& en
                 utext_next32(text);
                 c = utext_current32(text);
                 ++end;
-                if (!fMarkSet.contains(c))
+                if (fIgnoreSet.contains(c))
+                    continue;
+                else if (!fMarkSet.contains(c))
                     break;
                 else if (fViramaSet.contains(c)) {  // handle coeng + base as mark
                     utext_next32(text);

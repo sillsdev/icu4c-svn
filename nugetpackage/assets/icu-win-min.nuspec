@@ -4,7 +4,7 @@
         <id>Icu4c.Win.Min</id>
         <version>$version$</version>
         <authors>SIL International</authors>
-        <copyright>Copyright (c) 2016-2017 SIL International</copyright>
+        <copyright>Copyright (c) 2016-2018 SIL International</copyright>
         <licenseUrl>https://github.com/sillsdev/icu4c/blob/trunk/license.html</licenseUrl>
         <projectUrl>https://github.com/sillsdev/icu4c</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>

@@ -23,7 +23,7 @@ ansiColor('xterm') {
 
 		try {
 			node('windows && supported') {
-				def msbuild = tool 'msbuild14'
+				def msbuild = tool 'msbuild15'
 				def git = tool(name: 'Default', type: 'git')
 
 				stage('Checkout') {

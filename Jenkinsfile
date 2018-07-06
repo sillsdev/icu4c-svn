@@ -8,7 +8,7 @@ ansiColor('xterm') {
 			// Add buildKind parameter
 			parameters([
 				choice(name: 'buildKind', choices: 'Continuous\nRelease\nReleaseCandidate',
-					description: 'Is this a continuous (pre-release) or a release build?'),
+					description: 'Is this a continuous (pre-release) or a release build? Release builds for Linux are uploaded to llso:main.'),
 				string(name: 'DistributionsToPackage', defaultValue: 'bionic xenial trusty',
 					description: 'The distributions to build packages for (separated by space)'),
 				string(name: 'ArchesToPackage', defaultValue: 'amd64 i386',
@@ -106,7 +106,7 @@ ansiColor('xterm') {
 
 							if [ "${buildKindVar}" = "Release" ]; then
 								MAKE_SOURCE_ARGS="--preserve-changelog"
-								BUILD_PACKAGE_ARGS="--no-upload"
+								BUILD_PACKAGE_ARGS="--suite-name main"
 							elif [ "${buildKindVar}" = "ReleaseCandidate" ]; then
 								MAKE_SOURCE_ARGS="--preserve-changelog"
 								BUILD_PACKAGE_ARGS="--no-upload"
